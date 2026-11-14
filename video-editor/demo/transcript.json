@@ -1,0 +1,526 @@
+{
+  "source_audio": "",
+  "language": "en",
+  "language_probability": 1.0,
+  "word_timestamps": true,
+  "segments": [
+    {
+      "id": 0,
+      "start": 0.0,
+      "end": 11.4,
+      "text": "Welcome to the video editor engine demo um, this is a quick example of how the engine uh, processes raw footage So today we will trim silence and remove filler words",
+      "words": [
+        {
+          "word": "Welcome",
+          "start": 0.0,
+          "end": 0.4,
+          "probability": 0.95
+        },
+        {
+          "word": "to",
+          "start": 0.4,
+          "end": 0.6,
+          "probability": 0.95
+        },
+        {
+          "word": "the",
+          "start": 0.6,
+          "end": 0.75,
+          "probability": 0.95
+        },
+        {
+          "word": "video",
+          "start": 0.75,
+          "end": 1.1,
+          "probability": 0.95
+        },
+        {
+          "word": "editor",
+          "start": 1.1,
+          "end": 1.5,
+          "probability": 0.95
+        },
+        {
+          "word": "engine",
+          "start": 1.5,
+          "end": 1.9,
+          "probability": 0.95
+        },
+        {
+          "word": "demo",
+          "start": 1.9,
+          "end": 2.3,
+          "probability": 0.95
+        },
+        {
+          "word": "um,",
+          "start": 2.3,
+          "end": 2.65,
+          "probability": 0.95
+        },
+        {
+          "word": "this",
+          "start": 2.65,
+          "end": 2.95,
+          "probability": 0.95
+        },
+        {
+          "word": "is",
+          "start": 2.95,
+          "end": 3.15,
+          "probability": 0.95
+        },
+        {
+          "word": "a",
+          "start": 3.15,
+          "end": 3.25,
+          "probability": 0.95
+        },
+        {
+          "word": "quick",
+          "start": 3.25,
+          "end": 3.6,
+          "probability": 0.95
+        },
+        {
+          "word": "example",
+          "start": 3.6,
+          "end": 4.1,
+          "probability": 0.95
+        },
+        {
+          "word": "of",
+          "start": 4.1,
+          "end": 4.25,
+          "probability": 0.95
+        },
+        {
+          "word": "how",
+          "start": 4.25,
+          "end": 4.5,
+          "probability": 0.95
+        },
+        {
+          "word": "the",
+          "start": 4.5,
+          "end": 4.65,
+          "probability": 0.95
+        },
+        {
+          "word": "engine",
+          "start": 4.65,
+          "end": 5.05,
+          "probability": 0.95
+        },
+        {
+          "word": "uh,",
+          "start": 5.05,
+          "end": 5.35,
+          "probability": 0.95
+        },
+        {
+          "word": "processes",
+          "start": 5.35,
+          "end": 5.8,
+          "probability": 0.95
+        },
+        {
+          "word": "raw",
+          "start": 5.8,
+          "end": 6.1,
+          "probability": 0.95
+        },
+        {
+          "word": "footage",
+          "start": 6.1,
+          "end": 6.6,
+          "probability": 0.95
+        },
+        {
+          "word": "So",
+          "start": 8.1,
+          "end": 8.45,
+          "probability": 0.95
+        },
+        {
+          "word": "today",
+          "start": 8.45,
+          "end": 8.8,
+          "probability": 0.95
+        },
+        {
+          "word": "we",
+          "start": 8.8,
+          "end": 8.95,
+          "probability": 0.95
+        },
+        {
+          "word": "will",
+          "start": 8.95,
+          "end": 9.15,
+          "probability": 0.95
+        },
+        {
+          "word": "trim",
+          "start": 9.15,
+          "end": 9.45,
+          "probability": 0.95
+        },
+        {
+          "word": "silence",
+          "start": 9.45,
+          "end": 9.9,
+          "probability": 0.95
+        },
+        {
+          "word": "and",
+          "start": 9.9,
+          "end": 10.1,
+          "probability": 0.95
+        },
+        {
+          "word": "remove",
+          "start": 10.1,
+          "end": 10.5,
+          "probability": 0.95
+        },
+        {
+          "word": "filler",
+          "start": 10.5,
+          "end": 10.9,
+          "probability": 0.95
+        },
+        {
+          "word": "words",
+          "start": 10.9,
+          "end": 11.4,
+          "probability": 0.95
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "start": 12.0,
+      "end": 13.3,
+      "text": "[pause]",
+      "words": [
+        {
+          "word": "[pause]",
+          "start": 12.0,
+          "end": 13.3,
+          "probability": 0.95
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "start": 13.4,
+      "end": 16.4,
+      "text": "And then we will add captions automatically That's it",
+      "words": [
+        {
+          "word": "And",
+          "start": 13.4,
+          "end": 13.65,
+          "probability": 0.95
+        },
+        {
+          "word": "then",
+          "start": 13.65,
+          "end": 13.9,
+          "probability": 0.95
+        },
+        {
+          "word": "we",
+          "start": 13.9,
+          "end": 14.05,
+          "probability": 0.95
+        },
+        {
+          "word": "will",
+          "start": 14.05,
+          "end": 14.25,
+          "probability": 0.95
+        },
+        {
+          "word": "add",
+          "start": 14.25,
+          "end": 14.5,
+          "probability": 0.95
+        },
+        {
+          "word": "captions",
+          "start": 14.5,
+          "end": 15.0,
+          "probability": 0.95
+        },
+        {
+          "word": "automatically",
+          "start": 15.0,
+          "end": 15.7,
+          "probability": 0.95
+        },
+        {
+          "word": "That's",
+          "start": 15.8,
+          "end": 16.15,
+          "probability": 0.95
+        },
+        {
+          "word": "it",
+          "start": 16.15,
+          "end": 16.4,
+          "probability": 0.95
+        }
+      ]
+    }
+  ],
+  "words": [
+    {
+      "word": "Welcome",
+      "start": 0.0,
+      "end": 0.4,
+      "probability": 0.95
+    },
+    {
+      "word": "to",
+      "start": 0.4,
+      "end": 0.6,
+      "probability": 0.95
+    },
+    {
+      "word": "the",
+      "start": 0.6,
+      "end": 0.75,
+      "probability": 0.95
+    },
+    {
+      "word": "video",
+      "start": 0.75,
+      "end": 1.1,
+      "probability": 0.95
+    },
+    {
+      "word": "editor",
+      "start": 1.1,
+      "end": 1.5,
+      "probability": 0.95
+    },
+    {
+      "word": "engine",
+      "start": 1.5,
+      "end": 1.9,
+      "probability": 0.95
+    },
+    {
+      "word": "demo",
+      "start": 1.9,
+      "end": 2.3,
+      "probability": 0.95
+    },
+    {
+      "word": "um,",
+      "start": 2.3,
+      "end": 2.65,
+      "probability": 0.95
+    },
+    {
+      "word": "this",
+      "start": 2.65,
+      "end": 2.95,
+      "probability": 0.95
+    },
+    {
+      "word": "is",
+      "start": 2.95,
+      "end": 3.15,
+      "probability": 0.95
+    },
+    {
+      "word": "a",
+      "start": 3.15,
+      "end": 3.25,
+      "probability": 0.95
+    },
+    {
+      "word": "quick",
+      "start": 3.25,
+      "end": 3.6,
+      "probability": 0.95
+    },
+    {
+      "word": "example",
+      "start": 3.6,
+      "end": 4.1,
+      "probability": 0.95
+    },
+    {
+      "word": "of",
+      "start": 4.1,
+      "end": 4.25,
+      "probability": 0.95
+    },
+    {
+      "word": "how",
+      "start": 4.25,
+      "end": 4.5,
+      "probability": 0.95
+    },
+    {
+      "word": "the",
+      "start": 4.5,
+      "end": 4.65,
+      "probability": 0.95
+    },
+    {
+      "word": "engine",
+      "start": 4.65,
+      "end": 5.05,
+      "probability": 0.95
+    },
+    {
+      "word": "uh,",
+      "start": 5.05,
+      "end": 5.35,
+      "probability": 0.95
+    },
+    {
+      "word": "processes",
+      "start": 5.35,
+      "end": 5.8,
+      "probability": 0.95
+    },
+    {
+      "word": "raw",
+      "start": 5.8,
+      "end": 6.1,
+      "probability": 0.95
+    },
+    {
+      "word": "footage",
+      "start": 6.1,
+      "end": 6.6,
+      "probability": 0.95
+    },
+    {
+      "word": "So",
+      "start": 8.1,
+      "end": 8.45,
+      "probability": 0.95
+    },
+    {
+      "word": "today",
+      "start": 8.45,
+      "end": 8.8,
+      "probability": 0.95
+    },
+    {
+      "word": "we",
+      "start": 8.8,
+      "end": 8.95,
+      "probability": 0.95
+    },
+    {
+      "word": "will",
+      "start": 8.95,
+      "end": 9.15,
+      "probability": 0.95
+    },
+    {
+      "word": "trim",
+      "start": 9.15,
+      "end": 9.45,
+      "probability": 0.95
+    },
+    {
+      "word": "silence",
+      "start": 9.45,
+      "end": 9.9,
+      "probability": 0.95
+    },
+    {
+      "word": "and",
+      "start": 9.9,
+      "end": 10.1,
+      "probability": 0.95
+    },
+    {
+      "word": "remove",
+      "start": 10.1,
+      "end": 10.5,
+      "probability": 0.95
+    },
+    {
+      "word": "filler",
+      "start": 10.5,
+      "end": 10.9,
+      "probability": 0.95
+    },
+    {
+      "word": "words",
+      "start": 10.9,
+      "end": 11.4,
+      "probability": 0.95
+    },
+    {
+      "word": "[pause]",
+      "start": 12.0,
+      "end": 13.3,
+      "probability": 0.95
+    },
+    {
+      "word": "And",
+      "start": 13.4,
+      "end": 13.65,
+      "probability": 0.95
+    },
+    {
+      "word": "then",
+      "start": 13.65,
+      "end": 13.9,
+      "probability": 0.95
+    },
+    {
+      "word": "we",
+      "start": 13.9,
+      "end": 14.05,
+      "probability": 0.95
+    },
+    {
+      "word": "will",
+      "start": 14.05,
+      "end": 14.25,
+      "probability": 0.95
+    },
+    {
+      "word": "add",
+      "start": 14.25,
+      "end": 14.5,
+      "probability": 0.95
+    },
+    {
+      "word": "captions",
+      "start": 14.5,
+      "end": 15.0,
+      "probability": 0.95
+    },
+    {
+      "word": "automatically",
+      "start": 15.0,
+      "end": 15.7,
+      "probability": 0.95
+    },
+    {
+      "word": "That's",
+      "start": 15.8,
+      "end": 16.15,
+      "probability": 0.95
+    },
+    {
+      "word": "it",
+      "start": 16.15,
+      "end": 16.4,
+      "probability": 0.95
+    }
+  ]
+}

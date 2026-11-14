@@ -1,0 +1,27 @@
+{
+  "name": "tiktok_raw",
+  "description": "Text hook, raw cut, captions",
+  "aspect_ratio": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "layout": {
+    "hook": { "x": 86, "y": 154, "width": 908, "height": 200 },
+    "video": { "x": 0, "y": 360, "width": 1080, "height": 1320 },
+    "captions": { "x": 86, "y": 1416, "width": 908, "height": 120 }
+  },
+  "captions": {
+    "font": "Montserrat",
+    "font_size": 64,
+    "font_color": "#FFFFFF",
+    "border_width": 5,
+    "border_color": "#000000",
+    "animation": "karaoke",
+    "font_weight": 800,
+    "text_effect": "shadow"
+  },
+  "branding": {
+    "logo_position": "none",
+    "accent_color": "#FF0050"
+  }
+}

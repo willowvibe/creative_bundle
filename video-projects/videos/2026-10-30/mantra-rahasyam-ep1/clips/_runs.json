@@ -1,0 +1,284 @@
+{
+ "v11": {
+  "workflow": "infinitetalk",
+  "file": "v11.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v17": {
+  "workflow": "infinitetalk",
+  "file": "v17.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v19": {
+  "workflow": "infinitetalk",
+  "file": "v19.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v26": {
+  "workflow": "infinitetalk",
+  "file": "v26.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v47": {
+  "workflow": "infinitetalk",
+  "file": "v47.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v02": {
+  "workflow": "infinitetalk",
+  "file": "v02.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v03": {
+  "workflow": "infinitetalk",
+  "file": "v03.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v04": {
+  "workflow": "infinitetalk",
+  "file": "v04.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v05": {
+  "workflow": "infinitetalk",
+  "file": "v05.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v14": {
+  "workflow": "infinitetalk",
+  "file": "v14.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v16": {
+  "workflow": "infinitetalk",
+  "file": "v16.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v21": {
+  "workflow": "infinitetalk",
+  "file": "v21.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v31": {
+  "workflow": "infinitetalk",
+  "file": "v31.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v32": {
+  "workflow": "infinitetalk",
+  "file": "v32.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v37": {
+  "workflow": "infinitetalk",
+  "file": "v37.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v38": {
+  "workflow": "infinitetalk",
+  "file": "v38.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v06": {
+  "workflow": "wan22_i2v",
+  "file": "v06.mp4",
+  "frames": 85,
+  "flow_beats": false
+ },
+ "v01": {
+  "workflow": "wan22_i2v",
+  "file": "v01.mp4",
+  "frames": 121,
+  "flow_beats": false
+ },
+ "v08": {
+  "workflow": "wan22_i2v",
+  "file": "v08.mp4",
+  "frames": 81,
+  "flow_beats": true
+ },
+ "v07": {
+  "workflow": "wan22_i2v",
+  "file": "v07.mp4",
+  "frames": 81,
+  "flow_beats": false
+ },
+ "v09": {
+  "workflow": "wan22_i2v",
+  "file": "v09.mp4",
+  "frames": 81,
+  "flow_beats": false
+ },
+ "v08b": {
+  "workflow": "wan22_i2v",
+  "file": "v08b.mp4",
+  "frames": 81,
+  "flow_beats": false
+ },
+ "v45": {
+  "workflow": "infinitetalk",
+  "file": "v45.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v41": {
+  "workflow": "infinitetalk",
+  "file": "v41.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v13": {
+  "workflow": "wan22_i2v",
+  "file": "v13.mp4",
+  "frames": 81,
+  "flow_beats": false
+ },
+ "v23": {
+  "workflow": "wan22_i2v",
+  "file": "v23.mp4",
+  "frames": 81,
+  "flow_beats": false
+ },
+ "v46": {
+  "workflow": "infinitetalk",
+  "file": "v46.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v12": {
+  "workflow": "wan22_i2v",
+  "file": "v12.mp4",
+  "frames": 121,
+  "flow_beats": false
+ },
+ "v50": {
+  "workflow": "infinitetalk",
+  "file": "v50.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v28": {
+  "workflow": "wan22_i2v",
+  "file": "v28.mp4",
+  "frames": 105,
+  "flow_beats": false
+ },
+ "v18": {
+  "workflow": "wan22_i2v",
+  "file": "v18.mp4",
+  "frames": 109,
+  "flow_beats": false
+ },
+ "v30": {
+  "workflow": "wan22_i2v",
+  "file": "v30.mp4",
+  "frames": 85,
+  "flow_beats": false
+ },
+ "v51": {
+  "workflow": "infinitetalk",
+  "file": "v51.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v27": {
+  "workflow": "wan22_i2v",
+  "file": "v27.mp4",
+  "frames": 81,
+  "flow_beats": false
+ },
+ "v34": {
+  "workflow": "wan22_i2v",
+  "file": "v34.mp4",
+  "frames": 81,
+  "flow_beats": true
+ },
+ "v29": {
+  "workflow": "wan22_i2v",
+  "file": "v29.mp4",
+  "frames": 81,
+  "flow_beats": false
+ },
+ "v36": {
+  "workflow": "wan22_i2v",
+  "file": "v36.mp4",
+  "frames": 81,
+  "flow_beats": true
+ },
+ "v52": {
+  "workflow": "infinitetalk",
+  "file": "v52.mp4",
+  "frames": null,
+  "flow_beats": false
+ },
+ "v33": {
+  "workflow": "wan22_i2v",
+  "file": "v33.mp4",
+  "frames": 81,
+  "flow_beats": false
+ },
+ "v42": {
+  "workflow": "wan22_i2v",
+  "file": "v42.mp4",
+  "frames": 81,
+  "flow_beats": false
+ },
+ "v35": {
+  "workflow": "wan22_i2v",
+  "file": "v35.mp4",
+  "frames": 81,
+  "flow_beats": true
+ },
+ "v44": {
+  "workflow": "wan22_i2v",
+  "file": "v44.mp4",
+  "frames": 81,
+  "flow_beats": false
+ },
+ "v40": {
+  "workflow": "wan22_i2v",
+  "file": "v40.mp4",
+  "frames": 81,
+  "flow_beats": true
+ },
+ "v49": {
+  "workflow": "wan22_i2v",
+  "file": "v49.mp4",
+  "frames": 81,
+  "flow_beats": false
+ },
+ "v43": {
+  "workflow": "wan22_i2v",
+  "file": "v43.mp4",
+  "frames": 81,
+  "flow_beats": true
+ },
+ "v48": {
+  "workflow": "wan22_i2v",
+  "file": "v48.mp4",
+  "frames": 81,
+  "flow_beats": false
+ },
+ "v54": {
+  "workflow": "wan22_i2v",
+  "file": "v54.mp4",
+  "frames": 121,
+  "flow_beats": false
+ }
+}

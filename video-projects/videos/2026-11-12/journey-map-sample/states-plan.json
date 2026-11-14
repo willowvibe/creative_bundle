@@ -1,0 +1,117 @@
+{
+  "job_id": "admin-sample",
+  "aspect_ratio": "9:16",
+  "design": "night_map",
+  "narration_path": "",
+  "music_path": "",
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "map",
+      "duration_seconds": 6.0,
+      "narration": "",
+      "visual_description": "",
+      "props": {
+        "country": "India",
+        "frame": "full",
+        "headline": "Two states",
+        "bbox": "74.5,7.5,86,20.5",
+        "regions": [
+          {
+            "state": "Andhra Pradesh",
+            "color": "#6B7A2E",
+            "label": "ANDHRA PRADESH"
+          },
+          {
+            "state": "Tamil Nadu",
+            "color": "#1E8573",
+            "label": "TAMIL NADU"
+          }
+        ]
+      }
+    },
+    {
+      "id": "s2",
+      "type": "map",
+      "duration_seconds": 4.5,
+      "narration": "",
+      "visual_description": "",
+      "props": {
+        "country": "India",
+        "frame": "full",
+        "headline": "I'm a Coimbatore boy",
+        "bbox": "74.5,7.5,86,20.5",
+        "regions": [
+          {
+            "district": "Coimbatore",
+            "image": "<stand-in AI still from the chai pilot>",
+            "label": "COIMBATORE"
+          }
+        ],
+        "zooms": [
+          {
+            "to": "district:Coimbatore",
+            "pad": 0.25
+          }
+        ]
+      }
+    },
+    {
+      "id": "s3",
+      "type": "map",
+      "duration_seconds": 5.0,
+      "narration": "",
+      "visual_description": "",
+      "props": {
+        "country": "India",
+        "frame": "full",
+        "headline": "1,000 km apart",
+        "bbox": "75.5,9.5,83.5,18.5",
+        "journey": {
+          "icon": "car",
+          "km": true,
+          "curve": 0.12,
+          "stops": [
+            {
+              "text": "Coimbatore",
+              "lon": 76.96,
+              "lat": 11.02
+            },
+            {
+              "text": "Eluru",
+              "lon": 81.1,
+              "lat": 16.71,
+              "km": 1000
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "type": "map",
+      "duration_seconds": 4.5,
+      "narration": "",
+      "visual_description": "",
+      "props": {
+        "country": "India",
+        "frame": "full",
+        "headline": "She's from Eluru",
+        "bbox": "74.5,7.5,86,20.5",
+        "regions": [
+          {
+            "district": "West Godavari",
+            "image": "<stand-in AI still from the chai pilot>",
+            "label": "ELURU"
+          }
+        ],
+        "zooms": [
+          {
+            "to": "district:West Godavari",
+            "pad": 0.25
+          }
+        ]
+      }
+    }
+  ]
+}

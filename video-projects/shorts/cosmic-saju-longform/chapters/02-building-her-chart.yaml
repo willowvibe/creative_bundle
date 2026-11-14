@@ -1,0 +1,98 @@
+job_id: cosmic-saju-ch2
+design: cosmic_saju_landscape
+aspect: "16:9"
+sfx: auto
+captions: {mode: sidecar}
+youtube_end_screen: false
+voice:
+  provider: sarvam_tts
+  voice_id: "sarvam:shubh"
+  language: en-IN
+  gap_seconds: 0.7
+image:
+  provider: auto
+  resolution: 2K
+  style_suffix: >-
+    Korean ink-wash and minhwa folk-painting style, hand-painted on warm hanji
+    paper texture, deep charcoal and indigo palette with accents in the five
+    traditional Korean colours (blue-green, red, yellow, white, black), soft
+    gold highlights, cinematic, calm, not photorealistic, no text, no letters,
+    no characters, no watermark, 16:9 composition.
+music: {path: "", gain_db: -22}
+end_card: {enabled: false}
+scenes:
+  - id: s09_desk
+    still:
+      key: i09
+      prompt: >-
+        Top-down view of a wooden writing desk with a brush, an inkstone, a
+        water dropper and one blank sheet of hanji in the centre.
+    motion: drift
+    lines:
+      - say: >-
+          Mira was born on the 15th of March 1996, at 10:30 in the morning, in
+          New York. Three facts: date, time, place.
+        show: 15 Mar 1996 · 10:30 · New York
+    transition_out: cut
+
+  - id: s10_sundial
+    layers: generated
+    generated:
+      bg: >-
+        Soft morning hills in ink wash, pale indigo sky.
+      mg: >-
+        An old stone sundial with a crisp shadow, isolated on a transparent
+        background, soft edges.
+      fg: >-
+        Tall grass close to the lens, out of focus, isolated on a transparent
+        background, soft edges.
+    motion: parallax
+    lines:
+      - say: >-
+          First, the place. Saju uses true solar time: where the sun actually
+          was, not what the clock said. New York's longitude and the time of
+          year shift her 10:30 to about 10:24. Here it doesn't change her hour.
+          For people born near the edge of an hour, it can.
+        show: 10:30 clock → 10:24 solar
+    transition_out: cut
+
+  - id: s11_plum_tree
+    still:
+      key: i11
+      prompt: >-
+        One plum tree, the left half bare branches in snow, the right half full
+        of pink blossom, the horizon at the middle.
+    motion: drift
+    lines:
+      - say: >-
+          Next, the year. Saju's year doesn't start on January 1st. It starts at
+          Ipchun, the beginning of spring, around February 4th. Mira's March
+          birthday is past it, so her year is Byeong-ja: the Fire Rat.
+        show: 입춘 Ipchun · 丙子 Fire Rat
+    transition_out: hanji_turn
+    transition_seconds: 0.7
+
+  - id: s12_four_pillars
+    still:
+      key: i12_chart
+      prompt: >-
+        A blurred ink-wash mountain valley, very soft, low contrast, as a
+        background for a chart.
+    graphic:
+      component: four_pillars
+      data:
+        pillars:
+          - {label: Year, glyph: 丙子, sub: Fire Rat}
+          - {label: Month, glyph: 辛卯, sub: Metal Rabbit}
+          - {label: Day, glyph: 辛亥, sub: Metal Pig}
+          - {label: Hour, glyph: 癸巳, sub: Water Snake}
+    motion: drift
+    lines:
+      - say: >-
+          The month follows the solar terms too. The day comes from an unbroken
+          sixty-day count, and the hour from her solar time. And here she is.
+          Year: Fire Rat. Month: Metal Rabbit. Day: Metal Pig. Hour: Water
+          Snake. Eight characters.
+        show: 丙子 · 辛卯 · 辛亥 · 癸巳
+    transition_out: seal_stamp
+    transition_seconds: 0.6

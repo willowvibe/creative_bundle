@@ -1,0 +1,26 @@
+name: image_story
+description: Generate a Ken Burns montage from a script describing scenes or images.
+inputs:
+  - name: concept.md
+    description: Markdown describing each scene/image and its narration.
+    required: true
+    example: ./concept.md
+  - name: image_paths
+    description: "Optional: copy reference images into the work tree and reference them manually."
+    required: false
+    example: projects/job1/assets/image1.jpg
+pipeline_kind: script_to_video
+default_preset: long_form
+default_aspect_ratio: "16:9"
+default_providers:
+  tts: elevenlabs_tts
+  image: fal_ai
+  music: poyo_music
+default_music_mood: cinematic
+scene_type_hints:
+  - narration
+  - broll
+build_concept_kind: image_story
+caveats:
+  - There is no direct image-upload provider; images are either described and regenerated, or manually referenced.
+  - Scenes default to Ken Burns motion unless props.requires_motion=true.

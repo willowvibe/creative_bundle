@@ -1,0 +1,76 @@
+# embedded upstream FableCut editor (cloned)
+tools/FableCut/
+packages/tools/FableCut/
+
+# static FFmpeg bundle installed by scripts/install_ffmpeg.sh
+tools/ffmpeg/
+
+# sdd workspace
+.superpowers/sdd/
+
+# standard python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+.env
+.env.local
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.cache/
+.coverage
+htmlcov/
+
+# Node.js
+node_modules/
+
+# Runtime outputs
+output/
+outputs/
+*.db
+*.db-shm
+*.db-wal
+
+# Project work directories (scratch space)
+projects/
+projects/*/output/
+projects/*/work/
+videos/
+videos/**/work/
+
+# Temp files
+*.tmp_*
+
+# Local media assets (generated music beds etc.). Not committed: they are
+# large binaries, and config.yaml points at them by repo-relative path so a
+# fresh checkout must regenerate them (see docs/POYO_ROUTING.md, music section).
+assets/
+
+# parity rebuild outputs (scripts/parity_rebuild.py)
+/qa/
+
+config.local.yaml
+
+# Run data moved out of the checkout (A13); symlinks point at VIDEO_EDITOR_DATA_DIR.
+/projects
+/outputs
+
+.playwright-mcp/
+
+# Local agent and tool state
+.opencode/
+.wrangler/
+_oc_scratch/
+
+# Content lives in ../video-projects (split 2026-11-11); these are symlinks to it.
+/videos
+/shorts

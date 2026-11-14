@@ -1,0 +1,4 @@
+# Formatting-only commits. Keep `git blame` on the real change.
+# Enable locally with:
+#   git config blame.ignoreRevsFile .git-blame-ignore-revs
+9cc8b220faf9b7719085a9ea62bda202018aa7f7

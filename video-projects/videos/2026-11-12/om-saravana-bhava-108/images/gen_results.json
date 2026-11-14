@@ -1,0 +1,29 @@
+[
+ {
+  "id": "m1_vel_peacock",
+  "provider": "flow_image",
+  "path": "/mnt/data2/git_repos/creative_repos/video-projects/videos/2026-11-12/om-saravana-bhava-108/images/m1_vel_peacock__flow_image.png",
+  "cost": 0.0
+ },
+ {
+  "id": "m2_bala_murugan",
+  "provider": "flow_image",
+  "path": "/mnt/data2/git_repos/creative_repos/video-projects/videos/2026-11-12/om-saravana-bhava-108/images/m2_bala_murugan__flow_image.png",
+  "cost": 0.0
+ },
+ {
+  "id": "m3_portrait",
+  "provider": null,
+  "path": null
+ },
+ {
+  "id": "m4_dandayuthapani",
+  "provider": null,
+  "path": null
+ },
+ {
+  "id": "m5_temple_arati",
+  "provider": null,
+  "path": null
+ }
+]

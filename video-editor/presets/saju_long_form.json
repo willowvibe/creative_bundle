@@ -1,0 +1,28 @@
+{
+  "name": "saju_long_form",
+  "description": "Long-form 16:9 landscape (1280x720). Full-bleed video, captions band at the bottom (caller supplies bottom_padding).",
+  "aspect_ratio": "16:9",
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "layout": {
+    "video": { "x": 0, "y": 0, "width": 1280, "height": 720 },
+    "graphics": { "x": 0, "y": 0, "width": 1280, "height": 720 },
+    "top_graphic": { "x": 64, "y": 36, "width": 1152, "height": 160 },
+    "captions": { "x": 64, "y": 600, "width": 1152, "height": 80 }
+  },
+  "captions": {
+    "font": "Montserrat",
+    "font_size": 56,
+    "font_color": "#FFFFFF",
+    "border_width": 6,
+    "border_color": "#000000",
+    "animation": "karaoke",
+    "font_weight": 800,
+    "text_effect": "shadow"
+  },
+  "branding": {
+    "logo_position": "bottom_right",
+    "accent_color": "#3B82F6"
+  }
+}

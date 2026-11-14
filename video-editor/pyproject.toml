@@ -1,0 +1,262 @@
+[project]
+name = "video-editor"
+version = "0.1.0"
+description = "Local AI video-editing engine with raw-footage and script-to-video workflows."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [
+    { name = "Video Editor Engine Team" },
+]
+keywords = ["video", "editing", "ai", "ffmpeg", "hyperframes"]
+dependencies = [
+    "structlog>=24.1.0",
+    "pydantic>=2.7",
+    "pydantic-settings>=2.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.2",
+    "pytest-asyncio>=0.23",
+    "pytest-cov>=5.0",
+    "pytest-xdist>=3.6",
+    "ruff>=0.4",
+    "mypy>=1.10",
+    "import-linter>=2.0",
+    "types-PyYAML>=6.0",
+    "requests>=2.32",
+]
+
+[project.scripts]
+ve = "video_editor_cli.main:app"
+video-editor-mcp = "video_editor_mcp.server:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.2",
+    "pytest-asyncio>=0.23",
+    "pytest-cov>=5.0",
+    "pytest-xdist>=3.6",
+    "ruff>=0.4",
+    "mypy>=1.10",
+    "import-linter>=2.0",
+    "types-PyYAML>=6.0",
+    "requests>=2.32",
+]
+
+[tool.pytest.ini_options]
+markers = [
+    "integration: marks tests as integration tests that require a live pod service (deselect with '-m \"not integration\"').",
+    "slow: marks tests that are slow (30-120+ seconds) and may be skipped in quick runs.",
+]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = [
+    "packages",
+    "apps",
+]
+omit = [
+    "*/tests/*",
+    "*/__pycache__/*",
+    "*/.venv/*",
+    "*/node_modules/*",
+]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+precision = 1
+
+[tool.uv.workspace]
+members = [
+    "packages/state",
+    "packages/ffmpeg",
+    "packages/llm",
+    "packages/asset_ingestion",
+    "packages/config",
+    "apps/cli",
+    "apps/engine",
+    "apps/transcribe",
+    "packages/core",
+    "packages/maps",
+    "packages/tools",
+    "packages/skills",
+    "packages/comfystudio_bridge",
+    "packages/fablecut_bridge",
+    "packages/mcp_server",
+    "packages/pipelines",
+]
+
+[tool.uv.sources]
+video-editor = { workspace = true }
+video-editor-state = { workspace = true }
+video-editor-ffmpeg = { workspace = true }
+video-editor-llm = { workspace = true }
+video-editor-asset-ingestion = { workspace = true }
+video-editor-config = { workspace = true }
+video-editor-engine = { workspace = true }
+video-editor-transcribe = { workspace = true }
+video-editor-core = { workspace = true }
+video-editor-maps = { workspace = true }
+video-editor-tools = { workspace = true }
+video-editor-skills = { workspace = true }
+video-editor-comfystudio-bridge = { workspace = true }
+video-editor-fablecut-bridge = { workspace = true }
+video-editor-pipelines = { workspace = true }
+video-editor-mcp = { workspace = true }
+video-editor-cli = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/video_editor"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+exclude = ["examples/archive"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "C4", "SIM", "TID", "BLE001", "S110"]
+ignore = ["E501"]
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["typer.Option", "typer.Argument"]
+
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+"subprocess".msg = "Use video_editor_ffmpeg.run.run_ffmpeg/run_subprocess so every process has a timeout and typed errors."
+
+[tool.ruff.lint.per-file-ignores]
+"packages/comfystudio_bridge/src/video_editor_comfystudio_bridge/models.py" = ["N815"]
+"packages/fablecut_bridge/src/video_editor_fablecut_bridge/models.py" = ["N815"]
+# The one implementation that is allowed to call subprocess, plus the
+# long-lived preview server (never waited on) and the unmaintained scripts
+# (migrated in phase 6). Tests may start ffmpeg fixtures directly.
+"packages/ffmpeg/src/video_editor_ffmpeg/run.py" = ["TID251"]
+"apps/cli/src/video_editor_cli/commands/preview.py" = ["TID251"]
+"scripts/**" = ["TID251"]
+"tests/**" = ["TID251"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_return_any = true
+warn_unused_ignores = true
+mypy_path = "$MYPY_CONFIG_FILE_DIR/packages/state/src:$MYPY_CONFIG_FILE_DIR/packages/ffmpeg/src:$MYPY_CONFIG_FILE_DIR/packages/llm/src:$MYPY_CONFIG_FILE_DIR/packages/asset_ingestion/src:$MYPY_CONFIG_FILE_DIR/packages/config/src:$MYPY_CONFIG_FILE_DIR/apps/engine/src:$MYPY_CONFIG_FILE_DIR/apps/cli/src:$MYPY_CONFIG_FILE_DIR/apps/transcribe/src:$MYPY_CONFIG_FILE_DIR/packages/core/src:$MYPY_CONFIG_FILE_DIR/packages/maps/src:$MYPY_CONFIG_FILE_DIR/packages/tools/src:$MYPY_CONFIG_FILE_DIR/packages/skills/src:$MYPY_CONFIG_FILE_DIR/packages/comfystudio_bridge/src:$MYPY_CONFIG_FILE_DIR/packages/fablecut_bridge/src:$MYPY_CONFIG_FILE_DIR/packages/mcp_server/src"
+
+[[tool.mypy.overrides]]
+module = "mediapipe"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "cv2"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "faster_whisper"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "ctranslate2"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "opentimelineio.*"
+ignore_missing_imports = true
+
+# Optional TTS extras: absent in a minimal install, untyped when installed.
+[[tool.mypy.overrides]]
+module = ["soundfile", "kittentts"]
+ignore_missing_imports = true
+
+[tool.importlinter]
+include_external_packages = true
+root_packages = [
+    "video_editor_cli",
+    "video_editor_engine",
+    "video_editor_mcp",
+    "video_editor_pipelines",
+    "video_editor_state",
+    "video_editor_ffmpeg",
+    "video_editor_llm",
+    "video_editor_asset_ingestion",
+    "video_editor_config",
+    "video_editor_core",
+    "video_editor_maps",
+    "video_editor_tools",
+    "video_editor_transcribe",
+    "video_editor_fablecut_bridge",
+    "video_editor_comfystudio_bridge",
+    "broll",
+    "music",
+    "qa",
+    "verify",
+    "review",
+    "captions",
+    "graphics",
+    "second_pass",
+    "export",
+    "rough_cut",
+    "audio_cleanup",
+    "reframe",
+    "transitions",
+    "sfx_placement",
+    "screen_tutorial",
+    "chapters",
+    "motion_graphics",
+    "dubbing",
+    "shorts_factory",
+    "thumbnail",
+    "beat_sync",
+    "skills",
+]
+
+[[tool.importlinter.contracts]]
+name = "Core does not import maps (it finds render_map by entry point)"
+type = "forbidden"
+source_modules = ["video_editor_core"]
+forbidden_modules = ["video_editor_maps"]
+
+[[tool.importlinter.contracts]]
+name = "Only the CLI and pipelines reach the optional editor bridges"
+type = "forbidden"
+source_modules = [
+    "video_editor_core", "video_editor_maps", "video_editor_engine", "video_editor_mcp",
+    "video_editor_state", "video_editor_ffmpeg", "video_editor_llm", "video_editor_asset_ingestion",
+    "video_editor_config", "video_editor_tools", "video_editor_transcribe", "skills",
+]
+forbidden_modules = ["video_editor_fablecut_bridge", "video_editor_comfystudio_bridge"]
+
+[[tool.importlinter.contracts]]
+name = "MCP does not import the CLI"
+type = "forbidden"
+source_modules = ["video_editor_mcp"]
+forbidden_modules = ["video_editor_cli"]
+
+[[tool.importlinter.contracts]]
+name = "Pipelines do not import apps, MCP or typer"
+type = "forbidden"
+source_modules = ["video_editor_pipelines"]
+forbidden_modules = ["video_editor_cli", "video_editor_engine", "video_editor_mcp", "typer"]
+
+[[tool.importlinter.contracts]]
+name = "Skills do not import apps, pipelines or MCP"
+type = "forbidden"
+source_modules = [
+    "broll", "music", "qa", "verify", "review", "captions", "graphics",
+    "second_pass", "export", "rough_cut", "audio_cleanup", "reframe",
+    "transitions", "sfx_placement", "screen_tutorial", "chapters",
+    "motion_graphics", "dubbing", "shorts_factory", "thumbnail", "beat_sync",
+    "skills",
+]
+forbidden_modules = [
+    "video_editor_cli",
+    "video_editor_engine",
+    "video_editor_mcp",
+    "video_editor_pipelines",
+]

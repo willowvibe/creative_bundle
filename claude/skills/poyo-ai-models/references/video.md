@@ -1,0 +1,65 @@
+# video
+
+Generated from PoYo Catalog `v1-5bc1c3f780a1`. Always call describe before execution.
+
+| Model | Type | Protocols | Description |
+|---|---|---|---|
+| `flux-3-max/image-to-video` | generate |  | Generate a 5-20 second video from one starting image and an optional ending image, with optional audio. |
+| `flux-3-max/keyframes-to-video` | generate |  | Generate a 5-20 second video using 1-10 keyframe images at unique positions on a 24 fps timeline, with optional audio. |
+| `flux-3-max/text-to-video` | generate |  | Generate a 5-20 second video from text with optional audio. Does not accept media input. |
+| `flux-3/extend-video` | generate |  | Create videos from text, images, first and last frames, source video, or positioned keyframes. |
+| `flux-3/first-last-frame-to-video` | generate |  | Create videos from text, images, first and last frames, source video, or positioned keyframes. |
+| `flux-3/image-to-video` | generate |  | Create videos from text, images, first and last frames, source video, or positioned keyframes. |
+| `flux-3/keyframes-to-video` | generate |  | Create videos from text, images, first and last frames, source video, or positioned keyframes. |
+| `flux-3/text-to-video` | generate |  | Create videos from text, images, first and last frames, source video, or positioned keyframes. |
+| `gemini-omni-1.1-flash` | generate |  | Generate videos from text, first and last frames, reference images, or a reference video. |
+| `grok-imagine-video-1.5` | generate |  | Text, image, and reference-to-video generation with Grok Imagine Video 1.5 |
+| `h3-max` | generate |  | Generate 5–15 second videos from text, keyframes, or image-led multimodal references. |
+| `h3-max-turbo` | generate |  | Generate videos from text, a first frame, or first and last frames |
+| `hailuo-03` | generate |  | Generate 2K videos from text, keyframes, or multimodal references |
+| `hailuo-2.3` | generate |  | Text-to-video and optional first-frame guided generation |
+| `happy-horse` | generate |  | Alibaba Happy Horse text-to-video, image-to-video, reference-to-video, and video-edit workflows |
+| `happy-horse-1.1` | generate |  | Happy Horse 1.1 text-to-video, image-to-video, and reference-to-video modes |
+| `kling-1.6/pro` | generate |  | Kling 1.6 Standard and Pro video generation through the PoYo API |
+| `kling-1.6/standard` | generate |  | Kling 1.6 Standard and Pro video generation through the PoYo API |
+| `kling-2.1/pro` | generate |  | Standard and Pro image-to-video generation |
+| `kling-2.1/standard` | generate |  | Standard and Pro image-to-video generation |
+| `kling-2.5-turbo-pro` | generate |  | Prompt-based video generation with optional start and end frame guidance |
+| `kling-3.0-motion-control` | generate |  | Reference image and reference video motion transfer |
+| `kling-3.0-turbo/pro` | generate |  | Fast video generation with Kling 3.0 Turbo standard and pro models |
+| `kling-3.0-turbo/standard` | generate |  | Fast video generation with Kling 3.0 Turbo standard and pro models |
+| `kling-3.0/4K` | generate |  | Native 4K Video Generation with Kling 3.0/4K |
+| `kling-4.0` | generate |  | Generate videos from text, first and last frames, or visual references, and edit an existing video. |
+| `kling-avatar-2.0/pro` | generate |  | Audio-driven avatar video generation with Kling Avatar 2.0 Standard and Pro |
+| `kling-avatar-2.0/standard` | generate |  | Audio-driven avatar video generation with Kling Avatar 2.0 Standard and Pro |
+| `kling-o3/4K` | generate |  | Native 4K video generation with Kling O3/4K |
+| `kling-o3/pro` | generate |  | Next-generation video generation with Kling O3 standard and pro |
+| `kling-o3/standard` | generate |  | Next-generation video generation with Kling O3 standard and pro |
+| `omni-flash` | generate |  | Text, image, and video input generation with Omni Flash |
+| `omnihuman-2.0` | generate |  | Animate one character image with a driving audio track. |
+| `poyo-ai/video-background-removal` | generate |  | Remove or replace the background of a video. |
+| `poyo-ai/video-upscaler` | generate |  | Upscale a video by a configurable scale factor. |
+| `runway-gen-4.5` | generate |  | Text-to-video generation with optional reference image, 5s and 10s durations |
+| `seedance-2` | generate |  | Video generation with Seedance 2 and Seedance 2 Fast |
+| `seedance-2-fast` | generate |  | Video generation with Seedance 2 and Seedance 2 Fast |
+| `seedance-2-mini` | generate |  | Fast video generation with Seedance 2 Mini |
+| `seedance-2.5` | generate |  | Generate videos with Seedance 2.5 from text, frames, or multimodal references |
+| `veo3.1-extend` | generate |  | Extend an existing video with Veo 3.1. |
+| `veo3.1-fast-official` | generate |  | Official VEO 3.1 video generation with duration, audio control, and image-guided modes. |
+| `veo3.1-lite-official` | generate |  | Official VEO 3.1 video generation with duration, audio control, and image-guided modes. |
+| `veo3.1-quality-official` | generate |  | Official VEO 3.1 video generation with duration, audio control, and image-guided modes. |
+| `vidu-q4` | generate |  | Generate video from one starting frame or reference images, with optional reference audio. |
+| `wan2.2-image-to-video-fast` | generate |  | Fast image-to-video generation with Alibaba Wan 2.2 Fast |
+| `wan2.2-text-to-video-fast` | generate |  | Fast text-to-video generation with Alibaba Wan 2.2 Fast |
+| `wan2.5-image-to-video` | generate |  | Image-to-video generation with Alibaba Wan 2.5 |
+| `wan2.5-text-to-video` | generate |  | Text-to-video generation with Alibaba Wan 2.5 |
+| `wan2.7-edit-video` | generate |  | Wan 2.7 Video API |
+| `wan2.7-image-to-video` | generate |  | Wan 2.7 Video API |
+| `wan2.7-reference-to-video` | generate |  | Wan 2.7 Video API |
+| `wan2.7-text-to-video` | generate |  | Wan 2.7 Video API |
+| `wan3.0-image-to-video` | generate |  | Wan 3.0 text, image, and multimodal reference video generation. |
+| `wan3.0-prime-image-to-video` | generate |  | Wan 3.0 Prime text, image, and multimodal reference video generation. |
+| `wan3.0-prime-reference-to-video` | generate |  | Wan 3.0 Prime text, image, and multimodal reference video generation. |
+| `wan3.0-prime-text-to-video` | generate |  | Wan 3.0 Prime text, image, and multimodal reference video generation. |
+| `wan3.0-reference-to-video` | generate |  | Wan 3.0 text, image, and multimodal reference video generation. |
+| `wan3.0-text-to-video` | generate |  | Wan 3.0 text, image, and multimodal reference video generation. |

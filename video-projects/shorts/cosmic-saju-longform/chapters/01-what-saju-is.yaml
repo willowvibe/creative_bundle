@@ -1,0 +1,94 @@
+job_id: cosmic-saju-ch1
+design: cosmic_saju_landscape
+aspect: "16:9"
+sfx: auto
+captions: {mode: sidecar}
+youtube_end_screen: false
+voice:
+  provider: sarvam_tts
+  voice_id: "sarvam:shubh"
+  language: en-IN
+  gap_seconds: 0.7
+image:
+  provider: auto
+  resolution: 2K
+  style_suffix: >-
+    Korean ink-wash and minhwa folk-painting style, hand-painted on warm hanji
+    paper texture, deep charcoal and indigo palette with accents in the five
+    traditional Korean colours (blue-green, red, yellow, white, black), soft
+    gold highlights, cinematic, calm, not photorealistic, no text, no letters,
+    no characters, no watermark, 16:9 composition.
+music: {path: "", gain_db: -22}
+end_card: {enabled: false}
+scenes:
+  - id: s05_four_pillars
+    still:
+      key: i05
+      prompt: >-
+        A misty mountain valley at dawn; four tall carved stone pillars evenly
+        spaced on a ledge, plain flat faces; low drifting mist.
+    motion: drift
+    lines:
+      - say: >-
+          Saju means "four pillars". The full phrase Koreans use is saju palja:
+          four pillars, eight characters. Each pillar is one unit of time from
+          your birth: year, month, day, hour.
+        show: 四柱八字 saju palja
+    transition_out: cut
+
+  - id: s06_stems_branches
+    still:
+      key: i06
+      prompt: >-
+        A dark hanji table with a single carved wooden tile; twelve small round
+        gold-rimmed animal medallions arranged in a loose ring, painted in ink,
+        one animal per medallion.
+    graphic:
+      component: medallion_ring
+      data:
+        items: [Rat, Ox, Tiger, Rabbit, Dragon, Snake, Horse, Goat, Monkey, Rooster, Dog, Pig]
+    motion: drift
+    lines:
+      - say: >-
+          Each pillar has two halves. On top, a heavenly stem, one of ten.
+          Below it, an earthly branch, one of twelve: the same twelve animals
+          you know from the zodiac.
+        show: 天干 10 stems · 地支 12 branches
+    transition_out: ink_bleed
+    transition_seconds: 0.7
+
+  - id: s07_sixty_cycle
+    still:
+      key: i07
+      prompt: >-
+        A river valley with pines; a large old wooden water wheel turning in the
+        stream; fine water spray in the air.
+    graphic:
+      component: sixty_cycle_rings
+      data:
+        items: [甲子, 乙丑, 丙寅, 丁卯, 戊辰, 己巳, 庚午, 辛未, 壬申, 癸酉, 甲戌, 乙亥, 丙子, 丁丑, 戊寅, 己卯, 庚辰, 辛巳, 壬午, 癸未, 甲申, 乙酉, 丙戌, 丁亥, 戊子, 己丑, 庚寅, 辛卯, 壬辰, 癸巳]
+        current: 12
+    motion: drift
+    lines:
+      - say: >-
+          Pair them in order and you get a cycle of sixty. Sixty years, sixty
+          months, sixty days, sixty two-hour blocks, all turning at once, like
+          gears.
+        show: 六十甲子 the 60-cycle
+    transition_out: cut
+
+  - id: s08_sky_time
+    still:
+      key: i08
+      prompt: >-
+        A vast starry night sky over a quiet field, the Milky Way faint, deep
+        indigo.
+    motion: drift
+    lines:
+      - say: >-
+          Western astrology reads the sky at your birth. Saju reads time itself:
+          which point of each cycle you landed on. So let's find where Mira
+          landed.
+        show: Sky vs. time
+    transition_out: hanji_turn
+    transition_seconds: 0.7

@@ -1,0 +1,21 @@
+name: multi_language_dub
+description: Re-voice an existing video in a new language with captions.
+inputs:
+  - name: video_file
+    description: Original video to dub.
+    required: true
+    example: ./source_en.mp4
+  - name: translated_script.md
+    description: Translated script matching the original timing/segments.
+    required: true
+    example: ./script_hi.md
+pipeline_kind: v2_skills
+default_preset: long_form
+default_aspect_ratio: "16:9"
+default_providers:
+  tts: elevenlabs_tts
+scene_type_hints:
+  - talking_head
+caveats:
+  - The current v2 pipeline replaces the full audio track via TTS, not lip-sync.
+  - For precise dubbing, supply a forced-alignment transcript in the target language.

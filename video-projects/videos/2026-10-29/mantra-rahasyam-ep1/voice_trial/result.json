@@ -1,0 +1,12 @@
+{"date": "2026-10-29", "user_notes_by_letter": {
+  "s03": {"A": "1", "B": "fast", "C": "1"}, "s04": {"A": "fast", "B": "1", "C": "very fast"},
+  "s05": {"A": "slow", "B": "ok", "C": ""}, "s15": {"A": "ok", "B": "ok", "C": "ok"},
+  "s16": {"A": "ok", "B": "slow", "C": "fast"}, "s17": {"A": "ok", "B": "ok", "C": "ok slight fast"}},
+ "by_provider": {
+  "s03": {"sarvam": "best", "teja": "fast", "venkat": "best"},
+  "s04": {"sarvam": "best", "prashanth": "fast", "lokesh": "very fast"},
+  "s05": {"sarvam": "slow", "nandini": "ok", "lavanya": "not rated"},
+  "s15": {"sarvam": "ok", "lokesh": "ok", "prashanth": "ok"},
+  "s16": {"sarvam": "slow", "lavanya": "ok", "nandini": "fast"},
+  "s17": {"sarvam": "ok", "harish": "ok", "arun": "ok, slightly fast"}},
+ "verdict": "no clear winner on voice quality or emotion; pace is the difference. Smallest.ai too fast on most voices and ignores '...' pauses; Sarvam too slow on Lakshmi's emotional lines (pace 0.9)."}

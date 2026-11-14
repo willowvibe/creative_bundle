@@ -1,0 +1,13 @@
+job_id: cosmic-saju-longform
+chapters:
+  - pack: chapters/00-cold-open.yaml
+  - pack: chapters/01-what-saju-is.yaml
+  - pack: chapters/02-building-her-chart.yaml
+  - pack: chapters/03-the-day-master.yaml
+  - pack: chapters/04-element-balance.yaml
+  - pack: chapters/05-the-element-she-needs.yaml
+  - pack: chapters/06-luck-decades.yaml
+  - pack: chapters/07-your-turn.yaml
+transition: crossfade
+transition_seconds: 0.8
+output_name: final.mp4

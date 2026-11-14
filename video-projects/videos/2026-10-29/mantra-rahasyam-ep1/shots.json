@@ -1,0 +1,387 @@
+{
+ "title": "మంత్ర రహస్యం — Episode 1: మృత్యువుతో పోరాటం (The Secret of the Mantra — The Battle with Death)",
+ "format": {
+  "aspect": "16:9",
+  "size": [
+   1920,
+   1080
+  ],
+  "target_seconds": 180,
+  "language": "te-IN",
+  "subtitles": "separate .srt (English)"
+ },
+ "style": "Cinematic realism mixed with dark spiritual mysticism. Night-time government hospital in Hyderabad, cold blue-green fluorescent light, deep shadows; divine scenes in warm gold. Photoreal, 35mm film still, shallow depth of field.",
+ "characters": {
+  "abhinav": "Abhinav, 25-year-old Telugu software engineer, slim, short black hair, light stubble, wheatish skin, hospital gown",
+  "lakshmi": "Lakshmi, Abhinav's mother, about 50, Telugu woman, maroon cotton saree with a thin gold border, hair in a low bun, small red bindi, gold chain, tired red eyes",
+  "raghava": "Raghava, Abhinav's father, about 56, Telugu man, grey moustache, receding grey hair, cream half-sleeve shirt, vibhuti stripes on forehead, rudraksha mala",
+  "doctor": "Dr. Srinivas, about 45, Indian male doctor, white coat over blue scrubs, stethoscope, glasses",
+  "grandfather": "Raghava's late father, about 75, thin Telugu man, white dhoti and angavastram, vibhuti on forehead, rudraksha mala, white hair"
+ },
+ "voices": {
+  "narrator": "deep commanding male (bulbul:v3)",
+  "abhinav": "young male, whispering",
+  "lakshmi": "female, about 50, crying",
+  "raghava": "mature male",
+  "doctor": "calm male"
+ },
+ "mantra": {
+  "file": "audio/mantra_cycle.wav",
+  "source": "Mantra Shakti channel, j4dxjdQKaD4 (Mahamrityunjaya Mantra 108 times), one cycle 25.7–37.2 s",
+  "use": "s09 only: Raghava chants along, lip-synced"
+ },
+ "shots": [
+  {
+   "id": "s01",
+   "kind": "motion",
+   "who": [],
+   "image": "Extreme close-up of a modern bedside ICU multiparameter patient monitor (flat LCD, like Philips IntelliVue) in a dark room: the green ECG trace has gone almost flat, numbers show HR 0, a red alarm indicator blinking.",
+   "motion": "The green line flattens into a straight line, red alarm light pulses. Static camera.",
+   "sfx": "heartbeat slowing, monitor alarm then flatline tone",
+   "style": "Modern hospital ICU, realistic medical equipment, cold blue-green light, deep shadows. Photoreal, 35mm film still, shallow depth of field. No religious images, no pictures on the screen other than the vital-sign waveforms."
+  },
+  {
+   "id": "s02",
+   "kind": "motion",
+   "who": [
+    "abhinav"
+   ],
+   "image": "Wide shot of a dark ICU room at night: Abhinav lies unconscious on the hospital bed with an oxygen mask, drips and wires; black smoky shadow shapes curl around the bed like reaching hands.",
+   "motion": "The black smoke shadows slowly creep and coil around the bed; faint flicker of the monitor light. Slow push-in.",
+   "vo": {
+    "who": "narrator",
+    "te": "వైద్యులు చేతులెత్తేశారు. ప్రాణం గాల్లో దీపంలా మారింది.",
+    "en": "The doctors had given up. His life flickered like a lamp in the wind.",
+    "emotion": "measured, slightly somber"
+   }
+  },
+  {
+   "id": "s03",
+   "kind": "still",
+   "who": [
+    "abhinav"
+   ],
+   "image": "Close-up of Abhinav's pale face under the oxygen mask, eyes closed, sweat on his forehead, a thin wisp of black smoke near his cheek, cold blue light.",
+   "move": "slow push-in",
+   "vo": {
+    "who": "narrator",
+    "te": "కానీ, ఆ రాత్రి... ఒక అద్భుతం జరగబోతోంది!",
+    "en": "But that night... a miracle was about to unfold!",
+    "emotion": "calm, a hint of suspense"
+   },
+   "style": "Realistic night-time government hospital in Hyderabad, cold blue-green fluorescent light, deep shadows, plain painted walls with no pictures, posters, paintings, murals, symbols or religious images anywhere. Photoreal, 35mm film still, shallow depth of field."
+  },
+  {
+   "id": "s03b",
+   "kind": "still",
+   "who": [
+    "abhinav",
+    "lakshmi",
+    "raghava"
+   ],
+   "image": "Warm flashback: Abhinav laughing at the dinner table at home with his mother and father on a festival evening, oil lamps and marigold garlands, golden warm light, a happy family moment.",
+   "move": "slow push-in",
+   "style": "Warm nostalgic flashback, soft golden light, slight film grain. Photoreal, 35mm film still.",
+   "vo": {
+    "who": "narrator",
+    "te": "అభినవ్... ఇరవై ఐదేళ్ల సాఫ్ట్‌వేర్ ఇంజనీర్. ఇంటికి ఒక్కగానొక్క కొడుకు. అమ్మానాన్నల ప్రాణం.",
+    "en": "Abhinav... a 25-year-old software engineer. The only son of his family. His parents' whole world.",
+    "emotion": "calm, slightly warm"
+   }
+  },
+  {
+   "id": "s03c",
+   "kind": "still",
+   "who": [],
+   "image": "A dark rainy highway at night near Hyderabad: a crashed motorbike lying on its side on wet asphalt, a dropped helmet, red and blue ambulance lights reflecting in puddles.",
+   "move": "slow pan right",
+   "style": "Gritty night realism, wet asphalt reflections, cold light. Photoreal, 35mm film still.",
+   "vo": {
+    "who": "narrator",
+    "te": "ఒక్క రోడ్డు ప్రమాదం... ఒక్క క్షణంలో అంతా మార్చేసింది.",
+    "en": "One road accident... changed everything in a single moment.",
+    "emotion": "measured, slightly somber"
+   }
+  },
+  {
+   "id": "s04",
+   "kind": "lipsync",
+   "speaker": "doctor",
+   "who": [
+    "doctor",
+    "lakshmi",
+    "raghava"
+   ],
+   "image": "Hospital corridor outside the ICU at night. Dr. Srinivas faces the camera, removing his glasses, grave expression. In the foreground, seen from behind and slightly to the side: Lakshmi in her maroon saree with her hair in a low bun, and Raghava with his receding GREY hair and cream half-sleeve shirt, standing close together.",
+   "line": {
+    "te": "క్షమించండి... మేము చేయగలిగినదంతా చేశాం. ఇక అంతా ఆ దేవుడి దయ.",
+    "en": "I'm sorry... we've done everything we could. Now it's all in God's hands."
+   },
+   "emotion": "grave, gentle, sorry",
+   "style": "Realistic night-time government hospital in Hyderabad, cold blue-green fluorescent light, deep shadows, plain painted walls with no pictures, posters, paintings, murals, symbols or religious images anywhere. Photoreal, 35mm film still, shallow depth of field."
+  },
+  {
+   "id": "s05",
+   "kind": "lipsync",
+   "speaker": "lakshmi",
+   "who": [
+    "lakshmi"
+   ],
+   "image": "Lakshmi slumped on a steel hospital bench in the corridor, crying, hands clasped at her mouth, tears on her cheeks.",
+   "line": {
+    "te": "నా బిడ్డను తీసుకెళ్ళకు దేవుడా... వాడే నా ప్రాణం!",
+    "en": "Don't take my child, God... he is my life!"
+   },
+   "emotion": "sobbing, desperate",
+   "style": "Realistic night-time government hospital in Hyderabad, cold blue-green fluorescent light, deep shadows, plain painted walls with no pictures, posters, paintings, murals, symbols or religious images anywhere. Photoreal, 35mm film still, shallow depth of field."
+  },
+  {
+   "id": "s06",
+   "kind": "still",
+   "who": [
+    "raghava"
+   ],
+   "image": "Raghava stands frozen in the corridor, staring at the closed ICU door, his rudraksha mala in one hand, his face lit by cold light.",
+   "move": "slow push-in",
+   "vo": {
+    "who": "raghava",
+    "te": "నాన్నగారు ఎప్పుడూ చెప్పేవారు... మృత్యువునే జయించే మంత్రం ఒకటుంది అని.",
+    "en": "My father always said... there is a mantra that conquers even death.",
+    "emotion": "trembling, remembering, a flicker of hope"
+   },
+   "style": "Realistic night-time government hospital in Hyderabad, cold blue-green fluorescent light, deep shadows, plain painted walls with no pictures, posters, paintings, murals, symbols or religious images anywhere. Photoreal, 35mm film still, shallow depth of field."
+  },
+  {
+   "id": "s06b",
+   "kind": "still",
+   "who": [
+    "grandfather"
+   ],
+   "image": "Sepia flashback memory: an old village shrine at night, the grandfather sits cross-legged before a Shiva lingam lit by a single brass oil lamp, chanting with closed eyes; a small boy (young Raghava) sits beside him listening.",
+   "move": "slow push-in",
+   "style": "Sepia-toned old memory, soft vignette, film grain, oil-lamp glow. Photoreal, 35mm film still."
+  },
+  {
+   "id": "s07",
+   "kind": "still",
+   "who": [
+    "raghava"
+   ],
+   "image": "Raghava sits down beside the ICU door and takes his smartphone out of his shirt pocket, determined look.",
+   "move": "slow pan right",
+   "vo": {
+    "who": "narrator",
+    "te": "ఏ దారీ లేనప్పుడు, ఆ తండ్రికి గుర్తొచ్చింది ఒకే ఒక్క మార్గం. తన ఫోన్ తీసి, మంత్ర శక్తి ఛానెల్‌లో మహా మృత్యుంజయ మంత్రం ప్లే చేశాడు.",
+    "en": "When every door had closed, the father remembered the only way left. He took out his phone and played the Mahamrityunjaya Mantra on the Mantra Shakti channel.",
+    "emotion": "measured, a little urgent"
+   },
+   "style": "Realistic night-time government hospital in Hyderabad, cold blue-green fluorescent light, deep shadows, plain painted walls with no pictures, posters, paintings, murals, symbols or religious images anywhere. Photoreal, 35mm film still, shallow depth of field."
+  },
+  {
+   "id": "s08",
+   "kind": "still",
+   "who": [],
+   "image": "Close-up of an older man's hand holding a smartphone in a dim hospital corridor; the screen shows a glowing Lord Shiva YouTube video (use the supplied thumbnail exactly on the screen).",
+   "move": "slow push-in",
+   "screen": "source/mantra_thumb.jpg"
+  },
+  {
+   "id": "s09",
+   "kind": "lipsync",
+   "speaker": "raghava",
+   "who": [
+    "raghava"
+   ],
+   "image": "Raghava sits on a steel bench by the ICU door with his eyes firmly closed, holding the softly glowing phone to his chest with both hands, chanting with devotion, lips slightly parted, a faint warm golden light on his face.",
+   "audio": "audio/mantra_cycle.wav",
+   "line": {
+    "te": "ఓం త్ర్యంబకం యజామహే సుగంధిం పుష్టివర్ధనమ్...",
+    "en": "(He chants the Mahamrityunjaya Mantra)"
+   },
+   "emotion": "devout, calm, eyes closed throughout, singing a chant",
+   "style": "Realistic night-time government hospital in Hyderabad, cold blue-green fluorescent light, deep shadows, plain painted walls with no pictures (only the phone glows), posters, paintings, murals, symbols or religious images anywhere. Photoreal, 35mm film still, shallow depth of field."
+  },
+  {
+   "id": "s10",
+   "kind": "motion",
+   "who": [
+    "abhinav"
+   ],
+   "image": "Inside the dark ICU: luminous golden waves of light flow in under the door and across the floor towards Abhinav's bed, pushing the black smoke shadows back into the corners.",
+   "motion": "Golden light waves ripple forward across the room; the black smoke recoils and thins. Slow push-in."
+  },
+  {
+   "id": "s10b",
+   "kind": "still",
+   "who": [],
+   "image": "A young Indian nurse in blue scrubs stands frozen at the ICU glass window at night, her face lit by golden light spilling from inside the room, mouth slightly open in awe, clipboard in hand.",
+   "move": "slow push-in",
+   "vo": {
+    "who": "narrator",
+    "te": "ఆ రాత్రి ఆ ఐసీయూలో ఉన్న వాళ్లెవరూ... ఆ దృశ్యాన్ని ఎప్పటికీ మర్చిపోలేరు.",
+    "en": "No one in that ICU that night... would ever forget what they saw.",
+    "emotion": "calm, a hint of awe"
+   }
+  },
+  {
+   "id": "s11",
+   "kind": "motion",
+   "who": [
+    "abhinav"
+   ],
+   "image": "Abhinav's subconscious: he stands barefoot in his hospital gown in an endless dark abyss; giant shadowy figures with long arms (Yamadutas) loom over him, reaching for him.",
+   "motion": "The giant shadow figures slowly reach their long arms toward Abhinav; he steps back in fear. Slow dolly back.",
+   "vo": {
+    "who": "narrator",
+    "te": "ఆ మంత్ర ధ్వని హాస్పిటల్ గదిని మాత్రమే కాదు... అభినవ్ ఆత్మను కూడా తాకింది!",
+    "en": "The sound of the mantra didn't just fill the hospital room... it touched Abhinav's soul!",
+    "emotion": "steady, slightly reverent"
+   }
+  },
+  {
+   "id": "s12",
+   "kind": "motion",
+   "who": [
+    "abhinav"
+   ],
+   "image": "In the dark abyss sky, a colossal glowing third eye of Lord Shiva opens; a dome-shaped golden shield of light surrounds Abhinav, and the shadow figures are thrown back.",
+   "motion": "The giant third eye opens slowly, golden light bursts out; the glowing shield forms around Abhinav. Slow tilt up.",
+   "vo": {
+    "who": "narrator",
+    "te": "యమదూతలు అతని ప్రాణాన్ని లాగే క్షణంలో... ఒక దివ్యమైన శక్తి అడ్డుపడింది!",
+    "en": "Just as death's messengers seized his life... a divine power stood in their way!",
+    "emotion": "steady, a little intense"
+   }
+  },
+  {
+   "id": "s13",
+   "kind": "motion",
+   "who": [],
+   "image": "Extreme close-up of the same modern bedside ICU patient monitor (flat LCD): the green ECG trace jumps back into regular heartbeat spikes, HR 72 shown, a faint warm golden reflection on the glass.",
+   "motion": "The flat line jumps into regular heartbeat spikes. Static camera.",
+   "sfx": "monitor beeps returning, heartbeat",
+   "vo": {
+    "who": "narrator",
+    "te": "సైన్స్ సమాధానం చెప్పలేని చోట... మంత్ర శక్తి తన విశ్వరూపాన్ని చూపించింది.",
+    "en": "Where science had no answers... the power of the mantra revealed its true might.",
+    "emotion": "steady, a hint of awe"
+   },
+   "style": "Modern hospital ICU, realistic medical equipment, cold blue-green light, deep shadows. Photoreal, 35mm film still, shallow depth of field. No religious images, no pictures on the screen other than the vital-sign waveforms."
+  },
+  {
+   "id": "s14",
+   "kind": "motion",
+   "who": [
+    "abhinav"
+   ],
+   "image": "Abhinav on the ICU bed gasps for air, eyes snapping open, his chest rising, oxygen mask fogging.",
+   "motion": "He gasps sharply, eyes open wide, chest heaves. Static camera.",
+   "vo": {
+    "who": "narrator",
+    "te": "అభినవ్ గుండె... మళ్లీ కొట్టుకోవడం మొదలైంది!",
+    "en": "Abhinav's heart... began to beat again!",
+    "emotion": "steady, slightly uplifted"
+   },
+   "style": "Realistic night-time government hospital in Hyderabad, cold blue-green fluorescent light, deep shadows, plain painted walls with no pictures, posters, paintings, murals, symbols or religious images anywhere. Photoreal, 35mm film still, shallow depth of field."
+  },
+  {
+   "id": "s15",
+   "kind": "lipsync",
+   "speaker": "doctor",
+   "who": [
+    "doctor"
+   ],
+   "image": "Dr. Srinivas rushes into the ICU, stops at the bed staring at the monitor, stunned, a nurse behind him.",
+   "line": {
+    "te": "ఇది... ఇది ఎలా సాధ్యం?!",
+    "en": "This... how is this possible?!"
+   },
+   "emotion": "shocked, disbelief",
+   "style": "Realistic night-time government hospital in Hyderabad, cold blue-green fluorescent light, deep shadows, plain painted walls with no pictures, posters, paintings, murals, symbols or religious images anywhere. Photoreal, 35mm film still, shallow depth of field."
+  },
+  {
+   "id": "s16",
+   "kind": "lipsync",
+   "speaker": "lakshmi",
+   "who": [
+    "lakshmi",
+    "abhinav"
+   ],
+   "image": "Lakshmi at Abhinav's bedside, holding his hand to her cheek, crying with joy; Abhinav lies awake, weak.",
+   "line": {
+    "te": "అభీ... నువ్వు తిరిగొచ్చావు రా కన్నా!",
+    "en": "Abhi... you came back to me, my dear!"
+   },
+   "emotion": "tears of joy, relief",
+   "style": "Realistic night-time government hospital in Hyderabad, cold blue-green fluorescent light, deep shadows, plain painted walls with no pictures, posters, paintings, murals, symbols or religious images anywhere. Photoreal, 35mm film still, shallow depth of field."
+  },
+  {
+   "id": "s16b",
+   "kind": "still",
+   "who": [
+    "raghava"
+   ],
+   "image": "Raghava stands at the foot of the ICU bed, tears in his eyes, palms joined in prayer, his phone still glowing in his shirt pocket, soft warm light on his face.",
+   "move": "slow push-in",
+   "vo": {
+    "who": "raghava",
+    "te": "శివయ్యా... నువ్వు మా మొర ఆలకించావు.",
+    "en": "Lord Shiva... you heard our prayer.",
+    "emotion": "tearful, grateful"
+   }
+  },
+  {
+   "id": "s17",
+   "kind": "lipsync",
+   "speaker": "abhinav",
+   "who": [
+    "abhinav"
+   ],
+   "image": "Abhinav sitting up in the ICU bed, looking straight ahead, his irises glowing with a faint golden light, eerie calm expression, dim room.",
+   "line": {
+    "te": "అమ్మా... ఆ మంత్రం నన్ను బ్రతికించలేదు... నన్ను ఒక పెద్ద రహస్యం కోసం తిరిగి పంపించింది!",
+    "en": "Amma... that mantra didn't just save me... it sent me back for a great secret!"
+   },
+   "emotion": "whispering, eerie, serious, no smile",
+   "style": "Realistic night-time government hospital in Hyderabad, cold blue-green fluorescent light, deep shadows, plain painted walls with no pictures, posters, paintings, murals, symbols or religious images anywhere. Photoreal, 35mm film still, shallow depth of field."
+  },
+  {
+   "id": "s18",
+   "kind": "still",
+   "who": [],
+   "image": "Raghava's smartphone lying on the bedside table, its screen glowing; a strange golden symbol of a trident inside a third eye flickers on the screen.",
+   "move": "slow push-in",
+   "vo": {
+    "who": "narrator",
+    "te": "అసలు ఆ రహస్యం ఏంటి?",
+    "en": "What is that secret?",
+    "emotion": "calm, a hint of mystery"
+   }
+  },
+  {
+   "id": "s19",
+   "kind": "still",
+   "who": [],
+   "image": "Dawn breaking over the hospital building in Hyderabad, golden sunlight cutting through dark clouds, a temple gopuram silhouette in the distance.",
+   "move": "slow pan left",
+   "vo": {
+    "who": "narrator",
+    "te": "అభినవ్‌ని తిరిగి పంపిన ఆ శక్తి... ఇప్పుడు అతని ద్వారా ఏం చేయబోతోంది?",
+    "en": "The power that sent Abhinav back... what will it do through him now?",
+    "emotion": "calm, slightly intriguing"
+   }
+  },
+  {
+   "id": "s20",
+   "kind": "title",
+   "text_te": "మంత్ర రహస్యం — పార్ట్ 2 త్వరలో",
+   "text_en": "The Secret of the Mantra — Part 2 coming soon · Mantra Shakti",
+   "vo": {
+    "who": "narrator",
+    "te": "తెలుసుకోవడానికి... పార్ట్-2 కోసం ఇప్పుడే మంత్ర శక్తి ఛానెల్‌ను సబ్‌స్క్రైబ్ చేయండి!",
+    "en": "To find out... subscribe to Mantra Shakti now for Part 2!",
+    "emotion": "warm, lightly inviting"
+   }
+  }
+ ]
+}

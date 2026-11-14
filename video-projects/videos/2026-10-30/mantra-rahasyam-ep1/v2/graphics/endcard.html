@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="te"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1920, height=1080" />
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+body{margin:0;background:transparent;font-family:'Noto Serif Telugu','Noto Serif',Georgia,serif;}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;}
+.clip{position:absolute;inset:0;}
+.bg{position:absolute;inset:0;background:url('assets/endcard_bg.jpg') center/cover no-repeat;}
+    .veil{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(40,8,8,0.45) 0%,rgba(20,4,4,0.82) 100%);}
+    .tbc{position:absolute;left:0;top:200px;width:1920px;text-align:center;font-size:96px;font-weight:700;color:#F2C566;
+      text-shadow:0 0 26px rgba(255,200,90,0.5);}
+    .tbc-en{position:absolute;left:0;top:330px;width:1920px;text-align:center;font-size:36px;letter-spacing:10px;color:#FFF4DC;}
+    .next{position:absolute;left:0;top:420px;width:1920px;text-align:center;font-size:40px;color:#FFF4DC;}
+    .chan{position:absolute;left:560px;top:600px;width:800px;height:180px;}
+    .avatar{position:absolute;left:0;top:0;width:180px;height:180px;border-radius:90px;border:5px solid #F2C566;
+      background:url('assets/channel_avatar.jpg') center/cover no-repeat;}
+    .cname{position:absolute;left:215px;top:22px;width:600px;font-size:62px;font-weight:700;color:#FFF4DC;}
+    .ctag{position:absolute;left:218px;top:108px;width:600px;font-size:30px;color:#F2C566;}
+    .sub{position:absolute;left:810px;top:850px;width:300px;height:84px;border-radius:42px;background:#cc0000;
+      color:#fff;font-family:Roboto,'Noto Sans',sans-serif;font-size:34px;font-weight:700;letter-spacing:2px;
+      text-align:center;line-height:84px;box-shadow:0 6px 22px rgba(0,0,0,0.5);}
+</style></head><body>
+<div id="root" data-composition-id="endcard" data-start="0" data-width="1920" data-height="1080" data-duration="15.0">
+<section id="endcard-clip" class="clip" data-start="0" data-duration="15.0" data-track-index="1">
+<div id="e-bg" class="bg"></div><div id="e-veil" class="veil"></div>
+      <div id="e-tbc" class="tbc">ఇంకా ఉంది…</div><div id="e-tbc-en" class="tbc-en">TO BE CONTINUED</div>
+      <div id="e-next" class="next">ఎపిసోడ్ 2 త్వరలో · Episode 2 coming soon</div>
+      <div id="e-chan" class="chan"><div id="e-avatar" class="avatar"></div>
+        <div id="e-cname" class="cname">Mantra Shakti</div><div id="e-ctag" class="ctag">The Power of Mantras</div></div>
+      <div id="e-sub" class="sub">SUBSCRIBE</div>
+</section></div>
+<script>
+window.__timelines = window.__timelines || {};
+const tl = gsap.timeline({ paused: true });
+tl.from("#e-veil",{opacity:0,duration:1.2},0)
+      .from("#e-tbc",{opacity:0,y:30,duration:1.0,ease:"power3.out"},0.6)
+      .from("#e-tbc-en",{opacity:0,letterSpacing:"26px",duration:0.9},1.2)
+      .from("#e-next",{opacity:0,y:16,duration:0.7},2.0)
+      .from("#e-avatar",{opacity:0,scale:0.6,duration:0.7,ease:"back.out(1.6)"},3.0)
+      .from(["#e-cname","#e-ctag"],{opacity:0,x:-30,duration:0.6,stagger:0.15},3.3)
+      .from("#e-sub",{opacity:0,y:40,duration:0.6,ease:"back.out(1.8)"},4.2)
+      .to("#e-sub",{scale:1.08,duration:0.35,yoyo:true,repeat:5,ease:"sine.inOut"},5.2)
+      .to(["#e-tbc","#e-tbc-en","#e-next","#e-chan","#e-sub","#e-veil","#e-bg"],{opacity:0,duration:1.2},13.6);
+window.__timelines["endcard"] = tl;
+</script></body></html>

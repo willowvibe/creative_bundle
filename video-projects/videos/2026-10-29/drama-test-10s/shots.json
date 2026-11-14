@@ -1,0 +1,56 @@
+{
+  "title": "The Wet Letter",
+  "aspect": "16:9",
+  "style": "photoreal cinematic still, Tamil family drama, natural morning window light, shallow depth of field, 35mm lens, warm muted colour grade, realistic skin texture, no text, no watermark",
+  "setting": "a modest middle-class Chennai kitchen: grey granite counter, steel sink, stacked stainless-steel vessels, a two-burner gas stove, light-green painted walls, a barred window with morning sun",
+  "characters": {
+    "nila": "Nila, a 21-year-old Tamil woman, slim, warm brown skin, long black hair in a single loose braid, small black bindi, simple faded pink cotton churidar with a cream dupatta, thin gold chain, gentle tired face, kind dark eyes",
+    "latha": "Latha, a 48-year-old Tamil woman, stern face, sharp eyebrows, large red kumkum bindi, hair in a tight bun with jasmine flowers, dark green silk saree with a gold zari border, heavy gold necklace and bangles"
+  },
+  "shots": [
+    {
+      "id": "s1",
+      "start": 0.0,
+      "end": 2.0,
+      "kind": "motion",
+      "refs": ["nila", "latha"],
+      "image_prompt": "Wide shot of the kitchen. Latha stands in the kitchen doorway on the left, pointing angrily at the sink. Nila stands at the sink on the right in three-quarter back view, turning her head toward Latha, hands wet. Piles of unwashed steel vessels on the counter.",
+      "video_prompt": "Latha steps forward from the doorway and jabs her finger toward the sink; Nila flinches and turns her head toward her. Slow push-in. Sunlight dust in the air."
+    },
+    {
+      "id": "s2",
+      "start": 2.0,
+      "end": 5.0,
+      "kind": "lipsync",
+      "speaker": "latha",
+      "line": "l1",
+      "refs": ["latha", "nila"],
+      "image_prompt": "Medium close-up of Latha facing camera slightly off-centre, scolding, mouth slightly open mid-sentence, eyebrows raised in anger, one hand raised. Over-the-shoulder framing: Nila's back, braid and pink churidar shoulder with cream dupatta blurred in the left foreground. Kitchen background soft.",
+      "video_prompt": "Latha scolds angrily, head shaking slightly, hand gesturing. Static camera."
+    },
+    {
+      "id": "s3",
+      "start": 5.0,
+      "end": 8.0,
+      "kind": "lipsync",
+      "speaker": "nila",
+      "line": "l2",
+      "refs": ["nila"],
+      "image_prompt": "Medium close-up of Nila facing camera slightly off-centre, eyes glistening with held-back tears, holding a wet steel vessel against her chest, lips parted as she replies softly. Window light on her face, sink behind her.",
+      "video_prompt": "Nila answers softly, lowering her eyes, a tear forming. Very slow push-in."
+    },
+    {
+      "id": "s4",
+      "start": 8.0,
+      "end": 10.0,
+      "kind": "motion",
+      "refs": ["nila"],
+      "image_prompt": "Close-up insert of Nila's hands scrubbing a stainless-steel pot under a running tap in the steel sink. On the wet counter beside the sink lies an opened envelope with a blue college crest, its paper soaked and wrinkled by the splashing water. Her pink sleeve and thin bangle visible.",
+      "video_prompt": "Hands scrub the pot under running water; water splashes onto the soaked envelope; a single tear drop falls into frame and lands on the envelope. Static macro shot."
+    }
+  ],
+  "lines": {
+    "l1": {"speaker": "latha", "text": "நிலா! இன்னும் பாத்திரம் கழுவலையா?", "english": "Nila! You still haven't washed the vessels?"},
+    "l2": {"speaker": "nila", "text": "இதோ கழுவுறேன் சித்தி…", "english": "I'm washing them right now, Chithi…"}
+  }
+}

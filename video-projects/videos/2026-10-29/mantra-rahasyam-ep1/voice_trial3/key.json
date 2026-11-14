@@ -1,0 +1,32 @@
+{
+ "s03": {
+  "A": "smallest pro:shankar",
+  "B": "sarvam",
+  "C": "elevenlabs v4:Bharadwaj"
+ },
+ "s04": {
+  "A": "elevenlabs v4:Vagmin",
+  "B": "smallest pro:manohar",
+  "C": "sarvam"
+ },
+ "s05": {
+  "A": "elevenlabs v4:Vijaya",
+  "B": "sarvam",
+  "C": "smallest pro:sravani"
+ },
+ "s15": {
+  "A": "sarvam",
+  "B": "elevenlabs v4:Vagmin",
+  "C": "smallest pro:manohar"
+ },
+ "s16": {
+  "A": "sarvam",
+  "B": "elevenlabs v4:Vijaya",
+  "C": "smallest pro:sravani"
+ },
+ "s17": {
+  "A": "sarvam",
+  "B": "elevenlabs v4:Kaka",
+  "C": "smallest pro:charan"
+ }
+}

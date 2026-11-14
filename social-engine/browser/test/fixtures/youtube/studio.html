@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Studio</title>
+  </head>
+  <body>
+    <main>
+      <h1>Channel content</h1>
+      <button id="create" type="button">Create</button>
+      <ul id="menu" hidden>
+        <li role="menuitem" id="upload-videos">Upload videos</li>
+      </ul>
+
+      <section id="file-stage" hidden>
+        <label for="file">Select files</label>
+        <input id="file" type="file" accept="video/*" />
+      </section>
+
+      <section id="details" hidden>
+        <h2>Details</h2>
+        <a id="video-link" role="link" href="https://youtu.be/studio-video-1">Video link</a>
+
+        <label for="title">Title</label>
+        <input
+          id="title"
+          type="text"
+          aria-label="Add a title that describes your video"
+        />
+
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          aria-label="Tell viewers about your video"
+        ></textarea>
+
+        <label for="thumbnail">Thumbnail</label>
+        <input id="thumbnail" type="file" accept="image/*" />
+
+        <fieldset>
+          <legend>Playlists</legend>
+          <label><input type="checkbox" name="playlist" value="Mantra Rahasyam" />Mantra Rahasyam</label>
+          <label><input type="checkbox" name="playlist" value="Second" />Second</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Audience</legend>
+          <label><input type="radio" name="kids" value="yes" />Yes, it's made for kids</label>
+          <label><input type="radio" name="kids" value="no" />No, it's not made for kids</label>
+        </fieldset>
+
+        <button id="show-more" type="button">Show more</button>
+
+        <div id="more" hidden>
+          <fieldset>
+            <legend>Altered content</legend>
+            <label><input type="radio" name="synthetic" value="yes" />Yes, AI was used</label>
+            <label><input type="radio" name="synthetic" value="no" />No, AI wasn't used</label>
+          </fieldset>
+
+          <label for="language">Video language</label>
+          <select id="language">
+            <option value="te">te</option>
+            <option value="en">en</option>
+            <option value="hi">hi</option>
+          </select>
+        </div>
+
+        <button id="next" type="button">Next</button>
+      </section>
+
+      <section id="visibility" hidden>
+        <h2>Visibility</h2>
+        <label><input type="radio" name="privacy" value="private" />Private</label>
+        <label><input type="radio" name="privacy" value="unlisted" />Unlisted</label>
+        <label><input type="radio" name="privacy" value="public" />Public</label>
+        <label><input type="radio" name="privacy" value="schedule" />Schedule</label>
+
+        <div id="schedule-date" hidden>
+          <label for="schedule-date-input">Schedule date</label>
+          <input id="schedule-date-input" type="text" />
+        </div>
+
+        <button id="final" type="button">Save</button>
+      </section>
+
+      <section id="done" hidden></section>
+    </main>
+
+    <script>
+      window.__actions = [];
+      window.__state = { playlists: [] };
+      const record = (name) => window.__actions.push(name);
+      const show = (id) => {
+        document.getElementById(id).hidden = false;
+      };
+      const hide = (id) => {
+        document.getElementById(id).hidden = true;
+      };
+
+      document.getElementById("create").addEventListener("click", () => {
+        record("create");
+        show("menu");
+      });
+      document.getElementById("upload-videos").addEventListener("click", () => {
+        record("upload-videos");
+        hide("menu");
+        show("file-stage");
+      });
+      document.getElementById("file").addEventListener("change", (event) => {
+        record("file-selected");
+        window.__state.videoName = event.target.files?.[0]?.name ?? null;
+        hide("file-stage");
+        show("details");
+      });
+      document.getElementById("title").addEventListener("input", (event) => {
+        window.__state.title = event.target.value;
+      });
+      document.getElementById("description").addEventListener("input", (event) => {
+        window.__state.description = event.target.value;
+      });
+      document.getElementById("thumbnail").addEventListener("change", (event) => {
+        window.__state.thumbnailName = event.target.files?.[0]?.name ?? null;
+      });
+      document.querySelectorAll('input[name="playlist"]').forEach((checkbox) => {
+        checkbox.addEventListener("change", () => {
+          window.__state.playlists = [
+            ...document.querySelectorAll('input[name="playlist"]:checked'),
+          ].map((input) => input.value);
+        });
+      });
+      document.querySelectorAll('input[name="kids"]').forEach((radio) => {
+        radio.addEventListener("change", () => {
+          window.__state.madeForKids = radio.value;
+        });
+      });
+      document.getElementById("show-more").addEventListener("click", () => {
+        record("show-more");
+        show("more");
+      });
+      document.querySelectorAll('input[name="synthetic"]').forEach((radio) => {
+        radio.addEventListener("change", () => {
+          window.__state.synthetic = radio.value;
+        });
+      });
+      document.getElementById("language").addEventListener("change", (event) => {
+        window.__state.language = event.target.value;
+      });
+      document.getElementById("next").addEventListener("click", () => {
+        record("next");
+        hide("details");
+        show("visibility");
+      });
+      document.querySelectorAll('input[name="privacy"]').forEach((radio) => {
+        radio.addEventListener("change", () => {
+          window.__state.privacy = radio.value;
+          record(`visibility-${radio.value}`);
+          const final = document.getElementById("final");
+          final.textContent =
+            radio.value === "public"
+              ? "Publish"
+              : radio.value === "schedule"
+                ? "Schedule"
+                : "Save";
+          document.getElementById("schedule-date").hidden = radio.value !== "schedule";
+        });
+      });
+      document.getElementById("schedule-date-input").addEventListener("input", (event) => {
+        window.__state.scheduleDate = event.target.value;
+      });
+      document.getElementById("final").addEventListener("click", () => {
+        record("final-clicked");
+        window.__state.finalClicked = true;
+        hide("visibility");
+        const done = document.getElementById("done");
+        done.hidden = false;
+        done.textContent =
+          window.__state.privacy === "schedule"
+            ? "Video scheduled"
+            : window.__state.privacy === "public"
+              ? "Video published"
+              : "Video saved";
+      });
+    </script>
+  </body>
+</html>

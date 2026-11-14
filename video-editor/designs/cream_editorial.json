@@ -1,0 +1,12 @@
+{
+  "name": "cream_editorial",
+  "palette": {
+    "bg": "#EFEAE3",
+    "ink": "#141210",
+    "accent": "#C8102E",
+    "muted": "#8A8378"
+  },
+  "type": { "display": "Montserrat", "body": "Inter", "display_weight": 700 },
+  "theme": "light",
+  "motion": { "tempo": 1.0, "entry": "rise", "drift": 1.06 }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "PoYo AI Models"
+  short_description: "Discover and run PoYo chat, media, and moderation"
+  default_prompt: "Use $poyo-ai-models to choose a PoYo model, inspect its schema and price, run it, and report its result."

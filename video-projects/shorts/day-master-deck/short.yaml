@@ -1,0 +1,167 @@
+# Cosmic Saju — Video 3 rebuilt as "The Day Master Deck".
+#
+# Ten archetype cards in a fresh woodblock-tarot treatment: midnight pine,
+# rice-paper cream, persimmon and jade instead of the series' warm hanji/gold.
+# Stills go through `auto`, so the free/quota `agy_image` runs first and
+# `poyo_ai` is only the priced fallback.
+job_id: day-master-deck
+design: day_master_deck
+aspect: "9:16"
+
+voice:
+  provider: sarvam_tts
+  voice_id: "sarvam:sarang_en_narration"
+  model: bulbul:v4-flash
+  language: en-IN
+  gap_seconds: 0.28
+
+image:
+  provider: auto
+  model: gpt-image-2.5-fixed
+  resolution: 2K
+  style_suffix: >-
+    Bold flat Korean minhwa woodblock print, carved-line texture, limited
+    palette of midnight pine, rice-paper cream, persimmon and jade, gold foil
+    accents, symmetrical tarot-card composition with a thin gold border,
+    subject centred on a low horizon, high contrast, no text, no letters, no
+    characters, no watermark, vertical 9:16 composition, empty space in the
+    top 18% and bottom 28% of the frame
+
+end_card:
+  say: "Find yours free at cosmicsaju.com."
+  speak_as: "Find yours free at Cosmic Sah-joo dot com."
+  text: "Free chart snapshot"
+  url: cosmicsaju.com
+  tail_seconds: 1.2
+
+scenes:
+  - id: intro
+    still:
+      key: deck_fan
+      prompt: >-
+        Ten blank oracle cards fanned in a perfect arc on midnight silk, each
+        with a thin gold border, no text or symbols
+    chip: "十"
+    lines:
+      - say: >-
+          Korean Saju has ten Day Masters. Wait for yours.
+        speak_as: >-
+          Korean Sah-joo has ten Day Masters. Wait for yours.
+        show: "Which one are you?"
+        cue: "Wait for yours"
+
+  - id: yang_wood
+    still:
+      key: yang_wood
+      prompt: "One tall straight pine tree on a hill, reaching upward"
+    chip: "甲"
+    lines:
+      - say: "Yang Wood, the tall tree: upright, ambitious, a natural lead."
+        show: "Yang Wood · the tree"
+        cue: "the tall tree"
+
+  - id: yin_wood
+    still:
+      key: yin_wood
+      prompt: "A flowering vine curling gracefully around a bamboo stake"
+    chip: "乙"
+    lines:
+      - say: >-
+          Yin Wood, the vine: flexible, tends to find a way around anything.
+        show: "Yin Wood · the vine"
+        cue: "the vine"
+
+  - id: yang_fire
+    still:
+      key: yang_fire
+      prompt: "A radiant sun rising over layered mountains"
+    chip: "丙"
+    lines:
+      - say: "Yang Fire, the sun: warm, open, lights up a room."
+        show: "Yang Fire · the sun"
+        cue: "the sun"
+
+  - id: yin_fire
+    still:
+      key: yin_fire
+      prompt: "A single paper lantern glowing in a dark room"
+    chip: "丁"
+    lines:
+      - say: "Yin Fire, the candle: focused, caring, brightest up close."
+        show: "Yin Fire · the candle"
+        cue: "the candle"
+
+  - id: yang_earth
+    still:
+      key: yang_earth
+      prompt: "A vast solid mountain, unmoving, clouds at its base"
+    chip: "戊"
+    lines:
+      - say: "Yang Earth, the mountain: steady, loyal, hard to move."
+        show: "Yang Earth · the mountain"
+        cue: "the mountain"
+
+  - id: yin_earth
+    still:
+      key: yin_earth
+      prompt: "A tended garden plot with young sprouts in rich soil"
+    chip: "己"
+    lines:
+      - say: "Yin Earth, the garden: nurturing, practical, helps others grow."
+        show: "Yin Earth · the garden"
+        cue: "the garden"
+
+  - id: yang_metal
+    still:
+      key: yang_metal
+      prompt: "A plain iron sword resting on a stone, strong and unpolished"
+    chip: "庚"
+    lines:
+      - say: >-
+          Yang Metal, the sword: direct, decisive, a strong sense of fairness.
+        show: "Yang Metal · the sword"
+        cue: "the sword"
+
+  - id: yin_metal
+    still:
+      key: yin_metal
+      prompt: "A delicate silver hairpin with a small jewel on dark silk"
+    chip: "辛"
+    lines:
+      - say: "Yin Metal, the jewel: refined, precise, sensitive."
+        show: "Yin Metal · the jewel"
+        cue: "the jewel"
+
+  - id: yang_water
+    still:
+      key: yang_water
+      prompt: "A wide ocean with rolling waves to the horizon"
+    chip: "壬"
+    lines:
+      - say: "Yang Water, the ocean: big-picture, free-spirited, restless."
+        show: "Yang Water · the ocean"
+        cue: "the ocean"
+
+  - id: yin_water
+    still:
+      key: yin_water
+      prompt: "Fine rain falling on lotus leaves, mist in the air"
+    chip: "癸"
+    lines:
+      - say: "Yin Water, the rain: intuitive, gentle, quietly persistent."
+        show: "Yin Water · the rain"
+        cue: "the rain"
+
+  - id: deck_grid
+    still:
+      key: deck_grid
+      prompt: >-
+        Ten blank oracle cards arranged in a two-by-five grid on midnight silk,
+        thin gold borders, no text or symbols
+    chip: "10"
+    lines:
+      - say: >-
+          Your Day Master comes from the day you were born, not the year.
+          Comment which one you got.
+        show: "Comment yours"
+        cue: "Comment which one"

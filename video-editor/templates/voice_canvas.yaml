@@ -1,0 +1,27 @@
+name: voice_canvas
+description: Lay generated b-roll under a supplied voiceover audio file.
+inputs:
+  - name: voiceover_audio
+    description: Pre-recorded voiceover MP3/WAV.
+    required: true
+    example: ./vo.mp3
+  - name: concept.md
+    description: Script that matches the voiceover (used for scene timing and captions).
+    required: true
+    example: ./concept.md
+pipeline_kind: script_to_video
+default_preset: long_form
+default_aspect_ratio: "16:9"
+default_providers:
+  image: fal_ai
+  video: hyperframes_video
+  music: poyo_music
+  sfx: elevenlabs_sfx
+default_music_mood: ambient
+scene_type_hints:
+  - broll
+  - narration
+build_concept_kind: voice_canvas
+caveats:
+  - The supplied audio is used as the scene voiceover; TTS generation is skipped.
+  - Scene durations should match the voiceover segments.

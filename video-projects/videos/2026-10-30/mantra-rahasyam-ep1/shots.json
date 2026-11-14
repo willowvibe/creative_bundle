@@ -1,0 +1,1131 @@
+{
+ "title": "మంత్ర రహస్యం — Episode 1: మృత్యువుతో పోరాటం (restart)",
+ "format": {
+  "aspect": "16:9",
+  "size": [
+   1920,
+   1080
+  ],
+  "language": "te-IN",
+  "subtitles": "separate .srt (English)"
+ },
+ "style": "Bright natural daylight, clean and warm. Sunny Hyderabad home; busy, real daytime roads; modern clean private hospital with warm white light, pastel walls, plants. Photoreal, 35mm film still. Never dark, gloomy or grim.",
+ "characters": {
+  "abhinav": "Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, expressive warm dark-brown eyes, warm friendly smile, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, brown rudraksha bead bracelet on a red thread on his right wrist",
+  "lakshmi": "Lakshmi, a 50-year-old Telugu mother, soft round kind face, large dark eyes with fine laugh lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, maroon cotton saree with a thin gold border",
+  "raghava": "Raghava, a 56-year-old Telugu father, lean face, kind tired eyes, receding short grey hair combed back, thick grey moustache, clean-shaven chin, three horizontal white vibhuti stripes on the forehead with a small red kumkum dot, rudraksha mala around the neck, steel wristwatch, medium-dark brown skin, lean build, cream half-sleeve cotton shirt",
+  "doctor": "Dr. Srinivas, ~45, Indian male doctor, white coat over blue scrubs, stethoscope, glasses, calm",
+  "grandfather": "Tatayya, ~75, Raghava's late father, thin Telugu man, white dhoti and angavastram, vibhuti, rudraksha mala, white hair, gentle smile",
+  "nurse1": "Nurse Swathi, ~28, Indian woman, light-blue nurse uniform, hair tied back, ID badge",
+  "nurse2": "Nurse Rani, ~35, Indian woman, light-blue nurse uniform, surgical cap and mask in the operating theatre",
+  "passerby": "Auto driver, ~40, Telugu man, khaki auto-driver shirt, towel on shoulder, moustache",
+  "yama1": "Yama Dhootha 1, tall, dark-blue skin, black-and-gold armour, rope noose (pasha), stern but dignified, not scary",
+  "yama2": "Yama Dhootha 2, tall, dark-blue skin, black-and-gold armour, mace, stern but dignified, not scary",
+  "shiva": "Lord Shiva in classic devotional TV-serial style, photoreal, young handsome calm face with a gentle half-smile, solid pale blue-grey skin, warm brown eyes, three white vibhuti lines with a vertical third-eye mark and an orange-red dot, long dark-brown matted locks in a high top knot wrapped with rudraksha beads, white crescent moon in the hair, large gold hoop earrings, grey-green cobra coiled around the neck with its hood over the right shoulder, long rudraksha malas and armbands, tiger-skin wrap with an orange-red sash, silver-gold trishul with a small damaru, bright burst of white-gold divine light and sparkles behind him"
+ },
+ "images": {
+  "default": "qwen",
+  "poyo_pinned": "user pins human shots to regenerate on PoYo",
+  "shiva": "Matches the user's Google Flow clip (2026-10-31): refs/shiva_default.png (portrait) and refs/shiva_full.png (full figure), frames from clips/provided/c15a_shiva_flow.mp4.",
+  "frames": "Qwen Image 3 on PoYo with the picked character refs (user decision 2026-10-31, over free Nano Banana in Flow); user pins shots to redo on PoYo Nano Banana Pro.",
+  "default_model": "Kling O3 (user rule 2026-10-31, after the bake-off); Qwen Image 3 for blood or dark beats; Nano Banana Pro for pinned redos."
+ },
+ "motion": "Wan 2.2 I2V on RunPod (user decision 2026-10-31, after a blind tie with Veo 3.1 Lite on shot v12): saves Flow credits for special scenes. 1280x720, then smoothed to 24 fps.",
+ "shots": [
+  {
+   "id": "c01a",
+   "scene": 1,
+   "speaker": "narrator",
+   "vo": {
+    "who": "narrator",
+    "te": "హైదరాబాద్‌లో ఒక చిన్న ఇల్లు. ఆ ఇంటి సంతోషం అంతా... వాళ్ళ అబ్బాయి ఒక్కడే, అభినవ్.",
+    "en": "A small house in Hyderabad. All the happiness in that home... was their only son, Abhinav.",
+    "emotion": "warm, gentle"
+   }
+  },
+  {
+   "id": "c01b",
+   "scene": 1,
+   "speaker": "lakshmi",
+   "line": {
+    "who": "lakshmi",
+    "te": "ఇదిగో నాన్నా... పెరుగు, పంచదార. మొదటి జీతం రోజు... శుభంగా వెళ్ళి రా.",
+    "en": "Here, dear... curd and sugar. It's your first-salary day... go well, and come back.",
+    "emotion": "loving, proud"
+   }
+  },
+  {
+   "id": "c01c",
+   "scene": 1,
+   "speaker": "abhinav",
+   "line": {
+    "who": "abhinav",
+    "te": "అమ్మా, ఈ ఆదివారం మిమ్మల్ని ఇద్దరినీ శ్రీశైలం తీసుకెళ్ళాలి అనుకుంటున్నాను. ఇది తాతయ్య కోరిక... నా జీతంతో తీరుస్తా!",
+    "en": "Amma, this Sunday I want to take you both to Srisailam. It was Tatayya's wish... I'll fulfil it with my salary!",
+    "emotion": "warm, affectionate, calm"
+   }
+  },
+  {
+   "id": "c01d",
+   "scene": 1,
+   "speaker": "raghava",
+   "line": {
+    "who": "raghava",
+    "te": "బండి నెమ్మదిగా నడుపు రా. నీ తాతయ్య రుద్రాక్ష నీ చేతికే ఉంది... జాగ్రత్త.",
+    "en": "Ride slowly. Your Tatayya's rudraksha is on your wrist... take care.",
+    "emotion": "smiling, caring"
+   }
+  },
+  {
+   "id": "c01e",
+   "scene": 1,
+   "speaker": "abhinav",
+   "line": {
+    "who": "abhinav",
+    "te": "సరే నాన్నా! సాయంత్రం స్వీట్స్‌తో వస్తా!",
+    "en": "Okay, Nanna! I'll be back with sweets this evening!",
+    "emotion": "cheerful"
+   }
+  },
+  {
+   "id": "c02a",
+   "scene": 2,
+   "speaker": "narrator",
+   "vo": {
+    "who": "narrator",
+    "te": "కానీ విధి రాత... ఆ రోజు వేరేలా జరిగింది.",
+    "en": "But fate... had something else written for that day.",
+    "emotion": "calm, a hint of dread"
+   }
+  },
+  {
+   "id": "c03a",
+   "scene": 3,
+   "speaker": "passerby",
+   "line": {
+    "who": "passerby",
+    "te": "అయ్యో! ఆ పాపను కాపాడబోయి... ఆ అబ్బాయి కింద పడిపోయాడు!",
+    "en": "Oh no! He tried to save that little girl... and he's down!",
+    "emotion": "shocked, urgent"
+   }
+  },
+  {
+   "id": "c03b",
+   "scene": 3,
+   "speaker": "passerby",
+   "line": {
+    "who": "passerby",
+    "te": "హలో, 108? అమీర్‌పేట్ సిగ్నల్ దగ్గర యాక్సిడెంట్ అయ్యింది! అబ్బాయి స్పృహలో లేడు... త్వరగా రండి!",
+    "en": "Hello, 108? There's been an accident near the Ameerpet signal! The boy is unconscious... come quickly!",
+    "emotion": "on the phone, panicked"
+   }
+  },
+  {
+   "id": "c04a",
+   "scene": 4,
+   "speaker": "narrator",
+   "vo": {
+    "who": "narrator",
+    "te": "మానవతా దృక్పథంతో ఒక పసిపాప ప్రాణం కాపాడాడు... కానీ ఇప్పుడు తన ప్రాణమే గాల్లో దీపంలా మారింది.",
+    "en": "Out of pure humanity, he saved a little girl's life... but now his own life flickered like a lamp in the wind.",
+    "emotion": "measured, somber"
+   }
+  },
+  {
+   "id": "c05a",
+   "scene": 5,
+   "speaker": "nurse1",
+   "line": {
+    "who": "nurse1",
+    "te": "హలో... ఇది అభినవ్ గారి ఇల్లేనా? నేను సిటీ హాస్పిటల్ నుండి మాట్లాడుతున్నాను.",
+    "en": "Hello... is this Abhinav's home? I'm calling from City Hospital.",
+    "emotion": "gentle, professional"
+   }
+  },
+  {
+   "id": "c05b",
+   "scene": 5,
+   "speaker": "lakshmi",
+   "line": {
+    "who": "lakshmi",
+    "te": "అవునమ్మా... నేను వాళ్ళ అమ్మని. ఏమైంది?",
+    "en": "Yes... I'm his mother. What happened?",
+    "emotion": "worried"
+   }
+  },
+  {
+   "id": "c05c",
+   "scene": 5,
+   "speaker": "nurse1",
+   "line": {
+    "who": "nurse1",
+    "te": "అమ్మా, క్షమించండి... మీ అబ్బాయికి యాక్సిడెంట్ అయ్యింది. పరిస్థితి సీరియస్‌గా ఉంది. వెంటనే రండి.",
+    "en": "Amma, I'm sorry... your son has had an accident. It's serious. Please come right away.",
+    "emotion": "careful, serious"
+   }
+  },
+  {
+   "id": "c05d",
+   "scene": 5,
+   "speaker": "lakshmi",
+   "line": {
+    "who": "lakshmi",
+    "te": "ఏమండీ...! మన అభీ...!",
+    "en": "Listen...! Our Abhi...!",
+    "emotion": "shattered, crying out"
+   }
+  },
+  {
+   "id": "c06a",
+   "scene": 6,
+   "speaker": "lakshmi",
+   "line": {
+    "who": "lakshmi",
+    "te": "భగవంతుడా... నా బిడ్డకేం కాకూడదు... ఏం కాకూడదు స్వామీ...",
+    "en": "O Lord... nothing must happen to my child... nothing, Swami...",
+    "emotion": "sobbing, praying"
+   }
+  },
+  {
+   "id": "c07a",
+   "scene": 7,
+   "speaker": "doctor",
+   "line": {
+    "who": "doctor",
+    "te": "తలకి బలమైన దెబ్బ తగిలింది. లోపల రక్తస్రావం అవుతోంది. వెంటనే ఆపరేషన్ చేయాలి.",
+    "en": "He has a severe head injury, with internal bleeding. We must operate right away.",
+    "emotion": "calm, grave"
+   }
+  },
+  {
+   "id": "c07b",
+   "scene": 7,
+   "speaker": "raghava",
+   "line": {
+    "who": "raghava",
+    "te": "డాక్టర్ గారూ... మా అబ్బాయి పరిస్థితి ఎలా ఉంది?",
+    "en": "Doctor... how is my son?",
+    "emotion": "trembling, desperate"
+   }
+  },
+  {
+   "id": "c07c",
+   "scene": 7,
+   "speaker": "doctor",
+   "line": {
+    "who": "doctor",
+    "te": "మా ప్రయత్నం మేం చేస్తాం. ఇక్కడ సంతకం పెట్టండి... ప్రతి నిమిషం విలువైనదే.",
+    "en": "We'll do everything we can. Please sign here... every minute counts.",
+    "emotion": "gentle but firm"
+   }
+  },
+  {
+   "id": "c07d",
+   "scene": 7,
+   "speaker": "lakshmi",
+   "line": {
+    "who": "lakshmi",
+    "te": "మా అబ్బాయిని ఎలాగైనా కాపాడండి డాక్టర్ గారూ!",
+    "en": "Please save my son somehow, Doctor!",
+    "emotion": "crying, pleading"
+   }
+  },
+  {
+   "id": "c08a",
+   "scene": 8,
+   "speaker": "lakshmi",
+   "line": {
+    "who": "lakshmi",
+    "te": "శివయ్యా... కావాలంటే నా ప్రాణం తీసుకో... నా బిడ్డను మాత్రం కాపాడు తండ్రీ...",
+    "en": "Shivayya... take my life if you must... but save my child, Father...",
+    "emotion": "sobbing, desperate"
+   }
+  },
+  {
+   "id": "c08b",
+   "scene": 8,
+   "speaker": "raghava",
+   "line": {
+    "who": "raghava",
+    "te": "వాడింకా జీవితమే చూడలేదు స్వామీ... తీసుకెళ్లాలంటే నన్ను తీసుకెళ్ళు.",
+    "en": "He hasn't even seen life yet, Swami... if you must take someone, take me.",
+    "emotion": "broken, pleading"
+   }
+  },
+  {
+   "id": "c08c",
+   "scene": 8,
+   "speaker": "lakshmi",
+   "line": {
+    "who": "lakshmi",
+    "te": "పొద్దున్నే పెరుగు పెట్టి పంపాను... సాయంత్రం స్వీట్స్‌తో వస్తా అన్నాడండీ...",
+    "en": "I fed him curd and sent him off this morning... he said he'd come back with sweets this evening...",
+    "emotion": "quiet, heartbroken"
+   }
+  },
+  {
+   "id": "c09a",
+   "scene": 9,
+   "speaker": "nurse2",
+   "line": {
+    "who": "nurse2",
+    "te": "డాక్టర్! బీపీ పడిపోతోంది... పల్స్ దొరకట్లేదు!",
+    "en": "Doctor! BP is falling... I can't find a pulse!",
+    "emotion": "alarmed, fast"
+   }
+  },
+  {
+   "id": "c09b",
+   "scene": 9,
+   "speaker": "doctor",
+   "line": {
+    "who": "doctor",
+    "te": "డిఫిబ్రిలేటర్ రెడీ చేయండి... త్వరగా!",
+    "en": "Get the defibrillator ready... quickly!",
+    "emotion": "urgent, commanding"
+   }
+  },
+  {
+   "id": "c10a",
+   "scene": 10,
+   "speaker": "narrator",
+   "vo": {
+    "who": "narrator",
+    "te": "ఆ భయంలో... రాఘవకు తన తండ్రి మాటలు గుర్తొచ్చాయి.",
+    "en": "In that fear... Raghava remembered his father's words.",
+    "emotion": "soft, reflective"
+   }
+  },
+  {
+   "id": "c10b",
+   "scene": 10,
+   "speaker": "grandfather",
+   "line": {
+    "who": "grandfather",
+    "te": "రాఘవా... ఏ మందూ పనిచేయని రోజు, మృత్యువు గుమ్మం ముందు నిలబడిన రోజు... మహా మృత్యుంజయ మంత్రం జపించు. నమ్మకంతో జపిస్తే... యముడు కూడా వెనక్కి తగ్గుతాడు.",
+    "en": "Raghava... on the day no medicine works, the day death stands at the door... chant the Mahamrityunjaya mantra. Chant it with faith... and even Yama steps back.",
+    "emotion": "wise, gentle, firm"
+   }
+  },
+  {
+   "id": "c11a",
+   "scene": 11,
+   "kind": "lipsync",
+   "speaker": "raghava",
+   "audio": "../../mantra-rahasyam/assets/audio/mantra_cycle.wav",
+   "repeat": 3,
+   "line": {
+    "who": "raghava",
+    "te": "ఓం త్ర్యంబకం యజామహే సుగంధిం పుష్టివర్ధనమ్... (×3)",
+    "en": "(He chants the Mahamrityunjaya Mantra, three cycles)",
+    "emotion": "devoted, eyes closed, steady"
+   }
+  },
+  {
+   "id": "c12a",
+   "scene": 12,
+   "speaker": "yama1",
+   "line": {
+    "who": "yama1",
+    "te": "అభినవ్... నీ సమయం ముగిసింది. పద.",
+    "en": "Abhinav... your time is over. Come.",
+    "emotion": "deep, stern"
+   }
+  },
+  {
+   "id": "c12b",
+   "scene": 12,
+   "speaker": "yama2",
+   "line": {
+    "who": "yama2",
+    "te": "యమధర్మరాజు నీకోసం ఎదురుచూస్తున్నారు.",
+    "en": "Lord Yama awaits you.",
+    "emotion": "deep, commanding"
+   }
+  },
+  {
+   "id": "c12c",
+   "scene": 12,
+   "speaker": "abhinav",
+   "line": {
+    "who": "abhinav",
+    "te": "లేదు... మా అమ్మ, నాన్న... నేను లేకపోతే వాళ్ళు బ్రతకలేరు!",
+    "en": "No... my mother, my father... they can't live without me!",
+    "emotion": "scared, pleading"
+   }
+  },
+  {
+   "id": "c12d",
+   "scene": 12,
+   "speaker": "shiva",
+   "line": {
+    "who": "shiva",
+    "te": "ఆగండి! ఈ ప్రాణం వెళ్ళే సమయం ఇంకా రాలేదు. భూమి మీద ఇతను చేయాల్సిన పని ఇంకా మిగిలే ఉంది.",
+    "en": "Stop! This soul's time has not yet come. His work on earth is not yet done.",
+    "emotion": "authoritative, commanding, divine"
+   }
+  },
+  {
+   "id": "c12e",
+   "scene": 12,
+   "speaker": "yama1",
+   "line": {
+    "who": "yama1",
+    "te": "ఆజ్ఞ, మహాదేవా.",
+    "en": "As you command, Mahadeva.",
+    "emotion": "bowing, respectful"
+   }
+  },
+  {
+   "id": "c12f",
+   "scene": 12,
+   "speaker": "shiva",
+   "line": {
+    "who": "shiva",
+    "te": "వెళ్ళు నాయనా... తిరిగి వెళ్ళు.",
+    "en": "Go, my child... go back.",
+    "emotion": "commanding, firm, with quiet compassion"
+   }
+  },
+  {
+   "id": "c13a",
+   "scene": 13,
+   "speaker": "doctor",
+   "line": {
+    "who": "doctor",
+    "te": "గుండె ఆగిపోయింది... కానీ ఒక్కసారిగా మళ్ళీ కొట్టుకోవడం మొదలైంది! ఇరవై ఏళ్ల నా సర్వీసులో ఇలాంటిది చూడలేదు. ఇది నిజంగా అద్భుతం!",
+    "en": "His heart had stopped... but suddenly it started beating again! In twenty years of practice I've never seen this. It's truly a miracle!",
+    "emotion": "astonished, joyful"
+   }
+  },
+  {
+   "id": "c13b",
+   "scene": 13,
+   "speaker": "raghava",
+   "line": {
+    "who": "raghava",
+    "te": "శివయ్యా... నీ మహిమ...",
+    "en": "Shivayya... your grace...",
+    "emotion": "tearful, grateful"
+   }
+  },
+  {
+   "id": "c13c",
+   "scene": 13,
+   "speaker": "lakshmi",
+   "line": {
+    "who": "lakshmi",
+    "te": "మా మొర ఆలకించావు స్వామీ!",
+    "en": "You heard our plea, Swami!",
+    "emotion": "crying with joy"
+   }
+  },
+  {
+   "id": "c14a",
+   "scene": 14,
+   "speaker": "lakshmi",
+   "line": {
+    "who": "lakshmi",
+    "te": "అభీ... కన్నా! కళ్ళు తెరిచావా నాయనా... నా ప్రాణం తిరిగొచ్చింది!",
+    "en": "Abhi... my dear! You opened your eyes, my child... my life has come back!",
+    "emotion": "relieved, tearful joy"
+   }
+  },
+  {
+   "id": "c14b",
+   "scene": 14,
+   "speaker": "raghava",
+   "line": {
+    "who": "raghava",
+    "te": "ఆ పాపను కాపాడావని తెలిసింది రా... నిన్ను చూసి గర్వపడుతున్నాను.",
+    "en": "I heard you saved that little girl... I'm so proud of you.",
+    "emotion": "proud, emotional"
+   }
+  },
+  {
+   "id": "c14c",
+   "scene": 14,
+   "speaker": "abhinav",
+   "line": {
+    "who": "abhinav",
+    "te": "అమ్మా... నాన్నా... నేను ఎక్కడికో దూరంగా వెళ్ళాను... కానీ మీ మంత్ర శక్తే నన్ను వెనక్కి తీసుకొచ్చింది.",
+    "en": "Amma... Nanna... I went somewhere far away... but the power of your mantra brought me back.",
+    "emotion": "weak, wondering"
+   }
+  },
+  {
+   "id": "c15a",
+   "scene": 15,
+   "speaker": "shiva",
+   "line": {
+    "who": "shiva",
+    "te": "అభినవ్, నీ ప్రయాణం ఇక్కడితో ఆగిపోదు. నువ్వు చేయాల్సిన మహత్కార్యం ఇంకా మిగిలే ఉంది. నీ జీవితానికి ఒక సార్థకతను తెచ్చే పెద్ద బాధ్యత నిరీక్షిస్తోంది...",
+    "en": "Abhinav, your journey does not end here. A great task you must fulfil still remains. A great responsibility that will give your life its true meaning awaits you...",
+    "emotion": "authoritative, solemn, divine"
+   },
+   "provided": {
+    "video": "clips/provided/c15a_shiva_flow.mp4",
+    "original": "source/c15a_shiva_flow_original.mp4",
+    "note": "User's Google Flow clip (2026-10-31), used whole: picture, lip-sync and voice. Generator logo removed."
+   }
+  },
+  {
+   "id": "c16a",
+   "scene": 16,
+   "speaker": "narrator",
+   "vo": {
+    "who": "narrator",
+    "te": "ఆ దివ్యవాణి అభినవ్‌కు ఇంకా ఏం చెప్పింది? అతను కాపాడాల్సింది ఎవరిని? తెలుసుకోవాలంటే... పార్ట్-2 కోసం మంత్ర శక్తి ఛానెల్‌ను ఫాలో చేసి, సబ్‌స్క్రైబ్ చేసుకోండి!",
+    "en": "What else did the divine voice tell Abhinav? Who must he save? To find out... follow and subscribe to Mantra Shakti for Part 2!",
+    "emotion": "inviting, a hint of suspense"
+   }
+  }
+ ],
+ "series": {
+  "root": "../../mantra-rahasyam",
+  "episode": 1,
+  "bibles": "../../mantra-rahasyam/assets/characters/<name>/bible.md (abhinav, lakshmi, raghava, shiva)"
+ },
+ "visuals": [
+  {
+   "id": "v01",
+   "scene": 1,
+   "kind": "motion",
+   "who": [],
+   "lines": [
+    "c01a_vo"
+   ],
+   "image": "Wide exterior of a small, cheerful two-storey Hyderabad house at sunrise, potted tulsi plant and rangoli at the gate, warm golden morning light, birds, clear blue sky."
+  },
+  {
+   "id": "v02",
+   "scene": 1,
+   "kind": "lipsync",
+   "who": [
+    "lakshmi"
+   ],
+   "lines": [
+    "c01b_line"
+   ],
+   "image": "Lakshmi in a sunny kitchen doorway holding a small steel bowl of curd and sugar and a spoon, smiling lovingly at someone just off camera (Abhinav's shoulder blurred in the foreground, back to camera). Medium close-up on her face."
+  },
+  {
+   "id": "v03",
+   "scene": 1,
+   "kind": "lipsync",
+   "who": [
+    "abhinav"
+   ],
+   "lines": [
+    "c01c_line"
+   ],
+   "image": "Abhinav in a bright living room, office bag on his shoulder, warm affectionate smile, speaking to his mother off camera. Medium close-up."
+  },
+  {
+   "id": "v04",
+   "scene": 1,
+   "kind": "lipsync",
+   "who": [
+    "raghava"
+   ],
+   "lines": [
+    "c01d_line"
+   ],
+   "image": "Raghava sitting on a cane chair in a sunlit living room with a folded Telugu newspaper, looking up with a caring smile, pointing gently at his own wrist. Medium close-up."
+  },
+  {
+   "id": "v05",
+   "scene": 1,
+   "kind": "lipsync",
+   "who": [
+    "abhinav"
+   ],
+   "lines": [
+    "c01e_line"
+   ],
+   "image": "Abhinav at the open front door holding a black open-face helmet, turning back with a cheerful wave, bright morning light behind him. Medium shot, face clearly visible."
+  },
+  {
+   "id": "v06",
+   "scene": 2,
+   "kind": "motion",
+   "who": [
+    "abhinav"
+   ],
+   "lines": [
+    "c02a_vo"
+   ],
+   "image": "Abhinav riding a red motorbike with his helmet on along a sunny, busy Hyderabad road, trees and shops, smiling, seen from the front side. Wide tracking shot."
+  },
+  {
+   "id": "v07",
+   "scene": 2,
+   "kind": "motion",
+   "who": [],
+   "lines": [],
+   "image": "A little girl of about five in a yellow frock runs onto the sunny road chasing a red ball, cars and a lorry approaching in the distance. Wide street-level shot."
+  },
+  {
+   "id": "v08",
+   "scene": 2,
+   "kind": "motion",
+   "who": [
+    "abhinav"
+   ],
+   "lines": [],
+   "image": "The moment before impact on a busy, cluttered Hyderabad road in hard daylight: honking traffic, autos, buses and two-wheelers, dust, potholes and broken tarmac, roadside stalls and parked bikes; not an empty or clean road. Abhinav on his red motorbike swerves hard to avoid a little girl of about five in a yellow frock who has run into the road after a red ball; a large Indian lorry is right behind him, brakes screeching, motion blur, dust kicking up. Dramatic low wide shot."
+  },
+  {
+   "id": "v08b",
+   "scene": 2,
+   "kind": "motion",
+   "who": [
+    "abhinav"
+   ],
+   "lines": [],
+   "image": "Split second after the crash on a busy, cluttered Hyderabad road in hard daylight: honking traffic, autos, buses and two-wheelers, dust, potholes and broken tarmac, roadside stalls and parked bikes; not an empty or clean road: the red motorbike skidding on its side throwing sparks, Abhinav thrown onto the tarmac, his helmet rolling away, the lorry stopped at an angle behind, bystanders turning in shock. Gritty, realistic, motion blur. Wide shot."
+  },
+  {
+   "id": "v09",
+   "scene": 2,
+   "kind": "motion",
+   "who": [
+    "abhinav"
+   ],
+   "lines": [],
+   "image": "Aftermath on a busy, cluttered Hyderabad road in hard daylight with stopped autos, buses and two-wheelers, dust and broken tarmac: Abhinav lying motionless and unconscious on the road, eyes closed, face slack and pale, no expression, in his light-blue shirt, blood splattered across the tarmac beside him and a pool of blood spreading from his head, his cracked helmet and the damaged red motorbike nearby, broken mirror glass scattered; people rushing in and gathering around in shock; the little girl in her YELLOW frock safe and crying in her mother's arms at the roadside. Realistic accident scene. Wide shot."
+  },
+  {
+   "id": "v10",
+   "scene": 3,
+   "kind": "lipsync",
+   "who": [
+    "passerby"
+   ],
+   "lines": [
+    "c03a_line"
+   ],
+   "image": "The auto driver beside his yellow-and-green auto-rickshaw on the sunny road, shocked, hand on his head, looking towards the accident. Medium close-up."
+  },
+  {
+   "id": "v11",
+   "scene": 3,
+   "kind": "lipsync",
+   "who": [
+    "passerby"
+   ],
+   "lines": [
+    "c03b_line"
+   ],
+   "image": "The auto driver kneeling at the roadside, phone to his ear, urgent and panicked, people gathering behind him. Medium close-up."
+  },
+  {
+   "id": "v12",
+   "scene": 4,
+   "kind": "motion",
+   "who": [],
+   "lines": [
+    "c04a_vo"
+   ],
+   "image": "A white 108 ambulance with flashing lights racing through daytime Hyderabad traffic, cars moving aside. Wide shot."
+  },
+  {
+   "id": "v13",
+   "scene": 4,
+   "kind": "motion",
+   "who": [],
+   "lines": [],
+   "image": "Paramedics urgently wheeling a stretcher with an injured young man (head bandaged, blood on his shirt) through the bright glass entrance of a modern hospital emergency ward, nurses running to help; everyone tense, worried and focused, serious faces, no smiles; motion and urgency. Clean white and pastel interior. Wide shot."
+  },
+  {
+   "id": "v14",
+   "scene": 5,
+   "kind": "lipsync",
+   "who": [
+    "nurse1"
+   ],
+   "lines": [
+    "c05a_line"
+   ],
+   "image": "Nurse Swathi at a bright, clean hospital nurses' station, holding a desk phone to her ear, tense and grave while delivering bad news. Medium close-up."
+  },
+  {
+   "id": "v15",
+   "scene": 5,
+   "kind": "lipsync",
+   "who": [
+    "lakshmi"
+   ],
+   "lines": [
+    "c05b_line"
+   ],
+   "image": "Lakshmi in her sunny kitchen holding a mobile phone to her ear, worried expression. Medium close-up."
+  },
+  {
+   "id": "v16",
+   "scene": 5,
+   "kind": "lipsync",
+   "who": [
+    "nurse1"
+   ],
+   "lines": [
+    "c05c_line"
+   ],
+   "image": "Nurse Swathi holding a black desk-phone receiver to her ear and speaking gravely into it, a grave, apologetic expression, slightly closer framing. Close-up."
+  },
+  {
+   "id": "v17",
+   "scene": 5,
+   "kind": "lipsync",
+   "who": [
+    "lakshmi"
+   ],
+   "lines": [
+    "c05d_line"
+   ],
+   "image": "Lakshmi in the kitchen, a steel glass falling from her hand, shocked and crying out, phone still in her other hand. Medium close-up."
+  },
+  {
+   "id": "v18",
+   "scene": 6,
+   "kind": "motion",
+   "who": [
+    "raghava",
+    "lakshmi"
+   ],
+   "lines": [
+    "c06a_line"
+   ],
+   "image": "Raghava riding a grey scooter through a quiet daytime street with Lakshmi sitting behind him, both tense and worried, only two people in the frame. Medium tracking shot."
+  },
+  {
+   "id": "v19",
+   "scene": 7,
+   "kind": "lipsync",
+   "who": [
+    "doctor"
+   ],
+   "lines": [
+    "c07a_line"
+   ],
+   "image": "Dr. Srinivas in a bright, clean hospital corridor with pastel walls and plants, explaining gravely to someone off camera. Medium close-up."
+  },
+  {
+   "id": "v20",
+   "scene": 7,
+   "kind": "lipsync",
+   "who": [
+    "raghava"
+   ],
+   "lines": [
+    "c07b_line"
+   ],
+   "image": "Raghava in the bright hospital corridor, trembling, desperate, asking the doctor off camera. Medium close-up."
+  },
+  {
+   "id": "v21",
+   "scene": 7,
+   "kind": "lipsync",
+   "who": [
+    "doctor"
+   ],
+   "lines": [
+    "c07c_line"
+   ],
+   "image": "Dr. Srinivas holding out a clipboard with a consent form and a pen, gentle but firm. Medium close-up."
+  },
+  {
+   "id": "v22",
+   "scene": 7,
+   "kind": "lipsync",
+   "who": [
+    "lakshmi"
+   ],
+   "lines": [
+    "c07d_line"
+   ],
+   "image": "Lakshmi in the hospital corridor, crying and pleading with the doctor off camera, hands joined. Medium close-up."
+  },
+  {
+   "id": "v23",
+   "scene": 7,
+   "kind": "motion",
+   "who": [
+    "raghava"
+   ],
+   "lines": [],
+   "image": "Close-up of Raghava's trembling hand signing a hospital consent form on a clipboard, his rudraksha mala and wristwatch visible, bright light."
+  },
+  {
+   "id": "v24",
+   "scene": 8,
+   "kind": "lipsync",
+   "who": [
+    "lakshmi"
+   ],
+   "lines": [
+    "c08a_line"
+   ],
+   "image": "Lakshmi at a small bright hospital prayer corner with a framed picture of Lord Shiva and a lit oil lamp, sobbing and praying with joined hands. Medium close-up."
+  },
+  {
+   "id": "v25",
+   "scene": 8,
+   "kind": "lipsync",
+   "who": [
+    "raghava"
+   ],
+   "lines": [
+    "c08b_line"
+   ],
+   "image": "Raghava at the hospital prayer corner, broken and pleading, looking up towards the Shiva picture. Medium close-up."
+  },
+  {
+   "id": "v26",
+   "scene": 8,
+   "kind": "lipsync",
+   "who": [
+    "lakshmi"
+   ],
+   "lines": [
+    "c08c_line"
+   ],
+   "image": "Lakshmi sitting on a hospital corridor bench, quiet and heartbroken, staring ahead, a tear rolling down. Close-up."
+  },
+  {
+   "id": "v27",
+   "scene": 9,
+   "kind": "motion",
+   "who": [
+    "nurse1"
+   ],
+   "lines": [],
+   "image": "Bright hospital corridor outside the operating theatre, a red light glowing above the double doors, Nurse Swathi rushing out and another nurse rushing in. Wide shot."
+  },
+  {
+   "id": "v28",
+   "scene": 9,
+   "kind": "motion",
+   "who": [
+    "doctor",
+    "nurse2"
+   ],
+   "lines": [
+    "c09a_line",
+    "c09b_line"
+   ],
+   "image": "Inside a bright, clean operating theatre: Dr. Srinivas and Nurse Rani in surgical masks and caps working urgently, a monitor showing a falling heart line, a defibrillator being readied. Medium-wide shot."
+  },
+  {
+   "id": "v29",
+   "scene": 9,
+   "kind": "motion",
+   "who": [
+    "raghava",
+    "lakshmi"
+   ],
+   "lines": [],
+   "image": "Raghava and Lakshmi standing in the bright corridor outside the operating theatre, terrified, holding each other's hands. Medium shot."
+  },
+  {
+   "id": "v30",
+   "scene": 10,
+   "kind": "motion",
+   "who": [
+    "raghava"
+   ],
+   "lines": [
+    "c10a_vo"
+   ],
+   "image": "Raghava in the hospital corridor slowly closing his eyes, a soft warm golden glow beginning around him, memory coming back. Close-up."
+  },
+  {
+   "id": "v31",
+   "scene": 10,
+   "kind": "lipsync",
+   "who": [
+    "grandfather"
+   ],
+   "lines": [
+    "c10b_line"
+   ],
+   "image": "Flashback: Tatayya sitting on the step of a sunlit traditional Telugu home courtyard with a tulsi plant, speaking wisely and gently to someone off camera, warm golden light. Medium close-up."
+  },
+  {
+   "id": "v32",
+   "scene": 11,
+   "kind": "lipsync",
+   "who": [
+    "raghava"
+   ],
+   "lines": [
+    "c11a_line"
+   ],
+   "image": "Raghava in the hospital corridor, eyes closed, palms joined holding his rudraksha mala, chanting with deep devotion, soft golden light on his face. Medium close-up."
+  },
+  {
+   "id": "v33",
+   "scene": 11,
+   "kind": "motion",
+   "who": [
+    "lakshmi"
+   ],
+   "lines": [],
+   "image": "Lakshmi standing alone in the bright hospital corridor with folded hands and closed eyes, praying with deep devotion, soft golden light on her face. Medium close-up. Only Lakshmi in frame."
+  },
+  {
+   "id": "v34",
+   "scene": 11,
+   "kind": "motion",
+   "who": [],
+   "lines": [],
+   "image": "Soft golden light and faint sacred sound waves flowing down the bright hospital corridor and through the operating theatre doors. Wide shot."
+  },
+  {
+   "id": "v35",
+   "scene": 12,
+   "kind": "motion",
+   "who": [
+    "abhinav"
+   ],
+   "lines": [],
+   "image": "Abhinav's soul, glowing softly in a plain white kurta, rising gently from the operating table, translucent, the surgical team below. Bright white light. Wide shot."
+  },
+  {
+   "id": "v36",
+   "scene": 12,
+   "kind": "motion",
+   "who": [
+    "yama1",
+    "yama2"
+   ],
+   "lines": [],
+   "image": "Two tall Yama Dhoothas in black-and-gold armour emerging from a soft silver mist, one holding a rope noose, stern and dignified, in a bright otherworldly space. Wide shot."
+  },
+  {
+   "id": "v37",
+   "scene": 12,
+   "kind": "lipsync",
+   "who": [
+    "yama1"
+   ],
+   "lines": [
+    "c12a_line"
+   ],
+   "image": "Yama Dhootha 1 in the silver mist, holding the rope noose, speaking sternly. Medium close-up."
+  },
+  {
+   "id": "v38",
+   "scene": 12,
+   "kind": "lipsync",
+   "who": [
+    "yama2"
+   ],
+   "lines": [
+    "c12b_line"
+   ],
+   "image": "Yama Dhootha 2 in the silver mist, holding a mace, speaking with command. Medium close-up."
+  },
+  {
+   "id": "v39",
+   "scene": 12,
+   "kind": "lipsync",
+   "who": [
+    "abhinav"
+   ],
+   "lines": [
+    "c12c_line"
+   ],
+   "image": "Abhinav's soul in a plain white kurta in the bright mist, scared and pleading, soft glow around him. Medium close-up."
+  },
+  {
+   "id": "v40",
+   "scene": 12,
+   "kind": "motion",
+   "who": [
+    "shiva"
+   ],
+   "lines": [],
+   "image": "High in a bright blue sky above soft white clouds, a brilliant white-gold light opens and Lord Shiva appears within it, trishul in hand, floating among the clouds. No street, no buildings, no ground. Wide shot."
+  },
+  {
+   "id": "v41",
+   "scene": 12,
+   "kind": "lipsync",
+   "who": [
+    "shiva"
+   ],
+   "lines": [
+    "c12d_line"
+   ],
+   "image": "Lord Shiva in radiant white-gold light, commanding and authoritative, looking down. Medium close-up."
+  },
+  {
+   "id": "v42",
+   "scene": 12,
+   "kind": "motion",
+   "who": [
+    "yama1",
+    "yama2"
+   ],
+   "lines": [
+    "c12e_line"
+   ],
+   "image": "The two Yama Dhoothas bowing their heads respectfully and stepping back into a soft silver otherworldly mist, pale blue and silver light all around. No street, no buildings, no city. Medium-wide shot."
+  },
+  {
+   "id": "v43",
+   "scene": 12,
+   "kind": "motion",
+   "who": [
+    "shiva",
+    "abhinav"
+   ],
+   "lines": [
+    "c12f_line"
+   ],
+   "image": "Lord Shiva high above the clouds in a radiant burst of white-gold light, raising his right hand in blessing (abhaya mudra), looking down with compassion; far below him, Abhinav's small glowing soul in a white kurta, seen from behind, glides gently down through the clouds on a beam of light towards a bright hospital building on the ground. Majestic sense of scale, divine and peaceful. Wide shot."
+  },
+  {
+   "id": "v44",
+   "scene": 13,
+   "kind": "motion",
+   "who": [
+    "doctor",
+    "nurse2"
+   ],
+   "lines": [],
+   "image": "In the bright operating theatre a monitor's heart line jumps back to a strong steady rhythm; Dr. Srinivas and Nurse Rani look at each other in astonishment. Medium shot."
+  },
+  {
+   "id": "v45",
+   "scene": 13,
+   "kind": "lipsync",
+   "who": [
+    "doctor"
+   ],
+   "lines": [
+    "c13a_line"
+   ],
+   "image": "Dr. Srinivas in the bright corridor, surgical cap pulled down, astonished and joyful, talking to the parents off camera. Medium close-up."
+  },
+  {
+   "id": "v46",
+   "scene": 13,
+   "kind": "lipsync",
+   "who": [
+    "raghava"
+   ],
+   "lines": [
+    "c13b_line"
+   ],
+   "image": "Raghava in tears of gratitude, looking upward, hands joined. Close-up."
+  },
+  {
+   "id": "v47",
+   "scene": 13,
+   "kind": "lipsync",
+   "who": [
+    "lakshmi"
+   ],
+   "lines": [
+    "c13c_line"
+   ],
+   "image": "Lakshmi crying with joy, hands joined, looking upward. Close-up."
+  },
+  {
+   "id": "v48",
+   "scene": 14,
+   "kind": "motion",
+   "who": [
+    "raghava",
+    "lakshmi"
+   ],
+   "lines": [],
+   "image": "Raghava and Lakshmi entering a bright, sunny recovery room with green steady monitors, Abhinav asleep in bed with a head bandage. Wide shot."
+  },
+  {
+   "id": "v49",
+   "scene": 14,
+   "kind": "motion",
+   "who": [
+    "abhinav"
+   ],
+   "lines": [],
+   "image": "Abhinav lying back on white pillows in a hospital bed, wearing a loose collarless pale-blue patient gown with short sleeves (a hospital gown, not a shirt), a white bandage around his head, an IV line in his left hand, slowly opening his eyes (normal eyes, no glow), soft daylight on his face. Close-up."
+  },
+  {
+   "id": "v50",
+   "scene": 14,
+   "kind": "lipsync",
+   "who": [
+    "lakshmi"
+   ],
+   "lines": [
+    "c14a_line"
+   ],
+   "image": "Lakshmi at the bedside, holding Abhinav's hand, tears of relief and joy. Medium close-up on her face."
+  },
+  {
+   "id": "v51",
+   "scene": 14,
+   "kind": "lipsync",
+   "who": [
+    "raghava"
+   ],
+   "lines": [
+    "c14b_line"
+   ],
+   "image": "Raghava standing at the bedside, proud and emotional, hand on his son's shoulder. Medium close-up on his face."
+  },
+  {
+   "id": "v52",
+   "scene": 14,
+   "kind": "lipsync",
+   "who": [
+    "abhinav"
+   ],
+   "lines": [
+    "c14c_line"
+   ],
+   "image": "Abhinav lying back on white pillows in a hospital bed, wearing a loose collarless pale-blue patient gown with short sleeves (a hospital gown, not a shirt), a white bandage around his head, weak smile, wondering, looking at his parents off camera, rudraksha on his right wrist. Medium close-up."
+  },
+  {
+   "id": "v53",
+   "scene": 15,
+   "kind": "motion",
+   "who": [
+    "abhinav"
+   ],
+   "lines": [
+    "c15a_line"
+   ],
+   "image": "Abhinav in the hospital bed, his eyes widening as he remembers, a faint golden light reflected in his eyes and on his face. Close-up."
+  },
+  {
+   "id": "v54",
+   "scene": 16,
+   "kind": "motion",
+   "who": [
+    "shiva"
+   ],
+   "lines": [
+    "c16a_vo"
+   ],
+   "image": "A silhouette of Lord Shiva in soft white-gold light high above a sunlit Hyderabad skyline, peaceful and majestic, space at the bottom for a title. Wide shot."
+  }
+ ],
+ "picks": {
+  "abhinav": "a",
+  "lakshmi": "b",
+  "raghava": "b",
+  "doctor": "b",
+  "grandfather": "b",
+  "nurse1": "a",
+  "nurse2": "b",
+  "passerby": "b",
+  "yama1": "a",
+  "yama2": "b"
+ },
+ "style_divine": "Divine, otherworldly light: glowing gold and white, soft clouds or silver mist, radiant and peaceful. Photoreal, cinematic, never dark or frightening."
+}

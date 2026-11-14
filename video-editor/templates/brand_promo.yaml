@@ -1,0 +1,26 @@
+name: brand_promo
+description: Render a script with locked-in brand colors, fonts, and logo overlay.
+inputs:
+  - name: concept.md
+    description: Script for the promo.
+    required: true
+    example: ./concept.md
+  - name: brand.json
+    description: Brand file in presets/brand.json or presets/brands/<job>.json.
+    required: true
+    example: presets/brand.json
+pipeline_kind: script_to_video
+default_preset: long_form
+default_aspect_ratio: "16:9"
+default_providers:
+  tts: elevenlabs_tts
+  image: fal_ai
+  music: poyo_music
+default_music_mood: professional
+scene_type_hints:
+  - opening
+  - narration
+  - closing
+build_concept_kind: default
+caveats:
+  - Brand compliance depends on presets/brand.json being present and correctly formatted.

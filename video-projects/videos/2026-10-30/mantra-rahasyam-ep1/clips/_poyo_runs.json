@@ -1,0 +1,45 @@
+{
+ "v15": {
+  "model": "omnihuman-2.0",
+  "task_id": "NZHGNF4DH0G72DCX",
+  "file": "v15.mp4",
+  "credits": 89.46
+ },
+ "v20": {
+  "model": "omnihuman-2.0",
+  "task_id": "62QH850KPCQZVDZ3",
+  "prior": [
+   {
+    "task_id": "VHF0UGMBISVRPLLJ",
+    "file": "v20.mp4",
+    "credits": 84.42
+   }
+  ],
+  "file": "v20.mp4",
+  "credits": 84.42
+ },
+ "v22": {
+  "model": "omnihuman-2.0",
+  "task_id": "ZAMOZQRVKUTT3BAC",
+  "file": "v22.mp4",
+  "credits": 87.78
+ },
+ "v24": {
+  "model": "omnihuman-2.0",
+  "task_id": "502Z9M0MJLHJGW9N",
+  "file": "v24.mp4",
+  "credits": 132.72
+ },
+ "v25": {
+  "model": "omnihuman-2.0",
+  "task_id": "0G0R5PGJ5T3AV1DX",
+  "file": "v25.mp4",
+  "credits": 117.6
+ },
+ "v39": {
+  "model": "omnihuman-2.0",
+  "task_id": "32HTK5E6MJK48BXF",
+  "file": "v39.mp4",
+  "credits": 95.76
+ }
+}

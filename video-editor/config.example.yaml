@@ -1,0 +1,103 @@
+# Example project-level LLM provider configuration.
+# Copy this file to `config.yaml` and set the appropriate API key environment
+# variables to route tasks to different providers/models.
+#
+# The optional `assets:` section at the end configures generative asset
+# providers: the ordered image-provider chain, the per-run image cap, and the
+# local `agy` (Gemini CLI) provider that serves `agy_image`.
+
+providers:
+  ollama:
+    base_url: https://api.ollama.com
+    api_key_env: OLLAMA_API_KEY
+    default_model: minimax-m3:cloud
+  openrouter:
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    default_model: anthropic/claude-sonnet-5.5
+
+default_provider: ollama
+
+tasks:
+  plan:        { task_type: plan,         provider: ollama, model: minimax-m3:cloud }
+  decompose:   { task_type: decompose,    provider: ollama, model: minimax-m3:cloud }
+  edit_plan:   { task_type: edit_plan,    provider: ollama, model: minimax-m3:cloud }
+  scene_plan:  { task_type: scene_plan,   provider: ollama, model: minimax-m3:cloud }
+  fallback:    { task_type: fallback,     provider: ollama, model: glm-5.3:cloud }
+  code:        { task_type: code,         provider: ollama, model: kimi-k2.7-code:cloud }
+  utility:     { task_type: utility,      provider: ollama, model: glm-5.3-flash:cloud }
+  verify_judge: { task_type: verify_judge, provider: ollama, model: glm-5.3-flash:cloud }
+  # Vision: a contact sheet of downscaled keyframes, scored against the rubric.
+  critique:    { task_type: critique,    provider: openrouter, model: google/gemini-3.8-flash }
+
+assets:
+  # Ordered image providers; a named --image-provider bypasses the list,
+  # "auto" does not. When every provider fails the asset fails; set
+  # strict: false to get fal_ai's placeholder still instead (drafts, offline).
+  image_chain: [agy_image, flow_image, poyo_ai, openrouter, fal_ai]
+  # Final renders skip the slow local agent and start with a direct image API.
+  image_chain_final: [poyo_ai, openrouter, fal_ai]
+  # Never replace a missing or failed provider with a stub (a stub you name
+  # explicitly, e.g. defaults.sfx: stub_sfx, is still used).
+  strict: true
+  # Bounds chain runs per run: every image request the chain serves counts,
+  # including paid fallbacks (one request that falls agy -> poyo consumes one
+  # unit for two generations). Inert when image_chain is empty.
+  max_images_per_run: 25
+  providers:
+    flow_image:
+      # Google Flow via flow-mcp (~/flow-mcp): free Nano Banana stills; needs a project open
+      # in the Flow Chrome window, otherwise the chain moves on.
+      timeout: 600.0
+      provider_options:
+        flow_mcp_dir: ~/flow-mcp
+    agy_image:
+      timeout: 300.0
+      provider_options:
+        agy_bin: agy
+        sandbox: true   # enforced; a false value is ignored with a warning
+        # The agent only needs one tool call; low effort and the fast model cut
+        # the per-image warm-up. Run `ve agy-setup` once to create the profile.
+        model: gemini-3.8-flash-low
+        effort: low
+        session: true
+        profile_dir: ~/.config/video-editor/agy-profile
+    # Every image_chain member needs a block here: the chain validates at
+    # load time, and a missing provider would otherwise raise on the first
+    # fallback instead of degrading.
+    poyo_ai:
+      api_key_env: POYO_API_KEY
+      default_model: nano-banana-2-lite
+      timeout: 300.0
+    openrouter:
+      api_key_env: OPENROUTER_API_KEY
+      base_url: https://openrouter.ai/api/v1
+      default_model: openai/gpt-image-2
+      timeout: 300.0
+    fal_ai:
+      api_key_env: FAL_KEY
+      default_model: fal-ai/flux/dev
+      timeout: 300.0
+
+queue:
+  # A running job whose worker has not heartbeated for this long is reclaimed.
+  stale_seconds: 900
+
+# Spending limits for jobs started through the MCP server (agent-written
+# tool calls). Every MCP job runs under default_budget_usd; a call's `budget`
+# argument can only lower it. One generation estimated above per_call_cap_usd
+# is refused unless the call passes approve_usd >= the estimate.
+mcp:
+  default_budget_usd: 1.00
+  per_call_cap_usd: 0.50
+
+# 2.5D layer separation (content packs with `layers: auto`). The command runs
+# in the model environment, not the engine's; the engine never imports torch.
+# Point it at a Python that has the layerize CLI's dependencies, e.g. the
+# isolated `~/tools/da3-venv`. Leave `command:` empty to refuse such packs.
+layerize:
+  command: []
+  timeout: 600
+  depth_model: depth-anything/DA3MONO-LARGE
+  process_res: 1280
+  cutout: birefnet

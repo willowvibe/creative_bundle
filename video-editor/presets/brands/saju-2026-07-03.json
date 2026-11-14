@@ -1,0 +1,24 @@
+{
+  "brand": "Saju (Korean Four Pillars)",
+  "colors": {
+    "primary": "#7C3AED",
+    "secondary": "#F59E0B",
+    "background": "#0F0B1E",
+    "text": "#F5F3FF"
+  },
+  "fonts": {
+    "headline": "Noto Serif KR",
+    "body": "Noto Sans KR",
+    "captions": "Noto Sans KR"
+  },
+  "logo": {
+    "path": "",
+    "width": 0,
+    "height": 0
+  },
+  "defaults": {
+    "caption_animation": "pop_in",
+    "music_duck_db": -6,
+    "final_loudness": -22
+  }
+}

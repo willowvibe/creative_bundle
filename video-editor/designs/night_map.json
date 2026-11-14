@@ -1,0 +1,40 @@
+{
+  "name": "night_map",
+  "palette": {
+    "bg": "#0B3A36",
+    "ink": "#E8FFF4",
+    "accent": "#C6F35A",
+    "muted": "#8FB8AD"
+  },
+  "type": { "display": "Montserrat", "body": "Inter", "display_weight": 700 },
+  "theme": "dark",
+  "motion": { "tempo": 1.0, "entry": "rise", "drift": 1.03 },
+  "layers": {
+    "map": {
+      "paper": "#0B3A36",
+      "paper_light": "#11504A",
+      "paper_edge": "#052421",
+      "rings": "#0B3A36",
+      "graticule": "#0B3A36",
+      "ghost_fill": "#0E4540",
+      "ghost_stroke": "#7FF0CF",
+      "highlight": "#125A52",
+      "highlight_stroke": "#8FF7D6",
+      "pin": "#C6F35A",
+      "pin_ring": "#0B3A36",
+      "ink": "#E8FFF4",
+      "muted": "#8FB8AD",
+      "label": "#E8FFF4",
+      "card_fill": "#08201E",
+      "card_border": "#2F6F64",
+      "eyebrow": "#C6F35A",
+      "gold_ink": "#C6F35A",
+      "rule": "#2F6F64",
+      "route": "#C6F35A",
+      "vehicle": "#E63946",
+      "km_bg": "rgba(5, 28, 26, 0.88)",
+      "km_ink": "#E8FFF4",
+      "glow": "#5FF2C8"
+    }
+  }
+}

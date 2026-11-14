@@ -1,0 +1,27 @@
+name: talking_head_polish
+description: Single talking-head take → polished YouTube video. Rough cut → optional reframe → captions → music → export.
+inputs:
+  - name: take.mp4
+    description: Single talking-head video file.
+    required: true
+    example: ./take.mp4
+pipeline_kind: raw_to_video
+default_preset: vlogger_youtube
+default_aspect_ratio: "16:9"
+default_providers:
+  tts: elevenlabs_tts
+  image: pexels
+  video: pixabay
+  music: poyo_music
+  sfx: elevenlabs_sfx
+default_music_mood: calm
+scene_type_hints:
+  - opening
+  - talking_head
+  - broll
+  - closing
+build_concept_kind: default
+caveats:
+  - Takes a single video file; a directory of clips maps to vlog_reel.
+  - Reframe to 9:16 is available via --reframe for Shorts/Reels.
+  - Audio cleanup (de-noise) can be enabled as a pre-stage.

@@ -1,0 +1,23 @@
+name: training_module
+description: Turn a step-by-step markdown guide into a tutorial with diagrams.
+inputs:
+  - name: concept.md
+    description: Numbered steps, each with narration and optional chart data.
+    required: true
+    example: ./tutorial.md
+pipeline_kind: script_to_video
+default_preset: long_form
+default_aspect_ratio: "16:9"
+default_providers:
+  tts: elevenlabs_tts
+  image: fal_ai
+  data_viz: matplotlib_data_viz
+  music: poyo_music
+default_music_mood: calm
+scene_type_hints:
+  - narration
+  - broll
+build_concept_kind: training_module
+caveats:
+  - Diagrams use matplotlib data_viz via asset_query: data:... syntax.
+  - Screen recordings must be captured separately and are not generated.

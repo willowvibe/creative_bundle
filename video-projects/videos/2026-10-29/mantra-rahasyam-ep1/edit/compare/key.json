@@ -1,0 +1,98 @@
+{
+ "s01": {
+  "A": "poyo",
+  "B": "qwen"
+ },
+ "s02": {
+  "A": "qwen",
+  "B": "poyo"
+ },
+ "s03": {
+  "A": "poyo",
+  "B": "qwen"
+ },
+ "s03b": {
+  "A": "poyo",
+  "B": "qwen"
+ },
+ "s03c": {
+  "A": "poyo",
+  "B": "qwen"
+ },
+ "s04": {
+  "A": "poyo",
+  "B": "qwen"
+ },
+ "s05": {
+  "A": "qwen",
+  "B": "poyo"
+ },
+ "s06": {
+  "A": "poyo",
+  "B": "qwen"
+ },
+ "s06b": {
+  "A": "poyo",
+  "B": "qwen"
+ },
+ "s07": {
+  "A": "poyo",
+  "B": "qwen"
+ },
+ "s08": {
+  "A": "poyo",
+  "B": "qwen"
+ },
+ "s09": {
+  "A": "poyo",
+  "B": "qwen"
+ },
+ "s10": {
+  "A": "poyo",
+  "B": "qwen"
+ },
+ "s10b": {
+  "A": "poyo",
+  "B": "qwen"
+ },
+ "s11": {
+  "A": "qwen",
+  "B": "poyo"
+ },
+ "s12": {
+  "A": "poyo",
+  "B": "qwen"
+ },
+ "s13": {
+  "A": "qwen",
+  "B": "poyo"
+ },
+ "s14": {
+  "A": "qwen",
+  "B": "poyo"
+ },
+ "s15": {
+  "A": "poyo",
+  "B": "qwen"
+ },
+ "s16": {
+  "A": "qwen",
+  "B": "poyo"
+ },
+ "s16b": {
+  "A": "qwen",
+  "B": "poyo"
+ },
+ "s17": {
+  "A": "poyo",
+  "B": "qwen"
+ },
+ "s18": {
+  "A": "qwen",
+  "B": "poyo"
+ },
+ "s19": {
+  "A": "qwen",
+  "B": "poyo"
+ }
+}

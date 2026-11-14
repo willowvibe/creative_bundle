@@ -1,0 +1,25 @@
+name: product_spot
+description: Generate a product-focused showcase reel from a description.
+inputs:
+  - name: concept.md
+    description: Product description, benefit, audience, and script.
+    required: true
+    example: ./concept.md
+pipeline_kind: script_to_video
+default_preset: short_explainer
+default_aspect_ratio: "9:16"
+default_providers:
+  tts: elevenlabs_tts
+  image: fal_ai
+  video: hyperframes_video
+  music: poyo_music
+  sfx: elevenlabs_sfx
+default_music_mood: upbeat
+scene_type_hints:
+  - opening
+  - narration
+  - closing
+build_concept_kind: product_spot
+caveats:
+  - No real product footage is captured; visuals are AI-generated from the description.
+  - Use Image Story if you have actual product photos to animate.

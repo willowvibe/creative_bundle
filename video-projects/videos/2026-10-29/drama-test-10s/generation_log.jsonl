@@ -1,0 +1,37 @@
+{"out": "nila.jpg", "model": "nano-banana-2", "secs": 33}
+{"out": "latha.jpg", "model": "nano-banana-2", "secs": 32}
+{"out": "s1.jpg", "model": "nano-banana-2-edit", "secs": 54}
+{"out": "s2.jpg", "model": "nano-banana-2-edit", "secs": 48}
+{"out": "s3.jpg", "model": "nano-banana-2-edit", "secs": 44}
+{"out": "s4.jpg", "model": "nano-banana-2-edit", "secs": 49}
+{"out": "s2.jpg", "model": "nano-banana-2-edit", "secs": 69}
+{"out": "wan22_fast/s1.mp4", "model": "wan2.2-image-to-video-fast", "secs": 100, "credits": null}
+{"out": "wan22_fast/s2.mp4", "model": "wan2.2-image-to-video-fast", "secs": 137, "credits": null}
+{"out": "wan22_fast/s3.mp4", "model": "wan2.2-image-to-video-fast", "secs": 172, "credits": null}
+{"out": "wan22_fast/s4.mp4", "model": "wan2.2-image-to-video-fast", "secs": 205, "credits": null}
+{"out": "kling_avatar/s2.mp4", "model": "kling-avatar-2.0/standard", "secs": 156}
+{"out": "kling_avatar/s3.mp4", "model": "kling-avatar-2.0/standard", "secs": 149}
+{"out": "omnihuman/s2.mp4", "model": "omnihuman-2.0", "secs": 164}
+{"out": "omnihuman/s3.mp4", "model": "omnihuman-2.0", "secs": 166}
+{"out": "wan27/s2.mp4", "model": "wan2.7-image-to-video", "secs": 54}
+{"out": "wan27/s3.mp4", "model": "wan2.7-image-to-video", "secs": 59}
+{"out": "kling_avatar_pro/s2.mp4", "model": "kling-avatar-2.0/pro", "secs": 205}
+{"out": "kling_avatar_pro/s3.mp4", "model": "kling-avatar-2.0/pro", "secs": 200}
+{"out": "infinitetalk/s2.mp4", "model": "InfiniteTalk single (Wan2.1 I2V 480P fp8, LightX2V 6-step), ComfyUI on RunPod secure RTX 5090", "secs": 247, "note": "includes first model load; 832x480, 153 frames = 6.12 s for 4 s audio"}
+{"out": "infinitetalk/s3.mp4", "model": "InfiniteTalk single (Wan2.1 I2V 480P fp8, LightX2V 6-step), ComfyUI on RunPod secure RTX 5090", "secs": 163, "note": "warm; 26.6 GPU-s per generated second"}
+{"out": "trial_lipsync2pro/s2.mp4", "model": "fal-ai/sync-lipsync/v2/pro", "secs": 102}
+{"out": "trial_lipsync2pro/s3.mp4", "model": "fal-ai/sync-lipsync/v2/pro", "secs": 147}
+{"out": "trial_lipsync2/s2.mp4", "model": "fal-ai/sync-lipsync/v2", "secs": 156}
+{"out": "trial_lipsync2/s3.mp4", "model": "fal-ai/sync-lipsync/v2", "secs": 101}
+{"out": "trial_longcat/s2.mp4", "model": "fal-ai/longcat-single-avatar/image-audio-to-video", "secs": 731}
+{"out": "trial_longcat/s3.mp4", "model": "fal-ai/longcat-single-avatar/image-audio-to-video", "secs": 371}
+{"out": "wan22_selfhost/s1.mp4", "model": "Wan 2.2 I2V A14B fp8 + LightX2V 4-step, ComfyUI on RunPod secure RTX 5090", "secs": 197, "note": "cold: includes loading both 14B experts; 1280x720, 81 frames @16 fps"}
+{"out": "wan22_selfhost/s4.mp4", "model": "Wan 2.2 I2V A14B fp8 + LightX2V 4-step, ComfyUI on RunPod secure RTX 5090", "secs": 135, "note": "warm; ~$0.045 per clip at $1.19/h vs PoYo $0.06"}
+{"out": "final_selfhosted/s1.mp4", "model": "wan22_i2v (emotion prompt), secure 5090", "secs": 261, "note": "cold load"}
+{"out": "final_selfhosted/s2.mp4", "model": "infinitetalk (angry prompt, no-smile negative)", "secs": 243, "note": "cold model swap"}
+{"out": "final_selfhosted/s3_seed7.mp4", "model": "infinitetalk (sad prompt, seed 7) - chosen", "secs": 200}
+{"out": "final_selfhosted/s3_seed31.mp4", "model": "infinitetalk (sad prompt, seed 31) - rejected: smiles", "secs": 141}
+{"out": "final_selfhosted/s4.mp4", "model": "wan22_i2v (somber prompt)", "secs": 263, "note": "cold: Wan reloaded after InfiniteTalk"}
+{"out": "qwen_keyframes_8step/k1.png", "model": "qwen_image_edit_3ref (8-step, face crops + outfit sheet), RTX PRO 4500", "secs": 148, "note": "cold"}
+{"out": "qwen_keyframes_8step/k2.png", "model": "qwen_image_edit_3ref", "secs": 84, "note": "rendered a duplicate Latha (3 people)"}
+{"out": "qwen_keyframes_8step/k3.png", "model": "qwen_image_edit_3ref", "secs": 43, "note": "Latha close-up, angry"}

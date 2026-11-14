@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="te"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1920, height=1080" />
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+body{margin:0;background:transparent;font-family:'Noto Serif Telugu','Noto Serif',Georgia,serif;}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;}
+.clip{position:absolute;inset:0;}
+.glow{position:absolute;left:310px;top:250px;width:1300px;height:580px;
+      background:radial-gradient(ellipse at center, rgba(40,8,8,0.82) 0%, rgba(40,8,8,0.55) 45%, rgba(40,8,8,0.0) 72%);}
+    .stack{position:absolute;left:0;top:340px;width:1920px;height:400px;text-align:center;}
+    .te{display:block;font-size:132px;font-weight:700;color:#F2C566;line-height:1.15;
+      text-shadow:0 0 28px rgba(255,200,90,0.55),0 4px 12px rgba(0,0,0,0.6);}
+    .en{display:block;margin-top:6px;font-size:34px;letter-spacing:14px;color:#FFF4DC;
+      text-shadow:0 2px 8px rgba(0,0,0,0.7);}
+    .ep{display:block;margin-top:22px;font-size:40px;color:#FFF4DC;text-shadow:0 2px 8px rgba(0,0,0,0.7);}
+</style></head><body>
+<div id="root" data-composition-id="title" data-start="0" data-width="1920" data-height="1080" data-duration="3.84">
+<section id="title-clip" class="clip" data-start="0" data-duration="3.84" data-track-index="1">
+<div id="title-glow" class="glow"></div><div id="title-stack" class="stack">
+      <span id="title-te" class="te">మంత్ర రహస్యం</span><span id="title-en" class="en">MANTRA RAHASYAM</span>
+      <span id="title-ep" class="ep">ఎపిసోడ్ 1 · మృత్యువుతో పోరాటం</span></div>
+</section></div>
+<script>
+window.__timelines = window.__timelines || {};
+const tl = gsap.timeline({ paused: true });
+tl.from("#title-glow",{opacity:0,duration:0.8},0.2)
+      .from("#title-te",{opacity:0,y:30,scale:0.96,duration:1.0,ease:"power3.out"},0.3)
+      .from("#title-en",{opacity:0,letterSpacing:"30px",duration:0.9,ease:"power2.out"},0.8)
+      .from("#title-ep",{opacity:0,y:16,duration:0.7,ease:"power2.out"},1.2)
+      .to(["#title-stack","#title-glow"],{opacity:0,duration:0.6,ease:"power1.in"},3.2);
+window.__timelines["title"] = tl;
+</script></body></html>

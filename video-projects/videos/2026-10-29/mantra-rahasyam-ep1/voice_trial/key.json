@@ -1,0 +1,32 @@
+{
+ "s03": {
+  "A": "sarvam",
+  "B": "smallest:teja",
+  "C": "smallest:venkat"
+ },
+ "s04": {
+  "A": "smallest:prashanth",
+  "B": "sarvam",
+  "C": "smallest:lokesh"
+ },
+ "s05": {
+  "A": "sarvam",
+  "B": "smallest:nandini",
+  "C": "smallest:lavanya"
+ },
+ "s15": {
+  "A": "sarvam",
+  "B": "smallest:lokesh",
+  "C": "smallest:prashanth"
+ },
+ "s16": {
+  "A": "smallest:lavanya",
+  "B": "sarvam",
+  "C": "smallest:nandini"
+ },
+ "s17": {
+  "A": "sarvam",
+  "B": "smallest:harish",
+  "C": "smallest:arun"
+ }
+}

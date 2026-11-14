@@ -1,0 +1,542 @@
+{
+ "s26": {
+  "model": "omnihuman-2.0",
+  "task_id": "MPWVWN4JTIPGKHOW",
+  "status": "done",
+  "estimate": 84.0,
+  "file": "v2/clips/lipsync/s26.mp4",
+  "prompt": "Lakshmi speaks, face contorted with shock and grief, tears running down her cheeks, no smile; the face stays distressed the whole time, brows drawn together, absolutely no smile; natural small head movement, staying in frame, photorealistic",
+  "credits": 84.0
+ },
+ "s32": {
+  "model": "omnihuman-2.0",
+  "task_id": "TJB50OF88O0GR9XY",
+  "status": "done",
+  "estimate": 84.0,
+  "file": "v2/clips/lipsync/s32.mp4",
+  "prompt": "Raghava speaks, terrified, eyes red-rimmed, wide and wet with fear, brows raised and knotted together, deep forehead creases, jaw clenched and trembling, no smile; the face stays distressed the whole time, brows drawn together, absolutely no smile; natural small head movement, staying in frame, photorealistic",
+  "credits": 84.0
+ },
+ "s37": {
+  "model": "veo3.1-lite-official",
+  "task_id": "MNMEGZU7LNKJGTC7",
+  "status": "done",
+  "estimate": 21.6,
+  "file": "v2/clips/motion/s37.mp4",
+  "prompt": "tears roll, her shoulders shake. the person stays almost completely still: only natural blinks and slow breathing, the eyes shift slightly; no head turn, no mouth movement, no camera movement, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 21.6
+ },
+ "s45": {
+  "model": "veo3.1-lite-official",
+  "task_id": "3GA5681JP9I0NQAD",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s45.mp4",
+  "prompt": "the doctor presses the paddles to the patient's bare chest; the patient's chest jumps slightly once and he stays lying flat on the table, eyes closed; the nurse watches the monitor. Realistic, physically plausible motion; everyone stays where they are unless the action says otherwise; no one stands up, jumps or leaves the frame; steady camera, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s03": {
+  "model": "omnihuman-2.0",
+  "task_id": "E0HZRF7N2LPVVOJ5",
+  "status": "done",
+  "estimate": 96.6,
+  "file": "v2/clips/lipsync/s03.mp4",
+  "prompt": "Lakshmi speaks, eyes soft and shining with love, relaxed brow; natural small head movement, staying in frame, photorealistic",
+  "credits": 96.6
+ },
+ "s05": {
+  "model": "omnihuman-2.0",
+  "task_id": "BW22P2RNFHNDR6T2",
+  "status": "done",
+  "estimate": 96.6,
+  "file": "v2/clips/lipsync/s05.mp4",
+  "prompt": "Abhinav speaks, bright eager eyes, eyebrows slightly raised, a hint of a smile; natural small head movement, staying in frame, photorealistic",
+  "credits": 96.6
+ },
+ "s06": {
+  "model": "veo3.1-lite-official",
+  "task_id": "1FMEQKOQRDGM3HXH",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s06.mp4",
+  "prompt": "they glance at each other, Lakshmi's eyes glisten. the person stays almost completely still: only natural blinks and slow breathing, the eyes shift slightly; no head turn, no mouth movement, no camera movement, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s07": {
+  "model": "omnihuman-2.0",
+  "task_id": "UL70DBFJ94C1ALX9",
+  "status": "done",
+  "estimate": 96.6,
+  "file": "v2/clips/lipsync/s07.mp4",
+  "prompt": "Raghava speaks, a kind, slightly concerned look, eyebrows gently raised; natural small head movement, staying in frame, photorealistic",
+  "credits": 96.6
+ },
+ "s09": {
+  "model": "omnihuman-2.0",
+  "task_id": "IJFJZ2SLTNHFJE7W",
+  "status": "done",
+  "estimate": 84.0,
+  "file": "v2/clips/lipsync/s09.mp4",
+  "prompt": "Abhinav speaks, a broad happy smile, eyes bright; natural small head movement, staying in frame, photorealistic",
+  "credits": 84.0
+ },
+ "s10": {
+  "model": "veo3.1-lite-official",
+  "task_id": "D3IYY7O776LXH3OA",
+  "status": "done",
+  "estimate": 21.6,
+  "file": "v2/clips/motion/s10.mp4",
+  "prompt": "the bike moves forward through traffic, camera tracks alongside. Realistic, physically plausible motion; everyone stays where they are unless the action says otherwise; no one stands up, jumps or leaves the frame; steady camera, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 21.6
+ },
+ "s11": {
+  "model": "kling-o3/standard",
+  "task_id": "HBDYZHT3HSHERGV1",
+  "status": "done",
+  "estimate": 30,
+  "file": "v2/clips/motion/s11.mp4",
+  "prompt": "a little girl in a yellow frock happily skips along the edge of the street after her bouncing red ball; bright daylight, people and auto-rickshaws in the background. Realistic, physically plausible motion; everyone stays where they are unless the action says otherwise; no one stands up, jumps or leaves the frame; steady camera, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 30.0
+ },
+ "s13": {
+  "model": "veo3.1-lite-official",
+  "task_id": "YQ6H80DT2JQ68U3K",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s13.mp4",
+  "prompt": "dust drifts in the sunlight and settles slowly; the fallen motorbike and the helmet stay still. Realistic, physically plausible motion; everyone stays where they are unless the action says otherwise; no one stands up, jumps or leaves the frame; steady camera, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s14": {
+  "model": "omnihuman-2.0",
+  "task_id": "OQQEOIC846BI3YFI",
+  "status": "done",
+  "estimate": 84.0,
+  "file": "v2/clips/lipsync/s14.mp4",
+  "prompt": "Passerby speaks, eyes wide open, eyebrows raised high, face tense with alarm; natural small head movement, staying in frame, photorealistic",
+  "credits": 84.0
+ },
+ "s15": {
+  "model": "omnihuman-2.0",
+  "task_id": "OLIQ5QUET27Z8VG3",
+  "status": "done",
+  "estimate": 96.6,
+  "file": "v2/clips/lipsync/s15.mp4",
+  "prompt": "Passerby speaks, eyes wide and darting, brow furrowed hard, sweat on the forehead; natural small head movement, staying in frame, photorealistic",
+  "credits": 96.6
+ },
+ "s16": {
+  "model": "veo3.1-lite-official",
+  "task_id": "0GVZHVUBO3CH7UCS",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s16.mp4",
+  "prompt": "the onlookers lean in slightly and murmur; the kneeling man checks his breathing; Abhinav stays lying still on the road, eyes closed. Realistic, physically plausible motion; everyone stays where they are unless the action says otherwise; no one stands up, jumps or leaves the frame; steady camera, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s17": {
+  "model": "veo3.1-lite-official",
+  "task_id": "RUWX2D8MRJZ8FTTW",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s17.mp4",
+  "prompt": "the ambulance speeds past, traffic parts. Realistic, physically plausible motion; everyone stays where they are unless the action says otherwise; no one stands up, jumps or leaves the frame; steady camera, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s18": {
+  "model": "veo3.1-lite-official",
+  "task_id": "6S7EX1S5X03SMF4E",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s18.mp4",
+  "prompt": "the stretcher rolls quickly towards the camera; the injured young man stays lying still on it, eyes closed. Realistic, physically plausible motion; everyone stays where they are unless the action says otherwise; no one stands up, jumps or leaves the frame; steady camera, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s20": {
+  "model": "omnihuman-2.0",
+  "task_id": "LH59POFIEM3S154X",
+  "status": "done",
+  "estimate": 96.6,
+  "file": "v2/clips/lipsync/s20.mp4",
+  "prompt": "Nurse1 speaks, a grave, sympathetic face, brows drawn together, eyes heavy, no smile; natural small head movement, staying in frame, photorealistic",
+  "credits": 96.6
+ },
+ "s21": {
+  "model": "veo3.1-lite-official",
+  "task_id": "7O14G7X2BS0J8A9W",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s21.mp4",
+  "prompt": "she lifts the phone to her ear, blinks. the person stays almost completely still: only natural blinks and slow breathing, the eyes shift slightly; no head turn, no mouth movement, no camera movement, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s22": {
+  "model": "omnihuman-2.0",
+  "task_id": "IU8569LWQK87GVU4",
+  "status": "done",
+  "estimate": 84.0,
+  "file": "v2/clips/lipsync/s22.mp4",
+  "prompt": "Lakshmi speaks, brows drawn together and raised in the middle, eyes anxious, no smile; the face stays distressed the whole time, brows drawn together, absolutely no smile; natural small head movement, staying in frame, photorealistic",
+  "credits": 84.0
+ },
+ "s23": {
+  "model": "omnihuman-2.0",
+  "task_id": "V8X0Q8ZJM1CC8SB8",
+  "status": "done",
+  "estimate": 96.6,
+  "file": "v2/clips/lipsync/s23.mp4",
+  "prompt": "Nurse1 speaks, a grave, sympathetic face, brows drawn together, eyes heavy, no smile; natural small head movement, staying in frame, photorealistic",
+  "credits": 96.6
+ },
+ "s24": {
+  "model": "veo3.1-lite-official",
+  "task_id": "SDH3ETUCQ5TQ1FPM",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s24.mp4",
+  "prompt": "her face slowly falls, eyes fill with tears. the person stays almost completely still: only natural blinks and slow breathing, the eyes shift slightly; no head turn, no mouth movement, no camera movement, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s27": {
+  "model": "veo3.1-lite-official",
+  "task_id": "EZXMJ103FK7GSMHK",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s27.mp4",
+  "prompt": "the scooter weaves through traffic, wind in their clothes. Realistic, physically plausible motion; everyone stays where they are unless the action says otherwise; no one stands up, jumps or leaves the frame; steady camera, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut, smiling, happy expression, grin, cheerful, laughing, relaxed pleasant face, showing teeth.",
+  "credits": 14.4
+ },
+ "s28": {
+  "model": "veo3.1-lite-official",
+  "task_id": "4HDGRGDSGXQ4F4N8",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s28.mp4",
+  "prompt": "wind moves her hair, tears roll, lips tremble. the person stays almost completely still: only natural blinks and slow breathing, the eyes shift slightly; no head turn, no mouth movement, no camera movement, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s30": {
+  "model": "omnihuman-2.0",
+  "task_id": "WU4MWHIV87WDUNY0",
+  "status": "done",
+  "estimate": 96.6,
+  "file": "v2/clips/lipsync/s30.mp4",
+  "prompt": "Doctor speaks, a grave, sympathetic face, brows drawn together, eyes heavy, no smile; natural small head movement, staying in frame, photorealistic",
+  "credits": 96.6
+ },
+ "s31": {
+  "model": "veo3.1-lite-official",
+  "task_id": "SQ0GUFYDLIS6V0KZ",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s31.mp4",
+  "prompt": "Lakshmi grips Raghava's arm, his jaw trembles. the person stays almost completely still: only natural blinks and slow breathing, the eyes shift slightly; no head turn, no mouth movement, no camera movement, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s33": {
+  "model": "omnihuman-2.0",
+  "task_id": "5BUG3CL644ZHES0E",
+  "status": "done",
+  "estimate": 92.4,
+  "file": "v2/clips/lipsync/s33.mp4",
+  "prompt": "Doctor speaks, a grave, sympathetic face, brows drawn together, eyes heavy, no smile; natural small head movement, staying in frame, photorealistic",
+  "credits": 92.4
+ },
+ "s35": {
+  "model": "veo3.1-lite-official",
+  "task_id": "1TPIUSFVHXX9XQZO",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s35.mp4",
+  "prompt": "her joined hands shake, a tear falls. the person stays almost completely still: only natural blinks and slow breathing, the eyes shift slightly; no head turn, no mouth movement, no camera movement, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s38": {
+  "model": "veo3.1-lite-official",
+  "task_id": "JCAAZ92GWW4G33JD",
+  "status": "done",
+  "estimate": 28.8,
+  "file": "v2/clips/motion/s38.mp4",
+  "prompt": "a tear rolls down, lips quiver. the person stays almost completely still: only natural blinks and slow breathing, the eyes shift slightly; no head turn, no mouth movement, no camera movement, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 28.8
+ },
+ "s39": {
+  "model": "omnihuman-2.0",
+  "task_id": "3RXSMVJV9BOBL0O0",
+  "status": "done",
+  "estimate": 84.0,
+  "file": "v2/clips/lipsync/s39.mp4",
+  "prompt": "Lakshmi speaks, a distant hollow gaze, wet eyes, a single tear, no smile; the face stays distressed the whole time, brows drawn together, absolutely no smile; natural small head movement, staying in frame, photorealistic",
+  "credits": 84.0
+ },
+ "s40": {
+  "model": "veo3.1-lite-official",
+  "task_id": "VOFLZU99F3UIDOQJ",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s40.mp4",
+  "prompt": "Lakshmi gently lifts the spoon to Abhinav's mouth and both smile softly; slow, tender, dreamlike movement in warm morning light. Realistic, physically plausible motion; everyone stays where they are unless the action says otherwise; no one stands up, jumps or leaves the frame; steady camera, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s42": {
+  "model": "veo3.1-lite-official",
+  "task_id": "9BN4SIVMPMV25DHP",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s42.mp4",
+  "prompt": "her eyes dart to the monitor. the person stays almost completely still: only natural blinks and slow breathing, the eyes shift slightly; no head turn, no mouth movement, no camera movement, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s44": {
+  "model": "veo3.1-lite-official",
+  "task_id": "S5M72BBL3TNCZG5I",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s44.mp4",
+  "prompt": "he turns, his hand reaches out. the person stays almost completely still: only natural blinks and slow breathing, the eyes shift slightly; no head turn, no mouth movement, no camera movement, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s46": {
+  "model": "veo3.1-lite-official",
+  "task_id": "YKA1N9HZH7T86J6K",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s46.mp4",
+  "prompt": "Lakshmi clutches her mangalsutram, Raghava's eyes fill. the person stays almost completely still: only natural blinks and slow breathing, the eyes shift slightly; no head turn, no mouth movement, no camera movement, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s47": {
+  "model": "veo3.1-lite-official",
+  "task_id": "IMLC1RFEUZNMIJFH",
+  "status": "done",
+  "estimate": 21.6,
+  "file": "v2/clips/motion/s47.mp4",
+  "prompt": "his gaze drifts, the corridor light softens. the person stays almost completely still: only natural blinks and slow breathing, the eyes shift slightly; no head turn, no mouth movement, no camera movement, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 21.6
+ },
+ "s48": {
+  "model": "omnihuman-2.0",
+  "task_id": "Z2XR6WUIT76QV1CW",
+  "status": "done",
+  "estimate": 100.8,
+  "file": "v2/clips/lipsync/s48.mp4",
+  "prompt": "Grandfather speaks, a gentle, wise and serious face, calm eyes looking straight at the listener; natural small head movement, staying in frame, photorealistic",
+  "credits": 100.8
+ },
+ "s49": {
+  "model": "veo3.1-lite-official",
+  "task_id": "P94JYL5RENWX9WQ1",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s49.mp4",
+  "prompt": "his lips part slightly, a breath. the person stays almost completely still: only natural blinks and slow breathing, the eyes shift slightly; no head turn, no mouth movement, no camera movement, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s50": {
+  "model": "omnihuman-2.0",
+  "task_id": "JHTI54FQ5YBLZ028",
+  "status": "done",
+  "estimate": 104.2,
+  "file": "v2/clips/lipsync/s50.mp4",
+  "prompt": "Grandfather speaks, a gentle, wise and serious face, calm eyes looking straight at the listener; natural small head movement, staying in frame, photorealistic",
+  "credits": 104.16
+ },
+ "s51": {
+  "model": "omnihuman-2.0",
+  "task_id": "AGK4R1D74JX8R79R",
+  "status": "done",
+  "estimate": 105.0,
+  "file": "v2/clips/lipsync/s51.mp4",
+  "prompt": "Raghava chants the mantra softly with eyes closed, lips moving gently with the words, a calm devoted face, slight natural head movement, staying in frame, photorealistic",
+  "credits": 105.0
+ },
+ "s52": {
+  "model": "veo3.1-lite-official",
+  "task_id": "PM3NHE2566N34V64",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s52.mp4",
+  "prompt": "her lips move softly, tears fall. the person stays almost completely still: only natural blinks and slow breathing, the eyes shift slightly; no head turn, no mouth movement, no camera movement, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s54": {
+  "model": "omnihuman-2.0",
+  "task_id": "83V9IT3WESFZIECB",
+  "status": "done",
+  "estimate": 105.0,
+  "file": "v2/clips/lipsync/s54.mp4",
+  "prompt": "Raghava chants the mantra softly with eyes closed, lips moving gently with the words, a calm devoted face, slight natural head movement, staying in frame, photorealistic",
+  "credits": 105.0
+ },
+ "s58": {
+  "model": "veo3.1-lite-official",
+  "task_id": "0UNJWLE0Y4VK5PGZ",
+  "status": "done",
+  "estimate": 21.6,
+  "file": "v2/clips/motion/s58.mp4",
+  "prompt": "he turns slowly, glowing softly. the person stays almost completely still: only natural blinks and slow breathing, the eyes shift slightly; no head turn, no mouth movement, no camera movement, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut, smiling, happy expression, grin, cheerful, laughing, relaxed pleasant face, showing teeth.",
+  "credits": 21.6
+ },
+ "s59": {
+  "model": "omnihuman-2.0",
+  "task_id": "HB3U99IPNSJAB2JE",
+  "status": "done",
+  "estimate": 84.0,
+  "file": "v2/clips/lipsync/s59.mp4",
+  "prompt": "Yama1 speaks, a stern, dignified, unsmiling face, eyes steady and cold; natural small head movement, staying in frame, photorealistic",
+  "credits": 84.0
+ },
+ "s60": {
+  "model": "omnihuman-2.0",
+  "task_id": "FMOJW5K6KGZXZSGJ",
+  "status": "done",
+  "estimate": 84.0,
+  "file": "v2/clips/lipsync/s60.mp4",
+  "prompt": "Yama2 speaks, a stern, dignified, unsmiling face, eyes steady and cold; natural small head movement, staying in frame, photorealistic",
+  "credits": 84.0
+ },
+ "s61": {
+  "model": "omnihuman-2.0",
+  "task_id": "1GOKB04I7FRHAUSZ",
+  "status": "done",
+  "estimate": 95.8,
+  "file": "v2/clips/lipsync/s61.mp4",
+  "prompt": "Abhinav speaks, eyes wide with fear, brows raised and pinched, no smile; the face stays distressed the whole time, brows drawn together, absolutely no smile; natural small head movement, staying in frame, photorealistic",
+  "credits": 95.76
+ },
+ "s63": {
+  "model": "omnihuman-2.0",
+  "task_id": "MTJSAZULGB9DI0LU",
+  "status": "done",
+  "estimate": 98.3,
+  "file": "v2/clips/lipsync/s63.mp4",
+  "prompt": "Shiva speaks, a calm, powerful, authoritative face, eyes steady and commanding, no smile; natural small head movement, staying in frame, photorealistic",
+  "credits": 98.28
+ },
+ "s64": {
+  "model": "veo3.1-lite-official",
+  "task_id": "9OO7SWXUC5BKZYM2",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s64.mp4",
+  "prompt": "the two Yama Dhoothas slowly bow their heads and lower their weapons, still facing forward towards the camera; they do not turn around and do not walk away. Realistic, physically plausible motion; everyone stays where they are unless the action says otherwise; no one stands up, jumps or leaves the frame; steady camera, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s65": {
+  "model": "omnihuman-2.0",
+  "task_id": "ZE32S9WHMQ76LCSO",
+  "status": "done",
+  "estimate": 84.0,
+  "file": "v2/clips/lipsync/s65.mp4",
+  "prompt": "Shiva speaks, a calm, compassionate face, soft eyes, the faintest gentle smile; natural small head movement, staying in frame, photorealistic",
+  "credits": 84.0
+ },
+ "s68": {
+  "model": "omnihuman-2.0",
+  "task_id": "EFMIK7MOYDQHQO5G",
+  "status": "done",
+  "estimate": 100.8,
+  "file": "v2/clips/lipsync/s68.mp4",
+  "prompt": "Doctor speaks, eyes wide with astonishment, eyebrows raised, a disbelieving smile breaking out; natural small head movement, staying in frame, photorealistic",
+  "credits": 100.8
+ },
+ "s69": {
+  "model": "veo3.1-lite-official",
+  "task_id": "2OO9EFFQ8XA7W0XK",
+  "status": "done",
+  "estimate": 21.6,
+  "file": "v2/clips/motion/s69.mp4",
+  "prompt": "they rise, hands to their mouths, tears come. the person stays almost completely still: only natural blinks and slow breathing, the eyes shift slightly; no head turn, no mouth movement, no camera movement, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 21.6
+ },
+ "s70": {
+  "model": "omnihuman-2.0",
+  "task_id": "LVT42XDAICM01DUI",
+  "status": "done",
+  "estimate": 84.0,
+  "file": "v2/clips/lipsync/s70.mp4",
+  "prompt": "Raghava speaks, eyes wet with tears, looking upward; natural small head movement, staying in frame, photorealistic",
+  "credits": 84.0
+ },
+ "s71": {
+  "model": "omnihuman-2.0",
+  "task_id": "NVY6C0E2F321M3SZ",
+  "status": "done",
+  "estimate": 84.0,
+  "file": "v2/clips/lipsync/s71.mp4",
+  "prompt": "Lakshmi speaks, tears of joy on her cheeks; natural small head movement, staying in frame, photorealistic",
+  "credits": 84.0
+ },
+ "s73": {
+  "model": "veo3.1-lite-official",
+  "task_id": "NVB5SPHEB4GBXJEW",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s73.mp4",
+  "prompt": "his eyelids flutter open, a slow blink. the person stays almost completely still: only natural blinks and slow breathing, the eyes shift slightly; no head turn, no mouth movement, no camera movement, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s74": {
+  "model": "omnihuman-2.0",
+  "task_id": "NAEBEQ335YS85AJV",
+  "status": "done",
+  "estimate": 96.6,
+  "file": "v2/clips/lipsync/s74.mp4",
+  "prompt": "Lakshmi speaks, tears of joy on her cheeks; natural small head movement, staying in frame, photorealistic",
+  "credits": 96.6
+ },
+ "s75": {
+  "model": "veo3.1-lite-official",
+  "task_id": "9EKPADCG9JB58FBQ",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s75.mp4",
+  "prompt": "a faint smile, a slow blink. the person stays almost completely still: only natural blinks and slow breathing, the eyes shift slightly; no head turn, no mouth movement, no camera movement, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s76": {
+  "model": "omnihuman-2.0",
+  "task_id": "O2U0RI5ILPU0GI6H",
+  "status": "done",
+  "estimate": 105.8,
+  "file": "v2/clips/lipsync/s76.mp4",
+  "prompt": "Raghava speaks, eyes crinkled at the corners; natural small head movement, staying in frame, photorealistic",
+  "credits": 105.84
+ },
+ "s77": {
+  "model": "omnihuman-2.0",
+  "task_id": "8XXU9X0856PK77SA",
+  "status": "done",
+  "estimate": 96.6,
+  "file": "v2/clips/lipsync/s77.mp4",
+  "prompt": "Abhinav speaks, eyes half-open and wondering, a faint weak smile, face pale and tired; natural small head movement, staying in frame, photorealistic",
+  "credits": 96.6
+ },
+ "s78": {
+  "model": "veo3.1-lite-official",
+  "task_id": "C4I6CFBSS4832UUS",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s78.mp4",
+  "prompt": "the blinding white-gold light around Lord Shiva's silhouette flares brighter for a moment and then fades back to soft white; the whole frame stays luminous and bright, never dark. Realistic, physically plausible motion; everyone stays where they are unless the action says otherwise; no one stands up, jumps or leaves the frame; steady camera, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s79": {
+  "model": "veo3.1-lite-official",
+  "task_id": "2MEF2YSNVBLO7PMK",
+  "status": "done",
+  "estimate": 14.4,
+  "file": "v2/clips/motion/s79.mp4",
+  "prompt": "his eyes widen. the person stays almost completely still: only natural blinks and slow breathing, the eyes shift slightly; no head turn, no mouth movement, no camera movement, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 14.4
+ },
+ "s12": {
+  "model": "kling-o3/standard",
+  "task_id": "7JWGTQERTVQN8JHL",
+  "status": "done",
+  "estimate": 40,
+  "file": "v2/clips/motion/s12.mp4",
+  "prompt": "the young man on the red motorbike brakes hard and steers to one side, the bike leaning; the little girl stands safely at the roadside holding her ball; traffic in the background. Realistic, physically plausible motion; everyone stays where they are unless the action says otherwise; no one stands up, jumps or leaves the frame; steady camera, photorealistic Avoid: bright tones, overexposed, static, blurred details, subtitles, worst quality, low quality, ugly, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, still picture, camera cut.",
+  "credits": 40.0
+ }
+}

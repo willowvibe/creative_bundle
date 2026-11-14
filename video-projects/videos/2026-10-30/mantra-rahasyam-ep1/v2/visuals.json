@@ -1,0 +1,2095 @@
+{
+ "plan": "docs/DRAMA_PIPELINE_V2_2026-11-01.md §2",
+ "visuals": [
+  {
+   "id": "s01",
+   "scene": 1,
+   "kind": "establishing",
+   "who": [],
+   "expr": null,
+   "cam": "slow push-in, 2.5D parallax",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c01a_vo",
+     0,
+     3.6
+    ]
+   ],
+   "seconds": 3.6,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [],
+   "prompt": "Wide exterior: a small cheerful two-storey house on a quiet Hyderabad lane at sunrise, rangoli at the gate, a potted tulsi, birds on the wire, golden light on the facade. No people and no faces anywhere in the frame. Scene: A modest, cheerful middle-class Hyderabad home: cream walls, a small pooja shelf with a brass lamp, a mango-leaf toran over the door, potted tulsi. Golden sunrise light streams through the windows in soft warm shafts. Palette amber, cream and leaf green. Mood: joyful, tender, auspicious. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s02",
+   "scene": 1,
+   "kind": "insert",
+   "who": [],
+   "expr": null,
+   "cam": "slow push-in",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c01a_vo",
+     3.6,
+     6.64
+    ]
+   ],
+   "seconds": 3.04,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [],
+   "prompt": "Close-up insert: the small pooja shelf inside: a brass diya burning, a framed photo of an old man (Tatayya) with a sandalwood garland, a rudraksha mala beside it. No people and no faces anywhere in the frame. Scene: A modest, cheerful middle-class Hyderabad home: cream walls, a small pooja shelf with a brass lamp, a mango-leaf toran over the door, potted tulsi. Golden sunrise light streams through the windows in soft warm shafts. Palette amber, cream and leaf green. Mood: joyful, tender, auspicious. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s03",
+   "scene": 1,
+   "kind": "speak",
+   "who": [
+    "lakshmi"
+   ],
+   "expr": "loving",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c01b_line",
+     0,
+     4.6
+    ]
+   ],
+   "seconds": 4.6,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/lakshmi_b.png"
+   ],
+   "prompt": "Lakshmi: eyes soft and shining with love, a gentle closed-mouth smile, relaxed brow. Medium close-up, eye level: Lakshmi at the sunny kitchen doorway holding a small steel bowl of curd and sugar and a spoon, looking at her son just off camera. Expression: eyes soft and shining with love, a gentle closed-mouth smile, relaxed brow. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Lakshmi, a 50-year-old Telugu mother, soft round face, large dark eyes with fine lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, her maroon cotton saree with a thin gold border. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A modest, cheerful middle-class Hyderabad home: cream walls, a small pooja shelf with a brass lamp, a mango-leaf toran over the door, potted tulsi. Golden sunrise light streams through the windows in soft warm shafts. Palette amber, cream and leaf green. Mood: joyful, tender, auspicious. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes soft and shining with love, a gentle closed-mouth smile, relaxed brow.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s04",
+   "scene": 1,
+   "kind": "insert",
+   "who": [
+    "lakshmi",
+    "abhinav"
+   ],
+   "expr": null,
+   "cam": "static",
+   "motion": "the spoon moves to his mouth, bangles shift",
+   "still": null,
+   "lines": [
+    [
+     "c01b_line",
+     4.6,
+     5.84
+    ]
+   ],
+   "seconds": 1.24,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/lakshmi_b.png",
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Close-up insert on hands: Lakshmi's hand with green glass bangles feeding a spoonful of curd to Abhinav, his face partly in frame, smiling. Nobody looks into the camera lens. Lakshmi, a 50-year-old Telugu mother, soft round face, large dark eyes with fine lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, her maroon cotton saree with a thin gold border. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, a light-blue slim-fit formal shirt with sleeves folded to the forearm, dark-grey trousers, a black wristwatch on his left wrist. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Exactly 2 named people; anyone else is a background extra. Scene: A modest, cheerful middle-class Hyderabad home: cream walls, a small pooja shelf with a brass lamp, a mango-leaf toran over the door, potted tulsi. Golden sunrise light streams through the windows in soft warm shafts. Palette amber, cream and leaf green. Mood: joyful, tender, auspicious. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s05",
+   "scene": 1,
+   "kind": "speak",
+   "who": [
+    "abhinav"
+   ],
+   "expr": "earnest",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c01c_line",
+     0,
+     4.6
+    ]
+   ],
+   "seconds": 4.6,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Abhinav: bright eager eyes, eyebrows slightly raised, lips closed about to speak, a hint of a smile. Medium close-up: Abhinav in the bright living room, office bag strap across his chest, speaking to his mother off camera. Expression: bright eager eyes, eyebrows slightly raised, lips closed about to speak, a hint of a smile. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, a light-blue slim-fit formal shirt with sleeves folded to the forearm, dark-grey trousers, a black wristwatch on his left wrist. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A modest, cheerful middle-class Hyderabad home: cream walls, a small pooja shelf with a brass lamp, a mango-leaf toran over the door, potted tulsi. Golden sunrise light streams through the windows in soft warm shafts. Palette amber, cream and leaf green. Mood: joyful, tender, auspicious. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: bright eager eyes, eyebrows slightly raised, lips closed about to speak, a hint of a smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s06",
+   "scene": 1,
+   "kind": "living",
+   "who": [
+    "lakshmi",
+    "raghava"
+   ],
+   "expr": "proud_smile",
+   "cam": "slow push-in",
+   "motion": "they glance at each other, Lakshmi's eyes glisten",
+   "still": null,
+   "lines": [
+    [
+     "c01c_line",
+     4.6,
+     7.84
+    ]
+   ],
+   "seconds": 3.24,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/lakshmi_b.png",
+    "refs/raghava_b.png"
+   ],
+   "prompt": "Lakshmi and Raghava: a warm proud closed-mouth smile, eyes crinkled at the corners. Medium two-shot: Lakshmi and Raghava standing together, listening to their son off camera, exchanging a moved glance. Expression: a warm proud closed-mouth smile, eyes crinkled at the corners. Nobody looks into the camera lens. The emotion must read fully in the still itself. Lakshmi, a 50-year-old Telugu mother, soft round face, large dark eyes with fine lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, her maroon cotton saree with a thin gold border. Raghava, a 56-year-old Telugu father, lean face, receding short grey hair combed back, thick grey moustache, clean-shaven chin, three horizontal white vibhuti stripes on the forehead with a small red kumkum dot, a rudraksha mala around the neck, steel wristwatch, medium-dark brown skin, lean build, a cream half-sleeve cotton shirt and white dhoti-style trousers. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Exactly 2 named people; anyone else is a background extra. Scene: A modest, cheerful middle-class Hyderabad home: cream walls, a small pooja shelf with a brass lamp, a mango-leaf toran over the door, potted tulsi. Golden sunrise light streams through the windows in soft warm shafts. Palette amber, cream and leaf green. Mood: joyful, tender, auspicious. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a warm proud closed-mouth smile, eyes crinkled at the corners.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s07",
+   "scene": 1,
+   "kind": "speak",
+   "who": [
+    "raghava"
+   ],
+   "expr": "caring",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c01d_line",
+     0,
+     4.6
+    ]
+   ],
+   "seconds": 4.6,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/raghava_b.png"
+   ],
+   "prompt": "Raghava: a kind, slightly concerned look, eyebrows gently raised, lips closed. Medium close-up: Raghava sitting on a cane chair with a folded Telugu newspaper on his knee, looking up at his son. Expression: a kind, slightly concerned look, eyebrows gently raised, lips closed. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Raghava, a 56-year-old Telugu father, lean face, receding short grey hair combed back, thick grey moustache, clean-shaven chin, three horizontal white vibhuti stripes on the forehead with a small red kumkum dot, a rudraksha mala around the neck, steel wristwatch, medium-dark brown skin, lean build, a cream half-sleeve cotton shirt and white dhoti-style trousers. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A modest, cheerful middle-class Hyderabad home: cream walls, a small pooja shelf with a brass lamp, a mango-leaf toran over the door, potted tulsi. Golden sunrise light streams through the windows in soft warm shafts. Palette amber, cream and leaf green. Mood: joyful, tender, auspicious. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a kind, slightly concerned look, eyebrows gently raised, lips closed.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s08",
+   "scene": 1,
+   "kind": "insert",
+   "who": [
+    "abhinav"
+   ],
+   "expr": null,
+   "cam": "slow push-in",
+   "motion": "his fingers touch the beads",
+   "still": null,
+   "lines": [
+    [
+     "c01d_line",
+     4.6,
+     7.12
+    ]
+   ],
+   "seconds": 2.52,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Extreme close-up insert: the brown rudraksha bracelet on a red thread on Abhinav's right wrist, sunlight on the beads. Nobody looks into the camera lens. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, a light-blue slim-fit formal shirt with sleeves folded to the forearm, dark-grey trousers, a black wristwatch on his left wrist. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A modest, cheerful middle-class Hyderabad home: cream walls, a small pooja shelf with a brass lamp, a mango-leaf toran over the door, potted tulsi. Golden sunrise light streams through the windows in soft warm shafts. Palette amber, cream and leaf green. Mood: joyful, tender, auspicious. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s09",
+   "scene": 1,
+   "kind": "speak",
+   "who": [
+    "abhinav"
+   ],
+   "expr": "cheerful",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c01e_line",
+     0,
+     3.04
+    ]
+   ],
+   "seconds": 3.04,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Abhinav: a broad happy smile, eyes bright. Medium shot, face clearly visible: Abhinav at the open front door holding a black open-face helmet, turning back to his parents, bright morning light behind him. Expression: a broad happy smile, eyes bright. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, a light-blue slim-fit formal shirt with sleeves folded to the forearm, dark-grey trousers, a black wristwatch on his left wrist. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A modest, cheerful middle-class Hyderabad home: cream walls, a small pooja shelf with a brass lamp, a mango-leaf toran over the door, potted tulsi. Golden sunrise light streams through the windows in soft warm shafts. Palette amber, cream and leaf green. Mood: joyful, tender, auspicious. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a broad happy smile, eyes bright.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s10",
+   "scene": 2,
+   "kind": "action",
+   "who": [
+    "abhinav"
+   ],
+   "expr": "cheerful",
+   "cam": "",
+   "motion": "the bike moves forward through traffic, camera tracks alongside",
+   "still": null,
+   "lines": [
+    [
+     "c02a_vo",
+     0,
+     4.32
+    ]
+   ],
+   "seconds": 4.32,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Abhinav: a broad happy smile, eyes bright. Wide tracking shot from the front side: Abhinav riding a red motorbike along the sunny busy road, relaxed and happy, eyes on the road ahead. Expression: a broad happy smile, eyes bright. Nobody looks into the camera lens. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, a light-blue formal shirt, dark-grey trousers, a black open-face helmet. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A busy, sunny Hyderabad road near the Ameerpet signal: shops, trees, auto-rickshaws, a metro pillar. Hard bright midday sun, clear blue sky, vivid street colours. Mood: lively, turning sharply tense. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a broad happy smile, eyes bright.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s11",
+   "scene": 2,
+   "kind": "action",
+   "who": [
+    "girl"
+   ],
+   "expr": null,
+   "cam": "",
+   "motion": "the girl runs into the road after the bouncing ball",
+   "still": null,
+   "lines": [],
+   "seconds": 3.0,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [],
+   "prompt": "Wide street-level shot: a little girl in a yellow frock runs onto the road chasing a red ball, a large lorry approaching in the distance. Nobody looks into the camera lens. a five-year-old Telugu girl in a yellow frock, two small pigtails. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A busy, sunny Hyderabad road near the Ameerpet signal: shops, trees, auto-rickshaws, a metro pillar. Hard bright midday sun, clear blue sky, vivid street colours. Mood: lively, turning sharply tense. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s12",
+   "scene": 2,
+   "kind": "hero",
+   "who": [
+    "abhinav",
+    "girl"
+   ],
+   "expr": "shock",
+   "cam": "",
+   "motion": "sharp swerve, the bike tilts, the girl freezes",
+   "still": null,
+   "lines": [],
+   "seconds": 4.0,
+   "engine": "flow-nb",
+   "clip": "flow-omni",
+   "refs": [
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Abhinav and a five-year-old Telugu girl in a yellow frock: eyes wide open, eyebrows shot up, mouth slightly open in shock, face frozen. Wide dramatic shot: Abhinav swerving his red motorbike hard to avoid the little girl, the lorry looming behind, motion blur, no impact shown. Expression: eyes wide open, eyebrows shot up, mouth slightly open in shock, face frozen. Nobody looks into the camera lens. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, a light-blue formal shirt, dark-grey trousers, a black open-face helmet. a five-year-old Telugu girl in a yellow frock, two small pigtails. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Exactly 2 named people; anyone else is a background extra. Scene: A busy, sunny Hyderabad road near the Ameerpet signal: shops, trees, auto-rickshaws, a metro pillar. Hard bright midday sun, clear blue sky, vivid street colours. Mood: lively, turning sharply tense. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes wide open, eyebrows shot up, mouth slightly open in shock, face frozen.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s13",
+   "scene": 2,
+   "kind": "action",
+   "who": [],
+   "expr": null,
+   "cam": "",
+   "motion": "people run in, dust settles",
+   "still": null,
+   "lines": [],
+   "seconds": 3.5,
+   "engine": "qwen",
+   "clip": "",
+   "refs": [],
+   "prompt": "Wide shot: aftermath on the sunny road: a red motorbike on its side, a young man lying still on the asphalt in the distance, a streak of blood near his head, people running towards him, the little girl in her yellow frock safe in her mother's arms at the roadside. No people and no faces anywhere in the frame. Scene: A busy, sunny Hyderabad road near the Ameerpet signal: shops, trees, auto-rickshaws, a metro pillar. Hard bright midday sun, clear blue sky, vivid street colours. Mood: lively, turning sharply tense. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s14",
+   "scene": 3,
+   "kind": "speak",
+   "who": [
+    "passerby"
+   ],
+   "expr": "alarm",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c03a_line",
+     0,
+     3.76
+    ]
+   ],
+   "seconds": 3.76,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/passerby_b.png"
+   ],
+   "prompt": "an auto-rickshaw driver: eyes wide open, eyebrows raised high, face tense with alarm, lips closed. Medium close-up: the auto-rickshaw driver standing by his yellow-green auto, looking towards the accident. Expression: eyes wide open, eyebrows raised high, face tense with alarm, lips closed. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. an auto-rickshaw driver, a 40-year-old Telugu man, thick black moustache, sunburnt face, a khaki auto-driver shirt with a checked towel over his shoulder. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: The same sunny road moments later: traffic stopped, a small crowd gathering, dust in the air. Bright, flat noon light, no shadows of drama, colours slightly bleached by the sun. Mood: shock, urgency. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes wide open, eyebrows raised high, face tense with alarm, lips closed.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s15",
+   "scene": 3,
+   "kind": "speak",
+   "who": [
+    "passerby"
+   ],
+   "expr": "panic",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c03b_line",
+     0,
+     4.6
+    ]
+   ],
+   "seconds": 4.6,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/passerby_b.png"
+   ],
+   "prompt": "an auto-rickshaw driver: eyes wide and darting, brow furrowed hard, mouth tense, sweat on the forehead. Medium close-up: the auto driver pressing a phone to his ear, the crowd behind him. Expression: eyes wide and darting, brow furrowed hard, mouth tense, sweat on the forehead. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. an auto-rickshaw driver, a 40-year-old Telugu man, thick black moustache, sunburnt face, a khaki auto-driver shirt with a checked towel over his shoulder. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: The same sunny road moments later: traffic stopped, a small crowd gathering, dust in the air. Bright, flat noon light, no shadows of drama, colours slightly bleached by the sun. Mood: shock, urgency. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes wide and darting, brow furrowed hard, mouth tense, sweat on the forehead.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s16",
+   "scene": 3,
+   "kind": "action",
+   "who": [
+    "abhinav"
+   ],
+   "expr": "unconscious",
+   "cam": "",
+   "motion": "the crowd shifts, someone kneels",
+   "still": null,
+   "lines": [
+    [
+     "c03b_line",
+     4.6,
+     6.0
+    ]
+   ],
+   "seconds": 1.4,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Abhinav: eyes closed, face slack and still. High-angle wide shot: a crowd circling Abhinav lying unconscious on the road beside his fallen red motorbike, one man shading his face with a newspaper. Expression: eyes closed, face slack and still. Nobody looks into the camera lens. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, a torn light-blue shirt, unconscious. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: The same sunny road moments later: traffic stopped, a small crowd gathering, dust in the air. Bright, flat noon light, no shadows of drama, colours slightly bleached by the sun. Mood: shock, urgency. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes closed, face slack and still.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s17",
+   "scene": 4,
+   "kind": "action",
+   "who": [],
+   "expr": null,
+   "cam": "",
+   "motion": "the ambulance speeds past, traffic parts",
+   "still": null,
+   "lines": [
+    [
+     "c04a_vo",
+     0,
+     3.4
+    ]
+   ],
+   "seconds": 3.4,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [],
+   "prompt": "Low-angle wide shot: an Indian 108 ambulance (a white Force Traveller van with red and blue stripes) racing through daytime Hyderabad traffic, lights flashing. No people and no faces anywhere in the frame. Scene: A white 108 ambulance and a modern private hospital's emergency entrance in daylight: glass doors, white and pastel-blue walls. Bright daylight with red-and-blue emergency flashes. Mood: urgent, racing against time. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s18",
+   "scene": 4,
+   "kind": "action",
+   "who": [
+    "abhinav"
+   ],
+   "expr": "unconscious",
+   "cam": "",
+   "motion": "the stretcher rushes towards camera",
+   "still": null,
+   "lines": [
+    [
+     "c04a_vo",
+     3.4,
+     6.4
+    ]
+   ],
+   "seconds": 3.0,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Abhinav: eyes closed, face slack and still. Medium wide shot: two paramedics wheeling Abhinav lying flat and unconscious on a stretcher through the glass doors of the emergency entrance, his eyes closed, mouth slack, not smiling. Expression: eyes closed, face slack and still. Nobody looks into the camera lens. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, a torn light-blue shirt, unconscious. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A white 108 ambulance and a modern private hospital's emergency entrance in daylight: glass doors, white and pastel-blue walls. Bright daylight with red-and-blue emergency flashes. Mood: urgent, racing against time. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes closed, face slack and still.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s19",
+   "scene": 4,
+   "kind": "insert",
+   "who": [
+    "abhinav"
+   ],
+   "expr": null,
+   "cam": "slow push-in",
+   "motion": "the hand sways with the stretcher",
+   "still": null,
+   "lines": [
+    [
+     "c04a_vo",
+     6.4,
+     8.64
+    ]
+   ],
+   "seconds": 2.24,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Extreme close-up insert: only a limp right hand hanging off the edge of a moving stretcher, the brown rudraksha bracelet on its red thread around the wrist; no face in frame. Nobody looks into the camera lens. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, a light-blue slim-fit formal shirt with sleeves folded to the forearm, dark-grey trousers, a black wristwatch on his left wrist. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A white 108 ambulance and a modern private hospital's emergency entrance in daylight: glass doors, white and pastel-blue walls. Bright daylight with red-and-blue emergency flashes. Mood: urgent, racing against time. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s20",
+   "scene": 5,
+   "kind": "speak",
+   "who": [
+    "nurse1"
+   ],
+   "expr": "grave",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c05a_line",
+     0,
+     4.6
+    ]
+   ],
+   "seconds": 4.6,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/nurse1_a.png"
+   ],
+   "prompt": "Nurse Swathi: a grave, sympathetic face, brows drawn together, eyes heavy, mouth closed with the corners turned down, no smile. Medium close-up: Nurse Swathi at the bright nursing station holding a landline receiver to her ear. Expression: a grave, sympathetic face, brows drawn together, eyes heavy, mouth closed with the corners turned down, no smile. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Nurse Swathi, a 28-year-old Indian woman, hair tied back in a neat bun, a light-blue nurse uniform with an ID badge. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A bright hospital nursing station: white counter, a landline phone, files, pastel-blue walls, cool clean light. Mood: professional calm carrying bad news. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a grave, sympathetic face, brows drawn together, eyes heavy, mouth closed with the corners turned down, no smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon, smiling, grin, happy expression, showing teeth"
+  },
+  {
+   "id": "s21",
+   "scene": 5,
+   "kind": "living",
+   "who": [
+    "lakshmi"
+   ],
+   "expr": "unease",
+   "cam": "slow push-in",
+   "motion": "she lifts the phone to her ear, blinks",
+   "still": null,
+   "lines": [
+    [
+     "c05a_line",
+     4.6,
+     5.76
+    ]
+   ],
+   "seconds": 1.16,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/lakshmi_b.png"
+   ],
+   "prompt": "Lakshmi: a faint frown, eyes searching, lips pressed together. Medium shot: Lakshmi in her sunlit kitchen answering a ringing phone, a steel glass of water in her other hand. Expression: a faint frown, eyes searching, lips pressed together. Nobody looks into the camera lens. The emotion must read fully in the still itself. Lakshmi, a 50-year-old Telugu mother, soft round face, large dark eyes with fine lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, her maroon cotton saree with a thin gold border. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: The family's sunlit home kitchen: steel vessels on a shelf, a gas stove, a calendar of a deity, warm late-morning light through a small window. Mood: ordinary calm breaking into dread. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a faint frown, eyes searching, lips pressed together.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s22",
+   "scene": 5,
+   "kind": "speak",
+   "who": [
+    "lakshmi"
+   ],
+   "expr": "worried",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c05b_line",
+     0,
+     3.76
+    ]
+   ],
+   "seconds": 3.76,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/lakshmi_b.png"
+   ],
+   "prompt": "Lakshmi: brows drawn together and raised in the middle, eyes anxious, lips pressed together, no smile. Close-up: Lakshmi holding the phone to her ear in the kitchen. Expression: brows drawn together and raised in the middle, eyes anxious, lips pressed together, no smile. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Lakshmi, a 50-year-old Telugu mother, soft round face, large dark eyes with fine lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, her maroon cotton saree with a thin gold border. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: The family's sunlit home kitchen: steel vessels on a shelf, a gas stove, a calendar of a deity, warm late-morning light through a small window. Mood: ordinary calm breaking into dread. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: brows drawn together and raised in the middle, eyes anxious, lips pressed together, no smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon, smiling, grin, happy expression, showing teeth"
+  },
+  {
+   "id": "s23",
+   "scene": 5,
+   "kind": "speak",
+   "who": [
+    "nurse1"
+   ],
+   "expr": "grave",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c05c_line",
+     0,
+     4.6
+    ]
+   ],
+   "seconds": 4.6,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/nurse1_a.png"
+   ],
+   "prompt": "Nurse Swathi: a grave, sympathetic face, brows drawn together, eyes heavy, mouth closed with the corners turned down, no smile. Close-up: Nurse Swathi speaking gently into the phone, apologetic. Expression: a grave, sympathetic face, brows drawn together, eyes heavy, mouth closed with the corners turned down, no smile. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Nurse Swathi, a 28-year-old Indian woman, hair tied back in a neat bun, a light-blue nurse uniform with an ID badge. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A bright hospital nursing station: white counter, a landline phone, files, pastel-blue walls, cool clean light. Mood: professional calm carrying bad news. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a grave, sympathetic face, brows drawn together, eyes heavy, mouth closed with the corners turned down, no smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon, smiling, grin, happy expression, showing teeth"
+  },
+  {
+   "id": "s24",
+   "scene": 5,
+   "kind": "shock",
+   "who": [
+    "lakshmi"
+   ],
+   "expr": "dread",
+   "cam": "serial triple zoom",
+   "motion": "her face slowly falls, eyes fill with tears",
+   "still": null,
+   "lines": [
+    [
+     "c05c_line",
+     4.6,
+     7.12
+    ]
+   ],
+   "seconds": 2.52,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/lakshmi_b.png"
+   ],
+   "prompt": "Lakshmi: the colour draining from her face, eyes widening and glistening, lips trembling apart, no smile. Close-up: Lakshmi listening on the phone as the news sinks in. Expression: the colour draining from her face, eyes widening and glistening, lips trembling apart, no smile. Nobody looks into the camera lens. Lakshmi, a 50-year-old Telugu mother, soft round face, large dark eyes with fine lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, her maroon cotton saree with a thin gold border. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: The family's sunlit home kitchen: steel vessels on a shelf, a gas stove, a calendar of a deity, warm late-morning light through a small window. Mood: ordinary calm breaking into dread. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: the colour draining from her face, eyes widening and glistening, lips trembling apart, no smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon, smiling, grin, happy expression, showing teeth"
+  },
+  {
+   "id": "s25",
+   "scene": 5,
+   "kind": "insert",
+   "who": [],
+   "expr": null,
+   "cam": "",
+   "motion": "the glass hits the floor, water splashes, slow motion",
+   "still": null,
+   "lines": [],
+   "seconds": 1.2,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [],
+   "prompt": "Low close-up, slow motion: a steel glass falling from a woman's hand onto the kitchen floor, water splashing. No people and no faces anywhere in the frame. Scene: The family's sunlit home kitchen: steel vessels on a shelf, a gas stove, a calendar of a deity, warm late-morning light through a small window. Mood: ordinary calm breaking into dread. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s26",
+   "scene": 5,
+   "kind": "speak",
+   "who": [
+    "lakshmi"
+   ],
+   "expr": "crying_out",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c05d_line",
+     0,
+     2.4
+    ]
+   ],
+   "seconds": 2.4,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/lakshmi_b.png"
+   ],
+   "prompt": "Lakshmi: face contorted with shock and grief, mouth open in a cry, tears running down her cheeks, no smile. Close-up: Lakshmi crying out towards the next room, the phone slipping. Expression: face contorted with shock and grief, mouth open in a cry, tears running down her cheeks, no smile. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. One face only in frame (this frame starts a lip-sync shot). Lakshmi, a 50-year-old Telugu mother, soft round face, large dark eyes with fine lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, her maroon cotton saree with a thin gold border. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: The family's sunlit home kitchen: steel vessels on a shelf, a gas stove, a calendar of a deity, warm late-morning light through a small window. Mood: ordinary calm breaking into dread. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: face contorted with shock and grief, mouth open in a cry, tears running down her cheeks, no smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon, smiling, grin, happy expression, showing teeth"
+  },
+  {
+   "id": "s27",
+   "scene": 6,
+   "kind": "action",
+   "who": [
+    "raghava",
+    "lakshmi"
+   ],
+   "expr": "fear_father",
+   "cam": "",
+   "motion": "the scooter weaves through traffic, wind in their clothes",
+   "still": null,
+   "lines": [
+    [
+     "c06a_line",
+     0,
+     2.6
+    ]
+   ],
+   "seconds": 2.6,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/raghava_b.png",
+    "refs/lakshmi_b.png"
+   ],
+   "prompt": "Raghava and Lakshmi: terrified: eyes red-rimmed, wide and wet with fear, brows raised and knotted together, deep forehead creases, jaw clenched and trembling, mouth closed and turned down, no smile. Wide tracking shot: Raghava riding an old grey Bajaj scooter through traffic, Lakshmi riding pillion behind him clutching his shoulder, her saree end flying. Expression: terrified: eyes red-rimmed, wide and wet with fear, brows raised and knotted together, deep forehead creases, jaw clenched and trembling, mouth closed and turned down, no smile. Nobody looks into the camera lens. Raghava, a 56-year-old Telugu father, lean face, receding short grey hair combed back, thick grey moustache, clean-shaven chin, three horizontal white vibhuti stripes on the forehead with a small red kumkum dot, a rudraksha mala around the neck, steel wristwatch, medium-dark brown skin, lean build, a cream half-sleeve cotton shirt and white dhoti-style trousers. Lakshmi, a 50-year-old Telugu mother, soft round face, large dark eyes with fine lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, her maroon cotton saree with a thin gold border. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Exactly 2 named people; anyone else is a background extra. Scene: A sunny city road at midday, wind in the clothes, traffic around an old grey Bajaj scooter. Bright light. Mood: frantic, praying. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: terrified: eyes red-rimmed, wide and wet with fear, brows raised and knotted together, deep forehead creases, jaw clenched and trembling, mouth closed and turned down, no smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s28",
+   "scene": 6,
+   "kind": "living",
+   "who": [
+    "lakshmi"
+   ],
+   "expr": "praying_tears",
+   "cam": "",
+   "motion": "wind moves her hair, tears roll, lips tremble",
+   "still": null,
+   "lines": [
+    [
+     "c06a_line",
+     2.6,
+     5.76
+    ]
+   ],
+   "seconds": 3.16,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/lakshmi_b.png"
+   ],
+   "prompt": "Lakshmi: anguished weeping: eyes squeezed shut, wet tear streaks shining down both cheeks, brows knotted upward in pain, mouth pulled down at the corners and trembling, nose and eyes red, no smile, not serene, not peaceful. Close-up on the moving scooter: Lakshmi on the pillion seat praying as they ride. Expression: anguished weeping: eyes squeezed shut, wet tear streaks shining down both cheeks, brows knotted upward in pain, mouth pulled down at the corners and trembling, nose and eyes red, no smile, not serene, not peaceful. Nobody looks into the camera lens. The emotion must read fully in the still itself. Lakshmi, a 50-year-old Telugu mother, soft round face, large dark eyes with fine lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, her maroon cotton saree with a thin gold border. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A sunny city road at midday, wind in the clothes, traffic around an old grey Bajaj scooter. Bright light. Mood: frantic, praying. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: anguished weeping: eyes squeezed shut, wet tear streaks shining down both cheeks, brows knotted upward in pain, mouth pulled down at the corners and trembling, nose and eyes red, no smile, not serene, not peaceful.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon, smiling, grin, happy expression, showing teeth"
+  },
+  {
+   "id": "s29",
+   "scene": 7,
+   "kind": "establishing",
+   "who": [],
+   "expr": null,
+   "cam": "slow push-in",
+   "motion": "",
+   "still": null,
+   "lines": [],
+   "seconds": 2.0,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [],
+   "prompt": "Wide shot: the bright corridor outside the operating theatre, steel benches, a potted plant, double doors with a red lamp above. No people and no faces anywhere in the frame. Scene: A clean, bright modern private hospital corridor outside the operating theatre: warm white light, pastel-green walls, a potted plant, steel benches. Mood: hushed tension, fear held in. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s30",
+   "scene": 7,
+   "kind": "speak",
+   "who": [
+    "doctor"
+   ],
+   "expr": "grave",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c07a_line",
+     0,
+     4.6
+    ]
+   ],
+   "seconds": 4.6,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/doctor_b.png"
+   ],
+   "prompt": "Dr. Srinivas: a grave, sympathetic face, brows drawn together, eyes heavy, mouth closed with the corners turned down, no smile. Medium close-up: Dr. Srinivas in the corridor speaking to the parents off camera, a file in his hand. Expression: a grave, sympathetic face, brows drawn together, eyes heavy, mouth closed with the corners turned down, no smile. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Dr. Srinivas, a 45-year-old Indian male doctor, short black hair greying at the temples, rimless glasses, a white coat over blue scrubs, a stethoscope around his neck. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A clean, bright modern private hospital corridor outside the operating theatre: warm white light, pastel-green walls, a potted plant, steel benches. Mood: hushed tension, fear held in. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a grave, sympathetic face, brows drawn together, eyes heavy, mouth closed with the corners turned down, no smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon, smiling, grin, happy expression, showing teeth"
+  },
+  {
+   "id": "s31",
+   "scene": 7,
+   "kind": "living",
+   "who": [
+    "raghava",
+    "lakshmi"
+   ],
+   "expr": "terrified_couple",
+   "cam": "",
+   "motion": "Lakshmi grips Raghava's arm, his jaw trembles",
+   "still": null,
+   "lines": [
+    [
+     "c07a_line",
+     4.6,
+     5.76
+    ]
+   ],
+   "seconds": 1.16,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/raghava_b.png",
+    "refs/lakshmi_b.png"
+   ],
+   "prompt": "Raghava and Lakshmi: both faces stricken with terror: eyes wide, red and wet, brows raised and knotted, mouths closed and turned down, gripping each other's hands, no smile, not posing. Medium two-shot: Raghava and Lakshmi standing close together, hearing the news. Expression: both faces stricken with terror: eyes wide, red and wet, brows raised and knotted, mouths closed and turned down, gripping each other's hands, no smile, not posing. Nobody looks into the camera lens. The emotion must read fully in the still itself. Raghava, a 56-year-old Telugu father, lean face, receding short grey hair combed back, thick grey moustache, clean-shaven chin, three horizontal white vibhuti stripes on the forehead with a small red kumkum dot, a rudraksha mala around the neck, steel wristwatch, medium-dark brown skin, lean build, a cream half-sleeve cotton shirt and white dhoti-style trousers. Lakshmi, a 50-year-old Telugu mother, soft round face, large dark eyes with fine lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, her maroon cotton saree with a thin gold border. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Exactly 2 named people; anyone else is a background extra. Scene: A clean, bright modern private hospital corridor outside the operating theatre: warm white light, pastel-green walls, a potted plant, steel benches. Mood: hushed tension, fear held in. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: both faces stricken with terror: eyes wide, red and wet, brows raised and knotted, mouths closed and turned down, gripping each other's hands, no smile, not posing.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon, smiling, grin, happy expression, showing teeth"
+  },
+  {
+   "id": "s32",
+   "scene": 7,
+   "kind": "speak",
+   "who": [
+    "raghava"
+   ],
+   "expr": "fear_father",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c07b_line",
+     0,
+     3.52
+    ]
+   ],
+   "seconds": 3.52,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/raghava_b.png"
+   ],
+   "prompt": "Raghava: terrified: eyes red-rimmed, wide and wet with fear, brows raised and knotted together, deep forehead creases, jaw clenched and trembling, mouth closed and turned down, no smile. Close-up: Raghava facing the doctor, who is just off camera to the left. Expression: terrified: eyes red-rimmed, wide and wet with fear, brows raised and knotted together, deep forehead creases, jaw clenched and trembling, mouth closed and turned down, no smile. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Raghava, a 56-year-old Telugu father, lean face, receding short grey hair combed back, thick grey moustache, clean-shaven chin, three horizontal white vibhuti stripes on the forehead with a small red kumkum dot, a rudraksha mala around the neck, steel wristwatch, medium-dark brown skin, lean build, a cream half-sleeve cotton shirt and white dhoti-style trousers. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A clean, bright modern private hospital corridor outside the operating theatre: warm white light, pastel-green walls, a potted plant, steel benches. Mood: hushed tension, fear held in. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: terrified: eyes red-rimmed, wide and wet with fear, brows raised and knotted together, deep forehead creases, jaw clenched and trembling, mouth closed and turned down, no smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon, smiling, grin, happy expression, showing teeth"
+  },
+  {
+   "id": "s33",
+   "scene": 7,
+   "kind": "speak",
+   "who": [
+    "doctor"
+   ],
+   "expr": "grave",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c07c_line",
+     0,
+     4.4
+    ]
+   ],
+   "seconds": 4.4,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/doctor_b.png"
+   ],
+   "prompt": "Dr. Srinivas: a grave, sympathetic face, brows drawn together, eyes heavy, mouth closed with the corners turned down, no smile. Medium close-up: Dr. Srinivas holding out a consent form on a clipboard and a pen. Expression: a grave, sympathetic face, brows drawn together, eyes heavy, mouth closed with the corners turned down, no smile. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Dr. Srinivas, a 45-year-old Indian male doctor, short black hair greying at the temples, rimless glasses, a white coat over blue scrubs, a stethoscope around his neck. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A clean, bright modern private hospital corridor outside the operating theatre: warm white light, pastel-green walls, a potted plant, steel benches. Mood: hushed tension, fear held in. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a grave, sympathetic face, brows drawn together, eyes heavy, mouth closed with the corners turned down, no smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon, smiling, grin, happy expression, showing teeth"
+  },
+  {
+   "id": "s34",
+   "scene": 7,
+   "kind": "insert",
+   "who": [
+    "raghava"
+   ],
+   "expr": null,
+   "cam": "",
+   "motion": "the hand trembles as the pen moves",
+   "still": null,
+   "lines": [
+    [
+     "c07c_line",
+     4.4,
+     5.2
+    ],
+    [
+     "c07d_line",
+     0,
+     2.4
+    ]
+   ],
+   "seconds": 3.2,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/raghava_b.png"
+   ],
+   "prompt": "Close-up insert on hands: Raghava's trembling hand with a steel wristwatch signing the consent form on a clipboard. Nobody looks into the camera lens. Raghava, a 56-year-old Telugu father, lean face, receding short grey hair combed back, thick grey moustache, clean-shaven chin, three horizontal white vibhuti stripes on the forehead with a small red kumkum dot, a rudraksha mala around the neck, steel wristwatch, medium-dark brown skin, lean build, a cream half-sleeve cotton shirt and white dhoti-style trousers. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A clean, bright modern private hospital corridor outside the operating theatre: warm white light, pastel-green walls, a potted plant, steel benches. Mood: hushed tension, fear held in. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s35",
+   "scene": 7,
+   "kind": "living",
+   "who": [
+    "lakshmi"
+   ],
+   "expr": "sobbing",
+   "cam": "",
+   "motion": "her joined hands shake, a tear falls",
+   "still": null,
+   "lines": [
+    [
+     "c07d_line",
+     2.4,
+     3.68
+    ]
+   ],
+   "seconds": 1.28,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/lakshmi_b.png"
+   ],
+   "prompt": "Lakshmi: face crumpled in grief, eyes swollen and red, tears on her cheeks, mouth closed and trembling, no smile. Close-up: Lakshmi pleading towards the doctor, hands joined. Expression: face crumpled in grief, eyes swollen and red, tears on her cheeks, mouth closed and trembling, no smile. Nobody looks into the camera lens. The emotion must read fully in the still itself. Lakshmi, a 50-year-old Telugu mother, soft round face, large dark eyes with fine lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, her maroon cotton saree with a thin gold border. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A clean, bright modern private hospital corridor outside the operating theatre: warm white light, pastel-green walls, a potted plant, steel benches. Mood: hushed tension, fear held in. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: face crumpled in grief, eyes swollen and red, tears on her cheeks, mouth closed and trembling, no smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon, smiling, grin, happy expression, showing teeth"
+  },
+  {
+   "id": "s36",
+   "scene": 8,
+   "kind": "insert",
+   "who": [],
+   "expr": null,
+   "cam": "slow push-in",
+   "motion": "the diya flame flickers, incense smoke curls",
+   "still": null,
+   "lines": [
+    [
+     "c08a_line",
+     0,
+     2.0
+    ]
+   ],
+   "seconds": 2.0,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/shiva_default.png",
+    "refs/shiva_full.png"
+   ],
+   "prompt": "Close-up: the framed picture of Lord Shiva in the prayer alcove, garlanded with marigolds, a brass diya flame in front. No people and no faces anywhere in the frame. The framed picture shows Lord Shiva exactly as in the reference images. Scene: A quiet prayer alcove at the end of the hospital corridor: a framed picture of Lord Shiva garlanded with marigolds, a small brass diya burning, incense smoke. Soft warm lamp glow against the bright white daylight of the corridor. Mood: devotional, aching, intimate. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s37",
+   "scene": 8,
+   "kind": "living",
+   "who": [
+    "lakshmi"
+   ],
+   "expr": "praying_tears",
+   "cam": "",
+   "motion": "tears roll, her shoulders shake",
+   "still": null,
+   "lines": [
+    [
+     "c08a_line",
+     2.0,
+     6.32
+    ]
+   ],
+   "seconds": 4.32,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/lakshmi_b.png"
+   ],
+   "prompt": "Lakshmi: anguished weeping: eyes squeezed shut, wet tear streaks shining down both cheeks, brows knotted upward in pain, mouth pulled down at the corners and trembling, nose and eyes red, no smile, not serene, not peaceful. Close-up, profile three-quarter: Lakshmi kneeling before the Shiva picture, praying. Expression: anguished weeping: eyes squeezed shut, wet tear streaks shining down both cheeks, brows knotted upward in pain, mouth pulled down at the corners and trembling, nose and eyes red, no smile, not serene, not peaceful. Nobody looks into the camera lens. The emotion must read fully in the still itself. Lakshmi, a 50-year-old Telugu mother, soft round face, large dark eyes with fine lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, her maroon cotton saree with a thin gold border. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A quiet prayer alcove at the end of the hospital corridor: a framed picture of Lord Shiva garlanded with marigolds, a small brass diya burning, incense smoke. Soft warm lamp glow against the bright white daylight of the corridor. Mood: devotional, aching, intimate. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: anguished weeping: eyes squeezed shut, wet tear streaks shining down both cheeks, brows knotted upward in pain, mouth pulled down at the corners and trembling, nose and eyes red, no smile, not serene, not peaceful.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon, smiling, grin, happy expression, showing teeth"
+  },
+  {
+   "id": "s38",
+   "scene": 8,
+   "kind": "living",
+   "who": [
+    "raghava"
+   ],
+   "expr": "broken",
+   "cam": "slow push-in",
+   "motion": "a tear rolls down, lips quiver",
+   "still": null,
+   "lines": [
+    [
+     "c08b_line",
+     0,
+     5.6
+    ]
+   ],
+   "seconds": 5.6,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/raghava_b.png"
+   ],
+   "prompt": "Raghava: eyes red and wet, looking upward, brows knotted in pain, mouth closed and quivering, a tear rolling down, no smile. Close-up: Raghava standing at the alcove with joined hands, looking up at the picture. Expression: eyes red and wet, looking upward, brows knotted in pain, mouth closed and quivering, a tear rolling down, no smile. Nobody looks into the camera lens. The emotion must read fully in the still itself. Raghava, a 56-year-old Telugu father, lean face, receding short grey hair combed back, thick grey moustache, clean-shaven chin, three horizontal white vibhuti stripes on the forehead with a small red kumkum dot, a rudraksha mala around the neck, steel wristwatch, medium-dark brown skin, lean build, a cream half-sleeve cotton shirt and white dhoti-style trousers. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A quiet prayer alcove at the end of the hospital corridor: a framed picture of Lord Shiva garlanded with marigolds, a small brass diya burning, incense smoke. Soft warm lamp glow against the bright white daylight of the corridor. Mood: devotional, aching, intimate. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes red and wet, looking upward, brows knotted in pain, mouth closed and quivering, a tear rolling down, no smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon, smiling, grin, happy expression, showing teeth"
+  },
+  {
+   "id": "s39",
+   "scene": 8,
+   "kind": "speak",
+   "who": [
+    "lakshmi"
+   ],
+   "expr": "heartbroken_quiet",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c08c_line",
+     0,
+     2.6
+    ]
+   ],
+   "seconds": 2.6,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/lakshmi_b.png"
+   ],
+   "prompt": "Lakshmi: a distant hollow gaze, wet eyes, a single tear, mouth closed, no smile. Close-up: Lakshmi sitting on the corridor bench, speaking quietly to her husband beside her (off camera). Expression: a distant hollow gaze, wet eyes, a single tear, mouth closed, no smile. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Lakshmi, a 50-year-old Telugu mother, soft round face, large dark eyes with fine lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, her maroon cotton saree with a thin gold border. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A quiet prayer alcove at the end of the hospital corridor: a framed picture of Lord Shiva garlanded with marigolds, a small brass diya burning, incense smoke. Soft warm lamp glow against the bright white daylight of the corridor. Mood: devotional, aching, intimate. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a distant hollow gaze, wet eyes, a single tear, mouth closed, no smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon, smiling, grin, happy expression, showing teeth"
+  },
+  {
+   "id": "s40",
+   "scene": 8,
+   "kind": "flashback",
+   "who": [
+    "lakshmi",
+    "abhinav"
+   ],
+   "expr": "loving",
+   "cam": "slow drift, memory glow",
+   "motion": "soft, slow, dreamlike",
+   "still": null,
+   "lines": [
+    [
+     "c08c_line",
+     2.6,
+     5.2
+    ]
+   ],
+   "seconds": 2.6,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/lakshmi_b.png",
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Lakshmi and Abhinav: eyes soft and shining with love, a gentle closed-mouth smile, relaxed brow. Medium shot, memory: this morning at home in the sunny kitchen: Lakshmi feeding Abhinav curd and sugar, both smiling. Expression: eyes soft and shining with love, a gentle closed-mouth smile, relaxed brow. Nobody looks into the camera lens. Lakshmi, a 50-year-old Telugu mother, soft round face, large dark eyes with fine lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, her maroon cotton saree with a thin gold border. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, a light-blue slim-fit formal shirt with sleeves folded to the forearm, dark-grey trousers, a black wristwatch on his left wrist. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Exactly 2 named people; anyone else is a background extra. Scene: A modest, cheerful middle-class Hyderabad home: cream walls, a small pooja shelf with a brass lamp, a mango-leaf toran over the door, potted tulsi. Golden sunrise light streams through the windows in soft warm shafts. Palette amber, cream and leaf green. Mood: joyful, tender, auspicious. Warm golden memory glow, softened edges. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes soft and shining with love, a gentle closed-mouth smile, relaxed brow.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s41",
+   "scene": 9,
+   "kind": "insert",
+   "who": [],
+   "expr": null,
+   "cam": "",
+   "motion": "the red lamp glows steadily",
+   "still": null,
+   "lines": [],
+   "seconds": 1.5,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [],
+   "prompt": "Close-up: the red lamp glowing above the operating theatre doors. No people and no faces anywhere in the frame. Scene: The bright hospital corridor outside the operating theatre: steel benches, pastel-green walls, a glowing red lamp above the theatre doors. Mood: helpless waiting, fear. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s42",
+   "scene": 9,
+   "kind": "living",
+   "who": [
+    "nurse2"
+   ],
+   "expr": "alarmed_masked",
+   "cam": "",
+   "motion": "her eyes dart to the monitor",
+   "still": null,
+   "lines": [
+    [
+     "c09a_line",
+     0,
+     3.2
+    ]
+   ],
+   "seconds": 3.2,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/nurse2_b.png"
+   ],
+   "prompt": "Nurse Rani: eyes wide with alarm above the surgical mask, brows raised. Close-up inside the theatre: Nurse Rani beside a patient monitor, looking up at the doctor. Expression: eyes wide with alarm above the surgical mask, brows raised. Nobody looks into the camera lens. The emotion must read fully in the still itself. Nurse Rani, a 35-year-old Indian woman, light-blue scrubs, surgical cap, a surgical mask. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: Inside a bright modern operating theatre: intense white surgical lights, blue-green scrubs, steel instruments, patient monitors. Mood: urgent, frightening, clinical but bright. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes wide with alarm above the surgical mask, brows raised.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s43",
+   "scene": 9,
+   "kind": "insert",
+   "who": [],
+   "expr": null,
+   "cam": "",
+   "motion": "the line drops, alarms flash",
+   "still": null,
+   "lines": [],
+   "seconds": 1.2,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [],
+   "prompt": "Close-up: a patient monitor with a falling blood-pressure line and a flat pulse trace, no readable text. No people and no faces anywhere in the frame. Scene: Inside a bright modern operating theatre: intense white surgical lights, blue-green scrubs, steel instruments, patient monitors. Mood: urgent, frightening, clinical but bright. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s44",
+   "scene": 9,
+   "kind": "living",
+   "who": [
+    "doctor"
+   ],
+   "expr": "commanding_masked",
+   "cam": "",
+   "motion": "he turns, his hand reaches out",
+   "still": null,
+   "lines": [
+    [
+     "c09b_line",
+     0,
+     2.4
+    ]
+   ],
+   "seconds": 2.4,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/doctor_b.png"
+   ],
+   "prompt": "Dr. Srinivas: eyes sharp and focused above the surgical mask, brows lowered. Close-up: Dr. Srinivas under the surgical lights turning sharply. Expression: eyes sharp and focused above the surgical mask, brows lowered. Nobody looks into the camera lens. The emotion must read fully in the still itself. Dr. Srinivas, a 45-year-old Indian male doctor, short black hair greying at the temples, rimless glasses, blue surgical scrubs, surgical cap, a surgical mask over his nose and mouth. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: Inside a bright modern operating theatre: intense white surgical lights, blue-green scrubs, steel instruments, patient monitors. Mood: urgent, frightening, clinical but bright. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes sharp and focused above the surgical mask, brows lowered.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s45",
+   "scene": 9,
+   "kind": "action",
+   "who": [
+    "doctor",
+    "nurse2",
+    "abhinav"
+   ],
+   "expr": null,
+   "cam": "",
+   "motion": "the patient's body jolts, the team leans in",
+   "still": null,
+   "lines": [],
+   "seconds": 2.5,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/doctor_b.png",
+    "refs/nurse2_b.png",
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Medium shot: the masked surgical team at the operating table as the doctor presses defibrillator paddles to the chest of the patient, Abhinav, who lies unconscious under a green sheet with an oxygen mask; every member of the team wears a surgical mask and cap. Nobody looks into the camera lens. Dr. Srinivas, a 45-year-old Indian male doctor, short black hair greying at the temples, rimless glasses, blue surgical scrubs, surgical cap, a surgical mask over his nose and mouth. Nurse Rani, a 35-year-old Indian woman, light-blue scrubs, surgical cap, a surgical mask. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, covered to the chest with a green surgical sheet, an oxygen mask, eyes closed. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Exactly 3 named people; anyone else is a background extra. Scene: Inside a bright modern operating theatre: intense white surgical lights, blue-green scrubs, steel instruments, patient monitors. Mood: urgent, frightening, clinical but bright. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s46",
+   "scene": 9,
+   "kind": "living",
+   "who": [
+    "raghava",
+    "lakshmi"
+   ],
+   "expr": "terrified_couple",
+   "cam": "",
+   "motion": "Lakshmi clutches her mangalsutram, Raghava's eyes fill",
+   "still": null,
+   "lines": [],
+   "seconds": 2.5,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/raghava_b.png",
+    "refs/lakshmi_b.png"
+   ],
+   "prompt": "Raghava and Lakshmi: both faces stricken with terror: eyes wide, red and wet, brows raised and knotted, mouths closed and turned down, gripping each other's hands, no smile, not posing. Medium two-shot: outside, Raghava and Lakshmi seen from the side on the steel bench, both staring at the theatre doors at the right of the frame, not at the camera. Expression: both faces stricken with terror: eyes wide, red and wet, brows raised and knotted, mouths closed and turned down, gripping each other's hands, no smile, not posing. Nobody looks into the camera lens. The emotion must read fully in the still itself. Raghava, a 56-year-old Telugu father, lean face, receding short grey hair combed back, thick grey moustache, clean-shaven chin, three horizontal white vibhuti stripes on the forehead with a small red kumkum dot, a rudraksha mala around the neck, steel wristwatch, medium-dark brown skin, lean build, a cream half-sleeve cotton shirt and white dhoti-style trousers. Lakshmi, a 50-year-old Telugu mother, soft round face, large dark eyes with fine lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, her maroon cotton saree with a thin gold border. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Exactly 2 named people; anyone else is a background extra. Scene: The bright hospital corridor outside the operating theatre: steel benches, pastel-green walls, a glowing red lamp above the theatre doors. Mood: helpless waiting, fear. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: both faces stricken with terror: eyes wide, red and wet, brows raised and knotted, mouths closed and turned down, gripping each other's hands, no smile, not posing.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon, smiling, grin, happy expression, showing teeth"
+  },
+  {
+   "id": "s47",
+   "scene": 10,
+   "kind": "living",
+   "who": [
+    "raghava"
+   ],
+   "expr": "remembering",
+   "cam": "slow push-in",
+   "motion": "his gaze drifts, the corridor light softens",
+   "still": "s49",
+   "lines": [
+    [
+     "c10a_vo",
+     0,
+     4.4
+    ]
+   ],
+   "seconds": 4.4,
+   "engine": "reuse",
+   "clip": "",
+   "refs": [],
+   "prompt": "",
+   "avoid": ""
+  },
+  {
+   "id": "s48",
+   "scene": 10,
+   "kind": "speak",
+   "who": [
+    "grandfather"
+   ],
+   "expr": "wise",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c10b_line",
+     0,
+     4.8
+    ]
+   ],
+   "seconds": 4.8,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/grandfather_b.png"
+   ],
+   "prompt": "Tatayya: a gentle, wise and serious face, calm eyes looking straight at the listener, lips closed. Medium close-up: Tatayya sitting on a wooden bench on the veranda, speaking to his son off camera, a rudraksha mala in his hand. Expression: a gentle, wise and serious face, calm eyes looking straight at the listener, lips closed. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Tatayya, a 75-year-old thin Telugu man, white hair, white stubble, vibhuti stripes on the forehead, a rudraksha mala, a white dhoti and angavastram. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: Twenty-five years ago: the veranda of a village house with a tiled roof and wooden pillars, afternoon sun. Warm golden-sepia glow, soft haze and slightly softened edges like a memory. Mood: nostalgic, wise, tender. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a gentle, wise and serious face, calm eyes looking straight at the listener, lips closed.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s49",
+   "scene": 10,
+   "kind": "living",
+   "who": [
+    "raghava"
+   ],
+   "expr": "remembering",
+   "cam": "",
+   "motion": "his lips part slightly, a breath",
+   "still": null,
+   "lines": [
+    [
+     "c10b_line",
+     4.8,
+     6.8
+    ]
+   ],
+   "seconds": 2.0,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/raghava_b.png"
+   ],
+   "prompt": "Raghava: a distant, inward gaze, eyes glistening, brows softening, mouth closed. Close-up: present-day Raghava in the hospital corridor, eyes closed, listening to the memory. Expression: a distant, inward gaze, eyes glistening, brows softening, mouth closed. Nobody looks into the camera lens. The emotion must read fully in the still itself. Raghava, a 56-year-old Telugu father, lean face, receding short grey hair combed back, thick grey moustache, clean-shaven chin, three horizontal white vibhuti stripes on the forehead with a small red kumkum dot, a rudraksha mala around the neck, steel wristwatch, medium-dark brown skin, lean build, a cream half-sleeve cotton shirt and white dhoti-style trousers. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: The bright present-day hospital corridor, pastel-green walls, steel benches; a soft warm glow begins to touch his face like a memory. Mood: remembering, tender. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a distant, inward gaze, eyes glistening, brows softening, mouth closed.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s50",
+   "scene": 10,
+   "kind": "speak",
+   "who": [
+    "grandfather"
+   ],
+   "expr": "wise",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c10b_line",
+     6.8,
+     11.76
+    ]
+   ],
+   "seconds": 4.96,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/grandfather_b.png"
+   ],
+   "prompt": "Tatayya: a gentle, wise and serious face, calm eyes looking straight at the listener, lips closed. Close-up: Tatayya leaning forward, pressing the rudraksha mala into his son's hands (only the hands visible). Expression: a gentle, wise and serious face, calm eyes looking straight at the listener, lips closed. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Tatayya, a 75-year-old thin Telugu man, white hair, white stubble, vibhuti stripes on the forehead, a rudraksha mala, a white dhoti and angavastram. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: Twenty-five years ago: the veranda of a village house with a tiled roof and wooden pillars, afternoon sun. Warm golden-sepia glow, soft haze and slightly softened edges like a memory. Mood: nostalgic, wise, tender. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a gentle, wise and serious face, calm eyes looking straight at the listener, lips closed.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s51",
+   "scene": 11,
+   "kind": "speak",
+   "who": [
+    "raghava"
+   ],
+   "expr": "devout",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "chant",
+     0,
+     5.0
+    ]
+   ],
+   "seconds": 5.0,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/raghava_b.png"
+   ],
+   "prompt": "Raghava: eyes closed, face calm and devoted, brows relaxed, lips closed. Close-up: Raghava in the prayer alcove, eyes fully closed, hands joined, beginning to chant. Expression: eyes closed, face calm and devoted, brows relaxed, lips closed. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Raghava, a 56-year-old Telugu father, lean face, receding short grey hair combed back, thick grey moustache, clean-shaven chin, three horizontal white vibhuti stripes on the forehead with a small red kumkum dot, a rudraksha mala around the neck, steel wristwatch, medium-dark brown skin, lean build, a cream half-sleeve cotton shirt and white dhoti-style trousers. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: The hospital prayer alcove with the Shiva picture and the diya; golden sunrays begin to slant through the corridor window as the chant builds. Mood: faith, stillness, rising hope. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes closed, face calm and devoted, brows relaxed, lips closed.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s52",
+   "scene": 11,
+   "kind": "living",
+   "who": [
+    "lakshmi"
+   ],
+   "expr": "chant_join",
+   "cam": "",
+   "motion": "her lips move softly, tears fall",
+   "still": null,
+   "lines": [
+    [
+     "chant",
+     5.0,
+     8.5
+    ]
+   ],
+   "seconds": 3.5,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/lakshmi_b.png"
+   ],
+   "prompt": "Lakshmi: eyes closed, hands folded in prayer, tears on her cheeks, lips moving softly in prayer, no smile. Close-up: Lakshmi beside him joining the prayer. Expression: eyes closed, hands folded in prayer, tears on her cheeks, lips moving softly in prayer, no smile. Nobody looks into the camera lens. The emotion must read fully in the still itself. Lakshmi, a 50-year-old Telugu mother, soft round face, large dark eyes with fine lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, her maroon cotton saree with a thin gold border. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: The hospital prayer alcove with the Shiva picture and the diya; golden sunrays begin to slant through the corridor window as the chant builds. Mood: faith, stillness, rising hope. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes closed, hands folded in prayer, tears on her cheeks, lips moving softly in prayer, no smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s53",
+   "scene": 11,
+   "kind": "insert",
+   "who": [],
+   "expr": null,
+   "cam": "",
+   "motion": "sunrays sweep across the picture, the flame brightens",
+   "still": null,
+   "lines": [
+    [
+     "chant",
+     8.5,
+     11.5
+    ]
+   ],
+   "seconds": 3.0,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/shiva_default.png",
+    "refs/shiva_full.png"
+   ],
+   "prompt": "Close-up: the Shiva picture as golden sunlight reaches it, the diya flame rising. No people and no faces anywhere in the frame. The framed picture shows Lord Shiva exactly as in the reference images. Scene: The hospital prayer alcove with the Shiva picture and the diya; golden sunrays begin to slant through the corridor window as the chant builds. Mood: faith, stillness, rising hope. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s54",
+   "scene": 11,
+   "kind": "speak",
+   "who": [
+    "raghava"
+   ],
+   "expr": "devout",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "chant",
+     11.5,
+     16.5
+    ]
+   ],
+   "seconds": 5.0,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/raghava_b.png"
+   ],
+   "prompt": "Raghava: eyes closed, face calm and devoted, brows relaxed, lips closed. Medium close-up, low angle: Raghava chanting with conviction, sunrays across his face. Expression: eyes closed, face calm and devoted, brows relaxed, lips closed. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Raghava, a 56-year-old Telugu father, lean face, receding short grey hair combed back, thick grey moustache, clean-shaven chin, three horizontal white vibhuti stripes on the forehead with a small red kumkum dot, a rudraksha mala around the neck, steel wristwatch, medium-dark brown skin, lean build, a cream half-sleeve cotton shirt and white dhoti-style trousers. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: The hospital prayer alcove with the Shiva picture and the diya; golden sunrays begin to slant through the corridor window as the chant builds. Mood: faith, stillness, rising hope. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes closed, face calm and devoted, brows relaxed, lips closed.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s55",
+   "scene": 11,
+   "kind": "insert",
+   "who": [
+    "abhinav"
+   ],
+   "expr": "unconscious",
+   "cam": "",
+   "motion": "the monitor light flickers on his face",
+   "still": null,
+   "lines": [
+    [
+     "chant",
+     16.5,
+     19.5
+    ]
+   ],
+   "seconds": 3.0,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Abhinav: eyes closed, face slack and still. Medium shot inside the theatre: Abhinav on the operating table under the lights, still. Expression: eyes closed, face slack and still. Nobody looks into the camera lens. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, covered to the chest with a green surgical sheet, an oxygen mask, eyes closed. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: The hospital prayer alcove with the Shiva picture and the diya; golden sunrays begin to slant through the corridor window as the chant builds. Mood: faith, stillness, rising hope. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes closed, face slack and still.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s56",
+   "scene": 11,
+   "kind": "hero",
+   "who": [
+    "abhinav"
+   ],
+   "expr": "eyes_opening",
+   "cam": "",
+   "motion": "the soul lifts upward slowly",
+   "still": null,
+   "lines": [
+    [
+     "chant",
+     19.5,
+     24.0
+    ]
+   ],
+   "seconds": 4.5,
+   "engine": "kling-o3",
+   "clip": "flow-omni",
+   "refs": [
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Abhinav: eyelids just opening, gaze unfocused, face peaceful; normal human eyes, no glow. Wide shot: Abhinav's translucent glowing soul in a white kurta rising up out of his own body, which lies unconscious on the operating table below, into a shaft of soft white-gold light. Expression: eyelids just opening, gaze unfocused, face peaceful; normal human eyes, no glow. Nobody looks into the camera lens. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, in soul form: a plain white kurta, softly glowing and slightly translucent, no injuries. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: The hospital prayer alcove with the Shiva picture and the diya; golden sunrays begin to slant through the corridor window as the chant builds. Mood: faith, stillness, rising hope. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyelids just opening, gaze unfocused, face peaceful; normal human eyes, no glow.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s57",
+   "scene": 12,
+   "kind": "hero",
+   "who": [
+    "yama1",
+    "yama2"
+   ],
+   "expr": "stern",
+   "cam": "",
+   "motion": "they stride forward out of the light",
+   "still": null,
+   "lines": [
+    [
+     "chant",
+     24.0,
+     29.0
+    ]
+   ],
+   "seconds": 5.0,
+   "engine": "flow-nb",
+   "clip": "flow-omni",
+   "refs": [
+    "refs/yama1_a.png",
+    "refs/yama2_b.png"
+   ],
+   "prompt": "Yama Dhootha and the second Yama Dhootha: a stern, dignified, unsmiling face, eyes steady and cold. Wide low-angle shot: two tall Yama Dhoothas emerging from the golden clouds of light, one with a rope noose, one with a mace. Expression: a stern, dignified, unsmiling face, eyes steady and cold. Nobody looks into the camera lens. Yama Dhootha, a tall divine warrior with dark-blue skin, stern dignified face, black-and-gold armour and crown, holding a coiled rope noose. the second Yama Dhootha, a tall divine warrior with dark-blue skin, stern dignified face, black-and-gold armour and crown, holding a heavy golden mace. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Exactly 2 named people; anyone else is a background extra. Scene: A luminous otherworldly space between earth and heaven: soft white-gold clouds of light, a faint path of light, gentle sparkles. Bright and ethereal, never dark. The Yama Dhoothas' dark blue stands out against the gold. Mood: awe, fear turning to grace. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a stern, dignified, unsmiling face, eyes steady and cold.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s58",
+   "scene": 12,
+   "kind": "living",
+   "who": [
+    "abhinav"
+   ],
+   "expr": "scared",
+   "cam": "",
+   "motion": "he turns slowly, glowing softly",
+   "still": null,
+   "lines": [
+    [
+     "chant",
+     29.0,
+     34.34
+    ]
+   ],
+   "seconds": 5.34,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Abhinav: eyes wide with fear, brows raised and pinched, lips parted, no smile. Medium close-up: Abhinav in soul form looking around the glowing space, confused. Expression: eyes wide with fear, brows raised and pinched, lips parted, no smile. Nobody looks into the camera lens. The emotion must read fully in the still itself. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, in soul form: a plain white kurta, softly glowing and slightly translucent, no injuries. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A luminous otherworldly space between earth and heaven: soft white-gold clouds of light, a faint path of light, gentle sparkles. Bright and ethereal, never dark. The Yama Dhoothas' dark blue stands out against the gold. Mood: awe, fear turning to grace. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes wide with fear, brows raised and pinched, lips parted, no smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s59",
+   "scene": 12,
+   "kind": "speak",
+   "who": [
+    "yama1"
+   ],
+   "expr": "stern",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c12a_line",
+     0,
+     3.36
+    ]
+   ],
+   "seconds": 3.36,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/yama1_a.png"
+   ],
+   "prompt": "Yama Dhootha: a stern, dignified, unsmiling face, eyes steady and cold. Medium close-up: the first Yama Dhootha holding out the rope noose. Expression: a stern, dignified, unsmiling face, eyes steady and cold. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Yama Dhootha, a tall divine warrior with dark-blue skin, stern dignified face, black-and-gold armour and crown, holding a coiled rope noose. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A luminous otherworldly space between earth and heaven: soft white-gold clouds of light, a faint path of light, gentle sparkles. Bright and ethereal, never dark. The Yama Dhoothas' dark blue stands out against the gold. Mood: awe, fear turning to grace. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a stern, dignified, unsmiling face, eyes steady and cold.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s60",
+   "scene": 12,
+   "kind": "speak",
+   "who": [
+    "yama2"
+   ],
+   "expr": "stern",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c12b_line",
+     0,
+     3.2
+    ]
+   ],
+   "seconds": 3.2,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/yama2_b.png"
+   ],
+   "prompt": "the second Yama Dhootha: a stern, dignified, unsmiling face, eyes steady and cold. Medium close-up: the second Yama Dhootha, mace on his shoulder. Expression: a stern, dignified, unsmiling face, eyes steady and cold. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. the second Yama Dhootha, a tall divine warrior with dark-blue skin, stern dignified face, black-and-gold armour and crown, holding a heavy golden mace. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A luminous otherworldly space between earth and heaven: soft white-gold clouds of light, a faint path of light, gentle sparkles. Bright and ethereal, never dark. The Yama Dhoothas' dark blue stands out against the gold. Mood: awe, fear turning to grace. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a stern, dignified, unsmiling face, eyes steady and cold.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s61",
+   "scene": 12,
+   "kind": "speak",
+   "who": [
+    "abhinav"
+   ],
+   "expr": "scared",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c12c_line",
+     0,
+     4.56
+    ]
+   ],
+   "seconds": 4.56,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Abhinav: eyes wide with fear, brows raised and pinched, lips parted, no smile. Close-up: Abhinav in soul form stepping back, pleading. Expression: eyes wide with fear, brows raised and pinched, lips parted, no smile. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, in soul form: a plain white kurta, softly glowing and slightly translucent, no injuries. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A luminous otherworldly space between earth and heaven: soft white-gold clouds of light, a faint path of light, gentle sparkles. Bright and ethereal, never dark. The Yama Dhoothas' dark blue stands out against the gold. Mood: awe, fear turning to grace. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes wide with fear, brows raised and pinched, lips parted, no smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon, smiling, grin, happy expression, showing teeth"
+  },
+  {
+   "id": "s62",
+   "scene": 12,
+   "kind": "hero",
+   "who": [
+    "shiva"
+   ],
+   "expr": "divine_command",
+   "cam": "",
+   "motion": "the light bursts open, Shiva steps forward",
+   "still": null,
+   "lines": [
+    [
+     "c12d_line",
+     0,
+     2.6
+    ]
+   ],
+   "seconds": 2.6,
+   "engine": "flow-nb",
+   "clip": "flow-omni",
+   "refs": [
+    "refs/shiva_default.png",
+    "refs/shiva_full.png"
+   ],
+   "prompt": "Lord Shiva in classic devotional TV-serial style: a calm, powerful, authoritative face, eyes steady and commanding, lips closed, no smile. Wide shot: a burst of divine white-gold light opening behind the Yama Dhoothas as Lord Shiva appears, trishul raised. Expression: a calm, powerful, authoritative face, eyes steady and commanding, lips closed, no smile. Nobody looks into the camera lens. Lord Shiva in classic devotional TV-serial style, photoreal, young handsome face, solid pale blue-grey skin, warm brown eyes, three white vibhuti lines with a vertical third-eye mark and an orange-red dot, long dark-brown matted locks in a high top knot wrapped with rudraksha beads, white crescent moon in the hair, large gold hoop earrings, grey-green cobra coiled around the neck with its hood over the right shoulder, rudraksha malas and armbands, tiger-skin wrap with an orange-red sash, silver-gold trishul with a small damaru, exactly as in his reference images. Lord Shiva must match his reference images exactly: face, hair, costume and ornaments. Scene: A luminous otherworldly space between earth and heaven: soft white-gold clouds of light, a faint path of light, gentle sparkles. Bright and ethereal, never dark. The Yama Dhoothas' dark blue stands out against the gold. Mood: awe, fear turning to grace. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a calm, powerful, authoritative face, eyes steady and commanding, lips closed, no smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s63",
+   "scene": 12,
+   "kind": "speak",
+   "who": [
+    "shiva"
+   ],
+   "expr": "divine_command",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c12d_line",
+     2.6,
+     7.28
+    ]
+   ],
+   "seconds": 4.68,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/shiva_default.png",
+    "refs/shiva_full.png"
+   ],
+   "prompt": "Lord Shiva in classic devotional TV-serial style: a calm, powerful, authoritative face, eyes steady and commanding, lips closed, no smile. Medium close-up: Lord Shiva speaking with authority, divine light behind him. Expression: a calm, powerful, authoritative face, eyes steady and commanding, lips closed, no smile. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Lord Shiva in classic devotional TV-serial style, photoreal, young handsome face, solid pale blue-grey skin, warm brown eyes, three white vibhuti lines with a vertical third-eye mark and an orange-red dot, long dark-brown matted locks in a high top knot wrapped with rudraksha beads, white crescent moon in the hair, large gold hoop earrings, grey-green cobra coiled around the neck with its hood over the right shoulder, rudraksha malas and armbands, tiger-skin wrap with an orange-red sash, silver-gold trishul with a small damaru, exactly as in his reference images. Lord Shiva must match his reference images exactly: face, hair, costume and ornaments. Scene: A luminous otherworldly space between earth and heaven: soft white-gold clouds of light, a faint path of light, gentle sparkles. Bright and ethereal, never dark. The Yama Dhoothas' dark blue stands out against the gold. Mood: awe, fear turning to grace. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a calm, powerful, authoritative face, eyes steady and commanding, lips closed, no smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon, smiling, grin, happy expression, showing teeth"
+  },
+  {
+   "id": "s64",
+   "scene": 12,
+   "kind": "action",
+   "who": [
+    "yama1",
+    "yama2"
+   ],
+   "expr": "bowing",
+   "cam": "",
+   "motion": "they bow deeply, then step back into the light",
+   "still": null,
+   "lines": [
+    [
+     "c12e_line",
+     0,
+     2.0
+    ]
+   ],
+   "seconds": 2.0,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/yama1_a.png",
+    "refs/yama2_b.png"
+   ],
+   "prompt": "Yama Dhootha and the second Yama Dhootha: heads bowed low in respect, eyes lowered. Medium wide shot: the two Yama Dhoothas bowing low before the light, the noose lowered. Expression: heads bowed low in respect, eyes lowered. Nobody looks into the camera lens. Yama Dhootha, a tall divine warrior with dark-blue skin, stern dignified face, black-and-gold armour and crown, holding a coiled rope noose. the second Yama Dhootha, a tall divine warrior with dark-blue skin, stern dignified face, black-and-gold armour and crown, holding a heavy golden mace. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Exactly 2 named people; anyone else is a background extra. Scene: A luminous otherworldly space between earth and heaven: soft white-gold clouds of light, a faint path of light, gentle sparkles. Bright and ethereal, never dark. The Yama Dhoothas' dark blue stands out against the gold. Mood: awe, fear turning to grace. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: heads bowed low in respect, eyes lowered.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s65",
+   "scene": 12,
+   "kind": "speak",
+   "who": [
+    "shiva"
+   ],
+   "expr": "divine_tender",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c12f_line",
+     0,
+     2.4
+    ]
+   ],
+   "seconds": 2.4,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/shiva_default.png",
+    "refs/shiva_full.png"
+   ],
+   "prompt": "Lord Shiva in classic devotional TV-serial style: a calm, compassionate face, soft eyes, the faintest gentle smile. Close-up: Lord Shiva looking down at Abhinav with compassion. Expression: a calm, compassionate face, soft eyes, the faintest gentle smile. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Lord Shiva in classic devotional TV-serial style, photoreal, young handsome face, solid pale blue-grey skin, warm brown eyes, three white vibhuti lines with a vertical third-eye mark and an orange-red dot, long dark-brown matted locks in a high top knot wrapped with rudraksha beads, white crescent moon in the hair, large gold hoop earrings, grey-green cobra coiled around the neck with its hood over the right shoulder, rudraksha malas and armbands, tiger-skin wrap with an orange-red sash, silver-gold trishul with a small damaru, exactly as in his reference images. Lord Shiva must match his reference images exactly: face, hair, costume and ornaments. Scene: A luminous otherworldly space between earth and heaven: soft white-gold clouds of light, a faint path of light, gentle sparkles. Bright and ethereal, never dark. The Yama Dhoothas' dark blue stands out against the gold. Mood: awe, fear turning to grace. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a calm, compassionate face, soft eyes, the faintest gentle smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s66",
+   "scene": 12,
+   "kind": "hero",
+   "who": [
+    "abhinav"
+   ],
+   "expr": "eyes_opening",
+   "cam": "",
+   "motion": "the soul descends in a stream of light",
+   "still": null,
+   "lines": [],
+   "seconds": 3.0,
+   "engine": "kling-o3",
+   "clip": "flow-omni",
+   "refs": [
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Abhinav: eyelids just opening, gaze unfocused, face peaceful; normal human eyes, no glow. Wide shot: Abhinav's soul drawn gently back down through streams of golden light towards the hospital below. Expression: eyelids just opening, gaze unfocused, face peaceful; normal human eyes, no glow. Nobody looks into the camera lens. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, in soul form: a plain white kurta, softly glowing and slightly translucent, no injuries. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A luminous otherworldly space between earth and heaven: soft white-gold clouds of light, a faint path of light, gentle sparkles. Bright and ethereal, never dark. The Yama Dhoothas' dark blue stands out against the gold. Mood: awe, fear turning to grace. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyelids just opening, gaze unfocused, face peaceful; normal human eyes, no glow.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s67",
+   "scene": 13,
+   "kind": "insert",
+   "who": [],
+   "expr": null,
+   "cam": "",
+   "motion": "the line spikes into a steady rhythm",
+   "still": null,
+   "lines": [],
+   "seconds": 1.5,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [],
+   "prompt": "Close-up: a patient monitor whose flat line jumps back into a strong green heartbeat, no readable text. No people and no faces anywhere in the frame. Scene: The hospital corridor outside the operating theatre, now flooded with bright morning light through the windows. Mood: disbelief turning into overwhelming relief. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s68",
+   "scene": 13,
+   "kind": "speak",
+   "who": [
+    "doctor"
+   ],
+   "expr": "astonished_joy",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c13a_line",
+     0,
+     4.8
+    ]
+   ],
+   "seconds": 4.8,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/doctor_b.png"
+   ],
+   "prompt": "Dr. Srinivas: eyes wide with astonishment, eyebrows raised, a disbelieving smile breaking out. Medium close-up: Dr. Srinivas coming out of the theatre doors towards the parents off camera, restrained astonishment, looking at them, not at the camera. Expression: eyes wide with astonishment, eyebrows raised, a disbelieving smile breaking out. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Dr. Srinivas, a 45-year-old Indian male doctor, short black hair greying at the temples, rimless glasses, blue scrubs, surgical cap pushed back, the mask pulled down under his chin. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: The hospital corridor outside the operating theatre, now flooded with bright morning light through the windows. Mood: disbelief turning into overwhelming relief. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes wide with astonishment, eyebrows raised, a disbelieving smile breaking out.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s69",
+   "scene": 13,
+   "kind": "shock",
+   "who": [
+    "raghava",
+    "lakshmi"
+   ],
+   "expr": "stunned_relief",
+   "cam": "serial triple zoom",
+   "motion": "they rise, hands to their mouths, tears come",
+   "still": null,
+   "lines": [
+    [
+     "c13a_line",
+     4.8,
+     9.04
+    ]
+   ],
+   "seconds": 4.24,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/raghava_b.png",
+    "refs/lakshmi_b.png"
+   ],
+   "prompt": "Raghava and Lakshmi: faces frozen in disbelief, then eyes filling with tears of relief, mouths slightly open. Medium two-shot: Raghava and Lakshmi rising from the bench as they hear it. Expression: faces frozen in disbelief, then eyes filling with tears of relief, mouths slightly open. Nobody looks into the camera lens. Raghava, a 56-year-old Telugu father, lean face, receding short grey hair combed back, thick grey moustache, clean-shaven chin, three horizontal white vibhuti stripes on the forehead with a small red kumkum dot, a rudraksha mala around the neck, steel wristwatch, medium-dark brown skin, lean build, a cream half-sleeve cotton shirt and white dhoti-style trousers. Lakshmi, a 50-year-old Telugu mother, soft round face, large dark eyes with fine lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, her maroon cotton saree with a thin gold border. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Exactly 2 named people; anyone else is a background extra. Scene: The hospital corridor outside the operating theatre, now flooded with bright morning light through the windows. Mood: disbelief turning into overwhelming relief. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: faces frozen in disbelief, then eyes filling with tears of relief, mouths slightly open.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s70",
+   "scene": 13,
+   "kind": "speak",
+   "who": [
+    "raghava"
+   ],
+   "expr": "grateful_tears",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c13b_line",
+     0,
+     2.8
+    ]
+   ],
+   "seconds": 2.8,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/raghava_b.png"
+   ],
+   "prompt": "Raghava: eyes wet with tears, looking upward, a trembling grateful closed-mouth smile. Close-up: Raghava looking upward, hands joined. Expression: eyes wet with tears, looking upward, a trembling grateful closed-mouth smile. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Raghava, a 56-year-old Telugu father, lean face, receding short grey hair combed back, thick grey moustache, clean-shaven chin, three horizontal white vibhuti stripes on the forehead with a small red kumkum dot, a rudraksha mala around the neck, steel wristwatch, medium-dark brown skin, lean build, a cream half-sleeve cotton shirt and white dhoti-style trousers. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: The hospital corridor outside the operating theatre, now flooded with bright morning light through the windows. Mood: disbelief turning into overwhelming relief. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes wet with tears, looking upward, a trembling grateful closed-mouth smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s71",
+   "scene": 13,
+   "kind": "speak",
+   "who": [
+    "lakshmi"
+   ],
+   "expr": "joy_tears",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c13c_line",
+     0,
+     3.2
+    ]
+   ],
+   "seconds": 3.2,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/lakshmi_b.png"
+   ],
+   "prompt": "Lakshmi: tears of joy on her cheeks, a radiant trembling closed-mouth smile. Close-up: Lakshmi with her palms pressed together, looking up. Expression: tears of joy on her cheeks, a radiant trembling closed-mouth smile. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Lakshmi, a 50-year-old Telugu mother, soft round face, large dark eyes with fine lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, her maroon cotton saree with a thin gold border. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: The hospital corridor outside the operating theatre, now flooded with bright morning light through the windows. Mood: disbelief turning into overwhelming relief. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: tears of joy on her cheeks, a radiant trembling closed-mouth smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s72",
+   "scene": 14,
+   "kind": "establishing",
+   "who": [],
+   "expr": null,
+   "cam": "slow push-in",
+   "motion": "",
+   "still": null,
+   "lines": [],
+   "seconds": 2.0,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [],
+   "prompt": "Wide shot: the bright recovery room with morning sun through the big window, a plant, steady green monitor lines. No people and no faces anywhere in the frame. Scene: A bright, airy private recovery room: big window with morning sun, a plant, white sheets, monitors showing steady green lines. Mood: hopeful, tender, gentle. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s73",
+   "scene": 14,
+   "kind": "living",
+   "who": [
+    "abhinav"
+   ],
+   "expr": "eyes_opening",
+   "cam": "",
+   "motion": "his eyelids flutter open, a slow blink",
+   "still": null,
+   "lines": [],
+   "seconds": 2.5,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Abhinav: eyelids just opening, gaze unfocused, face peaceful; normal human eyes, no glow. Extreme close-up: Abhinav in the hospital bed opening his eyes. Expression: eyelids just opening, gaze unfocused, face peaceful; normal human eyes, no glow. Nobody looks into the camera lens. The emotion must read fully in the still itself. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, a pale-blue hospital gown, a white bandage around his head, an IV line taped to his left hand. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A bright, airy private recovery room: big window with morning sun, a plant, white sheets, monitors showing steady green lines. Mood: hopeful, tender, gentle. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyelids just opening, gaze unfocused, face peaceful; normal human eyes, no glow.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s74",
+   "scene": 14,
+   "kind": "speak",
+   "who": [
+    "lakshmi"
+   ],
+   "expr": "joy_tears",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c14a_line",
+     0,
+     4.6
+    ]
+   ],
+   "seconds": 4.6,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/lakshmi_b.png"
+   ],
+   "prompt": "Lakshmi: tears of joy on her cheeks, a radiant trembling closed-mouth smile. Close-up: Lakshmi at the bedside holding her son's hand to her cheek. Expression: tears of joy on her cheeks, a radiant trembling closed-mouth smile. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Lakshmi, a 50-year-old Telugu mother, soft round face, large dark eyes with fine lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, her maroon cotton saree with a thin gold border. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A bright, airy private recovery room: big window with morning sun, a plant, white sheets, monitors showing steady green lines. Mood: hopeful, tender, gentle. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: tears of joy on her cheeks, a radiant trembling closed-mouth smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s75",
+   "scene": 14,
+   "kind": "living",
+   "who": [
+    "abhinav"
+   ],
+   "expr": "weak_wonder",
+   "cam": "",
+   "motion": "a faint smile, a slow blink",
+   "still": null,
+   "lines": [
+    [
+     "c14a_line",
+     4.6,
+     5.44
+    ]
+   ],
+   "seconds": 0.84,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Abhinav: eyes half-open and wondering, a faint weak smile, face pale and tired. Close-up: Abhinav in the bed looking at his mother. Expression: eyes half-open and wondering, a faint weak smile, face pale and tired. Nobody looks into the camera lens. The emotion must read fully in the still itself. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, a pale-blue hospital gown, a white bandage around his head, an IV line taped to his left hand. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A bright, airy private recovery room: big window with morning sun, a plant, white sheets, monitors showing steady green lines. Mood: hopeful, tender, gentle. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes half-open and wondering, a faint weak smile, face pale and tired.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s76",
+   "scene": 14,
+   "kind": "speak",
+   "who": [
+    "raghava"
+   ],
+   "expr": "proud_smile",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c14b_line",
+     0,
+     5.04
+    ]
+   ],
+   "seconds": 5.04,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/raghava_b.png"
+   ],
+   "prompt": "Raghava: a warm proud closed-mouth smile, eyes crinkled at the corners. Medium close-up: Raghava standing at the bedside looking down at his son, who is out of frame below; only Raghava's face is in frame. Expression: a warm proud closed-mouth smile, eyes crinkled at the corners. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Raghava, a 56-year-old Telugu father, lean face, receding short grey hair combed back, thick grey moustache, clean-shaven chin, three horizontal white vibhuti stripes on the forehead with a small red kumkum dot, a rudraksha mala around the neck, steel wristwatch, medium-dark brown skin, lean build, a cream half-sleeve cotton shirt and white dhoti-style trousers. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A bright, airy private recovery room: big window with morning sun, a plant, white sheets, monitors showing steady green lines. Mood: hopeful, tender, gentle. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a warm proud closed-mouth smile, eyes crinkled at the corners.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s77",
+   "scene": 14,
+   "kind": "speak",
+   "who": [
+    "abhinav"
+   ],
+   "expr": "weak_wonder",
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c14c_line",
+     0,
+     4.6
+    ]
+   ],
+   "seconds": 4.6,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Abhinav: eyes half-open and wondering, a faint weak smile, face pale and tired. Close-up: Abhinav in the bed speaking softly to his parents. Expression: eyes half-open and wondering, a faint weak smile, face pale and tired. Nobody looks into the camera lens. Three-quarter view towards the camera, both eyes visible, not in profile. The mouth is closed at rest (this frame starts a lip-sync shot); one face only in frame. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, a pale-blue hospital gown, a white bandage around his head, an IV line taped to his left hand. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A bright, airy private recovery room: big window with morning sun, a plant, white sheets, monitors showing steady green lines. Mood: hopeful, tender, gentle. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes half-open and wondering, a faint weak smile, face pale and tired.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s78",
+   "scene": 14,
+   "kind": "flashback",
+   "who": [
+    "shiva"
+   ],
+   "expr": "divine_tender",
+   "cam": "fast flash transition",
+   "motion": "a flash of light, gone",
+   "still": null,
+   "lines": [
+    [
+     "c14c_line",
+     4.6,
+     7.68
+    ]
+   ],
+   "seconds": 3.08,
+   "engine": "kling-o3",
+   "clip": "",
+   "refs": [
+    "refs/shiva_default.png",
+    "refs/shiva_full.png"
+   ],
+   "prompt": "Lord Shiva in classic devotional TV-serial style: a calm, compassionate face, soft eyes, the faintest gentle smile. Wide shot, flash memory: a brief flash memory in the divine white-gold space: the silhouette of Lord Shiva with his trishul against blinding light, no room, no hospital. Expression: a calm, compassionate face, soft eyes, the faintest gentle smile. Nobody looks into the camera lens. Lord Shiva in classic devotional TV-serial style, photoreal, young handsome face, solid pale blue-grey skin, warm brown eyes, three white vibhuti lines with a vertical third-eye mark and an orange-red dot, long dark-brown matted locks in a high top knot wrapped with rudraksha beads, white crescent moon in the hair, large gold hoop earrings, grey-green cobra coiled around the neck with its hood over the right shoulder, rudraksha malas and armbands, tiger-skin wrap with an orange-red sash, silver-gold trishul with a small damaru, exactly as in his reference images. Lord Shiva must match his reference images exactly: face, hair, costume and ornaments. Scene: A bright, airy private recovery room: big window with morning sun, a plant, white sheets, monitors showing steady green lines. Mood: hopeful, tender, gentle. Warm golden memory glow, softened edges. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: a calm, compassionate face, soft eyes, the faintest gentle smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  },
+  {
+   "id": "s79",
+   "scene": 14,
+   "kind": "living",
+   "who": [
+    "abhinav"
+   ],
+   "expr": "eyes_widen",
+   "cam": "",
+   "motion": "his eyes widen",
+   "still": null,
+   "lines": [],
+   "seconds": 1.5,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Abhinav: eyes widening with sudden realisation, lips parting slightly, no smile. Extreme close-up: Abhinav in the bed as a voice echoes in his mind. Expression: eyes widening with sudden realisation, lips parting slightly, no smile. Nobody looks into the camera lens. The emotion must read fully in the still itself. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, a pale-blue hospital gown, a white bandage around his head, an IV line taped to his left hand. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A bright, airy private recovery room: big window with morning sun, a plant, white sheets, monitors showing steady green lines. Mood: hopeful, tender, gentle. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes widening with sudden realisation, lips parting slightly, no smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon, smiling, grin, happy expression, showing teeth"
+  },
+  {
+   "id": "s80",
+   "scene": 15,
+   "kind": "provided",
+   "who": [
+    "shiva"
+   ],
+   "expr": null,
+   "cam": "",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c15a_line",
+     0,
+     9.96
+    ]
+   ],
+   "seconds": 9.96,
+   "engine": "provided",
+   "clip": "",
+   "refs": [],
+   "prompt": "",
+   "avoid": ""
+  },
+  {
+   "id": "s81",
+   "scene": 16,
+   "kind": "endcard",
+   "who": [
+    "shiva",
+    "abhinav"
+   ],
+   "expr": "eyes_widen",
+   "cam": "slow push-in",
+   "motion": "",
+   "still": null,
+   "lines": [
+    [
+     "c16a_vo",
+     0,
+     11.12
+    ]
+   ],
+   "seconds": 11.12,
+   "engine": "flow-nb",
+   "clip": "",
+   "refs": [
+    "refs/shiva_default.png",
+    "refs/shiva_full.png",
+    "refs/abhinav_a.png"
+   ],
+   "prompt": "Lord Shiva in classic devotional TV-serial style and Abhinav: eyes widening with sudden realisation, lips parting slightly, no smile. Wide poster composition: Lord Shiva's calm face large and faint in golden light in the sky, Abhinav below in his light-blue shirt looking up at him, the rudraksha on his wrist catching the light, empty space at the bottom for the title. Expression: eyes widening with sudden realisation, lips parting slightly, no smile. Lord Shiva in classic devotional TV-serial style, photoreal, young handsome face, solid pale blue-grey skin, warm brown eyes, three white vibhuti lines with a vertical third-eye mark and an orange-red dot, long dark-brown matted locks in a high top knot wrapped with rudraksha beads, white crescent moon in the hair, large gold hoop earrings, grey-green cobra coiled around the neck with its hood over the right shoulder, rudraksha malas and armbands, tiger-skin wrap with an orange-red sash, silver-gold trishul with a small damaru, exactly as in his reference images. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, a light-blue slim-fit formal shirt with sleeves folded to the forearm, dark-grey trousers, a black wristwatch on his left wrist. Lord Shiva must match his reference images exactly: face, hair, costume and ornaments. Exactly 2 named people; anyone else is a background extra. Scene: Divine gold and white light, soft bokeh, devotional. Mood: inviting, a hint of suspense. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Again: eyes widening with sudden realisation, lips parting slightly, no smile.",
+   "avoid": "a different person, changed face, copied reference pose or clothing, dark or gloomy light, horror, text, letters, watermark, logo, deformed hands, extra fingers, plastic skin, cartoon"
+  }
+ ]
+}

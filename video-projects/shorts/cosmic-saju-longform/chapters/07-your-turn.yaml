@@ -1,0 +1,97 @@
+job_id: cosmic-saju-ch7
+design: cosmic_saju_landscape
+aspect: "16:9"
+sfx: auto
+captions: {mode: sidecar}
+youtube_end_screen: true
+voice:
+  provider: sarvam_tts
+  voice_id: "sarvam:shubh"
+  language: en-IN
+  gap_seconds: 0.7
+image:
+  provider: auto
+  resolution: 2K
+  style_suffix: >-
+    Korean ink-wash and minhwa folk-painting style, hand-painted on warm hanji
+    paper texture, deep charcoal and indigo palette with accents in the five
+    traditional Korean colours (blue-green, red, yellow, white, black), soft
+    gold highlights, cinematic, calm, not photorealistic, no text, no letters,
+    no characters, no watermark, 16:9 composition.
+music: {path: "", gain_db: -22}
+end_card: {enabled: false}
+scenes:
+  - id: s31_open_gate
+    layers: generated
+    generated:
+      bg: >-
+        A stone courtyard at dusk, violet sky, warm light spilling from an open
+        hanok gate.
+      mg: >-
+        The open wooden gate, both doors open, warm golden light on the stones,
+        isolated on a transparent background, soft edges.
+      fg: >-
+        A hanging plum branch close to the lens, out of focus, isolated on a
+        transparent background, soft edges.
+    motion: parallax
+    lines:
+      - say: >-
+          Everything I just did with Mira came from three facts: a date, a time,
+          a place. Your chart has its own version of her story: an element
+          that's missing or overloaded, a Day Master, and a decade when that
+          balance shifts.
+        show: date · time · place
+    transition_out: push_through
+    transition_seconds: 0.7
+
+  - id: s32_snapshot
+    still:
+      key: i26
+      prompt: >-
+        A blurred wooden desk with a small laptop, ink-wash, soft focus, warm
+        lamp light.
+    motion: drift
+    lines:
+      - say: >-
+          You can see the first half free. At cosmicsaju.com, enter your birth
+          details and you'll get your four pillars, your element balance, your
+          Day Master, and your lucky colours, directions and numbers: Saju's
+          everyday way of bringing in what's missing. No account needed.
+        show: cosmicsaju.com · free snapshot
+    transition_out: cut
+
+  - id: s33_reading
+    layers: generated
+    generated:
+      bg: >-
+        A quiet study with shelves of books and scrolls, warm and dim, ink wash.
+      mg: >-
+        Two hands with a brush annotating a painted chart scroll, no face,
+        isolated on a transparent background, soft edges.
+      fg: >-
+        A candle flame close to the lens, out of focus, isolated on a
+        transparent background, soft edges.
+    motion: parallax
+    lines:
+      - say: >-
+          If you want your decades read the way I read Mira's, the full readings
+          do that, and every paid reading is checked by a person before it
+          reaches you. Because, as Mira's chart showed: the chart is
+          arithmetic. The reading is the hard part.
+        show: The chart is arithmetic. The reading is the hard part.
+    transition_out: mist_dissolve
+    transition_seconds: 0.8
+
+  - id: s34_end_screen
+    still:
+      key: i28
+      prompt: >-
+        Layered ink-wash mountain ridges under a deep indigo night sky, a faint
+        full moon, eight faint golden Hanja glowing in the sky.
+    motion: drift
+    lines:
+      - say: >-
+          Then come back and tell me in the comments: which element is your
+          chart missing? I read every one. cosmicsaju.com.
+        show: cosmicsaju.com
+    transition_out: cut

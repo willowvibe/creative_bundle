@@ -1,0 +1,29 @@
+{
+  "name": "cooking_show",
+  "description": "Warm grade, ingredient callouts, sizzle SFX, top-down B-roll inserts",
+  "aspect_ratio": "16:9",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "layout": {
+    "video": { "x": 0, "y": 0, "width": 1920, "height": 1080 },
+    "graphics": { "x": 0, "y": 0, "width": 1920, "height": 1080 },
+    "callout": { "x": 120, "y": 620, "width": 620, "height": 160 },
+    "ingredients": { "x": 1280, "y": 160, "width": 520, "height": 520 },
+    "captions": { "x": 120, "y": 926, "width": 1680, "height": 100 }
+  },
+  "captions": {
+    "font": "Montserrat",
+    "font_size": 52,
+    "font_color": "#FFFFFF",
+    "border_width": 4,
+    "border_color": "#7C2D12",
+    "animation": "karaoke",
+    "font_weight": 800,
+    "text_effect": "shadow"
+  },
+  "branding": {
+    "logo_position": "bottom_right",
+    "accent_color": "#EA580C"
+  }
+}

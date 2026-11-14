@@ -1,0 +1,37 @@
+name: explainer_motion
+description: >-
+  Markdown script + supplied media → motion-graphic explainer video.
+  Pairs the script_to_video pipeline with the motion graphics skill
+  (Task 12) for animated code highlights, diagrams, and callouts.
+  Best for product explainers, algorithm walkthroughs, and concept
+  overviews where stock footage alone can't carry the narrative.
+inputs:
+  - name: concept.md
+    description: Markdown script with H2 headings acting as scenes.
+    required: true
+    example: ./concept.md
+  - name: media/
+    description: Optional directory of supplied clips + images to weave into scenes.
+    required: false
+    example: ./media/
+pipeline_kind: script_to_video
+default_preset: tech_tutorial
+default_aspect_ratio: "16:9"
+default_providers:
+  tts: elevenlabs_tts
+  image: pexels
+  video: pixabay
+  music: poyo_music
+  sfx: elevenlabs_sfx
+default_music_mood: upbeat
+scene_type_hints:
+  - opening
+  - narration
+  - broll
+  - closing
+build_concept_kind: default
+caveats:
+  - Motion graphics are built via the motion_graphics skill (Task 12) — code_highlight, diagram, callout templates.
+  - 'Use `motion: code_highlight` / `motion: diagram` / `motion: callout` in concept.md to opt into graphics; `motion` is a prop, not a scene type.'
+  - Without supplied media, visuals default to stock imagery + motion graphics.
+  - On systems without HyperFrames, the motion graphics fallback uses ffmpeg drawtext.

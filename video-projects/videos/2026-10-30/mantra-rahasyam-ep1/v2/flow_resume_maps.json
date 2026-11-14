@@ -1,0 +1,16 @@
+{
+ "note": "Flow output folder scene number -> shot id, for collecting. resume5 scene-01 was cancelled.",
+ "mantra-ep1-v2-resume4": {
+  "1": "s13",
+  "2": "s29",
+  "3": "s22",
+  "4": "s79"
+ },
+ "mantra-ep1-v2-resume5": {
+  "2": "s45",
+  "3": "s44"
+ },
+ "mantra-ep1-v2-resume6": {
+  "1": "s28"
+ }
+}

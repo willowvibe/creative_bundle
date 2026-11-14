@@ -1,0 +1,40 @@
+[project]
+name = "video-editor-cli"
+version = "0.1.0"
+description = "Typer CLI for the video editor engine."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "typer>=0.12",
+    "rich>=13.7",
+    "pydantic>=2.7",
+    "structlog>=24.1.0",
+    "python-dotenv>=1.0",
+    "video-editor-state",
+    "video-editor-engine",
+    "video-editor-pipelines",
+    "video-editor-ffmpeg",
+    "video-editor-core",
+    "video-editor-tools",
+    "video-editor-llm",
+    "video-editor-transcribe",
+    "video-editor-asset-ingestion",
+    "video-editor-skills",
+]
+
+[project.optional-dependencies]
+# External-editor bridges, loaded only by the bridge commands (video_editor_cli.bridge_loader).
+bridges = [
+    "video-editor-comfystudio-bridge",
+    "video-editor-fablecut-bridge",
+]
+
+[project.scripts]
+ve = "video_editor_cli.main:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/video_editor_cli"]

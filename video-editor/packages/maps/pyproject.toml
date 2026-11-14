@@ -1,0 +1,20 @@
+[project]
+name = "video-editor-maps"
+version = "0.1.0"
+description = "Map scenes: bundled Natural Earth geometry, projection and the map plate renderer."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "structlog>=24.1.0",
+    "video-editor-core",
+]
+
+[project.entry-points."video_editor.scene_renderers"]
+map = "video_editor_maps.scenes:render_map"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/video_editor_maps"]

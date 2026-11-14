@@ -1,0 +1,50 @@
+{
+ "s03": {
+  "sarvam": 3.59,
+  "pro": 4.42,
+  "elevenlabs:Bharadwaj": {
+   "secs": 4.16,
+   "speed": 1.18
+  }
+ },
+ "s04": {
+  "sarvam": 5.91,
+  "pro": 5.61,
+  "elevenlabs:Vagmin": {
+   "secs": 6.0,
+   "speed": 0.97
+  }
+ },
+ "s05": {
+  "sarvam": 4.1,
+  "pro": 4.04,
+  "elevenlabs:Vijaya": {
+   "secs": 4.24,
+   "speed": 1.06
+  }
+ },
+ "s15": {
+  "sarvam": 2.31,
+  "pro": 1.76,
+  "elevenlabs:Vagmin": {
+   "secs": 2.24,
+   "speed": 0.92
+  }
+ },
+ "s16": {
+  "sarvam": 3.41,
+  "pro": 3.15,
+  "elevenlabs:Vijaya": {
+   "secs": 3.76,
+   "speed": 1.07
+  }
+ },
+ "s17": {
+  "sarvam": 8.31,
+  "pro": 8.25,
+  "elevenlabs:Kaka": {
+   "secs": 6.48,
+   "speed": 0.71
+  }
+ }
+}

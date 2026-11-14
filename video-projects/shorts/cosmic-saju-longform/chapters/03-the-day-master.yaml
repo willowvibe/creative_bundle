@@ -1,0 +1,104 @@
+job_id: cosmic-saju-ch3
+design: cosmic_saju_landscape
+aspect: "16:9"
+sfx: auto
+captions: {mode: sidecar}
+youtube_end_screen: false
+voice:
+  provider: sarvam_tts
+  voice_id: "sarvam:shubh"
+  language: en-IN
+  gap_seconds: 0.7
+image:
+  provider: auto
+  resolution: 2K
+  style_suffix: >-
+    Korean ink-wash and minhwa folk-painting style, hand-painted on warm hanji
+    paper texture, deep charcoal and indigo palette with accents in the five
+    traditional Korean colours (blue-green, red, yellow, white, black), soft
+    gold highlights, cinematic, calm, not photorealistic, no text, no letters,
+    no characters, no watermark, 16:9 composition.
+music: {path: "", gain_db: -22}
+end_card: {enabled: false}
+scenes:
+  - id: s13_day_master
+    still:
+      key: i13_chart
+      prompt: >-
+        A soft ink-wash chart background on hanji, muted indigo, almost abstract.
+    graphic:
+      component: four_pillars
+      data:
+        pillars:
+          - {label: Year, glyph: 丙子, sub: Fire Rat}
+          - {label: Month, glyph: 辛卯, sub: Metal Rabbit}
+          - {label: Day, glyph: 辛, sub: Yin Metal · Day Master}
+          - {label: Hour, glyph: 癸巳, sub: Water Snake}
+    motion: drift
+    lines:
+      - say: >-
+          Most people stop at the year animal. But in Saju, the character that
+          is you is the top half of the day pillar. It's called the Day Master.
+        show: 日干 Day Master
+    transition_out: push_through
+    transition_seconds: 0.7
+
+  - id: s14_jewel
+    layers: generated
+    generated:
+      bg: >-
+        Deep folds of dark navy silk, soft light, ink-wash texture.
+      mg: >-
+        A single faceted white jewel with gold rim light, isolated on a
+        transparent background, soft edges.
+      fg: >-
+        Small out-of-focus sparkles floating near the lens, isolated on a
+        transparent background, soft edges.
+    motion: parallax
+    lines:
+      - say: >-
+          Mira's is Sin: Yin Metal. Not the sword or the raw ore; that's Yang
+          Metal. Yin Metal is the jewel. Something that's been cut and polished.
+        show: 辛 Yin Metal · the jewel
+    transition_out: ink_bleed
+    transition_seconds: 0.7
+
+  - id: s15_polishing
+    layers: generated
+    generated:
+      bg: >-
+        Shelves of a small jeweller's workshop, warm and dim, ink wash.
+      mg: >-
+        Two hands, no face, polishing a small gem with a soft cloth, isolated on
+        a transparent background, soft edges.
+      fg: >-
+        A warm lamp glow close to the lens, out of focus, isolated on a
+        transparent background, soft edges.
+    motion: parallax
+    lines:
+      - say: >-
+          People with a jewel Day Master tend to be precise and refined, quietly
+          proud of their standards, and more sensitive to rough treatment than
+          they let on. A jewel shines when it's clean. It goes dull when it's
+          buried or neglected.
+        show: precise · refined · sensitive
+    transition_out: cut
+
+  - id: s16_guess
+    still:
+      key: i03b
+      prompt: >-
+        Five unlit paper lanterns on a dark lake at night, distant low hills,
+        reeds at the edge.
+    graphic:
+      component: countdown
+      data: {from: 3}
+    motion: drift
+    lines:
+      - say: >-
+          A jewel needs certain things around it to shine. So pause here and
+          guess: which of the five elements is completely missing from Mira's
+          chart?
+        show: "Wood · Fire · Earth · Metal · Water: guess"
+    transition_out: ink_bleed
+    transition_seconds: 0.8

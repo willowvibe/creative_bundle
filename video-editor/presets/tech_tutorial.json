@@ -1,0 +1,56 @@
+{
+  "name": "tech_tutorial",
+  "description": "16:9 screen-first tutorial layout with face-tracked webcam PiP bubble in the bottom-right, animated captions above the webcam safe zone, chapter title cards, and motion-graphic callouts.",
+  "aspect_ratio": "16:9",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "layout": {
+    "video": { "x": 0, "y": 0, "width": 1920, "height": 1080 },
+    "graphics": { "x": 0, "y": 0, "width": 1920, "height": 1080 },
+    "screen_main": { "x": 0, "y": 0, "width": 1920, "height": 1080 },
+    "webcam_pip": { "x": 1480, "y": 700, "width": 380, "height": 280 },
+    "webcam_circle": { "x": 1620, "y": 720, "width": 320, "height": 320 },
+    "code_block": { "x": 200, "y": 200, "width": 1520, "height": 600 },
+    "diagram": { "x": 160, "y": 180, "width": 1600, "height": 720 },
+    "chapter_title": { "x": 96, "y": 54, "width": 1728, "height": 200 },
+    "captions": { "x": 120, "y": 880, "width": 1300, "height": 110 }
+  },
+  "captions": {
+    "font": "Montserrat",
+    "font_size": 44,
+    "font_color": "#FFFFFF",
+    "border_width": 4,
+    "border_color": "#0F172A",
+    "safe_zone": "above_webcam",
+    "animation": "karaoke",
+    "font_weight": 800,
+    "text_effect": "shadow"
+  },
+  "branding": {
+    "logo_position": "top_right",
+    "accent_color": "#06B6D4",
+    "show_chapter_title": true,
+    "chapter_title_duration_s": 2.5
+  },
+  "transitions": {
+    "kind": "cut",
+    "scene_change_default": "fade",
+    "fade_duration_ms": 220
+  },
+  "motion_graphics": {
+    "enabled": true,
+    "code_highlight_accent": "#FBBF24",
+    "diagram_accent": "#06B6D4",
+    "callout_accent": "#F59E0B",
+    "background_color": "#0F172A",
+    "text_color": "#F8FAFC"
+  },
+  "chapters": {
+    "enabled": true,
+    "source": "script_headings",
+    "min_segment_duration_s": 20,
+    "max_chapters": 15,
+    "youtube_format": true
+  }
+}

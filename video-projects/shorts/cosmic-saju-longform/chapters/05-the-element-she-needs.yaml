@@ -1,0 +1,98 @@
+job_id: cosmic-saju-ch5
+design: cosmic_saju_landscape
+aspect: "16:9"
+sfx: auto
+captions: {mode: sidecar}
+youtube_end_screen: false
+voice:
+  provider: sarvam_tts
+  voice_id: "sarvam:shubh"
+  language: en-IN
+  gap_seconds: 0.7
+image:
+  provider: auto
+  resolution: 2K
+  style_suffix: >-
+    Korean ink-wash and minhwa folk-painting style, hand-painted on warm hanji
+    paper texture, deep charcoal and indigo palette with accents in the five
+    traditional Korean colours (blue-green, red, yellow, white, black), soft
+    gold highlights, cinematic, calm, not photorealistic, no text, no letters,
+    no characters, no watermark, 16:9 composition.
+music: {path: "", gain_db: -22}
+end_card: {enabled: false}
+scenes:
+  - id: s21_feeding_cycle
+    still:
+      key: i18
+      prompt: >-
+        One bold ink-brush circle (enso) on hanji paper, lots of empty space.
+    graphic:
+      component: feeding_cycle
+      data:
+        steps:
+          - {label: Wood, glyph: 木}
+          - {label: Fire, glyph: 火}
+          - {label: Earth, glyph: 土}
+          - {label: Metal, glyph: 金}
+          - {label: Water, glyph: 水}
+    motion: drift
+    lines:
+      - say: >-
+          The five elements feed each other in a cycle. Wood feeds fire. Fire
+          makes earth. Earth bears metal. Metal carries water. Water feeds wood.
+        show: 相生 the feeding cycle
+    transition_out: push_through
+    transition_seconds: 0.7
+
+  - id: s22_yongsin
+    layers: generated
+    generated:
+      bg: >-
+        A pale ink-wash sky, soft gradient, calm.
+      mg: >-
+        A mountain shown in cross-section, rock layers inside with glowing gold
+        veins and small gems, isolated on a transparent background, soft edges.
+      fg: >-
+        Drifting dust motes close to the lens, isolated on a transparent
+        background, soft edges.
+    motion: parallax
+    lines:
+      - say: >-
+          Look where metal gets its support: from earth. Earth is the mountain
+          the ore comes out of. For a weak jewel, earth is the element that
+          helps most. Saju calls it the yongsin, the useful god. And it's the
+          one thing Mira's chart doesn't have.
+        show: 用神 yongsin · Earth
+    transition_out: cut
+
+  - id: s23_sinking_jewel
+    still:
+      key: i20
+      prompt: >-
+        A small jewel sinking through deep blue water, light rays from the
+        surface above, ink-wash.
+    motion: drift
+    lines:
+      - say: >-
+          There's a classical line for charts like hers: too much water, and
+          metal sinks. A little water makes a jewel shine. This much, and it
+          disappears.
+        show: 水多金沈 too much water, metal sinks
+    transition_out: mist_dissolve
+    transition_seconds: 0.8
+
+  - id: s24_cta
+    still:
+      key: i03d
+      prompt: >-
+        Five paper lanterns on a dark lake at night, the earth lantern
+        flickering, deep indigo.
+    motion: drift
+    lines:
+      - say: >-
+          Quick pause. If you're already wondering what's missing in your own
+          chart, the free snapshot at cosmicsaju.com shows your element balance
+          in about a minute. Link's below. But stay, because Mira's chart has a
+          twist.
+        show: Free snapshot · cosmicsaju.com
+    transition_out: cut

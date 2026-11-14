@@ -1,0 +1,24 @@
+name: social_hook
+description: Create a fast, vertical social clip from a short hook script.
+inputs:
+  - name: concept.md
+    description: 15–60 second hook script with clear beats.
+    required: true
+    example: ./hook.md
+pipeline_kind: script_to_video
+default_preset: short_explainer
+default_aspect_ratio: "9:16"
+default_providers:
+  tts: elevenlabs_tts
+  image: fal_ai
+  video: hyperframes_video
+  music: poyo_music
+  sfx: elevenlabs_sfx
+default_music_mood: energetic
+scene_type_hints:
+  - opening
+  - narration
+  - closing
+build_concept_kind: social_hook
+caveats:
+  - Best for 9:16 output. 16:9 is possible by overriding aspect_ratio.

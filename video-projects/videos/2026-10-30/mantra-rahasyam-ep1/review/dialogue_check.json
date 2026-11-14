@@ -1,0 +1,98 @@
+{
+ "model": "sarvam-105b-conversations",
+ "runs": [
+  {
+   "run": 1,
+   "text": "[\n  {\n    \"id\": \"c01b_line\",\n    \"problem\": \"The phrase 'శుభంగా వెళ్ళి రా' is a bit too formal and bookish for a mother speaking to her son on his first day at work.\",\n    \"rewrite\": \"ఇదిగో నాన్నా... పెరుగు, పంచదార. మొదటి జీతం రోజు... జాగ్రత్తగా వెళ్ళి రా.\"\n  },\n  {\n    \"id\": \"c05b_line\",\n    \"problem\": \"A mother in distress would not introduce herself as 'నేను వాళ్ళ అమ్మని' (I am their mother). She would simply say 'నేను వాడి అమ్మని' (I am his mother).\",\n    \"rewrite\": \"అవునమ్మా... నేను వాడి అమ్మని. ఏమైంది?\"\n  },\n  {\n    \"id\": \"c07a_line\",\n    \"problem\": \"The line sounds like a medical report translated from English. A doctor speaking to the parents would be more empathetic and less clinical.\",\n    \"rewrite\": \"తలకి బలమైన దెబ్బ తగిలింది. లోపల రక్తస్రావం అవుతోంది. మనం వెంటనే ఆపరేషన్ చేయాలి.\"\n  },\n  {\n    \"id\": \"c12b_line\",\n    \"problem\": \"Yama Dhoothas would not use such formal and respectful language ('ఎదురుచూస్తున్నారు') when summoning a soul. It sounds too polite and bookish.\",\n    \"rewrite\": \"యమధర్మరాజు నీకోసం పిలుస్తున్నారు.\"\n  },\n  {\n    \"id\": \"c15a_line\",\n    \"problem\": \"The phrasing 'ఒక సార్థకతను తెచ్చే పెద్ద బాధ్యత నిరీక్షిస్తోంది' is overly poetic and unnatural for a divine voice speaking directly to a person.\",\n    \"rewrite\": \"అభినవ్, నీ ప్రయాణం ఇక్కడితో ఆగిపోదు. నువ్వు చేయాల్సిన మహత్కార్యం ఇంకా మిగిలే ఉంది. నీ జీవితానికి నిజమైన సార్థకతనిచ్చే పెద్ద బాధ్యత నీకోసం ఎదురుచూస్తోంది...\"\n  }\n]",
+   "flags": [
+    {
+     "id": "c01b_line",
+     "problem": "The phrase 'శుభంగా వెళ్ళి రా' is a bit too formal and bookish for a mother speaking to her son on his first day at work.",
+     "rewrite": "ఇదిగో నాన్నా... పెరుగు, పంచదార. మొదటి జీతం రోజు... జాగ్రత్తగా వెళ్ళి రా."
+    },
+    {
+     "id": "c05b_line",
+     "problem": "A mother in distress would not introduce herself as 'నేను వాళ్ళ అమ్మని' (I am their mother). She would simply say 'నేను వాడి అమ్మని' (I am his mother).",
+     "rewrite": "అవునమ్మా... నేను వాడి అమ్మని. ఏమైంది?"
+    },
+    {
+     "id": "c07a_line",
+     "problem": "The line sounds like a medical report translated from English. A doctor speaking to the parents would be more empathetic and less clinical.",
+     "rewrite": "తలకి బలమైన దెబ్బ తగిలింది. లోపల రక్తస్రావం అవుతోంది. మనం వెంటనే ఆపరేషన్ చేయాలి."
+    },
+    {
+     "id": "c12b_line",
+     "problem": "Yama Dhoothas would not use such formal and respectful language ('ఎదురుచూస్తున్నారు') when summoning a soul. It sounds too polite and bookish.",
+     "rewrite": "యమధర్మరాజు నీకోసం పిలుస్తున్నారు."
+    },
+    {
+     "id": "c15a_line",
+     "problem": "The phrasing 'ఒక సార్థకతను తెచ్చే పెద్ద బాధ్యత నిరీక్షిస్తోంది' is overly poetic and unnatural for a divine voice speaking directly to a person.",
+     "rewrite": "అభినవ్, నీ ప్రయాణం ఇక్కడితో ఆగిపోదు. నువ్వు చేయాల్సిన మహత్కార్యం ఇంకా మిగిలే ఉంది. నీ జీవితానికి నిజమైన సార్థకతనిచ్చే పెద్ద బాధ్యత నీకోసం ఎదురుచూస్తోంది..."
+    }
+   ]
+  },
+  {
+   "run": 2,
+   "text": "[\n  {\n    \"id\": \"c05b_line\",\n    \"problem\": \"The mother sounds too abrupt and unnatural when identifying herself to a stranger on the phone in distress.\",\n    \"rewrite\": \"అవును... నేను వాళ్ళ అమ్మని. ఏమైంది అమ్మా?\"\n  },\n  {\n    \"id\": \"c07a_line\",\n    \"problem\": \"The doctor's line sounds too clipped and translated from English, lacking the natural flow of a medical professional explaining a critical situation.\",\n    \"rewrite\": \"తలకు బలమైన దెబ్బ తగిలింది. లోపల రక్తస్రావం అవుతోంది. వెంటనే ఆపరేషన్ చేయాల్సిందే.\"\n  },\n  {\n    \"id\": \"c09a_line\",\n    \"problem\": \"The nurse's line sounds like a direct translation and is too abrupt for an emergency situation.\",\n    \"rewrite\": \"డాక్టర్! బీపీ పడిపోతోంది... పల్స్ దొరకట్లేదు, త్వరగా రండి!\"\n  },\n  {\n    \"id\": \"c10b_line\",\n    \"problem\": \"The grandfather's dialogue sounds overly bookish and formal, not like a natural memory recalled by a grieving father.\",\n    \"rewrite\": \"రాఘవా... ఏ మందూ పనిచేయని రోజు, మృత్యువు గుమ్మం ముందు నిలబడిన రోజు... మహా మృత్యుంజయ మంత్రం జపించు. నమ్మకంతో జపిస్తే... యముడు కూడా వెనక్కి తగ్గుతాడు.\"\n  }\n]",
+   "flags": [
+    {
+     "id": "c05b_line",
+     "problem": "The mother sounds too abrupt and unnatural when identifying herself to a stranger on the phone in distress.",
+     "rewrite": "అవును... నేను వాళ్ళ అమ్మని. ఏమైంది అమ్మా?"
+    },
+    {
+     "id": "c07a_line",
+     "problem": "The doctor's line sounds too clipped and translated from English, lacking the natural flow of a medical professional explaining a critical situation.",
+     "rewrite": "తలకు బలమైన దెబ్బ తగిలింది. లోపల రక్తస్రావం అవుతోంది. వెంటనే ఆపరేషన్ చేయాల్సిందే."
+    },
+    {
+     "id": "c09a_line",
+     "problem": "The nurse's line sounds like a direct translation and is too abrupt for an emergency situation.",
+     "rewrite": "డాక్టర్! బీపీ పడిపోతోంది... పల్స్ దొరకట్లేదు, త్వరగా రండి!"
+    },
+    {
+     "id": "c10b_line",
+     "problem": "The grandfather's dialogue sounds overly bookish and formal, not like a natural memory recalled by a grieving father.",
+     "rewrite": "రాఘవా... ఏ మందూ పనిచేయని రోజు, మృత్యువు గుమ్మం ముందు నిలబడిన రోజు... మహా మృత్యుంజయ మంత్రం జపించు. నమ్మకంతో జపిస్తే... యముడు కూడా వెనక్కి తగ్గుతాడు."
+    }
+   ]
+  },
+  {
+   "run": 3,
+   "text": "[{\"id\": \"c01a_vo\", \"problem\": \"The phrase 'వాళ్ళ అబ్బాయి ఒక్కడే' is grammatically correct but sounds like a written description rather than natural spoken Telugu.\", \"rewrite\": \"ఆ ఇంటి సంతోషం అంతా... వాళ్ళకి ఒక్కడే కొడుకు, అభినవ్.\"}, {\"id\": \"c05b_line\", \"problem\": \"Lakshmi calling herself 'వాళ్ళ అమ్మని' (their mother) to a stranger sounds unnatural and detached; she should refer to him as 'మా అబ్బాయి' (our son).\", \"rewrite\": \"అవునమ్మా... నేను వాడి అమ్మని. ఏమైంది?\"}, {\"id\": \"c07a_line\", \"problem\": \"The phrasing 'లోపల రక్తస్రావం అవుతోంది' sounds slightly clinical and translated; a native speaker would say 'లోపల బ్లీడింగ్ అవుతోంది' or 'రక్తం గడ్డకడుతోంది'.\", \"rewrite\": \"తలకి బలమైన దెబ్బ తగిలింది. లోపల బ్లీడింగ్ అవుతోంది. వెంటనే ఆపరేషన్ చేయాలి.\"}, {\"id\": \"c14b_line\", \"problem\": \"The phrase 'ఆ పాపను కాపాడావని తెలిసింది రా' sounds abrupt and slightly unnatural for a father speaking to his recovering son; 'రా' at the end feels clipped.\", \"rewrite\": \"ఆ పాపను కాపాడావని తెలిసిందిరా... నిన్ను చూస్తుంటే చాలా గర్వంగా ఉంది.\"}, {\"id\": \"c15a_line\", \"problem\": \"The phrasing 'ఒక సార్థకతను తెచ్చే పెద్ద బాధ్యత నిరీక్షిస్తోంది' is overly bookish and stiff for a divine voice in a TV serial.\", \"rewrite\": \"నీ జీవితానికి ఒక సార్థకత తెచ్చే పెద్ద బాధ్యత ఇంకా నీకోసం ఎదురుచూస్తోంది...\"}]",
+   "flags": [
+    {
+     "id": "c01a_vo",
+     "problem": "The phrase 'వాళ్ళ అబ్బాయి ఒక్కడే' is grammatically correct but sounds like a written description rather than natural spoken Telugu.",
+     "rewrite": "ఆ ఇంటి సంతోషం అంతా... వాళ్ళకి ఒక్కడే కొడుకు, అభినవ్."
+    },
+    {
+     "id": "c05b_line",
+     "problem": "Lakshmi calling herself 'వాళ్ళ అమ్మని' (their mother) to a stranger sounds unnatural and detached; she should refer to him as 'మా అబ్బాయి' (our son).",
+     "rewrite": "అవునమ్మా... నేను వాడి అమ్మని. ఏమైంది?"
+    },
+    {
+     "id": "c07a_line",
+     "problem": "The phrasing 'లోపల రక్తస్రావం అవుతోంది' sounds slightly clinical and translated; a native speaker would say 'లోపల బ్లీడింగ్ అవుతోంది' or 'రక్తం గడ్డకడుతోంది'.",
+     "rewrite": "తలకి బలమైన దెబ్బ తగిలింది. లోపల బ్లీడింగ్ అవుతోంది. వెంటనే ఆపరేషన్ చేయాలి."
+    },
+    {
+     "id": "c14b_line",
+     "problem": "The phrase 'ఆ పాపను కాపాడావని తెలిసింది రా' sounds abrupt and slightly unnatural for a father speaking to his recovering son; 'రా' at the end feels clipped.",
+     "rewrite": "ఆ పాపను కాపాడావని తెలిసిందిరా... నిన్ను చూస్తుంటే చాలా గర్వంగా ఉంది."
+    },
+    {
+     "id": "c15a_line",
+     "problem": "The phrasing 'ఒక సార్థకతను తెచ్చే పెద్ద బాధ్యత నిరీక్షిస్తోంది' is overly bookish and stiff for a divine voice in a TV serial.",
+     "rewrite": "నీ జీవితానికి ఒక సార్థకత తెచ్చే పెద్ద బాధ్యత ఇంకా నీకోసం ఎదురుచూస్తోంది..."
+    }
+   ]
+  }
+ ],
+ "kept": [
+  "c05b_line",
+  "c07a_line",
+  "c15a_line"
+ ]
+}

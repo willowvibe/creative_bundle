@@ -1,0 +1,28 @@
+{
+  "name": "vlogger_youtube",
+  "description": "16:9 talking-head + lower thirds + animated captions for YouTube vlogs",
+  "aspect_ratio": "16:9",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "layout": {
+    "video": { "x": 0, "y": 0, "width": 1920, "height": 1080 },
+    "graphics": { "x": 0, "y": 0, "width": 1920, "height": 1080 },
+    "lower_thirds": { "x": 120, "y": 780, "width": 1100, "height": 150 },
+    "captions": { "x": 120, "y": 916, "width": 1680, "height": 110 }
+  },
+  "captions": {
+    "font": "Montserrat",
+    "font_size": 56,
+    "font_color": "#FFFFFF",
+    "border_width": 5,
+    "border_color": "#000000",
+    "animation": "karaoke",
+    "font_weight": 800,
+    "text_effect": "shadow"
+  },
+  "branding": {
+    "logo_position": "bottom_right",
+    "accent_color": "#F59E0B"
+  }
+}

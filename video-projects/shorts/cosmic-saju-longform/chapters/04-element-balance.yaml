@@ -1,0 +1,100 @@
+job_id: cosmic-saju-ch4
+design: cosmic_saju_landscape
+aspect: "16:9"
+sfx: auto
+captions: {mode: sidecar}
+youtube_end_screen: false
+voice:
+  provider: sarvam_tts
+  voice_id: "sarvam:shubh"
+  language: en-IN
+  gap_seconds: 0.7
+image:
+  provider: auto
+  resolution: 2K
+  style_suffix: >-
+    Korean ink-wash and minhwa folk-painting style, hand-painted on warm hanji
+    paper texture, deep charcoal and indigo palette with accents in the five
+    traditional Korean colours (blue-green, red, yellow, white, black), soft
+    gold highlights, cinematic, calm, not photorealistic, no text, no letters,
+    no characters, no watermark, 16:9 composition.
+music: {path: "", gain_db: -22}
+end_card: {enabled: false}
+scenes:
+  - id: s17_five_elements
+    still:
+      key: i15
+      prompt: >-
+        A low wooden table with five objects in a circle: a green sprout, a
+        candle flame, a clay bowl of soil, a small silver bell and a bowl of
+        water, ink-wash still life.
+    motion: drift
+    lines:
+      - say: >-
+          Every one of the eight characters belongs to one of five elements:
+          wood, fire, earth, metal and water.
+        show: 木 火 土 金 水
+    transition_out: cut
+
+  - id: s18_element_count
+    still:
+      key: i03c
+      prompt: >-
+        Five paper lanterns floating on a dark lake at night, four of them lit
+        in different colours, one still dark.
+    graphic:
+      component: element_bars
+      data:
+        elements:
+          - {name: Water, value: 3}
+          - {name: Fire, value: 2}
+          - {name: Metal, value: 2}
+          - {name: Wood, value: 1}
+          - {name: Earth, value: 0}
+    motion: drift
+    lines:
+      - say: >-
+          Let's count Mira's. Water: three. The Rat, the Pig, and Gye in her
+          hour. Fire: two. Metal: two, including her. Wood: one. And earth:
+          zero.
+        show: Earth 0
+    transition_out: seal_stamp
+    transition_seconds: 0.6
+
+  - id: s19_forest_jewel
+    layers: generated
+    generated:
+      bg: >-
+        An overgrown spring forest, fresh green, ink-wash depth.
+      mg: >-
+        A clear stream with a flat stone holding a tiny jewel, isolated on a
+        transparent background, soft edges.
+      fg: >-
+        New leaves close to the lens, out of focus, isolated on a transparent
+        background, soft edges.
+    motion: parallax
+    lines:
+      - say: >-
+          She was also born in mid-spring, the season when wood is strongest and
+          metal is out of season. So this jewel is out of season, surrounded by
+          water, wood and fire, with nothing at all to support it.
+        show: Born in 卯 month · spring
+    transition_out: cut
+
+  - id: s20_weak
+    still:
+      key: i17
+      prompt: >-
+        A traditional Korean hand scale tipped heavily to one side, ink-wash
+        still life on hanji.
+    graphic:
+      component: strength_gauge
+      data: {label: Weak Day Master, value: 28, max: 100}
+    motion: drift
+    lines:
+      - say: >-
+          In Saju we'd call this a weak Day Master. Not a weak person: a chart
+          that gives more than it receives. The question is what it needs.
+        show: Weak Day Master ≠ weak person
+    transition_out: ink_bleed
+    transition_seconds: 0.7

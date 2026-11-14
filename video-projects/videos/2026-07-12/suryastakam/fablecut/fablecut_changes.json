@@ -1,0 +1,28 @@
+{
+  "source_revision": 71,
+  "live_revision": 74,
+  "project_settings": {},
+  "clips": {
+    "added": [],
+    "removed": [],
+    "modified": [
+      {
+        "identity": {
+          "id": "c_366ff4cf",
+          "name": "caption:mv_001",
+          "kind": "text",
+          "track": "V2",
+          "mediaId": null
+        },
+        "start": {
+          "old": 6.063265424356511,
+          "new": 5.512364567900736
+        }
+      }
+    ]
+  },
+  "media": {
+    "added": [],
+    "removed": []
+  }
+}

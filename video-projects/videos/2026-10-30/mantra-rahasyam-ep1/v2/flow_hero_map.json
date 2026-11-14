@@ -1,0 +1,14 @@
+{
+ "mantra-ep1-v2-hero": {
+  "7": "s56",
+  "8": "s57",
+  "9": "s62",
+  "13": "s70_flowtalk",
+  "14": "s70_flowchar",
+  "15": "s32_flowchar",
+  "16": "s66",
+  "17": "s12",
+  "18": "s11"
+ },
+ "note": "scene-01..05 failed (no project open); scene-06 (s12) failed on upload timeout; s11 moved here after PoYo content refusal; scene-13 is a test: Flow voices Raghava's c13b line itself (compare with OmniHuman s70); scenes 14-15 test the Flow character 'Raghava' (stock voice Gacrux) for voice consistency; scenes 10-12 failed (wrong .jpg path for s66/s11, upload timeout s12) and were re-queued as 16-18 (s12 from a 1920-wide copy)"
+}

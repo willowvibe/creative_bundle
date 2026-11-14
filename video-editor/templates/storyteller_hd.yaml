@@ -1,0 +1,28 @@
+name: storyteller_hd
+description: "Standard quality storyteller preset: gpt-image-2 1K low + seedance-2-fast 720p. User marks > motion: true to make a scene animate."
+inputs:
+  - name: script.md
+    description: Story markdown with YAML frontmatter (cast, language, music_mood) and ## Speaker: sections.
+    required: true
+    example: ./story.md
+pipeline_kind: storyteller
+default_preset: long_form
+default_aspect_ratio: "16:9"
+default_providers:
+  tts: tts_router
+  image: poyo_ai
+  video: poyo_ai
+  music: poyo_music
+  sfx: elevenlabs_sfx
+default_music_mood: cinematic
+scene_type_hints:
+  - story
+build_concept_kind: storyteller
+quality_tier_pair:
+  - standard
+  - standard
+caveats:
+  - Multi-voice multi-language: per-speaker voice_id + language; explicit prefixes (sarvam:/elevenlabs:) win over the language routing rule.
+  - Motion scenes require the > motion: true directive per scene; the default is still image with Ken Burns.
+  - Uses the existing FableCut bridge for timeline preview; after browser edits, run ve render-fablecut <job> for the final cut.
+  - "Override tiers per-run: ve run story.md --template storyteller_hd --video-tier premium."

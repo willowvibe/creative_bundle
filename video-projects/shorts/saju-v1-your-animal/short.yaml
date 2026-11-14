@@ -1,0 +1,107 @@
+# Short 1 of the Cosmic Saju series: "You're not just one animal."
+# Words and prompts only. Every colour, font and rect lives in
+# designs/saju_series.json; this file may not carry styling.
+job_id: saju-v1-your-animal
+design: saju_series
+aspect: "9:16"
+
+voice:
+  provider: sarvam_tts
+  # Sarvam takes "sarvam:<speaker>"; the speaker id is the whole contract.
+  voice_id: "sarvam:sarang_en_narration"
+  model: bulbul:v4-flash
+  language: en-IN
+  gap_seconds: 0.28
+
+image:
+  provider: poyo_ai
+  model: gpt-image-2.5-fixed
+  resolution: 2K
+  style_suffix: >-
+    Korean ink-wash and minhwa folk-painting style, hand-painted on warm hanji
+    paper texture, deep charcoal background, accents in the five traditional
+    Korean colours (blue-green, red, yellow, white, black), soft gold
+    highlights, calm and elegant, flat illustration, not photorealistic, no
+    text, no letters, no characters, no watermark, vertical 9:16 composition,
+    empty space in the top 15% and bottom 25% of the frame
+
+end_card:
+  say: "Find yours free at cosmicsaju.com."
+  text: "Free chart snapshot"
+  url: cosmicsaju.com
+  tail_seconds: 1.2
+
+scenes:
+  - id: hook
+    still:
+      key: rat
+      prompt: >-
+        A single small rat sitting on an ink-wash plum branch under a pale
+        moon, centred, lots of negative space
+    lines:
+      - say: "You think you're a Rat? That's one-eighth of you."
+        show: "You're not just a Rat."
+        cue: "Rat"
+    motion: drift
+
+  - id: eight_characters
+    still:
+      key: tiles
+      prompt: >-
+        Eight blank square wooden tiles laid in a 2 x 4 grid on hanji paper,
+        soft overhead light, tiles empty
+    lines:
+      - say: "In Korean Saju, your birth gives you eight characters, not one."
+        speak_as: "In Korean Sah-joo, your birth gives you eight characters, not one."
+        show: "8 characters"
+    motion: drift
+
+  - id: four_pillars
+    still:
+      key: pillars
+      prompt: >-
+        Four tall carved stone pillars on a misty mountain ledge at dawn,
+        pillars evenly spaced, plain surfaces
+    lines:
+      - say: >-
+          Four pillars: the year, month, day and hour you were born. Each
+          pillar has two characters.
+        show: "Year · Month · Day · Hour"
+    motion: drift
+
+  - id: year_branch
+    still: {reuse: pillars}
+    chip: "子"
+    lines:
+      - say: "Your animal comes from just one of them, the year branch."
+        show: "Rat = 1 of 8"
+        cue: "year branch"
+    motion: drift
+
+  - id: day_master
+    still:
+      key: gem
+      prompt: >-
+        A single faceted white gemstone resting on dark silk, gentle gold rim
+        light, macro view
+    chip: "辛"
+    lines:
+      - say: >-
+          The one that's actually you is the top of the day pillar, your Day
+          Master. This person's is Yin Metal: a polished gem. Precise, refined,
+          sensitive to rough handling.
+        show: "Day Master: Yin Metal"
+        cue: "Day Master"
+    motion: drift
+
+  - id: question
+    still:
+      key: bridge
+      prompt: >-
+        A figure seen from behind walking toward a softly glowing traditional
+        Korean gate (hanok), dusk
+    lines:
+      - say: "There are ten Day Masters. Which one are you?"
+        show: "Which one are you?"
+        cue: "Which one are you"
+    motion: drift

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Translations</title>
+  </head>
+  <body>
+    <main>
+      <h1>Translations</h1>
+      <p>Languages</p>
+      <ul id="languages"></ul>
+      <button id="add-language" type="button">Add language</button>
+
+      <div id="language-dialog" hidden>
+        <h2>Add language</h2>
+        <label for="language-select">Language</label>
+        <select id="language-select">
+          <option value="">Choose a language</option>
+          <option value="hi">hi</option>
+          <option value="ta">ta</option>
+          <option value="te">te</option>
+        </select>
+        <button id="add-language-confirm" type="button">Add</button>
+      </div>
+
+      <div id="dub-dialog" hidden>
+        <h2>Add dub</h2>
+        <label for="dub-audio">Dub audio</label>
+        <input id="dub-audio" type="file" accept="audio/*" />
+        <button id="upload-dub" type="button">Upload</button>
+      </div>
+
+      <button id="publish" type="button">Publish</button>
+      <p id="done" hidden></p>
+    </main>
+
+    <script>
+      window.__actions = [];
+      window.__state = { dubs: [] };
+      const record = (name) => window.__actions.push(name);
+      const show = (id) => {
+        document.getElementById(id).hidden = false;
+      };
+      const hide = (id) => {
+        document.getElementById(id).hidden = true;
+      };
+      let currentRow = null;
+
+      document.getElementById("add-language").addEventListener("click", () => {
+        show("language-dialog");
+      });
+      document.getElementById("add-language-confirm").addEventListener("click", () => {
+        const select = document.getElementById("language-select");
+        const language = select.value;
+        if (!language) return;
+        const row = document.createElement("li");
+        row.dataset.language = language;
+        row.innerHTML = `<span>${language}</span><button type="button">Add dub</button>`;
+        document.getElementById("languages").appendChild(row);
+        hide("language-dialog");
+        select.value = "";
+        record(`language-added:${language}`);
+      });
+      document.getElementById("languages").addEventListener("click", (event) => {
+        const button = event.target.closest("button");
+        if (!button || button.textContent !== "Add dub") return;
+        currentRow = button.closest("li");
+        record(`add-dub:${currentRow.dataset.language}`);
+        show("dub-dialog");
+      });
+      document.getElementById("upload-dub").addEventListener("click", () => {
+        if (!currentRow) return;
+        const language = currentRow.dataset.language;
+        const file = document.getElementById("dub-audio").files?.[0];
+        window.__state.dubs.push({ language, name: file?.name ?? null });
+        const status = document.createElement("span");
+        status.textContent = "dub uploaded";
+        currentRow.appendChild(status);
+        hide("dub-dialog");
+        record(`dub-uploaded:${language}`);
+      });
+      document.getElementById("publish").addEventListener("click", () => {
+        record("final-clicked");
+        const done = document.getElementById("done");
+        done.hidden = false;
+        done.textContent = "Video published";
+      });
+    </script>
+  </body>
+</html>

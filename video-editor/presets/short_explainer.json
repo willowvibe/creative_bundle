@@ -1,0 +1,27 @@
+{
+  "name": "short_explainer",
+  "description": "Graphics top, face bottom, captions middle",
+  "aspect_ratio": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "layout": {
+    "graphics": { "x": 0, "y": 0, "width": 1080, "height": 960 },
+    "face": { "x": 0, "y": 960, "width": 1080, "height": 960 },
+    "captions": { "x": 86, "y": 880, "width": 908, "height": 160 }
+  },
+  "captions": {
+    "font": "Montserrat",
+    "font_size": 72,
+    "font_color": "#FFFFFF",
+    "border_width": 6,
+    "border_color": "#000000",
+    "animation": "karaoke",
+    "font_weight": 800,
+    "text_effect": "shadow"
+  },
+  "branding": {
+    "logo_position": "top_right",
+    "accent_color": "#00D8FF"
+  }
+}

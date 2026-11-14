@@ -1,0 +1,33 @@
+{
+  "name": "paper_editorial",
+  "palette": {
+    "bg": "#F3EEE5",
+    "ink": "#1D2545",
+    "accent": "#B8862F",
+    "muted": "#6E6A63"
+  },
+  "type": { "display": "Cormorant Garamond", "body": "Montserrat", "display_weight": 600 },
+  "theme": "light",
+  "motion": { "tempo": 1.0, "entry": "rise", "drift": 1.05 },
+  "layers": {
+    "map": {
+      "paper": "#F3EEE5",
+      "paper_light": "#FBF7EE",
+      "paper_edge": "#E7DECD",
+      "rings": "#DDD0BB",
+      "graticule": "#D98C6A",
+      "ghost_fill": "#E5DCCB",
+      "ghost_stroke": "#FAF6EC",
+      "highlight": "#59608A",
+      "highlight_stroke": "#FFFFFF",
+      "pin": "#B8862F",
+      "pin_ring": "#F8EEDC",
+      "ink": "#1D2545",
+      "muted": "#6E6A63",
+      "card_fill": "#FBF8F1",
+      "card_border": "#DED4C2",
+      "eyebrow": "#B8862F",
+      "rule": "#C9A15A"
+    }
+  }
+}

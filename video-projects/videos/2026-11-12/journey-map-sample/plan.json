@@ -1,0 +1,101 @@
+{
+  "job_id": "journey-sample",
+  "aspect_ratio": "9:16",
+  "design": "night_map",
+  "narration_path": "",
+  "music_path": "",
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "map",
+      "duration_seconds": 9.0,
+      "narration": "",
+      "visual_description": "",
+      "props": {
+        "country": "India",
+        "frame": "full",
+        "headline": "Coimbatore to Eluru",
+        "journey": {
+          "icon": "car",
+          "km": true,
+          "follow": true,
+          "curve": 0.12,
+          "stops": [
+            {
+              "text": "Coimbatore",
+              "lon": 76.96,
+              "lat": 11.02
+            },
+            {
+              "text": "Chennai",
+              "lon": 80.27,
+              "lat": 13.08,
+              "km": 505
+            },
+            {
+              "text": "Eluru",
+              "lon": 81.1,
+              "lat": 16.71,
+              "km": 495
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "type": "map",
+      "duration_seconds": 12.0,
+      "narration": "",
+      "visual_description": "",
+      "props": {
+        "country": "India",
+        "frame": "full",
+        "headline": "Six abodes",
+        "bbox": "76.4,8.0,80.6,13.8",
+        "journey": {
+          "icon": "car",
+          "km": true,
+          "curve": 0.1,
+          "stops": [
+            {
+              "text": "Palani",
+              "lon": 77.52,
+              "lat": 10.45
+            },
+            {
+              "text": "Pazhamudircholai",
+              "lon": 78.21,
+              "lat": 10.07,
+              "km": 120
+            },
+            {
+              "text": "Thiruparankundram",
+              "lon": 78.07,
+              "lat": 9.88,
+              "km": 25
+            },
+            {
+              "text": "Thiruchendur",
+              "lon": 78.12,
+              "lat": 8.5,
+              "km": 175
+            },
+            {
+              "text": "Swamimalai",
+              "lon": 79.33,
+              "lat": 10.96,
+              "km": 330
+            },
+            {
+              "text": "Thiruttani",
+              "lon": 79.62,
+              "lat": 13.18,
+              "km": 310
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "vlogger_shorts",
+  "description": "9:16 face-aware reframe + kinetic captions + punch-in zoom for Shorts/Reels",
+  "aspect_ratio": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "layout": {
+    "hook": { "x": 86, "y": 154, "width": 908, "height": 220 },
+    "video": { "x": 0, "y": 360, "width": 1080, "height": 1320 },
+    "captions": { "x": 86, "y": 1396, "width": 908, "height": 140 }
+  },
+  "captions": {
+    "font": "Montserrat",
+    "font_size": 72,
+    "font_color": "#FFFFFF",
+    "border_width": 6,
+    "border_color": "#000000",
+    "animation": "karaoke",
+    "font_weight": 800,
+    "text_effect": "shadow"
+  },
+  "branding": {
+    "logo_position": "top_right",
+    "accent_color": "#FF0050"
+  }
+}

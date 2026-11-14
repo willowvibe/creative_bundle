@@ -1,0 +1,28 @@
+{
+  "name": "long_form",
+  "description": "Full graphics overlay, lower thirds",
+  "aspect_ratio": "16:9",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "layout": {
+    "video": { "x": 0, "y": 0, "width": 1920, "height": 1080 },
+    "graphics": { "x": 0, "y": 0, "width": 1920, "height": 1080 },
+    "lower_thirds": { "x": 96, "y": 820, "width": 1200, "height": 160 },
+    "captions": { "x": 96, "y": 940, "width": 1200, "height": 80 }
+  },
+  "captions": {
+    "font": "Montserrat",
+    "font_size": 48,
+    "font_color": "#FFFFFF",
+    "border_width": 4,
+    "border_color": "#000000",
+    "animation": "karaoke",
+    "font_weight": 800,
+    "text_effect": "shadow"
+  },
+  "branding": {
+    "logo_position": "bottom_right",
+    "accent_color": "#3B82F6"
+  }
+}

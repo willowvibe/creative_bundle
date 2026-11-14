@@ -1,0 +1,32 @@
+name: musical_video
+description: Cut user images and short clips to a music track with simple motion and optional lyric captions.
+inputs:
+  - name: music_file
+    description: The music/audio track that drives the video.
+    required: true
+    example: ./song.mp3
+  - name: media_dir
+    description: Folder containing JPG/PNG/MP4/MOV assets.
+    required: true
+    example: ./visuals/
+  - name: lyrics
+    description: Optional text file with lyrics for forced-alignment captions.
+    required: false
+    example: ./lyrics.txt
+  - name: language
+    description: Optional language code for the lyrics output filename.
+    required: false
+    example: en
+pipeline_kind: music_video
+default_preset: long_form
+default_aspect_ratio: "16:9"
+default_providers:
+  local_media: local_media
+scene_type_hints:
+  - music_visual
+build_concept_kind: musical_video
+caveats:
+  - User media is cycled in directory order; no AI generation is performed.
+  - Videos longer than a segment are trimmed; shorter videos freeze on their last frame.
+  - Beat detection is not yet implemented; use --segment-seconds to control cut timing.
+  - Headless HyperFrames renders may emit a silent AAC track; if the output has no audio, use scripts/compose_musical_video.py as a deterministic FFmpeg fallback.

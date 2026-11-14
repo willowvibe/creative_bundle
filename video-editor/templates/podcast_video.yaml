@@ -1,0 +1,46 @@
+name: podcast_video
+description: >-
+  Two-host podcast episode → long-form video with chaptered segments.
+  Multi-track audio ingest (host + guest microphones), speaker diarization,
+  chapter-aware editing, animated captions, optional B-roll inserts, and
+  background music. Designed for talking-head / interview content with
+  minimal camera movement.
+inputs:
+  - name: host_track.mp4
+    description: Host camera + lapel-mic single-track video (or audio-only).
+    required: true
+    example: ./host_track.mp4
+  - name: guest_track.mp4
+    description: Guest camera + lapel-mic single-track video (optional).
+    required: false
+    example: ./guest_track.mp4
+  - name: transcript.json
+    description: Optional pre-computed transcript (word-level). Auto-generated if missing.
+    required: false
+    example: ./transcript.json
+pipeline_kind: podcast_to_video
+default_preset: podcast_studio
+default_aspect_ratio: "16:9"
+default_providers:
+  tts: elevenlabs_tts
+  image: pexels
+  video: pixabay
+  music: poyo_music
+  sfx: elevenlabs_sfx
+default_music_mood: relaxed
+scene_type_hints:
+  - opening
+  - intro
+  - host_close
+  - guest_close
+  - split_screen
+  - broll
+  - chapter_break
+  - closing
+build_concept_kind: default
+caveats:
+  - Requires at least one host_track.mp4 input; guest_track is optional.
+  - Speaker diarization runs via pyannote.audio when available; falls back to alternating host/guest by channel.
+  - Chapter generation uses the chapters skill (Task 13) — outputs chapters.json + chapters.txt.
+  - B-roll inserts are speaker-aware (placed during long monologues, not over dialogue).
+  - Closing titles auto-include "Subscribe" CTA + episode number from filename.

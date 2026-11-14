@@ -1,0 +1,24 @@
+{
+  "brand": "Video Editor Engine",
+  "colors": {
+    "primary": "#00D8FF",
+    "secondary": "#FF0050",
+    "background": "#0A0A0A",
+    "text": "#FFFFFF"
+  },
+  "fonts": {
+    "headline": "Coolvetica",
+    "body": "Inter",
+    "captions": "Coolvetica"
+  },
+  "logo": {
+    "path": "assets/logos/logo.png",
+    "width": 160,
+    "height": 160
+  },
+  "defaults": {
+    "caption_animation": "pop_in",
+    "music_duck_db": -14,
+    "final_loudness": -16
+  }
+}

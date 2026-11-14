@@ -1,0 +1,28 @@
+name: storyteller_budget
+description: "Lowest-cost storyteller preset: budget image (flux-schnell) and budget video (wan2.2-image-to-video-fast, gentle parallax). LLM picks ~50% of scenes for motion."
+inputs:
+  - name: script.md
+    description: Story markdown with YAML frontmatter (cast, language, music_mood) and ## Speaker: sections.
+    required: true
+    example: ./story.md
+pipeline_kind: storyteller
+default_preset: long_form
+default_aspect_ratio: "16:9"
+default_providers:
+  tts: tts_router
+  image: poyo_ai
+  video: poyo_ai
+  music: poyo_music
+  sfx: elevenlabs_sfx
+default_music_mood: cinematic
+scene_type_hints:
+  - story
+build_concept_kind: storyteller
+quality_tier_pair:
+  - budget
+  - budget
+caveats:
+  - LLM picks motion scenes; the choice is deterministic per (text, speaker) but not user-tunable. Use > motion: true|false to override per scene.
+  - Budget image model flux-schnell is faster but lower fidelity than HD's gpt-image-2.
+  - Budget motion model wan2.2-image-to-video-fast is the cheapest PoYo video model ($0.030/gen at 480p); it adds gentle motion/parallax to a still image, not action shots.
+  - "Override tiers per-run: ve run story.md --template storyteller_budget --image-tier standard --video-tier premium."

@@ -1,0 +1,130 @@
+default: |
+  # Starter concept
+
+  Paste or write your script here.
+
+  ## Scene 1
+
+  Narration: ...
+
+  ## Scene 2
+
+  Narration: ...
+image_story: |
+  # Image Story
+
+  Describe each scene below. The engine will generate matching visuals
+  and animate them with a gentle Ken Burns pan/zoom.
+
+  ## Scene 1
+
+  - Visual: A wide shot of ...
+  - Narration: ...
+
+  ## Scene 2
+
+  - Visual: A close-up of ...
+  - Narration: ...
+voice_canvas: |
+  # Voice Canvas
+
+  Paste or write the script that matches the supplied voiceover audio.
+  Each paragraph becomes a scene; visuals are generated to support the
+  narration rather than show a speaker.
+
+  ## Scene 1
+
+  Narration: ...
+
+  ## Scene 2
+
+  Narration: ...
+product_spot: |
+  # Product Spot
+
+  Describe the product, its key benefit, and the audience. The engine
+  will generate clean product-focused visuals and a concise VO.
+
+  ## Product
+
+  Name: ...
+  Benefit: ...
+  Audience: ...
+
+  ## Script
+
+  1. Hook: ...
+  2. Problem: ...
+  3. Solution: ...
+  4. CTA: ...
+social_hook: |
+  # Social Hook
+
+  Write a 15–60 second hook. Keep sentences punchy so captions pop. The
+  output is 9:16 vertical with bold captions and music.
+
+  ## Hook
+
+  ...
+
+  ## Body
+
+  ...
+
+  ## CTA
+
+  ...
+training_module: |
+  # Training Module
+
+  Break the topic into numbered steps. Use the data-viz syntax for
+  diagrams: `asset_query: data:chart_type=bar;labels=A,B;values=1,2`.
+
+  ## Step 1
+
+  - Narration: ...
+  - Visual: ...
+  - Data: ...
+
+  ## Step 2
+
+  - Narration: ...
+  - Visual: ...
+musical_video: |
+  # Musical Video
+
+  The music file is the spine of the video. Put all images and short
+  video clips into the media directory; the engine will cycle through
+  them in directory order, one segment per `segment_seconds`.
+
+  ## Inputs
+
+  - Music: ./song.mp3
+  - Media directory: ./visuals/
+  - Lyrics (optional): ./lyrics.txt
+  - Language (optional): en
+
+  ## Notes
+
+  - Still images get a gentle Ken Burns pan/zoom.
+  - Video clips are trimmed to the segment length and play in-line (no extra motion).
+  - Lyrics, if provided, are aligned to the music and burned as captions.
+  - If the built-in render loses audio, use scripts/compose_musical_video.py as a direct FFmpeg fallback.
+storyteller: |
+  ---
+  title: My Story
+  language: en
+  music_mood: cinematic
+  cast:
+    narrator:
+      voice_id: elevenlabs:Bella
+      language: en
+  ---
+
+  # My Story
+
+  ## Speaker: narrator
+
+  Once upon a time, in a quiet valley...
+
+  > visual: wide shot of a peaceful valley at sunrise

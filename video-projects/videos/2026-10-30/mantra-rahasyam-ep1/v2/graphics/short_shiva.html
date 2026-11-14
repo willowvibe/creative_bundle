@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="te"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1080, height=1920" />
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+body{margin:0;background:transparent;font-family:'Noto Serif Telugu','Noto Serif',Georgia,serif;}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;}
+.clip{position:absolute;inset:0;}
+#root{width:1080px;height:1920px;}
+    .top{position:absolute;left:50px;top:250px;width:980px;height:290px;text-align:center;padding-top:34px;
+      box-sizing:border-box;border-radius:36px;background:rgba(40,8,8,0.74);}
+    .te{font-size:76px;font-weight:700;color:#F2C566;line-height:1.25;
+      text-shadow:0 0 20px rgba(255,200,90,0.45),0 4px 10px rgba(0,0,0,0.85);}
+    .en{margin-top:14px;font-size:38px;color:#FFF4DC;text-shadow:0 3px 8px rgba(0,0,0,0.9);}
+    .cta{position:absolute;left:90px;top:1330px;width:780px;height:140px;border-radius:70px;
+      background:rgba(40,8,8,0.82);border:3px solid #F2C566;}
+    .av{position:absolute;left:14px;top:14px;width:106px;height:106px;border-radius:53px;
+      background:url('assets/channel_avatar.jpg') center/cover no-repeat;}
+    .l1{position:absolute;left:140px;top:20px;width:620px;font-size:36px;font-weight:700;color:#FFF4DC;}
+    .l2{position:absolute;left:140px;top:74px;width:620px;font-size:30px;color:#F2C566;}
+</style></head><body>
+<div id="root" data-composition-id="short-shiva" data-start="0" data-width="1080" data-height="1920" data-duration="39.4">
+<section id="short-shiva-clip" class="clip" data-start="0" data-duration="39.4" data-track-index="1">
+<div id="short-shiva-top" class="top"><div id="short-shiva-te" class="te">యమదూతల ముందు శివుడు!</div><div id="short-shiva-en" class="en">Lord Shiva stops Yama's messengers</div></div>
+      <div id="short-shiva-cta" class="cta"><div id="short-shiva-av" class="av"></div>
+        <div id="short-shiva-l1" class="l1">పూర్తి ఎపిసోడ్ · Full episode</div>
+        <div id="short-shiva-l2" class="l2">Mantra Shakti · @Mantrashakti-power</div></div>
+</section></div>
+<script>
+window.__timelines = window.__timelines || {};
+const tl = gsap.timeline({ paused: true });
+tl.from("#short-shiva-top",{opacity:0,y:-30,duration:0.7,ease:"power3.out"},0.2)
+      .from("#short-shiva-cta",{opacity:0,y:40,duration:0.6,ease:"back.out(1.6)"},1.0)
+      .to("#short-shiva-cta",{scale:1.04,duration:0.4,yoyo:true,repeat:3,ease:"sine.inOut"},35.40);
+window.__timelines["short-shiva"] = tl;
+</script></body></html>

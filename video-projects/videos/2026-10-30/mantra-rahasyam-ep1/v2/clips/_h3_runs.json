@@ -1,0 +1,24 @@
+{
+ "s32": {
+  "workflow": "h3_lipsync",
+  "seed": 42,
+  "megapixels": 0.6,
+  "line_s": 3.52,
+  "clip_s": 3.75,
+  "prompt": "Raghava, a 56-year-old Telugu father, speaks in Telugu to someone near them; terrified, eyes red-rimmed, wide and wet with fear, brows raised and knotted together, deep forehead creases, jaw clenched and trembling, no smile. Only they speak and their lips follow the speech exactly; anyone else in frame stays silent and still. A clean, bright modern private hospital corridor outside the operating theatre: warm white light, pastel-green walls, a potted plant, steel benches. After the last word they fall silent, lips closed, listening, until the end. Static camera. Audio: only the voice, no music.",
+  "file": "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-11-04/freefield-lab/h3_wired/s32.mp4",
+  "wall_s": 132.9
+ },
+ "s39": {
+  "workflow": "h3_lipsync",
+  "seed": 42,
+  "megapixels": 0.6,
+  "line_s": 2.6,
+  "voice_end_s": 1.806,
+  "clip_s": 2.333,
+  "out_s": 2.6,
+  "prompt": "Lakshmi, a 50-year-old Telugu mother, speaks in Telugu to someone near them; a distant hollow gaze, wet eyes, a single tear, no smile. Only they speak and their lips follow the speech exactly; anyone else in frame stays silent and still. A quiet prayer alcove at the end of the hospital corridor: a framed picture of Lord Shiva garlanded with marigolds, a small brass diya burning, incense smoke. After the last word they fall silent, lips closed, listening, until the end. Static camera. Audio: only the voice, no music.",
+  "file": "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-11-04/freefield-lab/h3_wired/s39.mp4",
+  "wall_s": 107.5
+ }
+}

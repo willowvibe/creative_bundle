@@ -1,0 +1,379 @@
+{
+ "episode": "mantra-rahasyam-ep1",
+ "rules": [
+  {
+   "number": 1,
+   "name": "Question first",
+   "status": "pass",
+   "detail": "the opener asks a question in scene 3",
+   "evidence": [
+    "Oh no! He tried to save that little girl... and he's down! Hello, 108? There's been an accident near the Ameerpet signal! The boy is unconscious... come quickl…"
+   ]
+  },
+  {
+   "number": 2,
+   "name": "Make us care",
+   "status": "pass",
+   "detail": "selfless beat in scene 3 ('save')",
+   "evidence": [
+    "Oh no! He tried to save that little girl... and he's down! Hello, 108? There's been an accident near the Ameerpet signal"
+   ]
+  },
+  {
+   "number": 3,
+   "name": "Viewer knows more",
+   "status": "pass",
+   "detail": "scene 2 shows what the character cannot see ('approaching')",
+   "evidence": [
+    "road chasing a red ball, a large lorry approaching in the distance. Nobody looks into the camera lens. a five-year-old"
+   ]
+  },
+  {
+   "number": 4,
+   "name": "Every beat turns",
+   "status": "review",
+   "detail": "16 scene(s) declare no turn; 1 same-direction run(s) to confirm",
+   "evidence": [
+    "scenes 5–9 stay dark for 5 beats"
+   ]
+  },
+  {
+   "number": 5,
+   "name": "Payoff then reopen",
+   "status": "pass",
+   "detail": "the last scene closes on a question (scene 16)",
+   "evidence": [
+    "What else did the divine voice tell Abhinav? Who must he save? To find out... follow and subscribe to Mantra Shakti for Part 2!"
+   ]
+  }
+ ],
+ "beats": [
+  {
+   "scene": 1,
+   "shots": [
+    "c01a",
+    "c01b",
+    "c01c",
+    "c01d",
+    "c01e"
+   ],
+   "kinds": [
+    "establishing",
+    "insert",
+    "speak",
+    "insert",
+    "speak",
+    "living",
+    "speak",
+    "insert",
+    "speak"
+   ],
+   "cams": [
+    "slow push-in, 2.5D parallax",
+    "slow push-in",
+    "static",
+    "slow push-in",
+    "slow push-in"
+   ],
+   "action": "Wide exterior: a small cheerful two-storey house on a quiet Hyderabad lane at sunrise, rangoli at the gate, a potted tulsi, birds on the wire, golden light on the facade. No people and no faces anywhere in the frame. Scene: A modest, cheerful middle-class Hyderabad home: cream walls, a small pooja shelf with a brass lamp, a mango-leaf toran over the door, potted tulsi. Golden sunrise light streams through the windows in soft warm shafts. Palette amber, cream and leaf green. Mood: joyful, tender, auspicious. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. Close-up insert: the small pooja shelf inside: a brass diya burning, a framed photo of an old man (Tatayya) with a sandalwood garland, a rudraksha mala beside it. No people and no faces anywhere in the frame. Scene: A modest, cheerful middle-class Hyderabad home: cream walls, a small pooja shelf with a brass lamp, a mango-leaf toran over the door, potted tulsi. Golden sunrise light streams through the windows in soft warm shafts. Palette amber, cream and leaf green. Mood: joyful, tender, auspicious. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. loving Close-up insert on hands: Lakshmi's hand with green glass bangles feeding a spoonful of curd to Abhinav, his face partly in frame, smiling. Nobody looks into the camera lens. Lakshmi, a 50-year-old Telugu mother, soft round face, large dark eyes with fine lines, long black hair with a few grey strands in a neat low bun, small round red bindi, kumkum in the hair parting, thin gold chain with a mangalsutram, green and gold glass bangles, small gold stud earrings, medium-brown skin, slightly plump, her maroon cotton saree with a thin gold border. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, a light-blue slim-fit formal shirt with sleeves folded to the forearm, dark-grey trousers, a black wristwatch on his left wrist. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Exactly 2 named people; anyone else is a background extra. Scene: A modest, cheerful middle-class Hyderabad home: cream walls, a small pooja shelf with a brass lamp, a mango-leaf toran over the door, potted tulsi. Golden sunrise light streams through the windows in soft warm shafts. Palette amber, cream and leaf green. Mood: joyful, tender, auspicious. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. earnest proud_smile caring Extreme close-up insert: the brown rudraksha bracelet on a red thread on Abhinav's right wrist, sunlight on the beads. Nobody looks into the camera lens. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, a light-blue slim-fit formal shirt with sleeves folded to the forearm, dark-grey trousers, a black wristwatch on his left wrist. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A modest, cheerful middle-class Hyderabad home: cream walls, a small pooja shelf with a brass lamp, a mango-leaf toran over the door, potted tulsi. Golden sunrise light streams through the windows in soft warm shafts. Palette amber, cream and leaf green. Mood: joyful, tender, auspicious. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. cheerful",
+   "line": "A small house in Hyderabad. All the happiness in that home... was their only son, Abhinav. Here, dear... curd and sugar. It's your first-salary day... go well, and come back. Amma, this Sunday I want to take you both to Srisailam. It was Tatayya's wish... I'll fulfil it with my salary! Ride slowly. Your Tatayya's rudraksha is on your wrist... take care. Okay, Nanna! I'll be back with sweets this evening!",
+   "valence": 1
+  },
+  {
+   "scene": 2,
+   "shots": [
+    "c02a"
+   ],
+   "kinds": [
+    "action",
+    "action",
+    "hero",
+    "action"
+   ],
+   "cams": [],
+   "action": "cheerful Wide street-level shot: a little girl in a yellow frock runs onto the road chasing a red ball, a large lorry approaching in the distance. Nobody looks into the camera lens. a five-year-old Telugu girl in a yellow frock, two small pigtails. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A busy, sunny Hyderabad road near the Ameerpet signal: shops, trees, auto-rickshaws, a metro pillar. Hard bright midday sun, clear blue sky, vivid street colours. Mood: lively, turning sharply tense. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. shock Wide shot: aftermath on the sunny road: a red motorbike on its side, a young man lying still on the asphalt in the distance, a streak of blood near his head, people running towards him, the little girl in her yellow frock safe in her mother's arms at the roadside. No people and no faces anywhere in the frame. Scene: A busy, sunny Hyderabad road near the Ameerpet signal: shops, trees, auto-rickshaws, a metro pillar. Hard bright midday sun, clear blue sky, vivid street colours. Mood: lively, turning sharply tense. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark.",
+   "line": "But fate... had something else written for that day.",
+   "valence": 0
+  },
+  {
+   "scene": 3,
+   "shots": [
+    "c03a",
+    "c03b"
+   ],
+   "kinds": [
+    "speak",
+    "speak",
+    "action"
+   ],
+   "cams": [],
+   "action": "alarm panic unconscious",
+   "line": "Oh no! He tried to save that little girl... and he's down! Hello, 108? There's been an accident near the Ameerpet signal! The boy is unconscious... come quickly!",
+   "valence": -1
+  },
+  {
+   "scene": 4,
+   "shots": [
+    "c04a"
+   ],
+   "kinds": [
+    "action",
+    "action",
+    "insert"
+   ],
+   "cams": [
+    "slow push-in"
+   ],
+   "action": "Low-angle wide shot: an Indian 108 ambulance (a white Force Traveller van with red and blue stripes) racing through daytime Hyderabad traffic, lights flashing. No people and no faces anywhere in the frame. Scene: A white 108 ambulance and a modern private hospital's emergency entrance in daylight: glass doors, white and pastel-blue walls. Bright daylight with red-and-blue emergency flashes. Mood: urgent, racing against time. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. unconscious Extreme close-up insert: only a limp right hand hanging off the edge of a moving stretcher, the brown rudraksha bracelet on its red thread around the wrist; no face in frame. Nobody looks into the camera lens. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, a light-blue slim-fit formal shirt with sleeves folded to the forearm, dark-grey trousers, a black wristwatch on his left wrist. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A white 108 ambulance and a modern private hospital's emergency entrance in daylight: glass doors, white and pastel-blue walls. Bright daylight with red-and-blue emergency flashes. Mood: urgent, racing against time. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark.",
+   "line": "Out of pure humanity, he saved a little girl's life... but now his own life flickered like a lamp in the wind.",
+   "valence": 0
+  },
+  {
+   "scene": 5,
+   "shots": [
+    "c05a",
+    "c05b",
+    "c05c",
+    "c05d"
+   ],
+   "kinds": [
+    "speak",
+    "living",
+    "speak",
+    "speak",
+    "shock",
+    "insert",
+    "speak"
+   ],
+   "cams": [
+    "slow push-in",
+    "serial triple zoom"
+   ],
+   "action": "grave unease worried grave dread Low close-up, slow motion: a steel glass falling from a woman's hand onto the kitchen floor, water splashing. No people and no faces anywhere in the frame. Scene: The family's sunlit home kitchen: steel vessels on a shelf, a gas stove, a calendar of a deity, warm late-morning light through a small window. Mood: ordinary calm breaking into dread. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. crying_out",
+   "line": "Hello... is this Abhinav's home? I'm calling from City Hospital. Yes... I'm his mother. What happened? Amma, I'm sorry... your son has had an accident. It's serious. Please come right away. Listen...! Our Abhi...!",
+   "valence": -1
+  },
+  {
+   "scene": 6,
+   "shots": [
+    "c06a"
+   ],
+   "kinds": [
+    "action",
+    "living"
+   ],
+   "cams": [],
+   "action": "fear_father praying_tears",
+   "line": "O Lord... nothing must happen to my child... nothing, Swami...",
+   "valence": -1
+  },
+  {
+   "scene": 7,
+   "shots": [
+    "c07a",
+    "c07b",
+    "c07c",
+    "c07d"
+   ],
+   "kinds": [
+    "establishing",
+    "speak",
+    "living",
+    "speak",
+    "speak",
+    "insert",
+    "living"
+   ],
+   "cams": [
+    "slow push-in"
+   ],
+   "action": "Wide shot: the bright corridor outside the operating theatre, steel benches, a potted plant, double doors with a red lamp above. No people and no faces anywhere in the frame. Scene: A clean, bright modern private hospital corridor outside the operating theatre: warm white light, pastel-green walls, a potted plant, steel benches. Mood: hushed tension, fear held in. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. grave terrified_couple fear_father grave Close-up insert on hands: Raghava's trembling hand with a steel wristwatch signing the consent form on a clipboard. Nobody looks into the camera lens. Raghava, a 56-year-old Telugu father, lean face, receding short grey hair combed back, thick grey moustache, clean-shaven chin, three horizontal white vibhuti stripes on the forehead with a small red kumkum dot, a rudraksha mala around the neck, steel wristwatch, medium-dark brown skin, lean build, a cream half-sleeve cotton shirt and white dhoti-style trousers. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Scene: A clean, bright modern private hospital corridor outside the operating theatre: warm white light, pastel-green walls, a potted plant, steel benches. Mood: hushed tension, fear held in. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. sobbing",
+   "line": "He has a severe head injury, with internal bleeding. We must operate right away. Doctor... how is my son? We'll do everything we can. Please sign here... every minute counts. Please save my son somehow, Doctor!",
+   "valence": -1
+  },
+  {
+   "scene": 8,
+   "shots": [
+    "c08a",
+    "c08b",
+    "c08c"
+   ],
+   "kinds": [
+    "insert",
+    "living",
+    "living",
+    "speak",
+    "flashback"
+   ],
+   "cams": [
+    "slow push-in",
+    "slow push-in",
+    "slow drift, memory glow"
+   ],
+   "action": "Close-up: the framed picture of Lord Shiva in the prayer alcove, garlanded with marigolds, a brass diya flame in front. No people and no faces anywhere in the frame. The framed picture shows Lord Shiva exactly as in the reference images. Scene: A quiet prayer alcove at the end of the hospital corridor: a framed picture of Lord Shiva garlanded with marigolds, a small brass diya burning, incense smoke. Soft warm lamp glow against the bright white daylight of the corridor. Mood: devotional, aching, intimate. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. praying_tears broken heartbroken_quiet loving",
+   "line": "Shivayya... take my life if you must... but save my child, Father... He hasn't even seen life yet, Swami... if you must take someone, take me. I fed him curd and sent him off this morning... he said he'd come back with sweets this evening...",
+   "valence": -1
+  },
+  {
+   "scene": 9,
+   "shots": [
+    "c09a",
+    "c09b"
+   ],
+   "kinds": [
+    "insert",
+    "living",
+    "insert",
+    "living",
+    "action",
+    "living"
+   ],
+   "cams": [],
+   "action": "Close-up: the red lamp glowing above the operating theatre doors. No people and no faces anywhere in the frame. Scene: The bright hospital corridor outside the operating theatre: steel benches, pastel-green walls, a glowing red lamp above the theatre doors. Mood: helpless waiting, fear. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. alarmed_masked Close-up: a patient monitor with a falling blood-pressure line and a flat pulse trace, no readable text. No people and no faces anywhere in the frame. Scene: Inside a bright modern operating theatre: intense white surgical lights, blue-green scrubs, steel instruments, patient monitors. Mood: urgent, frightening, clinical but bright. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. commanding_masked Medium shot: the masked surgical team at the operating table as the doctor presses defibrillator paddles to the chest of the patient, Abhinav, who lies unconscious under a green sheet with an oxygen mask; every member of the team wears a surgical mask and cap. Nobody looks into the camera lens. Dr. Srinivas, a 45-year-old Indian male doctor, short black hair greying at the temples, rimless glasses, blue surgical scrubs, surgical cap, a surgical mask over his nose and mouth. Nurse Rani, a 35-year-old Indian woman, light-blue scrubs, surgical cap, a surgical mask. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, warm dark-brown eyes, thick black hair neatly styled with a soft side part, light neatly trimmed stubble, warm wheatish skin, slim fit build, a brown rudraksha bead bracelet on a red thread on his right wrist, covered to the chest with a green surgical sheet, an oxygen mask, eyes closed. Use the reference images only for faces and identity; do not copy their clothing, pose, expression or background. Exactly 3 named people; anyone else is a background extra. Scene: Inside a bright modern operating theatre: intense white surgical lights, blue-green scrubs, steel instruments, patient monitors. Mood: urgent, frightening, clinical but bright. Photoreal cinematic film still, 35mm, natural skin texture with pores, shallow depth of field, true-to-life Indian skin tones, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. terrified_couple",
+   "line": "Doctor! BP is falling... I can't find a pulse! Get the defibrillator ready... quickly!",
+   "valence": -1
+  },
+  {
+   "scene": 10,
+   "shots": [
+    "c10a",
+    "c10b"
+   ],
+   "kinds": [
+    "living",
+    "speak",
+    "living",
+    "speak"
+   ],
+   "cams": [
+    "slow push-in"
+   ],
+   "action": "remembering wise remembering wise",
+   "line": "In that fear... Raghava remembered his father's words. Raghava... on the day no medicine works, the day death stands at the door... chant the Mahamrityunjaya mantra. Chant it with faith... and even Yama steps back.",
+   "valence": 1
+  },
+  {
+   "scene": 11,
+   "shots": [
+    "c11a"
+   ],
+   "kinds": [
+    "speak",
+    "living",
+    "insert",
+    "speak",
+    "insert",
+    "hero"
+   ],
+   "cams": [],
+   "action": "devout chant_join Close-up: the Shiva picture as golden sunlight reaches it, the diya flame rising. No people and no faces anywhere in the frame. The framed picture shows Lord Shiva exactly as in the reference images. Scene: The hospital prayer alcove with the Shiva picture and the diya; golden sunrays begin to slant through the corridor window as the chant builds. Mood: faith, stillness, rising hope. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. devout unconscious eyes_opening",
+   "line": "(He chants the Mahamrityunjaya Mantra, three cycles)",
+   "valence": 0
+  },
+  {
+   "scene": 12,
+   "shots": [
+    "c12a",
+    "c12b",
+    "c12c",
+    "c12d",
+    "c12e",
+    "c12f"
+   ],
+   "kinds": [
+    "hero",
+    "living",
+    "speak",
+    "speak",
+    "speak",
+    "hero",
+    "speak",
+    "action",
+    "speak",
+    "hero"
+   ],
+   "cams": [],
+   "action": "stern scared stern stern scared divine_command divine_command bowing divine_tender eyes_opening",
+   "line": "Abhinav... your time is over. Come. Lord Yama awaits you. No... my mother, my father... they can't live without me! Stop! This soul's time has not yet come. His work on earth is not yet done. As you command, Mahadeva. Go, my child... go back.",
+   "valence": -1
+  },
+  {
+   "scene": 13,
+   "shots": [
+    "c13a",
+    "c13b",
+    "c13c"
+   ],
+   "kinds": [
+    "insert",
+    "speak",
+    "shock",
+    "speak",
+    "speak"
+   ],
+   "cams": [
+    "serial triple zoom"
+   ],
+   "action": "Close-up: a patient monitor whose flat line jumps back into a strong green heartbeat, no readable text. No people and no faces anywhere in the frame. Scene: The hospital corridor outside the operating theatre, now flooded with bright morning light through the windows. Mood: disbelief turning into overwhelming relief. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. astonished_joy stunned_relief grateful_tears joy_tears",
+   "line": "His heart had stopped... but suddenly it started beating again! In twenty years of practice I've never seen this. It's truly a miracle! Shivayya... your grace... You heard our plea, Swami!",
+   "valence": 1
+  },
+  {
+   "scene": 14,
+   "shots": [
+    "c14a",
+    "c14b",
+    "c14c"
+   ],
+   "kinds": [
+    "establishing",
+    "living",
+    "speak",
+    "living",
+    "speak",
+    "speak",
+    "flashback",
+    "living"
+   ],
+   "cams": [
+    "slow push-in",
+    "fast flash transition"
+   ],
+   "action": "Wide shot: the bright recovery room with morning sun through the big window, a plant, steady green monitor lines. No people and no faces anywhere in the frame. Scene: A bright, airy private recovery room: big window with morning sun, a plant, white sheets, monitors showing steady green lines. Mood: hopeful, tender, gentle. Photoreal cinematic film still, 35mm, shallow depth of field, clean bright colours. Wide 16:9 frame. No text, no letters, no watermark. eyes_opening joy_tears weak_wonder proud_smile weak_wonder divine_tender eyes_widen",
+   "line": "Abhi... my dear! You opened your eyes, my child... my life has come back! I heard you saved that little girl... I'm so proud of you. Amma... Nanna... I went somewhere far away... but the power of your mantra brought me back.",
+   "valence": 1
+  },
+  {
+   "scene": 15,
+   "shots": [
+    "c15a"
+   ],
+   "kinds": [
+    "provided"
+   ],
+   "cams": [],
+   "action": "",
+   "line": "Abhinav, your journey does not end here. A great task you must fulfil still remains. A great responsibility that will give your life its true meaning awaits you...",
+   "valence": 0
+  },
+  {
+   "scene": 16,
+   "shots": [
+    "c16a"
+   ],
+   "kinds": [
+    "endcard"
+   ],
+   "cams": [
+    "slow push-in"
+   ],
+   "action": "eyes_widen",
+   "line": "What else did the divine voice tell Abhinav? Who must he save? To find out... follow and subscribe to Mantra Shakti for Part 2!",
+   "valence": -1
+  }
+ ],
+ "failed": [],
+ "review": [
+  4
+ ]
+}

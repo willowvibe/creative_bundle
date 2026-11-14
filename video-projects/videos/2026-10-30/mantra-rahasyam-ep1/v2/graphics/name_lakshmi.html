@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="te"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1920, height=1080" />
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+body{margin:0;background:transparent;font-family:'Noto Serif Telugu','Noto Serif',Georgia,serif;}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;}
+.clip{position:absolute;inset:0;}
+.band{position:absolute;left:0;top:820px;width:900px;height:170px;
+      background:linear-gradient(90deg,rgba(58,12,12,0.78) 0%,rgba(58,12,12,0.55) 60%,rgba(58,12,12,0) 100%);}
+    .bar{position:absolute;left:96px;top:852px;width:6px;height:106px;background:#F2C566;}
+    .te{position:absolute;left:126px;top:842px;width:760px;font-size:54px;font-weight:700;color:#F2C566;
+      line-height:1.25;text-shadow:0 2px 8px rgba(0,0,0,0.6);}
+    .en{position:absolute;left:128px;top:922px;width:760px;font-size:28px;color:#FFF4DC;letter-spacing:2px;}
+</style></head><body>
+<div id="root" data-composition-id="name-lakshmi" data-start="0" data-width="1920" data-height="1080" data-duration="3.0">
+<section id="name-lakshmi-clip" class="clip" data-start="0" data-duration="3.0" data-track-index="1">
+<div id="name-lakshmi-band" class="band"></div><div id="name-lakshmi-bar" class="bar"></div>
+      <div id="name-lakshmi-te" class="te">లక్ష్మి</div><div id="name-lakshmi-en" class="en">Lakshmi · Abhi's mother</div>
+</section></div>
+<script>
+window.__timelines = window.__timelines || {};
+const tl = gsap.timeline({ paused: true });
+tl.from("#name-lakshmi-band",{opacity:0,x:-120,duration:0.5,ease:"power2.out"},0)
+      .from("#name-lakshmi-bar",{scaleY:0,transformOrigin:"top",duration:0.4,ease:"power2.out"},0.15)
+      .from("#name-lakshmi-te",{opacity:0,x:-24,duration:0.5,ease:"power2.out"},0.25)
+      .from("#name-lakshmi-en",{opacity:0,x:-16,duration:0.5,ease:"power2.out"},0.4)
+      .to(["#name-lakshmi-band","#name-lakshmi-bar","#name-lakshmi-te","#name-lakshmi-en"],{opacity:0,duration:0.45},2.55);
+window.__timelines["name-lakshmi"] = tl;
+</script></body></html>

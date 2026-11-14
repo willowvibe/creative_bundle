@@ -1,0 +1,113 @@
+# Video Editor Engine — Free Mode Configuration
+# Uses only free/local providers. No API keys required for basic operation.
+# Copy to config.yaml to activate, or use: ve run --config config.free.yaml
+
+llm:
+  default_provider: ollama_cloud_pro
+  providers:
+    ollama_cloud_pro:
+      name: ollama_cloud_pro
+      base_url: https://api.ollama.com
+      api_key_env: OLLAMA_CLOUD_API_KEY
+      default_model: minimax-m3:cloud
+  tasks:
+    plan:        { task_type: plan,         provider: ollama_cloud_pro, model: minimax-m3:cloud }
+    decompose:   { task_type: decompose,    provider: ollama_cloud_pro, model: minimax-m3:cloud }
+    edit_plan:   { task_type: edit_plan,    provider: ollama_cloud_pro, model: minimax-m3:cloud }
+    scene_plan:  { task_type: scene_plan,   provider: ollama_cloud_pro, model: minimax-m3:cloud }
+    fallback:    { task_type: fallback,     provider: ollama_cloud_pro, model: glm-5.3:cloud }
+    code:        { task_type: code,         provider: ollama_cloud_pro, model: kimi-k2.7-code:cloud }
+    utility:     { task_type: utility,      provider: ollama_cloud_pro, model: glm-5.3-flash:cloud }
+    verify_judge: { task_type: verify_judge, provider: ollama_cloud_pro, model: glm-5.3-flash:cloud }
+
+transcription:
+  engine: whisperx
+  model: large-v3-turbo
+  language: en
+  device: cuda
+  compute_type: int8_float16
+
+audio:
+  loudness_target_lufs: -16
+  true_peak_dbfs: -1.5
+  loudness_range_lu: 11
+  sample_rate: 48000
+  default_music_path: ""
+
+render:
+  cache_dir: projects/{job_id}/.cache
+  default_preset: short_explainer
+  container: mp4
+  video_codec: libx264
+  audio_codec: aac
+  fps: 30
+  width: 1920
+  height: 1080
+  crf: 23
+  video_bitrate: ""
+  audio_bitrate: 192k
+  output_name_template: "{stage}.mp4"
+  hyperframes:
+    cli: hyperframes
+    timeout: 600
+
+paths:
+  projects: projects
+  outputs: outputs
+  presets: presets
+  assets: assets
+  music: assets/music
+
+assets:
+  providers:
+    kokoro_tts:
+      timeout: 120.0
+      provider_options:
+        voice: af_bella
+        speed: 1.0
+    kitten_tts:
+      timeout: 120.0
+      provider_options:
+        voice: en_us_female_1
+        speed: 1.0
+    moss_tts:
+      timeout: 120.0
+      provider_options:
+        voice: default
+        speed: 1.0
+    pexels:
+      api_key_env: PEXELS_API_KEY
+      timeout: 60.0
+      provider_options:
+        per_page: 5
+        orientation: landscape
+    pixabay:
+      api_key_env: PIXABAY_API_KEY
+      timeout: 60.0
+    coverr:
+      timeout: 60.0
+    mixkit:
+      timeout: 60.0
+    ace_step:
+      timeout: 300.0
+      provider_options:
+        use_local: false
+        poll_interval_seconds: 5.0
+        poll_timeout_seconds: 300.0
+    hyperframes_video:
+      timeout: 600.0
+      provider_options:
+        cli_path: hyperframes
+        width: 1920
+        height: 1080
+        fps: 30
+  defaults:
+    tts: tts_router
+    image: pexels
+    video: pexels
+    music: ace_step
+    sfx: stub_sfx
+    alignment: stub_alignment
+    isolation: stub_isolation
+    speech_to_speech: stub_speech_to_speech
+    data_viz: matplotlib_data_viz

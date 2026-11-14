@@ -1,0 +1,49 @@
+{
+ "main_batch_unfinished": [
+  "s47",
+  "s49",
+  "s57",
+  "s58",
+  "s59",
+  "s60",
+  "s61",
+  "s62",
+  "s63",
+  "s69",
+  "s70",
+  "s71",
+  "s74",
+  "s79",
+  "s81"
+ ],
+ "failed_in_flow": [
+  "s22",
+  "s23"
+ ],
+ "kling_retakes": [
+  "s10",
+  "s13",
+  "s17",
+  "s18",
+  "s19",
+  "s29",
+  "s36",
+  "s40",
+  "s41",
+  "s43",
+  "s45",
+  "s51",
+  "s52",
+  "s56",
+  "s67",
+  "s68",
+  "s72",
+  "s76",
+  "s78"
+ ],
+ "user_rejected": [
+  "s28 (pillion, add s27 as ref)",
+  "s31 (faces, add s46 as ref)"
+ ],
+ "note": "Flow paused 2026-11-01 19:30 at the user's request; all queued jobs cancelled. Prompts: v2/flow_batch.json (main), v2/flow_retake.json (Kling retakes; hand-edited versions were sent), s28/s31 prompts in the session log."
+}

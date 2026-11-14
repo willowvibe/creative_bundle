@@ -1,0 +1,3 @@
+
+## 12:25 | main
+Om Saravana Bhava ×108 chant: final audio (manjira ding, 108 reps verified 2 ways, −14 LUFS) and v5 video (15:08 1080p, rotating Muruga images, petals/glitter/captions) in video-projects `videos/2026-11-12/om-saravana-bhava-108`; docs/skill/memory committed (vocal-to-song 56df3a5, video-editor 1ed687e, video-projects be43c5a), #370 agy save-path bug open, #371 OOM fixed, nothing pushed.

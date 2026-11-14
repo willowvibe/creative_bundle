@@ -1,0 +1,132 @@
+job_id: cosmic-saju-ch6
+design: cosmic_saju_landscape
+aspect: "16:9"
+sfx: auto
+captions: {mode: sidecar}
+youtube_end_screen: false
+voice:
+  provider: sarvam_tts
+  voice_id: "sarvam:shubh"
+  language: en-IN
+  gap_seconds: 0.7
+image:
+  provider: auto
+  resolution: 2K
+  style_suffix: >-
+    Korean ink-wash and minhwa folk-painting style, hand-painted on warm hanji
+    paper texture, deep charcoal and indigo palette with accents in the five
+    traditional Korean colours (blue-green, red, yellow, white, black), soft
+    gold highlights, cinematic, calm, not photorealistic, no text, no letters,
+    no characters, no watermark, 16:9 composition.
+music: {path: "", gain_db: -22}
+end_card: {enabled: false}
+scenes:
+  - id: s25_seasons_path
+    layers: generated
+    generated:
+      bg: >-
+        A winding path through a landscape that changes left to right from
+        spring blossom to summer green, autumn red and snowy winter, very wide,
+        ink-wash.
+      mg: >-
+        The path itself, a clear ink line winding through the seasons, isolated
+        on a transparent background, soft edges.
+      fg: >-
+        Branches passing close to the lens, out of focus, isolated on a
+        transparent background, soft edges.
+    motion: parallax
+    lines:
+      - say: >-
+          Your birth chart is fixed. But Saju also gives you a second set of
+          pillars that changes every ten years: the daeun, or luck decades.
+          Think of the birth chart as the plant, and the decades as the weather
+          it grows through.
+        show: 大運 daeun · luck decades
+    transition_out: hanji_turn
+    transition_seconds: 0.7
+
+  - id: s26_decade_ribbon
+    still:
+      key: i21b
+      prompt: >-
+        A plain hanji scroll with a faint indigo wash, lots of empty space for a
+        ribbon.
+    graphic:
+      component: decade_ribbon
+      data: {start: 1984, end: 2044, current: 2026}
+    motion: drift
+    lines:
+      - say: >-
+          They're counted from your month pillar. For a woman born in a Yang
+          year, like Mira, they run backward through the cycle, one new pillar
+          every ten years.
+        show: One pillar = ten years
+    transition_out: cut
+
+  - id: s27_earth_decades
+    still:
+      key: i22
+      prompt: >-
+        A mountain rising out of mist at gold dawn, deep indigo shadows, ink
+        wash.
+    motion: drift
+    lines:
+      - say: >-
+          And look what her teens and twenties bring. From about 2008, Gi-chuk:
+          earth over earth. From about 2018, Mu-ja: Yang Earth on top. The
+          missing element shows up, two decades in a row. In her chart, that
+          earth plays the role of support: mentors, learning, credentials,
+          people in her corner.
+        show: 己丑 ~2008 · 戊子 ~2018
+    transition_out: cut
+
+  - id: s28_combination
+    still:
+      key: i23
+      prompt: >-
+        Two silk threads twisting into one cord on dark hanji, gold and indigo,
+        ink-wash.
+    motion: drift
+    lines:
+      - say: >-
+          Here's the catch. The Mu earth on top of this decade forms a bond with
+          the Gye water in her hour pillar: what Saju calls a combination. A
+          combined stem doesn't act fully on its own; part of its attention goes
+          to the bond. So the earth arrives, but not all of it is free to
+          support her.
+        show: 戊癸合 a combination
+    transition_out: seal_stamp
+    transition_seconds: 0.6
+
+  - id: s29_jeong_hae
+    still:
+      key: i24
+      prompt: >-
+        A paper lantern floating on a dark ocean at night, spray close to the
+        lens, deep indigo.
+    motion: drift
+    lines:
+      - say: >-
+          And around 2028, the decade turns to Jeong-hae: fire over water, with
+          no earth on top. A decade of more pressure and structure, the kind
+          people often look back on as the years they grew up fastest.
+        show: 丁亥 ~2028
+    transition_out: cut
+
+  - id: s30_weigh
+    still:
+      key: i21c
+      prompt: >-
+        A wide hanji scroll with eight faint decade columns in indigo ink,
+        mist rising over it.
+    graphic:
+      component: decade_ribbon
+      data: {start: 1984, end: 2044, current: 2028}
+    motion: drift
+    lines:
+      - say: >-
+          That's the difference between what an engine can calculate and what a
+          person has to weigh. Which brings us to you.
+        show: ""
+    transition_out: mist_dissolve
+    transition_seconds: 0.8

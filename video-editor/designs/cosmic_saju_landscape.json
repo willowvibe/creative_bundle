@@ -1,0 +1,65 @@
+{
+  "name": "cosmic_saju_landscape",
+  "palette": {
+    "bg": "#0F0B1E",
+    "ink": "#F5F3FF",
+    "accent": "#F59E0B",
+    "muted": "#B9B3D0"
+  },
+  "type": {
+    "display": "Cormorant Garamond",
+    "body": "Inter",
+    "display_weight": 600
+  },
+  "theme": "dark",
+  "motion": {
+    "tempo": 0.85,
+    "entry": "rise",
+    "drift": 1.06
+  },
+  "layers": {
+    "safe_area": "auto",
+    "caption_preset": "karaoke",
+    "scrim": {
+      "top_height": 220,
+      "bottom_height": 300,
+      "top": "linear-gradient(#0F0B1E 0%, rgba(15,11,30,0.72) 55%, rgba(15,11,30,0) 100%)",
+      "bottom": "linear-gradient(rgba(15,11,30,0) 0%, rgba(15,11,30,0.80) 45%, #0F0B1E 100%)"
+    },
+    "chip": {
+      "font": "Noto Serif KR",
+      "font_size": 64,
+      "font_color": "#F59E0B",
+      "y": 90
+    },
+    "pill": {
+      "font": "Inter",
+      "font_size": 42,
+      "font_weight": 600,
+      "font_color": "#F5F3FF",
+      "background": "rgba(15,11,30,0.72)",
+      "x": 100,
+      "width": 1720,
+      "first_y": 160,
+      "gap": 76
+    },
+    "caption_line": {
+      "font": "Inter",
+      "font_size": 48,
+      "font_weight": 600,
+      "font_color": "#F5F3FF",
+      "highlight_color": "#F59E0B",
+      "upcoming_opacity": 0.6,
+      "box": {"x": 100, "y": 880, "width": 1720, "height": 110}
+    },
+    "end_card": {
+      "font": "Cormorant Garamond",
+      "font_size": 64,
+      "font_weight": 600,
+      "font_color": "#F5F3FF",
+      "url_color": "#F59E0B",
+      "url_font_size": 34,
+      "box": {"x": 100, "y": 380, "width": 1720, "height": 320}
+    }
+  }
+}

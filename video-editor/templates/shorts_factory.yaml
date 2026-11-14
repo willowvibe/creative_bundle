@@ -1,0 +1,45 @@
+name: shorts_factory
+description: >-
+  Long-form video → 3-5 vertical Shorts/Reels. Identifies viral moments
+  from transcript (LLM topic scoring, with energy/density fallback),
+  reframes each to 9:16 with kinetic captions, and emits one MP4 per
+  selected moment. Designed for repurposing interviews, podcasts, and
+  talking-head videos into vertical-format clips for YouTube Shorts,
+  TikTok, and Instagram Reels.
+inputs:
+  - name: long_video.mp4
+    description: Long-form source video (any aspect ratio; will be reframed to 9:16).
+    required: true
+    example: ./long_video.mp4
+  - name: transcript.json
+    description: Optional segment-level transcript. Auto-generated if missing.
+    required: false
+    example: ./transcript.json
+  - name: count
+    description: Number of Shorts to generate (3-5 recommended, max 8).
+    required: false
+    example: "4"
+pipeline_kind: shorts_from_long
+default_preset: shorts_factory
+default_aspect_ratio: "9:16"
+default_providers:
+  tts: elevenlabs_tts
+  image: pexels
+  video: pixabay
+  music: poyo_music
+  sfx: elevenlabs_sfx
+default_music_mood: hype
+scene_type_hints:
+  - hook
+  - body
+  - payoff
+  - call_to_action
+build_concept_kind: default
+caveats:
+  - Requires a long-form video; shorts are sliced from its timeline.
+  - Viral moment scoring uses an LLM by default; falls back to transcript
+    energy + sentence-density heuristic when no LLM client is configured.
+  - Each Short is independently reframed to 9:16 (face-tracking when
+    face metadata is available, center crop otherwise).
+  - Captions are auto-burned using the captions skill's word-level style.
+  - Total runtime scales with `count` × avg moment length (~25s each).

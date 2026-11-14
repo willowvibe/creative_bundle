@@ -1,0 +1,31 @@
+[project]
+name = "video-editor-skills"
+version = "0.1.0"
+description = "One distribution for the video-editor skill modules and their shared protocol."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic>=2.7",
+    "structlog>=24.1.0",
+    "video-editor-asset-ingestion",
+    "video-editor-config",
+    "video-editor-core",
+    "video-editor-ffmpeg",
+    "video-editor-llm",
+    "video-editor-state",
+    "video-editor-tools",
+]
+
+[project.optional-dependencies]
+detector = [
+    "librosa>=0.10",
+    "numpy>=1.24",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+only-include = ["src"]
+sources = ["src"]

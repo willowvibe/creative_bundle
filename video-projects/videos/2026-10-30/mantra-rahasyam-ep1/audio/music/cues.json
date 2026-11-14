@@ -1,0 +1,17 @@
+{
+ "a_house": {
+  "task_id": "MMAWTSZBP5MLUD5U",
+  "file": "a_house.wav",
+  "credits": 20.0
+ },
+ "b_mantra": {
+  "task_id": "E8C5OPL1B2R1TT9P",
+  "file": "b_mantra.wav",
+  "credits": 20.0
+ },
+ "c_return": {
+  "task_id": "Y2UTQT4BBR8JTXOW",
+  "file": "c_return.wav",
+  "credits": 20.0
+ }
+}

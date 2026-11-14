@@ -1,0 +1,30 @@
+# Content repo: version scripts, notes and configs; keep renders and caches out.
+# Files already tracked (a few reference frames, one licensed music bed) stay tracked.
+*.mp4
+*.mov
+*.webm
+*.mkv
+*.wav
+*.mp3
+*.m4a
+*.flac
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.safetensors
+*.npy
+*.zip
+.cache/
+cache/
+renders/
+node_modules/
+__pycache__/
+.DS_Store
+build/
+work/
+hf_project/
+*.ttf
+*.otf
+*.log

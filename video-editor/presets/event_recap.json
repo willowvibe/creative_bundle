@@ -1,0 +1,28 @@
+{
+  "name": "event_recap",
+  "description": "Beat-synced montage, quick cuts, crowd/atmosphere SFX for event recaps",
+  "aspect_ratio": "16:9",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "layout": {
+    "video": { "x": 0, "y": 0, "width": 1920, "height": 1080 },
+    "graphics": { "x": 0, "y": 0, "width": 1920, "height": 1080 },
+    "hook": { "x": 120, "y": 120, "width": 1680, "height": 200 },
+    "captions": { "x": 120, "y": 916, "width": 1680, "height": 110 }
+  },
+  "captions": {
+    "font": "Montserrat",
+    "font_size": 60,
+    "font_color": "#FFFFFF",
+    "border_width": 5,
+    "border_color": "#000000",
+    "animation": "karaoke",
+    "font_weight": 800,
+    "text_effect": "shadow"
+  },
+  "branding": {
+    "logo_position": "top_left",
+    "accent_color": "#8B5CF6"
+  }
+}

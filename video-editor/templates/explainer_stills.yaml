@@ -1,0 +1,27 @@
+name: explainer_stills
+description: >-
+  Simple explanatory short from one script.md: generated stills, flat
+  typographic scenes, a single narration track, karaoke captions and ducked
+  music. Durations come from the voice, never from the page.
+inputs:
+  - name: script.md
+    description: >-
+      Front matter (title, voice, design, reuse_threshold, target_seconds) plus
+      one `## ` heading per scene with `visual: still|typographic`.
+    required: true
+    example: ./script.md
+pipeline_kind: explainer_stills
+default_preset: short_explainer
+default_aspect_ratio: "9:16"
+default_providers:
+  tts: tts_router
+  image: poyo_ai
+  music: poyo_music
+default_music_mood: warm
+scene_type_hints:
+  - typographic
+  - narration
+caveats:
+  - Scene durations are derived from the narration; a written duration is ignored.
+  - A still scene that reprises a subject renders once — see plan/reuse_report.json.
+  - Typographic scenes use bundled fonts only (Inter, Montserrat).

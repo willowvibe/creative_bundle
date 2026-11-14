@@ -1,0 +1,300 @@
+# Video Editor Engine configuration
+# Model-agnostic: any provider supported by packages/llm can be selected.
+
+llm:
+  # The project can declare multiple providers and route specific tasks to
+  # them. The legacy single-provider layout (provider/model/base_url) is also
+  # accepted and auto-converted by LLMConfig.load().
+  default_provider: openrouter
+  providers:
+    ollama_cloud_pro:
+      name: ollama_cloud_pro
+      base_url: https://api.ollama.com
+      api_key_env: OLLAMA_CLOUD_API_KEY
+      default_model: minimax-m3:cloud
+    openrouter:
+      name: openrouter
+      base_url: https://openrouter.ai/api
+      api_key_env: OPENROUTER_API_KEY
+      default_model: anthropic/claude-sonnet-5.5
+    typesafe:
+      name: typesafe
+      base_url: https://api.typesafe.ai
+      api_key_env: TYPESAFE_API_KEY
+      default_model: jev-latest
+  tasks:
+    plan:        { task_type: plan,         provider: openrouter, model: anthropic/claude-sonnet-5.5 }
+    decompose:   { task_type: decompose,    provider: openrouter, model: anthropic/claude-sonnet-5.5 }
+    edit_plan:   { task_type: edit_plan,    provider: openrouter, model: anthropic/claude-sonnet-5.5 }
+    scene_plan:  { task_type: scene_plan,   provider: openrouter, model: anthropic/claude-sonnet-5.5 }
+    fallback:    { task_type: fallback,     provider: openrouter, model: google/gemini-3.8-flash }
+    code:        { task_type: code,         provider: openrouter, model: anthropic/claude-sonnet-5.5 }
+    utility:     { task_type: utility,      provider: openrouter, model: google/gemini-3.8-flash }
+    verify_judge: { task_type: verify_judge, provider: openrouter, model: google/gemini-3.8-flash }
+    # Vision: a contact sheet of downscaled keyframes, scored against the rubric.
+    critique:    { task_type: critique,    provider: openrouter, model: google/gemini-3.8-flash }
+    # Fast calibrated classifier (TypeSafe/Jev): per-item judgments (moment
+    # scoring, checklist judging, low-value detection). Not a chat model.
+    classify:    { task_type: classify,    provider: typesafe,   model: jev-latest }
+
+transcription:
+  # The transcription block is resolved by video_editor_tools.transcription.
+  # When CUDA is unavailable these degrade to small / cpu / int8 automatically.
+  engine: whisperx            # informational; the CLI path is used when present
+  model: large-v3-turbo
+  language: en
+  device: cuda
+  compute_type: int8_float16
+
+audio:
+  loudness_target_lufs: -16
+  true_peak_dbfs: -1.5
+  loudness_range_lu: 11
+  sample_rate: 48000
+  # Fallback background music track used when no --music-path or generated
+  # music is present. Relative to the repo root; leave empty to disable music.
+  # ``assets/`` is git-ignored (a ~5 MB binary), so a fresh checkout has no
+  # file here and simply builds without a bed. Regenerate with:
+  #   ve music-generate default-bed -p "<mood prompt>" \
+  #     --music-provider poyo_music --music-duration-seconds 120
+  # then copy the result to assets/music/default.mp3. The installed bed is
+  # 198.8 s / -18.3 LUFS, from poyo_music ``generate-music`` (Suno, ~$0.10).
+  default_music_path: assets/music/default.mp3
+
+render:
+  cache_dir: projects/{job_id}/.cache
+  default_preset: short_explainer
+  container: mp4
+  video_codec: libx264
+  audio_codec: aac
+  fps: 30
+  width: 1920
+  height: 1080
+  crf: 23
+  video_bitrate: ""
+  audio_bitrate: 192k
+  preset: fast
+  # Decode acceleration for inputs (e.g. "cuda"); empty means software decode.
+  hwaccel: ""
+  # Composition render engine: auto (router), ffmpeg, or hyperframes.
+  engine: auto
+  # Output filename template; {stage} is replaced by the stage name.
+  output_name_template: "{stage}.mp4"
+  hyperframes:
+    # Path or command used by engine/hyperframes_cli.py
+    cli: hyperframes
+    # Timeout in seconds for a single segment render
+    timeout: 600
+
+paths:
+  projects: projects
+  outputs: outputs
+  presets: presets
+  assets: assets
+  # Optional shared music directory; used when audio.default_music_path is empty.
+  music: assets/music
+
+pricing:
+  # Path to the provider pricing registry file.
+  path: pricing.yaml
+  # Maximum age in days before pricing data is considered stale.
+  # Stale data triggers a warning but does not block the pipeline.
+  max_age_days: 30
+
+assets:
+  # Ordered image providers. A named --image-provider/request.provider wins
+  # over this list, but "auto" does not: for images the chain takes precedence,
+  # and an empty list restores defaults/scored selection.
+  # If every provider fails, the asset fails: assets.strict (default true)
+  # refuses the fal_ai -> placeholder fallback so a render cannot ship a stub.
+  # Set `strict: false` below to get the placeholder back (drafts, offline).
+  image_chain: [agy_image, flow_image, poyo_ai, openrouter, fal_ai]
+  # Final renders skip the slow local agent and start with a direct image API.
+  image_chain_final: [poyo_ai, openrouter, fal_ai]
+  # Bounds chain runs per run: every image request the chain serves counts,
+  # including paid fallbacks (one request that falls agy -> poyo consumes one
+  # unit for two generations). Inert when image_chain is empty, and copies
+  # through local_media never count.
+  max_images_per_run: 25
+  providers:
+    flow_image:
+      # Google Flow through flow-mcp (~/flow-mcp): free Nano Banana stills from the signed-in Flow
+      # session; needs a project open in the Flow Chrome window, else the chain moves on.
+      timeout: 600.0
+      provider_options:
+        flow_mcp_dir: ~/flow-mcp
+    agy_image:
+      # Local Gemini CLI agent. Cost is 0.0 (quota-based).
+      # 600 s: the agent can spend several minutes on a single card before it
+      # writes the file; 300 s cut off two deck cards mid-run.
+      timeout: 600.0
+      provider_options:
+        agy_bin: agy
+        sandbox: true   # enforced; a false value is ignored with a warning
+        # The agent only needs one tool call; low effort and the fast model cut
+        # the per-image warm-up. Run `ve agy-setup` once to create the profile.
+        model: gemini-3.8-flash-low
+        effort: low
+        session: true
+        profile_dir: ~/.config/video-editor/agy-profile
+    elevenlabs_tts:
+      # Default voice-over (2026-10-30): eleven_v4 speaks Telugu/Tamil and takes inline emotion tags.
+      api_key_env: ELEVENLABS_API_KEY
+      default_model: eleven_v4
+      default_voice: Xb7hH8MSUJpSbSDYk0k2
+      timeout: 120.0
+    elevenlabs_music:
+      api_key_env: ELEVENLABS_API_KEY
+      default_model: eleven_music_v1
+      timeout: 300.0
+    elevenlabs_sfx:
+      api_key_env: ELEVENLABS_API_KEY
+      timeout: 120.0
+    freesound_sfx:
+      api_key_env: FREESOUND_API_KEY
+      base_url: https://freesound.org
+      timeout: 30.0
+    openverse_sfx:
+      api_key_env: OPENVERSE_API_KEY
+      base_url: https://api.openverse.org
+      timeout: 30.0
+    elevenlabs_forced_alignment:
+      api_key_env: ELEVENLABS_API_KEY
+      timeout: 120.0
+    elevenlabs_isolation:
+      api_key_env: ELEVENLABS_API_KEY
+      timeout: 120.0
+    elevenlabs_speech_to_speech:
+      api_key_env: ELEVENLABS_API_KEY
+      default_model: eleven_english_sts_v2
+      default_voice: Xb7hH8MSUJpSbSDYk0k2
+      timeout: 120.0
+    elevenlabs_clone:
+      api_key_env: ELEVENLABS_API_KEY
+      timeout: 120.0
+    fal_ai:
+      api_key_env: FAL_KEY
+      default_model: fal-ai/flux/dev
+      timeout: 300.0
+    openai_tts:
+      api_key_env: OPENAI_API_KEY
+      default_model: tts-1
+      timeout: 120.0
+    poyo_ai:
+      api_key_env: POYO_API_KEY
+      # Cheapest good-quality still (5 credits, flat). Jobs and plans that
+      # want a different model name it in props.image_model / --image-model.
+      default_model: nano-banana-2-lite
+      timeout: 300.0
+      provider_options:
+        video_model: seedance-2-fast
+        poll_interval_seconds: 2.0
+        poll_timeout_seconds: 600.0
+    openrouter:
+      api_key_env: OPENROUTER_API_KEY
+      base_url: https://openrouter.ai/api/v1
+      default_model: openai/gpt-image-2
+      timeout: 300.0
+      provider_options:
+        # Image model comes from default_model (e.g. openai/gpt-image-2 or
+        # bytedance-seed/seedream-5-0-pro); video/music have their own slots.
+        video_model: google/veo-3.1-fast
+        music_model: google/lyria-3-pro-preview
+        # Optional: aspect_ratio: "9:16", resolution: "1080p", quality: high
+        poll_interval_seconds: 5.0
+        poll_timeout_seconds: 900.0
+    replicate_image:
+      api_key_env: REPLICATE_API_TOKEN
+      default_model: black-forest-labs/flux-schnell
+      timeout: 300.0
+    hyperframes_video:
+      # HyperFrames does not require an API key for the local CLI render path.
+      timeout: 600.0
+      provider_options:
+        cli_path: hyperframes
+        width: 1920
+        height: 1080
+        fps: 30
+    poyo_music:
+      api_key_env: POYO_API_KEY
+      # Suno-backed: renders a bed in under a minute. The MiniMax fallback is
+      # the same price but has taken several minutes, hence the longer poll.
+      default_model: generate-music
+      timeout: 300.0
+      provider_options:
+        fallback_music_model: minimax-music-2.6
+        suno_mv: V4_5PLUS
+        poll_interval_seconds: 5.0
+        poll_timeout_seconds: 900.0
+    pexels:
+      api_key_env: PEXELS_API_KEY
+      timeout: 60.0
+      provider_options:
+        per_page: 5
+        orientation: landscape
+    pixabay:
+      api_key_env: PIXABAY_API_KEY
+      timeout: 60.0
+      provider_options:
+        per_page: 5
+        orientation: horizontal
+    coverr:
+      timeout: 60.0
+      provider_options:
+        per_page: 5
+    mixkit:
+      timeout: 60.0
+      provider_options:
+        per_page: 5
+    sarvam_tts:
+      api_key_env: SARVAM_API
+      base_url: https://api.sarvam.ai
+      tts_model: bulbul:v4-flash
+      fallback_model: bulbul:v3
+      timeout: 60.0
+    kitten_tts:
+      timeout: 120.0
+      provider_options:
+        voice: en_us_female_1
+        speed: 1.0
+    moss_tts:
+      timeout: 120.0
+      provider_options:
+        voice: default
+        speed: 1.0
+    ace_step:
+      api_key_env: ACE_STEP_API_KEY
+      timeout: 300.0
+      provider_options:
+        use_local: false
+        poll_interval_seconds: 5.0
+        poll_timeout_seconds: 300.0
+  defaults:
+    tts: tts_router
+    image: poyo_ai        # unused for images while image_chain is set
+    video: poyo_ai
+    music: poyo_music
+    # ElevenLabs is voice-over only (user rule, 2026-10-30): no ElevenLabs music, SFX,
+    # alignment, isolation or speech-to-speech. Those have no default; pass a provider explicitly.
+    sfx: freesound_sfx
+    data_viz: matplotlib_data_viz
+
+queue:
+  # A running job whose worker has not heartbeated for this long is reclaimed.
+  stale_seconds: 900
+
+mcp:
+  # Spending limits for agent-written MCP tool calls. A caller's `budget`
+  # argument can only lower the per-job cap; one generation estimated above
+  # per_call_cap_usd needs an explicit `approve_usd`.
+  default_budget_usd: 1.00
+  per_call_cap_usd: 0.50
+
+brand:
+  voices:
+    professional:
+      id: ATYMJR0SnaN1mSrsnZEi
+      label: professional (ATYMJR0SnaN1mSrsnZEi)
+    instant:
+      id: 32EwRSV41WufKgzh80Ri
+      label: instant (32EwRSV41WufKgzh80Ri)

@@ -1,0 +1,449 @@
+{
+ "ids": [
+  "s12",
+  "s14",
+  "s15",
+  "s20",
+  "s21",
+  "s22",
+  "s23",
+  "s24",
+  "s26",
+  "s27",
+  "s28",
+  "s30",
+  "s31",
+  "s33",
+  "s35",
+  "s38",
+  "s39",
+  "s42",
+  "s44",
+  "s47",
+  "s49",
+  "s57",
+  "s58",
+  "s59",
+  "s60",
+  "s61",
+  "s62",
+  "s63",
+  "s69",
+  "s70",
+  "s71",
+  "s74",
+  "s79",
+  "s81"
+ ],
+ "scenes": [
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/abhinav_a.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/abhinav_a.png"
+   ],
+   "prompt": "Reference images show the faces of Abhinav and a five-year-old Telugu girl in a yellow frock; keep the faces, not the references' expression or clothes. Abhinav and a five-year-old Telugu girl in a yellow frock: eyes wide open, eyebrows shot up, mouth slightly open in shock, face frozen. Wide dramatic shot: Abhinav swerving his red motorbike hard to avoid the little girl, the lorry looming behind, motion blur, no impact shown. Nobody looks into the camera lens. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, a light-blue formal shirt, dark-grey trousers, a black open-face helmet. Scene: A busy, sunny Hyderabad road near the Ameerpet signal: shops, trees, auto-rickshaws, a metro pillar. Hard bright midday sun, clear blue sky, vivid street colours. Mood: lively, turning sharply tense. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: eyes wide open, eyebrows shot up, mouth slightly open in shock, face frozen. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/passerby_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/passerby_b.png"
+   ],
+   "prompt": "Reference images show the faces of an auto-rickshaw driver; keep the faces, not the references' expression or clothes. an auto-rickshaw driver: eyes wide open, eyebrows raised high, face tense with alarm, lips closed. Medium close-up: the auto-rickshaw driver standing by his yellow-green auto, looking towards the accident. Nobody looks into the camera lens. Three-quarter view, both eyes visible, mouth closed at rest, one face only in frame. an auto-rickshaw driver, a 40-year-old Telugu man, thick black moustache, a khaki auto-driver shirt with a checked towel over his shoulder. Scene: The same sunny road moments later: traffic stopped, a small crowd gathering, dust in the air. Bright, flat noon light, no shadows of drama, colours slightly bleached by the sun. Mood: shock, urgency. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: eyes wide open, eyebrows raised high, face tense with alarm, lips closed. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/passerby_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/passerby_b.png"
+   ],
+   "prompt": "Reference images show the faces of an auto-rickshaw driver; keep the faces, not the references' expression or clothes. an auto-rickshaw driver: eyes wide and darting, brow furrowed hard, mouth tense, sweat on the forehead. Medium close-up: the auto driver pressing a phone to his ear, the crowd behind him. Nobody looks into the camera lens. Three-quarter view, both eyes visible, mouth closed at rest, one face only in frame. an auto-rickshaw driver, a 40-year-old Telugu man, thick black moustache, a khaki auto-driver shirt with a checked towel over his shoulder. Scene: The same sunny road moments later: traffic stopped, a small crowd gathering, dust in the air. Bright, flat noon light, no shadows of drama, colours slightly bleached by the sun. Mood: shock, urgency. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: eyes wide and darting, brow furrowed hard, mouth tense, sweat on the forehead. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/nurse1_a.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/nurse1_a.png"
+   ],
+   "prompt": "Reference images show the faces of Nurse Swathi; keep the faces, not the references' expression or clothes. Nurse Swathi: a grave, sympathetic face, brows drawn together, eyes heavy, mouth closed with the corners turned down, no smile. Medium close-up: Nurse Swathi at the bright nursing station holding a landline receiver to her ear. Nobody looks into the camera lens. Three-quarter view, both eyes visible, mouth closed at rest, one face only in frame. Nurse Swathi, a 28-year-old Indian woman, hair tied back in a neat bun, a light-blue nurse uniform with an ID badge. Scene: A bright hospital nursing station: white counter, a landline phone, files, pastel-blue walls, cool clean light. Mood: professional calm carrying bad news. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: a grave, sympathetic face, brows drawn together, eyes heavy, mouth closed with the corners turned down, no smile. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light. No smile, no grin."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/lakshmi_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/lakshmi_b.png"
+   ],
+   "prompt": "Reference images show the faces of Lakshmi; keep the faces, not the references' expression or clothes. Lakshmi: a faint frown, eyes searching, lips pressed together. Medium shot: Lakshmi in her sunlit kitchen answering a ringing phone, a steel glass of water in her other hand. Nobody looks into the camera lens. Lakshmi, a 50-year-old Telugu mother, soft round face, her maroon cotton saree with a thin gold border. Scene: The family's sunlit home kitchen: steel vessels on a shelf, a gas stove, a calendar of a deity, warm late-morning light through a small window. Mood: ordinary calm breaking into dread. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: a faint frown, eyes searching, lips pressed together. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/lakshmi_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/lakshmi_b.png"
+   ],
+   "prompt": "Reference images show the faces of Lakshmi; keep the faces, not the references' expression or clothes. Lakshmi: brows drawn together and raised in the middle, eyes anxious, lips pressed together, no smile. Close-up: Lakshmi holding the phone to her ear in the kitchen. Nobody looks into the camera lens. Three-quarter view, both eyes visible, mouth closed at rest, one face only in frame. Lakshmi, a 50-year-old Telugu mother, soft round face, her maroon cotton saree with a thin gold border. Scene: The family's sunlit home kitchen: steel vessels on a shelf, a gas stove, a calendar of a deity, warm late-morning light through a small window. Mood: ordinary calm breaking into dread. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: brows drawn together and raised in the middle, eyes anxious, lips pressed together, no smile. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light. No smile, no grin."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/nurse1_a.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/nurse1_a.png"
+   ],
+   "prompt": "Reference images show the faces of Nurse Swathi; keep the faces, not the references' expression or clothes. Nurse Swathi: a grave, sympathetic face, brows drawn together, eyes heavy, mouth closed with the corners turned down, no smile. Close-up: Nurse Swathi speaking gently into the phone, apologetic. Nobody looks into the camera lens. Three-quarter view, both eyes visible, mouth closed at rest, one face only in frame. Nurse Swathi, a 28-year-old Indian woman, hair tied back in a neat bun, a light-blue nurse uniform with an ID badge. Scene: A bright hospital nursing station: white counter, a landline phone, files, pastel-blue walls, cool clean light. Mood: professional calm carrying bad news. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: a grave, sympathetic face, brows drawn together, eyes heavy, mouth closed with the corners turned down, no smile. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light. No smile, no grin."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/lakshmi_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/lakshmi_b.png"
+   ],
+   "prompt": "Reference images show the faces of Lakshmi; keep the faces, not the references' expression or clothes. Lakshmi: the colour draining from her face, eyes widening and glistening, lips trembling apart, no smile. Close-up: Lakshmi listening on the phone as the news sinks in. Nobody looks into the camera lens. Lakshmi, a 50-year-old Telugu mother, soft round face, her maroon cotton saree with a thin gold border. Scene: The family's sunlit home kitchen: steel vessels on a shelf, a gas stove, a calendar of a deity, warm late-morning light through a small window. Mood: ordinary calm breaking into dread. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: the colour draining from her face, eyes widening and glistening, lips trembling apart, no smile. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light. No smile, no grin."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/lakshmi_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/lakshmi_b.png"
+   ],
+   "prompt": "Reference images show the faces of Lakshmi; keep the faces, not the references' expression or clothes. Lakshmi: face contorted with shock and grief, mouth open in a cry, tears running down her cheeks, no smile. Close-up: Lakshmi crying out towards the next room, the phone slipping. Nobody looks into the camera lens. Three-quarter view, both eyes visible, mouth closed at rest, one face only in frame. Lakshmi, a 50-year-old Telugu mother, soft round face, her maroon cotton saree with a thin gold border. Scene: The family's sunlit home kitchen: steel vessels on a shelf, a gas stove, a calendar of a deity, warm late-morning light through a small window. Mood: ordinary calm breaking into dread. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: face contorted with shock and grief, mouth open in a cry, tears running down her cheeks, no smile. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light. No smile, no grin."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/raghava_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/lakshmi_b.png"
+   ],
+   "prompt": "Reference images show the faces of Raghava and Lakshmi; keep the faces, not the references' expression or clothes. Raghava and Lakshmi: terrified: eyes red-rimmed, wide and wet with fear, brows raised and knotted together, deep forehead creases, jaw clenched and trembling, mouth closed and turned down, no smile. Wide tracking shot: Raghava riding an old grey Bajaj scooter through traffic, Lakshmi riding pillion behind him clutching his shoulder, her saree end flying. Nobody looks into the camera lens. Raghava, a 56-year-old Telugu father, lean face, a cream half-sleeve cotton shirt and white dhoti-style trousers. Lakshmi, a 50-year-old Telugu mother, soft round face, her maroon cotton saree with a thin gold border. Scene: A sunny city road at midday, wind in the clothes, traffic around an old grey Bajaj scooter. Bright light. Mood: frantic, praying. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: terrified: eyes red-rimmed, wide and wet with fear, brows raised and knotted together, deep forehead creases, jaw clenched and trembling, mouth closed and turned down, no smile. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light. No smile, no grin."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/lakshmi_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/lakshmi_b.png"
+   ],
+   "prompt": "Reference images show the faces of Lakshmi; keep the faces, not the references' expression or clothes. Lakshmi: anguished weeping: eyes squeezed shut, wet tear streaks shining down both cheeks, brows knotted upward in pain, mouth pulled down at the corners and trembling, nose and eyes red, no smile, not serene, not peaceful. Close-up on the moving scooter: Lakshmi on the pillion seat praying as they ride. Nobody looks into the camera lens. Lakshmi, a 50-year-old Telugu mother, soft round face, her maroon cotton saree with a thin gold border. Scene: A sunny city road at midday, wind in the clothes, traffic around an old grey Bajaj scooter. Bright light. Mood: frantic, praying. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: anguished weeping: eyes squeezed shut, wet tear streaks shining down both cheeks, brows knotted upward in pain, mouth pulled down at the corners and trembling, nose and eyes red, no smile, not serene, not peaceful. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light. No smile, no grin."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/doctor_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/doctor_b.png"
+   ],
+   "prompt": "Reference images show the faces of Dr. Srinivas; keep the faces, not the references' expression or clothes. Dr. Srinivas: a grave, sympathetic face, brows drawn together, eyes heavy, mouth closed with the corners turned down, no smile. Medium close-up: Dr. Srinivas in the corridor speaking to the parents off camera, a file in his hand. Nobody looks into the camera lens. Three-quarter view, both eyes visible, mouth closed at rest, one face only in frame. Dr. Srinivas, a 45-year-old Indian male doctor, short black hair greying at the temples, a white coat over blue scrubs, a stethoscope around his neck. Scene: A clean, bright modern private hospital corridor outside the operating theatre: warm white light, pastel-green walls, a potted plant, steel benches. Mood: hushed tension, fear held in. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: a grave, sympathetic face, brows drawn together, eyes heavy, mouth closed with the corners turned down, no smile. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light. No smile, no grin."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/raghava_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/lakshmi_b.png"
+   ],
+   "prompt": "Reference images show the faces of Raghava and Lakshmi; keep the faces, not the references' expression or clothes. Raghava and Lakshmi: both faces stricken with terror: eyes wide, red and wet, brows raised and knotted, mouths closed and turned down, gripping each other's hands, no smile, not posing. Medium two-shot: Raghava and Lakshmi standing close together, hearing the news. Nobody looks into the camera lens. Raghava, a 56-year-old Telugu father, lean face, a cream half-sleeve cotton shirt and white dhoti-style trousers. Lakshmi, a 50-year-old Telugu mother, soft round face, her maroon cotton saree with a thin gold border. Scene: A clean, bright modern private hospital corridor outside the operating theatre: warm white light, pastel-green walls, a potted plant, steel benches. Mood: hushed tension, fear held in. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: both faces stricken with terror: eyes wide, red and wet, brows raised and knotted, mouths closed and turned down, gripping each other's hands, no smile, not posing. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light. No smile, no grin."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/doctor_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/doctor_b.png"
+   ],
+   "prompt": "Reference images show the faces of Dr. Srinivas; keep the faces, not the references' expression or clothes. Dr. Srinivas: a grave, sympathetic face, brows drawn together, eyes heavy, mouth closed with the corners turned down, no smile. Medium close-up: Dr. Srinivas holding out a consent form on a clipboard and a pen. Nobody looks into the camera lens. Three-quarter view, both eyes visible, mouth closed at rest, one face only in frame. Dr. Srinivas, a 45-year-old Indian male doctor, short black hair greying at the temples, a white coat over blue scrubs, a stethoscope around his neck. Scene: A clean, bright modern private hospital corridor outside the operating theatre: warm white light, pastel-green walls, a potted plant, steel benches. Mood: hushed tension, fear held in. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: a grave, sympathetic face, brows drawn together, eyes heavy, mouth closed with the corners turned down, no smile. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light. No smile, no grin."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/lakshmi_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/lakshmi_b.png"
+   ],
+   "prompt": "Reference images show the faces of Lakshmi; keep the faces, not the references' expression or clothes. Lakshmi: face crumpled in grief, eyes swollen and red, tears on her cheeks, mouth closed and trembling, no smile. Close-up: Lakshmi pleading towards the doctor, hands joined. Nobody looks into the camera lens. Lakshmi, a 50-year-old Telugu mother, soft round face, her maroon cotton saree with a thin gold border. Scene: A clean, bright modern private hospital corridor outside the operating theatre: warm white light, pastel-green walls, a potted plant, steel benches. Mood: hushed tension, fear held in. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: face crumpled in grief, eyes swollen and red, tears on her cheeks, mouth closed and trembling, no smile. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light. No smile, no grin."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/raghava_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/raghava_b.png"
+   ],
+   "prompt": "Reference images show the faces of Raghava; keep the faces, not the references' expression or clothes. Raghava: eyes red and wet, looking upward, brows knotted in pain, mouth closed and quivering, a tear rolling down, no smile. Close-up: Raghava standing at the alcove with joined hands, looking up at the picture. Nobody looks into the camera lens. Raghava, a 56-year-old Telugu father, lean face, a cream half-sleeve cotton shirt and white dhoti-style trousers. Scene: A quiet prayer alcove at the end of the hospital corridor: a framed picture of Lord Shiva garlanded with marigolds, a small brass diya burning, incense smoke. Soft warm lamp glow against the bright white daylight of the corridor. Mood: devotional, aching, intimate. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: eyes red and wet, looking upward, brows knotted in pain, mouth closed and quivering, a tear rolling down, no smile. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light. No smile, no grin."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/lakshmi_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/lakshmi_b.png"
+   ],
+   "prompt": "Reference images show the faces of Lakshmi; keep the faces, not the references' expression or clothes. Lakshmi: a distant hollow gaze, wet eyes, a single tear, mouth closed, no smile. Close-up: Lakshmi sitting on the corridor bench, speaking quietly to her husband beside her (off camera). Nobody looks into the camera lens. Three-quarter view, both eyes visible, mouth closed at rest, one face only in frame. Lakshmi, a 50-year-old Telugu mother, soft round face, her maroon cotton saree with a thin gold border. Scene: A quiet prayer alcove at the end of the hospital corridor: a framed picture of Lord Shiva garlanded with marigolds, a small brass diya burning, incense smoke. Soft warm lamp glow against the bright white daylight of the corridor. Mood: devotional, aching, intimate. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: a distant hollow gaze, wet eyes, a single tear, mouth closed, no smile. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light. No smile, no grin."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/nurse2_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/nurse2_b.png"
+   ],
+   "prompt": "Reference images show the faces of Nurse Rani; keep the faces, not the references' expression or clothes. Nurse Rani: eyes wide with alarm above the surgical mask, brows raised. Close-up inside the theatre: Nurse Rani beside a patient monitor, looking up at the doctor. Nobody looks into the camera lens. Nurse Rani, a 35-year-old Indian woman, light-blue scrubs, surgical cap, a surgical mask. Scene: Inside a bright modern operating theatre: intense white surgical lights, blue-green scrubs, steel instruments, patient monitors. Mood: urgent, frightening, clinical but bright. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: eyes wide with alarm above the surgical mask, brows raised. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/doctor_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/doctor_b.png"
+   ],
+   "prompt": "Reference images show the faces of Dr. Srinivas; keep the faces, not the references' expression or clothes. Dr. Srinivas: eyes sharp and focused above the surgical mask, brows lowered. Close-up: Dr. Srinivas under the surgical lights turning sharply. Nobody looks into the camera lens. Dr. Srinivas, a 45-year-old Indian male doctor, short black hair greying at the temples, blue surgical scrubs, surgical cap, a surgical mask over his nose and mouth. Scene: Inside a bright modern operating theatre: intense white surgical lights, blue-green scrubs, steel instruments, patient monitors. Mood: urgent, frightening, clinical but bright. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: eyes sharp and focused above the surgical mask, brows lowered. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/raghava_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/raghava_b.png"
+   ],
+   "prompt": "Reference images show the faces of Raghava; keep the faces, not the references' expression or clothes. Raghava: a distant, inward gaze, eyes glistening, brows softening, mouth closed. Close-up: Raghava on the corridor bench, remembering. Nobody looks into the camera lens. Raghava, a 56-year-old Telugu father, lean face, a cream half-sleeve cotton shirt and white dhoti-style trousers. Scene: The bright present-day hospital corridor, pastel-green walls, steel benches; a soft warm glow begins to touch his face like a memory. Mood: remembering, tender. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: a distant, inward gaze, eyes glistening, brows softening, mouth closed. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/raghava_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/raghava_b.png"
+   ],
+   "prompt": "Reference images show the faces of Raghava; keep the faces, not the references' expression or clothes. Raghava: a distant, inward gaze, eyes glistening, brows softening, mouth closed. Close-up: present-day Raghava in the hospital corridor, eyes closed, listening to the memory. Nobody looks into the camera lens. Raghava, a 56-year-old Telugu father, lean face, a cream half-sleeve cotton shirt and white dhoti-style trousers. Scene: The bright present-day hospital corridor, pastel-green walls, steel benches; a soft warm glow begins to touch his face like a memory. Mood: remembering, tender. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: a distant, inward gaze, eyes glistening, brows softening, mouth closed. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/yama1_a.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/yama2_b.png"
+   ],
+   "prompt": "Reference images show the faces of Yama Dhootha and the second Yama Dhootha; keep the faces, not the references' expression or clothes. Yama Dhootha and the second Yama Dhootha: a stern, dignified, unsmiling face, eyes steady and cold. Wide low-angle shot: two tall Yama Dhoothas emerging from the golden clouds of light, one with a rope noose, one with a mace. Nobody looks into the camera lens. Yama Dhootha, a tall divine warrior with dark-blue skin, stern dignified face, holding a coiled rope noose. the second Yama Dhootha, a tall divine warrior with dark-blue skin, stern dignified face, holding a heavy golden mace. Scene: A luminous otherworldly space between earth and heaven: soft white-gold clouds of light, a faint path of light, gentle sparkles. Bright and ethereal, never dark. The Yama Dhoothas' dark blue stands out against the gold. Mood: awe, fear turning to grace. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: a stern, dignified, unsmiling face, eyes steady and cold. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/abhinav_a.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/abhinav_a.png"
+   ],
+   "prompt": "Reference images show the faces of Abhinav; keep the faces, not the references' expression or clothes. Abhinav: eyes wide with fear, brows raised and pinched, lips parted, no smile. Medium close-up: Abhinav in soul form looking around the glowing space, confused. Nobody looks into the camera lens. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, in soul form: a plain white kurta, softly glowing and slightly translucent, no injuries. Scene: A luminous otherworldly space between earth and heaven: soft white-gold clouds of light, a faint path of light, gentle sparkles. Bright and ethereal, never dark. The Yama Dhoothas' dark blue stands out against the gold. Mood: awe, fear turning to grace. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: eyes wide with fear, brows raised and pinched, lips parted, no smile. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light. No smile, no grin."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/yama1_a.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/yama1_a.png"
+   ],
+   "prompt": "Reference images show the faces of Yama Dhootha; keep the faces, not the references' expression or clothes. Yama Dhootha: a stern, dignified, unsmiling face, eyes steady and cold. Medium close-up: the first Yama Dhootha holding out the rope noose. Nobody looks into the camera lens. Three-quarter view, both eyes visible, mouth closed at rest, one face only in frame. Yama Dhootha, a tall divine warrior with dark-blue skin, stern dignified face, holding a coiled rope noose. Scene: A luminous otherworldly space between earth and heaven: soft white-gold clouds of light, a faint path of light, gentle sparkles. Bright and ethereal, never dark. The Yama Dhoothas' dark blue stands out against the gold. Mood: awe, fear turning to grace. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: a stern, dignified, unsmiling face, eyes steady and cold. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/yama2_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/yama2_b.png"
+   ],
+   "prompt": "Reference images show the faces of the second Yama Dhootha; keep the faces, not the references' expression or clothes. the second Yama Dhootha: a stern, dignified, unsmiling face, eyes steady and cold. Medium close-up: the second Yama Dhootha, mace on his shoulder. Nobody looks into the camera lens. Three-quarter view, both eyes visible, mouth closed at rest, one face only in frame. the second Yama Dhootha, a tall divine warrior with dark-blue skin, stern dignified face, holding a heavy golden mace. Scene: A luminous otherworldly space between earth and heaven: soft white-gold clouds of light, a faint path of light, gentle sparkles. Bright and ethereal, never dark. The Yama Dhoothas' dark blue stands out against the gold. Mood: awe, fear turning to grace. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: a stern, dignified, unsmiling face, eyes steady and cold. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/abhinav_a.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/abhinav_a.png"
+   ],
+   "prompt": "Reference images show the faces of Abhinav; keep the faces, not the references' expression or clothes. Abhinav: eyes wide with fear, brows raised and pinched, lips parted, no smile. Close-up: Abhinav in soul form stepping back, pleading. Nobody looks into the camera lens. Three-quarter view, both eyes visible, mouth closed at rest, one face only in frame. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, in soul form: a plain white kurta, softly glowing and slightly translucent, no injuries. Scene: A luminous otherworldly space between earth and heaven: soft white-gold clouds of light, a faint path of light, gentle sparkles. Bright and ethereal, never dark. The Yama Dhoothas' dark blue stands out against the gold. Mood: awe, fear turning to grace. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: eyes wide with fear, brows raised and pinched, lips parted, no smile. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light. No smile, no grin."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/shiva_default.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/shiva_full.png"
+   ],
+   "prompt": "Reference images show the faces of Lord Shiva in classic devotional TV-serial style; keep the faces, not the references' expression or clothes. Lord Shiva in classic devotional TV-serial style: a calm, powerful, authoritative face, eyes steady and commanding, lips closed, no smile. Wide shot: a burst of divine white-gold light opening behind the Yama Dhoothas as Lord Shiva appears, trishul raised. Nobody looks into the camera lens. Lord Shiva in classic devotional TV-serial style, photoreal, young handsome face, exactly as in his reference images. Scene: A luminous otherworldly space between earth and heaven: soft white-gold clouds of light, a faint path of light, gentle sparkles. Bright and ethereal, never dark. The Yama Dhoothas' dark blue stands out against the gold. Mood: awe, fear turning to grace. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: a calm, powerful, authoritative face, eyes steady and commanding, lips closed, no smile. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light. No smile, no grin."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/shiva_default.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/shiva_full.png"
+   ],
+   "prompt": "Reference images show the faces of Lord Shiva in classic devotional TV-serial style; keep the faces, not the references' expression or clothes. Lord Shiva in classic devotional TV-serial style: a calm, powerful, authoritative face, eyes steady and commanding, lips closed, no smile. Medium close-up: Lord Shiva speaking with authority, divine light behind him. Nobody looks into the camera lens. Three-quarter view, both eyes visible, mouth closed at rest, one face only in frame. Lord Shiva in classic devotional TV-serial style, photoreal, young handsome face, exactly as in his reference images. Scene: A luminous otherworldly space between earth and heaven: soft white-gold clouds of light, a faint path of light, gentle sparkles. Bright and ethereal, never dark. The Yama Dhoothas' dark blue stands out against the gold. Mood: awe, fear turning to grace. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: a calm, powerful, authoritative face, eyes steady and commanding, lips closed, no smile. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light. No smile, no grin."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/raghava_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/lakshmi_b.png"
+   ],
+   "prompt": "Reference images show the faces of Raghava and Lakshmi; keep the faces, not the references' expression or clothes. Raghava and Lakshmi: faces frozen in disbelief, then eyes filling with tears of relief, mouths slightly open. Medium two-shot: Raghava and Lakshmi rising from the bench as they hear it. Nobody looks into the camera lens. Raghava, a 56-year-old Telugu father, lean face, a cream half-sleeve cotton shirt and white dhoti-style trousers. Lakshmi, a 50-year-old Telugu mother, soft round face, her maroon cotton saree with a thin gold border. Scene: The hospital corridor outside the operating theatre, now flooded with bright morning light through the windows. Mood: disbelief turning into overwhelming relief. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: faces frozen in disbelief, then eyes filling with tears of relief, mouths slightly open. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/raghava_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/raghava_b.png"
+   ],
+   "prompt": "Reference images show the faces of Raghava; keep the faces, not the references' expression or clothes. Raghava: eyes wet with tears, looking upward, a trembling grateful closed-mouth smile. Close-up: Raghava looking upward, hands joined. Nobody looks into the camera lens. Three-quarter view, both eyes visible, mouth closed at rest, one face only in frame. Raghava, a 56-year-old Telugu father, lean face, a cream half-sleeve cotton shirt and white dhoti-style trousers. Scene: The hospital corridor outside the operating theatre, now flooded with bright morning light through the windows. Mood: disbelief turning into overwhelming relief. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: eyes wet with tears, looking upward, a trembling grateful closed-mouth smile. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/lakshmi_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/lakshmi_b.png"
+   ],
+   "prompt": "Reference images show the faces of Lakshmi; keep the faces, not the references' expression or clothes. Lakshmi: tears of joy on her cheeks, a radiant trembling closed-mouth smile. Close-up: Lakshmi with her palms pressed together, looking up. Nobody looks into the camera lens. Three-quarter view, both eyes visible, mouth closed at rest, one face only in frame. Lakshmi, a 50-year-old Telugu mother, soft round face, her maroon cotton saree with a thin gold border. Scene: The hospital corridor outside the operating theatre, now flooded with bright morning light through the windows. Mood: disbelief turning into overwhelming relief. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: tears of joy on her cheeks, a radiant trembling closed-mouth smile. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/lakshmi_b.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/lakshmi_b.png"
+   ],
+   "prompt": "Reference images show the faces of Lakshmi; keep the faces, not the references' expression or clothes. Lakshmi: tears of joy on her cheeks, a radiant trembling closed-mouth smile. Close-up: Lakshmi at the bedside holding her son's hand to her cheek. Nobody looks into the camera lens. Three-quarter view, both eyes visible, mouth closed at rest, one face only in frame. Lakshmi, a 50-year-old Telugu mother, soft round face, her maroon cotton saree with a thin gold border. Scene: A bright, airy private recovery room: big window with morning sun, a plant, white sheets, monitors showing steady green lines. Mood: hopeful, tender, gentle. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: tears of joy on her cheeks, a radiant trembling closed-mouth smile. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/abhinav_a.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/abhinav_a.png"
+   ],
+   "prompt": "Reference images show the faces of Abhinav; keep the faces, not the references' expression or clothes. Abhinav: eyes widening with sudden realisation, lips parting slightly, no smile. Extreme close-up: Abhinav in the bed as a voice echoes in his mind. Nobody looks into the camera lens. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, a pale-blue hospital gown, a white bandage around his head, an IV line taped to his left hand. Scene: A bright, airy private recovery room: big window with morning sun, a plant, white sheets, monitors showing steady green lines. Mood: hopeful, tender, gentle. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: eyes widening with sudden realisation, lips parting slightly, no smile. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light. No smile, no grin."
+  },
+  {
+   "type": "image",
+   "model": "Nano Banana Pro",
+   "aspect_ratio": "16:9",
+   "download_quality": "upscaled",
+   "max_credits": 0,
+   "reference_images": [
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/shiva_default.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/shiva_full.png",
+    "/mnt/data2/git_repos/creative_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/refs/_faces/abhinav_a.png"
+   ],
+   "prompt": "Reference images show the faces of Lord Shiva in classic devotional TV-serial style and Abhinav; keep the faces, not the references' expression or clothes. Lord Shiva in classic devotional TV-serial style and Abhinav: eyes widening with sudden realisation, lips parting slightly, no smile. Wide poster composition: Lord Shiva's calm face large and faint in golden light in the sky, Abhinav below in his light-blue shirt looking up at him, the rudraksha on his wrist catching the light, empty space at the bottom for the title. Nobody looks into the camera lens. Lord Shiva in classic devotional TV-serial style, photoreal, young handsome face, exactly as in his reference images. Abhinav, a handsome 25-year-old Telugu man, oval face with a defined jawline, a light-blue slim-fit formal shirt with sleeves folded to the forearm, dark-grey trousers, a black wristwatch on his left wrist. Scene: Divine gold and white light, soft bokeh, devotional. Mood: inviting, a hint of suspense. Photoreal cinematic film still, 35mm, natural skin texture, bright clean light. No text, no watermark. Again: eyes widening with sudden realisation, lips parting slightly, no smile. Avoid: looking into the lens, a different face, text, extra fingers, dark or gloomy light. No smile, no grin."
+  }
+ ]
+}

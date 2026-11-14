@@ -1,0 +1,39 @@
+# The offline proof pack: stub providers, two scenes, one alias still.
+job_id: short-e2e
+design: saju_series
+aspect: "9:16"
+
+voice:
+  provider: stub_tts
+  voice_id: en_US-lessac-medium
+  language: en-US
+  gap_seconds: 0.28
+
+image:
+  provider: stub_image
+  resolution: ""
+  style_suffix: "ink wash, no text"
+
+end_card:
+  say: "Find yours free at cosmicsaju.com."
+  text: "Free chart snapshot"
+  url: cosmicsaju.com
+  tail_seconds: 1.2
+
+scenes:
+  - id: hook
+    still:
+      key: rat
+      prompt: "a rat on a plum branch"
+    lines:
+      - say: "You think you're a Rat?"
+        show: "Not just a Rat"
+        cue: "Rat"
+    motion: drift
+
+  - id: branch
+    still: {reuse: rat}
+    lines:
+      - say: "Your animal is the year branch."
+        show: "1 of 8"
+    motion: drift

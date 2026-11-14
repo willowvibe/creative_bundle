@@ -1,0 +1,20 @@
+name: raw_batch
+description: Run the v1 raw-footage pipeline on a folder of clips.
+inputs:
+  - name: source_directory
+    description: Folder containing mp4/mov clips.
+    required: true
+    example: ./raw_clips/
+  - name: transcript
+    description: Optional transcript for the first clip.
+    required: false
+    example: ./clip1.json
+pipeline_kind: v1_raw
+default_preset: long_form
+default_aspect_ratio: "16:9"
+default_providers: {}
+scene_type_hints:
+  - raw_footage
+caveats:
+  - v1 transcribes, analyzes, and cuts only the first discovered clip. Clips 2..N are discovered but ignored.
+  - Concatenate clips first if you need them all.

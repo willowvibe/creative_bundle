@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "historyId": null,
+  "currentRevision": null,
+  "pendingChanges": true,
+  "files": {},
+  "revisions": {},
+  "checks": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "9a8a5ffa-a94f-404e-9ae6-7632e1863a0e",
+      "completedAt": 1793601640906,
+      "output": "/mnt/data2/git_repos/video-editor/videos/2026-10-30/mantra-rahasyam-ep1/v2/graphics/renders/thumbnail_flow.mp4",
+      "status": "completed",
+      "revision": null
+    },
+    "retainedRevisions": []
+  },
+  "pendingArtifactCleanup": []
+}

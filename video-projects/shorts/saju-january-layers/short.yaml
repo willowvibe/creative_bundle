@@ -1,0 +1,155 @@
+# Short 3 of the Cosmic Saju series, rebuilt as a content pack:
+# "Born in January? Your animal may be wrong."
+#
+# The argument is the 2026-10-23 cut's, beat for beat; the treatment is the
+# series design's. Words and prompts only. Every colour, font and rect lives
+# in designs/saju_series.json; this file may not carry styling.
+job_id: saju-january-layers
+design: saju_series_layers
+aspect: "9:16"
+sfx: auto
+
+voice:
+  provider: sarvam_tts
+  # Sarvam takes "sarvam:<speaker>"; the speaker id is the whole contract.
+  voice_id: "sarvam:sarang_en_narration"
+  model: bulbul:v4-flash
+  language: en-IN
+  gap_seconds: 0.28
+
+image:
+  provider: poyo_ai
+  model: gpt-image-2.5-fixed
+  resolution: 2K
+  style_suffix: >-
+    Korean ink-wash and minhwa folk-painting style, hand-painted on warm hanji
+    paper texture, deep charcoal background, accents in the five traditional
+    Korean colours (blue-green, red, yellow, white, black), soft gold
+    highlights, calm and elegant, flat illustration, not photorealistic, no
+    text, no letters, no characters, no watermark, vertical 9:16 composition,
+    empty space in the top 15% and bottom 25% of the frame
+
+end_card:
+  say: "Check your real year pillar free at cosmicsaju.com."
+  speak_as: "Check your real year pillar free at Cosmic Sah-joo dot com."
+  text: "Free chart snapshot"
+  url: cosmicsaju.com
+  tail_seconds: 1.2
+
+scenes:
+  - id: hook
+    still:
+      key: dragon_moon
+      prompt: >-
+        A jade-green and gold Korean dragon coiled around a pale winter moon,
+        ink-wash clouds, scales catching soft gold light, head turned toward
+        the viewer, centred in the lower half, deep charcoal sky, generous
+        empty space above
+    layers: auto
+    chip: "辰"
+    lines:
+      - say: "Born in January? Your zodiac animal might be the one before."
+        show: "The one before"
+        cue: "the one before"
+
+  - id: calendar
+    still:
+      key: calendar
+      prompt: >-
+        An old hanok window at dawn, a hanging paper calendar with blank pages
+        lifting in the wind, frost on the wooden sill, a plum branch shadow
+        across the paper, moody ink-wash, subject in the middle third
+    motion: flip
+    chip: "1 JAN"
+    lines:
+      - say: >-
+          Most zodiac charts switch on January first. Korean Saju ignores your
+          wall calendar.
+        speak_as: >-
+          Most zodiac charts switch on January first. Korean Sah-joo ignores
+          your wall calendar.
+        show: "1 January"
+        cue: "wall calendar"
+
+  - id: ipchun
+    still:
+      key: plum_split
+      prompt: >-
+        One ancient plum tree split down the middle: the left half bare and
+        snow-laden under a pale moon, the right half in full pink blossom under
+        a warm sun, symmetric composition, ink-wash and minhwa, low horizon,
+        empty sky above
+    chip: "입춘"
+    lines:
+      - say: >-
+          The Saju year turns at Ipchun, around February fourth. That's a solar
+          term, not the lunar calendar.
+        speak_as: >-
+          The Sah-joo year turns at Ip-choon, around February fourth. That's a
+          solar term, not the lunar calendar.
+        show: "Ipchun · 4 February"
+        cue: "February fourth"
+
+  - id: jan_twentieth
+    still:
+      key: rabbit
+      prompt: >-
+        A small white rabbit sitting upright in fresh snow in the lower centre
+        of the frame, fully visible and not cropped, ears up, looking toward a
+        distant golden light, a plum branch above, delicate ink-wash, generous
+        negative space
+    motion: stamp
+    chip: "己卯"
+    lines:
+      - say: "Born January twentieth, two thousand? Not a Dragon."
+        show: "20 January 2000"
+        cue: "not a Dragon"
+      - say: >-
+          In Saju, they're an Earth Rabbit: the year that ended at Ipchun.
+        speak_as: >-
+          In Sah-joo, they're an Earth Rabbit: the year that ended at Ip-choon.
+        show: "Earth Rabbit"
+        cue: "Earth Rabbit"
+
+  - id: feb_sixth
+    still:
+      key: dragon_rising
+      prompt: >-
+        A great dragon ascending through a storm of pink plum blossoms into a
+        pale spring sky, body coiling upward, gold whiskers and jade scales,
+        ink-wash, dynamic but elegant, subject centred
+    chip: "庚辰"
+    lines:
+      - say: "Born on February sixth? Then you're a Metal Dragon."
+        show: "6 February 2000"
+        cue: "Metal Dragon"
+
+  - id: seventeen_days
+    still:
+      key: two_animals
+      prompt: >-
+        A symmetrical face-off across a thin gold line: a white rabbit in snow
+        on the left, a jade dragon in plum blossom on the right, same warm
+        hanji texture, ink-wash and minhwa, both subjects at mid-height
+    motion: pop
+    chip: "2000"
+    lines:
+      - say: "Same calendar year. Seventeen days apart, two animals."
+        show: "17 days apart"
+        cue: "Seventeen days apart"
+
+  - id: sun_not_moon
+    still: {reuse: plum_split}
+    lines:
+      - say: "Saju ignores Lunar New Year too. It follows the sun, not the moon."
+        speak_as: "Sah-joo ignores Lunar New Year too. It follows the sun, not the moon."
+        show: "Sun, not moon"
+        cue: "Lunar New Year"
+
+  - id: one_of_eight
+    still: {reuse: dragon_rising}
+    chip: "八"
+    lines:
+      - say: "Your animal is the year branch: one of eight characters. Not your fate."
+        show: "1 of 8"
+        cue: "not your fate"

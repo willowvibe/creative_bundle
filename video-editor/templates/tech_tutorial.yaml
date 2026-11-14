@@ -1,0 +1,45 @@
+name: tech_tutorial
+description: >-
+  Screen recording + webcam talking-head + optional script → polished
+  technical tutorial video. Cursor zoom + click highlights (Task 11),
+  face-tracked webcam bubble, animated captions, B-roll inserts, and
+  chapter markers generated from the script.
+inputs:
+  - name: screen.mp4
+    description: Screen recording of the tutorial walkthrough.
+    required: true
+    example: ./screen.mp4
+  - name: webcam.mp4
+    description: Webcam/talking-head video recorded alongside the screen capture.
+    required: false
+    example: ./webcam.mp4
+  - name: script.md
+    description: Optional markdown script with chapter headings. Auto-chapters if missing.
+    required: false
+    example: ./script.md
+pipeline_kind: screen_to_video
+default_preset: tech_tutorial
+default_aspect_ratio: "16:9"
+default_providers:
+  tts: elevenlabs_tts
+  image: pexels
+  video: pixabay
+  music: poyo_music
+  sfx: elevenlabs_sfx
+default_music_mood: chill
+scene_type_hints:
+  - intro
+  - screen_capture
+  - webcam_popup
+  - code_walkthrough
+  - diagram
+  - broll
+  - chapter_break
+  - outro
+build_concept_kind: default
+caveats:
+  - Requires screen.mp4; webcam.mp4 is optional (tutorial falls back to full-screen capture).
+  - Screen tutorial skill (Task 11) handles cursor zoom + click highlights automatically.
+  - Webcam PiP bubble appears in the bottom-right with face-tracked reframe.
+  - Chapter titles are auto-generated from script.md headings (Task 13).
+  - No auto-generation of new screen content — record first, then render.

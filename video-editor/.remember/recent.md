@@ -1,0 +1,15 @@
+# Recent
+
+## 2026-11-09
+Audited 7 external repos against `ve`: port ffmpeg-skill's content-QC/cross-corr sync/loudness loop/FCPXML/SSIM ideas, defer threejs-skills, cherry-pick motion-skills lower-thirds/map/speech-timed B-roll, skip whisper, keep awesome-claude-video-skills as index only. Built the paper-editorial explainer stack on `feat/editorial-scenes`: `geo/` (Natural Earth 110m, Mercator, native 16:9+9:16 plates), `map_scenes.py` (markers, CSS route draw, zooms, label anti-overlap), `composite_scenes.py` (5 plates), `paper.py` tokens, editorial drafter grammar with pre-cost-gate validation/3 free re-drafts/cue opt-outs, plus a `kitten_tts` API rewrite and provider-registry entries. Fixed double-`px`, frame drift, deg-vs-rad, and an `eyebrow` CSS-injection that blanked all plates; HyperFrames nested layers became sub-compositions (13 warnings→0) and `stub_asset_ids` got scoped via `used_asset_paths()`. malacca-3 pilot: 75.6 s 1080×1920, 20/20 QA, luma stddev 1.0→19.5, $0.125; commits d1c1f11/ae05a3d/efad138/fd66120/8b5aec3/947fd12/a3978ee, 3009 pass/1 skip, ruff/mypy/lint-imports clean; flagged $0.30-actual vs $0.2650-estimate cost-gate gap.
+
+## 2026-11-08
+Audited 7 external repos vs `ve`: adopted ffmpeg-skill content-QC/sync/loudness/vidstab/FCPXML/SSIM and threejs-skills (future 3D), cherry-picked motion-skills lower-thirds/map/B-roll into HyperFrames; skipped whisper (faster-whisper/whisperx superior) and unlicensed forks. Built paper-editorial Slice 1+2: `geo` pkg (Natural Earth 110m, 177 countries, Mercator/equirect) + 4-zone map_scenes plate wired through scene-plan/script/QA, `paper_editorial` design, composite split/section/compare/quote layouts, docs §15; fixed double-`px` and over_media paper-fill bugs. Added portrait 9:16 plates, committed d1c1f11 (18 files, +3222; 2927 pass/1 skip; ruff/mypy/lint-imports clean), proofs both aspects; began the 3-slice plan.
+
+## 2026-11-07
+Reviewed 7 external repos against `ve`: cherry-pick ffmpeg-skill content-QC/sync/loudness/stabilise/FCPXML and motion-skills lower-thirds/map/B-roll into HyperFrames, install threejs-skills when 3D starts, skip whisper and unlicensed MotionClone/MMD forks. Shipped the map-scene slice — map_scene module with precomputed SVG paths and cue-timed callouts, `geo` pkg bundling offline Natural Earth 110m, paper_editorial design, `"map"` wired through scene-plan/script/QA with 19 tests and template docs. Fixed a deg-vs-radian View scale bug and doubled `px` suffix; 2879 tests pass, nothing committed; began composite-layout research.
+
+## Identity Candidates
+- IDENTITY CANDIDATE: Driving a subagent-led, 20-task video-template build with multi-tier AI provider routing, export bridges, and end-to-end quality gates.
+- IDENTITY CANDIDATE: Architecting a unified CSS-first `Composition` IR with a motion-primitive registry and automated CJK/cue/safe-area/SSIM QA gates.
+- IDENTITY CANDIDATE: Running a family-reviewed Telugu drama pipeline gated by a Cloudflare Worker review board and staged approval checkpoints.

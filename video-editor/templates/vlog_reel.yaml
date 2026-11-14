@@ -1,0 +1,28 @@
+name: vlog_reel
+description: Lifestyle/cooking/event vlog from raw clips. Rough cut → B-roll → music → captions → export.
+inputs:
+  - name: clips/
+    description: Directory of raw footage clips (video files).
+    required: true
+    example: ./clips/
+pipeline_kind: raw_to_video
+default_preset: vlogger_youtube
+default_aspect_ratio: "16:9"
+default_providers:
+  tts: elevenlabs_tts
+  image: pexels
+  video: pixabay
+  music: poyo_music
+  sfx: elevenlabs_sfx
+default_music_mood: upbeat
+scene_type_hints:
+  - opening
+  - talking_head
+  - broll
+  - montage
+  - closing
+build_concept_kind: default
+caveats:
+  - Requires a directory of raw clips; a single file maps to talking_head_polish.
+  - B-roll stock providers need PEXELS_API_KEY/PIXABAY_API_KEY when enabled.
+  - Uses the existing rough-cut, captions, music, and export skills; reframe and SFX are optional flags.

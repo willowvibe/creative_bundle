@@ -1,0 +1,9 @@
+{
+  // Review board for drama episodes: reviewers comment and approve each item of each stage.
+  "name": "drama-review",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-10-01",
+  "assets": { "directory": "public", "run_worker_first": ["/api/*", "/media/*"] },
+  "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "drama-review" }],
+  "d1_databases": [{ "binding": "DB", "database_name": "drama-review", "database_id": "75dc53e9-962d-4290-9c02-b5635be58b1e" }]
+}

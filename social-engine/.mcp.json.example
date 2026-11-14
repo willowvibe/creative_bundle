@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "social-engine": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "/path/to/social-engine",
+        "social-engine-mcp"
+      ],
+      "env": {
+        "SOCIAL_ENGINE_ROOTS": "/path/to/video-projects/videos"
+      }
+    }
+  }
+}

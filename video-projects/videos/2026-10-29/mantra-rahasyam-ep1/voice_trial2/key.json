@@ -1,0 +1,32 @@
+{
+ "s03": {
+  "A": "smallest pro:shankar",
+  "B": "smallest v3.1:venkat",
+  "C": "sarvam"
+ },
+ "s04": {
+  "A": "smallest v3.1:lokesh",
+  "B": "sarvam",
+  "C": "smallest pro:manohar"
+ },
+ "s05": {
+  "A": "smallest v3.1:lavanya",
+  "B": "sarvam",
+  "C": "smallest pro:sravani"
+ },
+ "s15": {
+  "A": "sarvam",
+  "B": "smallest pro:manohar",
+  "C": "smallest v3.1:lokesh"
+ },
+ "s16": {
+  "A": "smallest pro:sravani",
+  "B": "smallest v3.1:lavanya",
+  "C": "sarvam"
+ },
+ "s17": {
+  "A": "smallest v3.1:harish",
+  "B": "sarvam",
+  "C": "smallest pro:charan"
+ }
+}

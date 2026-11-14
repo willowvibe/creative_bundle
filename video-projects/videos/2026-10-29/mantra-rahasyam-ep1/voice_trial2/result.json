@@ -1,0 +1,40 @@
+{
+ "date": "2026-10-30",
+ "by_take": {
+  "s03": {
+   "smallest pro:shankar": "ok",
+   "smallest v3.1:venkat": "bad",
+   "sarvam": "good"
+  },
+  "s04": {
+   "smallest v3.1:lokesh": "bad",
+   "sarvam": "good",
+   "smallest pro:manohar": "ok"
+  },
+  "s05": {
+   "smallest v3.1:lavanya": "bad",
+   "sarvam": "ok",
+   "smallest pro:sravani": "good"
+  },
+  "s15": {
+   "sarvam": "ok",
+   "smallest pro:manohar": "ok",
+   "smallest v3.1:lokesh": "ok"
+  },
+  "s16": {
+   "smallest pro:sravani": "good",
+   "smallest v3.1:lavanya": "ok",
+   "sarvam": "bad"
+  },
+  "s17": {
+   "smallest v3.1:harish": "bad",
+   "sarvam": "good",
+   "smallest pro:charan": "ok"
+  }
+ },
+ "score_good2_ok1_bad0": {
+  "pro": 8,
+  "v3.1": 2,
+  "sarvam": 8
+ }
+}

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="te"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1280, height=720" />
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+body{margin:0;background:transparent;font-family:'Noto Serif Telugu','Noto Serif',Georgia,serif;}
+#root{position:relative;width:1280px;height:720px;overflow:hidden;}
+.clip{position:absolute;inset:0;}
+#root{width:1280px;height:720px;}
+    .left{position:absolute;left:0;top:0;width:700px;height:720px;
+      background:url('assets/thumb_left.jpg') 92% 30%/cover no-repeat;}
+    .right{position:absolute;left:580px;top:0;width:700px;height:720px;
+      background:url('assets/thumb_right.jpg') 50% 25%/cover no-repeat;}
+    .seam{position:absolute;left:520px;top:0;width:240px;height:720px;
+      background:linear-gradient(90deg,rgba(255,236,190,0) 0%,rgba(255,236,190,0.85) 50%,rgba(255,236,190,0) 100%);}
+    .shade{position:absolute;left:0;top:420px;width:1280px;height:300px;
+      background:linear-gradient(0deg,rgba(30,6,6,0.92) 0%,rgba(30,6,6,0.55) 60%,rgba(30,6,6,0) 100%);}
+    .hook{position:absolute;left:0;top:520px;width:1280px;text-align:center;font-size:92px;font-weight:700;
+      color:#FFD84A;line-height:1.2;-webkit-text-stroke:3px #2a0606;
+      text-shadow:0 0 24px rgba(255,190,60,0.7),0 6px 0 #2a0606;}
+    .badge{position:absolute;left:28px;top:26px;width:auto;height:64px;padding:0 24px;border-radius:12px;
+      background:rgba(40,8,8,0.82);border:3px solid #F2C566;color:#FFF4DC;font-size:34px;font-weight:700;
+      line-height:62px;}
+</style></head><body>
+<div id="root" data-composition-id="thumbnail" data-start="0" data-width="1280" data-height="720" data-duration="1.0">
+<section id="thumbnail-clip" class="clip" data-start="0" data-duration="1.0" data-track-index="1">
+<div id="t-left" class="left"></div><div id="t-right" class="right"></div><div id="t-seam" class="seam"></div>
+      <div id="t-shade" class="shade"></div><div id="t-hook" class="hook">మృత్యువును జయించిన మంత్రం</div>
+      <div id="t-badge" class="badge">మంత్ర రహస్యం · EP 1</div>
+</section></div>
+<script>
+window.__timelines = window.__timelines || {};
+const tl = gsap.timeline({ paused: true });
+tl.to("#t-hook",{opacity:1,duration:0.1},0);
+window.__timelines["thumbnail"] = tl;
+</script></body></html>

@@ -1,0 +1,42 @@
+name: Benchmark
+
+# Manual/nightly time-to-export benchmark. Not run on every push (Chrome +
+# FFmpeg renders are slow); trigger it from the Actions tab or on a schedule.
+on:
+  workflow_dispatch:
+    inputs:
+      seconds:
+        description: "Synthetic clip length (seconds)"
+        required: false
+        default: "60"
+  schedule:
+    - cron: "0 6 * * 1"  # Mondays 06:00 UTC
+
+jobs:
+  time-to-export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          python-version: "3.12"
+
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Sync workspace
+        run: uv sync --all-packages
+
+      - name: Benchmark (render-graph / FFmpeg)
+        run: |
+          uv run python benchmarks/pipeline_benchmark.py \
+            --seconds "${{ github.event.inputs.seconds || 60 }}" \
+            --preset short_explainer
+
+      - name: Benchmark (legacy per-stage path)
+        run: |
+          uv run python benchmarks/pipeline_benchmark.py \
+            --seconds "${{ github.event.inputs.seconds || 60 }}" \
+            --preset short_explainer --legacy

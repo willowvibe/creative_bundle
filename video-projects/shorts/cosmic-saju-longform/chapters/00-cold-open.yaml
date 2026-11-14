@@ -1,0 +1,98 @@
+job_id: cosmic-saju-ch0
+design: cosmic_saju_landscape
+aspect: "16:9"
+sfx: auto
+captions: {mode: sidecar}
+youtube_end_screen: false
+voice:
+  provider: sarvam_tts
+  voice_id: "sarvam:shubh"
+  language: en-IN
+  model: bulbul:v3
+  gap_seconds: 0.6
+image:
+  provider: auto
+  resolution: 2K
+  style_suffix: >-
+    Korean ink-wash and minhwa folk-painting style, hand-painted on warm hanji
+    paper texture, deep charcoal and indigo palette with accents in the five
+    traditional Korean colours (blue-green, red, yellow, white, black), soft
+    gold highlights, cinematic, calm, not photorealistic, no text, no letters,
+    no characters, no watermark, 16:9 composition.
+music:
+  path: shorts/cosmic-saju-longform/music/rameau-in-meditation.mp3
+  gain_db: -22
+  swells: [[0, 3, 2], [46, 3, 3]]
+end_card: {enabled: false}
+scenes:
+  - id: s01_night_mountains
+    still:
+      key: i01
+      prompt: >-
+        Layered ink-wash mountain ridges under a deep indigo night sky, a faint
+        full moon, very wide.
+    motion: drift
+    lines:
+      - say: >-
+          Eight characters. That's all Korean Saju needs to read a life: the
+          year, month, day and hour you were born, each written as two
+          characters.
+        show: 八字
+    transition_out: mist_dissolve
+    transition_seconds: 0.8
+
+  - id: s02_mira_window
+    layers: generated
+    generated:
+      bg: >-
+        A night garden with a stone lantern and a small pine, deep indigo and
+        charcoal, soft moon light.
+      mg: >-
+        A young woman seen from behind standing at a window, long dark hair,
+        simple modern clothes, face not visible, isolated on a transparent
+        background, soft edges.
+      fg: >-
+        A wooden hanok window lattice in front of the camera, out of focus,
+        isolated on a transparent background, soft edges.
+    motion: parallax
+    lines:
+      - say: >-
+          Tonight I'm going to read one stranger's eight characters, step by
+          step. Her name is Mira. She's a made-up example, but her chart is
+          real, computed by our engine.
+        show: Mira · fictional example
+    transition_out: push_through
+    transition_seconds: 0.7
+
+  - id: s03_five_lanterns
+    still:
+      key: i03
+      prompt: >-
+        A calm dark lake at night with distant low hills; five round paper
+        lanterns floating in a row on the water, all unlit; a few reeds at the
+        edge.
+    motion: drift
+    lines:
+      - say: >-
+          Before we finish, I'll show you two things. One element is completely
+          missing from her chart. And there's a ten-year window when it finally
+          shows up, with a catch most apps would never notice.
+        show: 1 element missing · 1 window · 1 catch
+    transition_out: seal_stamp
+    transition_seconds: 0.6
+
+  - id: s04_closed_gate
+    still:
+      key: i04
+      prompt: >-
+        A stone courtyard at dusk under a violet sky; a closed wooden hanok gate
+        with a dark tiled roof; a hanging plum branch close to the lens, out of
+        focus.
+    motion: drift
+    lines:
+      - say: >-
+          By the end, you'll know how to find the same two things in your own
+          chart. Let's start with what these eight characters actually are.
+        show: Reading 8 Characters
+    transition_out: push_through
+    transition_seconds: 0.7

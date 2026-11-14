@@ -1,0 +1,48 @@
+{
+  "name": "shorts_factory",
+  "description": "9:16 vertical layout for Shorts/Reels/TikTok with hook safe-zone and kinetic captions",
+  "aspect_ratio": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "layout": {
+    "hook": { "x": 86, "y": 154, "width": 908, "height": 240 },
+    "video": { "x": 0, "y": 360, "width": 1080, "height": 1320 },
+    "captions": { "x": 86, "y": 1376, "width": 908, "height": 160 }
+  },
+  "captions": {
+    "font": "Montserrat",
+    "font_size": 72,
+    "font_color": "#FFFFFF",
+    "border_width": 6,
+    "border_color": "#000000",
+    "animation": "karaoke",
+    "max_words_per_caption": 3,
+    "highlight_color": "#FFE600",
+    "font_weight": 800,
+    "text_effect": "shadow"
+  },
+  "branding": {
+    "logo_position": "top_right",
+    "accent_color": "#FF0050",
+    "watermark": true
+  },
+  "audio": {
+    "target_lufs": -14,
+    "duck_music_under_speech": true,
+    "duck_amount_db": 10
+  },
+  "reframe": {
+    "strategy": "face_track",
+    "fallback_strategy": "center_crop",
+    "enable_zoom": true,
+    "zoom_amount": 1.1
+  },
+  "moment_selection": {
+    "min_duration_s": 15.0,
+    "max_duration_s": 60.0,
+    "default_count": 4,
+    "max_count": 8,
+    "scoring": "llm_virality_with_density_fallback"
+  }
+}

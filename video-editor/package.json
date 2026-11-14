@@ -1,0 +1,27 @@
+{
+  "name": "video-editor",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local AI video-editing engine monorepo",
+  "scripts": {
+    "bootstrap": "bash scripts/bootstrap.sh",
+    "dev": "bash scripts/dev.sh",
+    "lint:py": "uv run ruff check .",
+    "lint:imports": "uv run lint-imports",
+    "format:py": "uv run ruff format .",
+    "typecheck:py": "uv run mypy apps packages",
+    "test:py": "uv run pytest",
+    "pxpipe": "pxpipe-proxy",
+    "pxpipe:dashboard": "open http://127.0.0.1:47821/ || xdg-open http://127.0.0.1:47821/ || echo 'Dashboard at http://127.0.0.1:47821/'"
+  },
+  "devDependencies": {
+    "hyperframes": "0.8.208",
+    "@poyoapi/cli": "^0.1.20",
+    "@types/node": "^22.0.0",
+    "pxpipe-proxy": "^0.8.0",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

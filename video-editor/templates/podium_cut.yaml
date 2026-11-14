@@ -1,0 +1,23 @@
+name: podium_cut
+description: "Polish a single talking-head video: auto-cut, captions, brand, music."
+inputs:
+  - name: video_file
+    description: One video file with a visible speaker and clear audio.
+    required: true
+    example: ./talk.mp4
+  - name: transcript
+    description: Optional word-level transcript JSON to skip WhisperX.
+    required: false
+    example: ./talk.json
+  - name: brand.json
+    description: Optional brand override in presets/brands/ or presets/brand.json.
+    required: false
+    example: presets/brand.json
+pipeline_kind: v2_skills
+default_preset: long_form
+default_aspect_ratio: "16:9"
+default_providers: {}
+scene_type_hints:
+  - talking_head
+caveats:
+  - Only one source video is processed; multi-speaker or multi-angle switching is not supported.

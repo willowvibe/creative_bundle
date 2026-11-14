@@ -1,0 +1,43 @@
+# image
+
+Generated from PoYo Catalog `v1-5bc1c3f780a1`. Always call describe before execution.
+
+| Model | Type | Protocols | Description |
+|---|---|---|---|
+| `flux-3-klein` | generate |  | Generate 1-4 images from text with 1K, 2K, or 4K output. |
+| `flux-3-klein-edit` | generate |  | Edit or compose 1-10 reference images with 1K, 2K, or 4K output. |
+| `flux-dev` | generate |  | Flux Dev image generation and single-image editing API |
+| `flux-schnell` | generate |  | Flux Schnell fast text-to-image generation API |
+| `gpt-image-1-edit-official` | generate |  | GPT Image 1.5 Generation and Editing |
+| `gpt-image-1-official` | generate |  | GPT Image 1.5 Generation and Editing |
+| `gpt-image-1.5-edit-official` | generate |  | GPT Image 1.5 Generation and Editing |
+| `gpt-image-1.5-official` | generate |  | GPT Image 1.5 Generation and Editing |
+| `gpt-image-2.5-fixed` | generate |  | GPT Image 2.5 single-image generation with Flare or Sunburst, billed per image by resolution. |
+| `gpt-image-2.5-flare` | generate |  | GPT Image 2.5 Flare single-image generation and reference-image editing with background, format, and mask controls. |
+| `gpt-image-2.5-sunburst` | generate |  | GPT Image 2.5 Sunburst single-image generation and reference-image editing with background, format, and mask controls. |
+| `grok-imagine-image-2.0` | generate |  | Grok Imagine Image 2.0 generation and editing with selectable quality and resolution |
+| `grok-imagine-image-quality` | generate |  | High-quality Grok Imagine Image generation with text-to-image and image editing support |
+| `ideogram-v4.5` | generate |  | Generate images from a prompt with quality and size controls. |
+| `ideogram-v4.5-edit` | generate |  | Edit exactly one primary image with references, optional masks, and precision controls. |
+| `kling-o1-image-edit` | generate |  | A high-consistency image generation model optimized for precise reference alignment and fine detail control, ideal for character and product-focused use cases |
+| `kling-o3-image` | generate |  | A high-expressiveness image generation model optimized for strong semantic understanding and scene composition, ideal for creative and narrative-driven visuals |
+| `kling-o3-image-edit` | generate |  | A high-expressiveness image generation model optimized for strong semantic understanding and scene composition, ideal for creative and narrative-driven visuals |
+| `nano-banana-2-lite` | generate |  | Nano Banana 2 Lite image generation and image editing API |
+| `nano-banana-2-lite-edit` | generate |  | Nano Banana 2 Lite image generation and image editing API |
+| `nano-banana-2-official` | generate |  | Next-generation AI image generation powered by Gemini 3.1 Flash Image Preview |
+| `nano-banana-2-official-edit` | generate |  | Next-generation AI image generation powered by Gemini 3.1 Flash Image Preview |
+| `nano-banana-pro` | generate |  | Classic Nano Banana 2 and Nano Banana Pro image generation and editing |
+| `nano-banana-pro-edit` | generate |  | Classic Nano Banana 2 and Nano Banana Pro image generation and editing |
+| `qwen-image-2.1` | generate |  | Text-to-image, multi-reference generation, transparent backgrounds, and mask editing with Qwen Image 2.1 |
+| `qwen-image-3` | generate |  | Unified text-to-image and reference-image generation with Qwen Image 3 |
+| `qwen-image-3-pro` | generate |  | Unified text-to-image and reference-image generation with Qwen Image 3 |
+| `seedream-4.5` | generate |  | Advanced image generation model with support for text-to-image, image-to-image, and multi-image reference capabilities |
+| `seedream-4.5-edit` | generate |  | Advanced image generation model with support for text-to-image, image-to-image, and multi-image reference capabilities |
+| `seedream-5.0-flash` | generate |  | Fast Seedream image generation and reference-image editing. |
+| `seedream-5.0-flash-edit` | generate |  | Fast Seedream image generation and reference-image editing. |
+| `seedream-5.0-lite` | generate |  | Advanced image generation model with support for text-to-image, image-to-image, and multi-image reference capabilities |
+| `seedream-5.0-lite-edit` | generate |  | Advanced image generation model with support for text-to-image, image-to-image, and multi-image reference capabilities |
+| `seedream-5.0-pro` | generate |  | Flagship Seedream image generation and editing model with precise prompt following, layout control, and multi-image reference editing |
+| `seedream-5.0-pro-edit` | generate |  | Flagship Seedream image generation and editing model with precise prompt following, layout control, and multi-image reference editing |
+| `wan-2.7-image` | generate |  | Image generation model with unified text-to-image and image editing support, including custom image sizes |
+| `wan-2.7-image-pro` | generate |  | High-quality image generation model with unified text-to-image and image editing support, including custom image sizes |

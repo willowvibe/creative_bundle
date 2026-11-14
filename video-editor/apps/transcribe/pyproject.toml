@@ -1,0 +1,22 @@
+[project]
+name = "video-editor-transcribe"
+version = "0.1.0"
+description = "Local transcription service using faster-whisper."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic>=2.7",
+    "faster-whisper>=1.0",
+    "structlog>=24.1.0",
+    "video-editor-state",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/video_editor_transcribe"]

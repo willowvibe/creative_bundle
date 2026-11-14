@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Drama Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;600&family=Noto+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f4ef; --card: #ffffff; --ink: #1d1b18; --muted: #6b665d; --line: #e4dfd4;
+  --accent: #b5541c; --ok: #2f7d4a; --ok-bg: #e6f3ea; --chg: #b23a2b; --chg-bg: #fbe9e6; --note-bg: #eef0f6;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15140f; --card: #1f1d18; --ink: #efe9dd; --muted: #a39d90; --line: #34312a;
+    --accent: #e08a52; --ok: #6cc28b; --ok-bg: #1d3325; --chg: #ef7d6e; --chg-bg: #3a201c; --note-bg: #23263a;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 "Noto Sans", system-ui, sans-serif; }
+header { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); padding: 10px 16px; }
+.top { display: flex; justify-content: space-between; align-items: center; gap: 8px; max-width: 860px; margin: 0 auto; }
+.brand { font-weight: 600; flex: none; }
+@media (max-width: 480px) { .brand { display: none; } } .who { color: var(--muted); font-size: 14px; }
+select { font: inherit; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--ink); max-width: 100%; }
+nav { display: flex; gap: 6px; overflow-x: auto; max-width: 860px; margin: 10px auto 0; padding-bottom: 2px; }
+nav button { flex: none; font: inherit; font-size: 14px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
+nav button[aria-current="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+nav button:disabled { opacity: .45; cursor: default; }
+main { max-width: 860px; margin: 0 auto; padding: 16px; }
+.summary { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-bottom: 14px; }
+.summary .row { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
+.filters { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.filters button { font: inherit; font-size: 13px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; }
+.filters button[aria-pressed="true"] { border-color: var(--ink); font-weight: 600; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+.card h3 { margin: 0 0 6px; font-size: 15px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.num { color: var(--muted); font-weight: 400; }
+.chip { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--note-bg); color: var(--ink); }
+.chip.ok { background: var(--ok-bg); color: var(--ok); } .chip.chg { background: var(--chg-bg); color: var(--chg); }
+.te { font-family: "Noto Sans Telugu", "Noto Sans", sans-serif; font-size: 19px; line-height: 1.7; margin: 4px 0; }
+.en { color: var(--muted); font-size: 15px; margin: 0 0 6px; }
+.emo { font-size: 13px; color: var(--muted); }
+.md { font-size: 15px; overflow-wrap: anywhere; } .md table { border-collapse: collapse; display: block; overflow-x: auto; }
+.md td, .md th { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; }
+img.media, video.media { width: 100%; border-radius: 8px; margin-top: 6px; background: #000; }
+audio { width: 100%; margin-top: 6px; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.actions button, .primary { font: inherit; font-size: 14px; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; }
+.actions .good { border-color: var(--ok); color: var(--ok); } .actions .bad { border-color: var(--chg); color: var(--chg); }
+.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.danger { flex: none; font: inherit; font-size: 13px; padding: 5px 10px; border-radius: 8px; border: 1px solid #c0392b; background: transparent; color: #c0392b; cursor: pointer; }
+.danger[hidden] { display: none; }
+textarea { width: 100%; min-height: 70px; font: inherit; margin-top: 8px; padding: 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+.thread { margin-top: 10px; border-top: 1px dashed var(--line); padding-top: 8px; font-size: 14px; }
+.msg { margin: 6px 0; } .msg .meta { color: var(--muted); font-size: 12px; } .old { opacity: .6; }
+.empty, .error { text-align: center; color: var(--muted); padding: 40px 10px; }
+.error { color: var(--chg); }
+.signoff { margin-top: 18px; text-align: center; }
+.toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 8px 14px; border-radius: 8px; font-size: 14px; display: none; }
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <span class="brand">Drama Review</span>
+    <select id="episode" aria-label="Episode"></select>
+    <button id="delete-episode" class="danger" hidden title="Delete this episode and its files from the board">Delete episode</button>
+    <span class="who" id="who"></span>
+  </div>
+  <nav id="stages" aria-label="Stages"></nav>
+</header>
+<main id="main"><p class="empty">Loading…</p></main>
+<div class="toast" id="toast"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js" integrity="sha384-+VfUPEb0PdtChMwmBcBmykRMDd+v6D/oFmB3rZM/puCMDYcIvF968OimRh4KQY9a" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js" integrity="sha384-/TQbtLCAerC3jgaim+N78RZSDYV7ryeoBCVqTuzRrFec2akfBkHS7ACQ3PQhvMVi" crossorigin="anonymous"></script>
+<script>
+const STAGES = [["script", "1 Script"], ["dialogue", "2 Dialogue"], ["voices", "3 Audio"], ["images", "4 Images"],
+  ["videos", "5 Videos"], ["lipsync", "6 Lip-sync + SFX"], ["final", "7 Final cut"]];
+const state = { key: "", me: null, episodes: [], episode: "", stage: "", data: null, filter: "all", open: {} };
+
+function readKey() {
+  const fromUrl = new URLSearchParams(location.search).get("k");
+  try {
+    if (fromUrl) { localStorage.setItem("reviewKey", fromUrl); history.replaceState(null, "", location.pathname + location.hash); }
+    return fromUrl || localStorage.getItem("reviewKey") || "";
+  } catch { return fromUrl || ""; }
+}
+async function api(path, opts = {}) {
+  const res = await fetch(path, { ...opts, headers: { "content-type": "application/json", "x-review-key": state.key, ...(opts.headers || {}) } });
+  const body = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(body.error || res.statusText);
+  return body;
+}
+const el = (tag, attrs = {}, ...kids) => {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") n.className = v; else if (k.startsWith("on")) n.addEventListener(k.slice(2), v);
+    else if (v !== undefined && v !== null && v !== false) n.setAttribute(k, v === true ? "" : v);
+  }
+  for (const kid of kids.flat()) if (kid !== null && kid !== undefined) n.append(kid.nodeType ? kid : document.createTextNode(kid));
+  return n;
+};
+function toast(text) { const t = document.getElementById("toast"); t.textContent = text; t.style.display = "block"; setTimeout(() => (t.style.display = "none"), 2200); }
+const mediaUrl = (key) => `/media/${key.split("/").map(encodeURIComponent).join("/")}?k=${encodeURIComponent(state.key)}`;
+const when = (ts) => new Date(ts.replace(" ", "T") + "Z").toLocaleString([], { dateStyle: "medium", timeStyle: "short" });
+
+// Build the episode <select> children, grouping dub-language episodes under their original episode.
+function buildEpisodeOptions(episodes) {
+  const byId = new Map(episodes.map((e) => [e.id, e]));
+  const indexById = new Map(episodes.map((e, i) => [e.id, i]));
+  const candidates = [];
+  const counts = new Map();
+  for (const ep of episodes) {
+    const m = /^(.*)-([a-z]{2,3})$/.exec(ep.id);
+    if (!m) continue;
+    const baseId = m[1], lang = m[2];
+    candidates.push({ ep, baseId, lang });
+    counts.set(baseId, (counts.get(baseId) || 0) + 1);
+  }
+  const groups = new Map();
+  for (const c of candidates) {
+    // A dub needs its original published, or at least one sibling sharing the base id.
+    if (!byId.has(c.baseId) && counts.get(c.baseId) < 2) continue;
+    if (!groups.has(c.baseId)) groups.set(c.baseId, { baseId: c.baseId, base: byId.get(c.baseId) || null, dubs: [] });
+    groups.get(c.baseId).dubs.push(c);
+  }
+  const groupLabel = (g) => {
+    if (g.base) {
+      const tail = g.base.id.replace(/^\d{4}-\d{2}-\d{2}-/, "");
+      const title = (g.base.title || "").trim();
+      if (title && !(title === tail && !/\s/.test(title))) return title;
+    }
+    const first = g.dubs[0] && g.dubs[0].ep.title || "";
+    const beforeDash = first.split(" — ")[0].trim();
+    return beforeDash || g.baseId;
+  };
+  const dubLabel = (d) => {
+    const title = d.ep.title || "";
+    const dash = title.indexOf(" — ");
+    if (dash !== -1) {
+      const rest = title.slice(dash + 3);
+      const dot = rest.indexOf(" · ");
+      const part = (dot === -1 ? rest : rest.slice(0, dot)).trim();
+      if (part) return part;
+    }
+    return d.lang.toUpperCase() + " dub";
+  };
+  const langRank = { hi: 0, ta: 1, kn: 2 };
+  const entries = [];
+  const grouped = new Set();
+  for (const g of groups.values()) {
+    if (g.base) grouped.add(g.base.id);
+    for (const d of g.dubs) grouped.add(d.ep.id);
+    g.dubs.sort((a, b) => {
+      const ra = a.lang in langRank ? langRank[a.lang] : 3;
+      const rb = b.lang in langRank ? langRank[b.lang] : 3;
+      return ra - rb || a.lang.localeCompare(b.lang);
+    });
+    const memberIds = g.dubs.map((d) => d.ep.id).concat(g.base ? [g.base.id] : []);
+    const at = Math.min(...memberIds.map((id) => indexById.get(id)));
+    const kids = [];
+    if (g.base) kids.push(el("option", { value: g.base.id }, "Telugu (original)"));
+    for (const d of g.dubs) kids.push(el("option", { value: d.ep.id }, dubLabel(d)));
+    entries.push({ at, node: el("optgroup", { label: groupLabel(g) }, ...kids) });
+  }
+  for (const [i, ep] of episodes.entries()) {
+    if (grouped.has(ep.id)) continue;
+    entries.push({ at: i, node: el("option", { value: ep.id }, ep.title || ep.id) });
+  }
+  return entries.sort((a, b) => a.at - b.at).map((entry) => entry.node);
+}
+
+// Each person's latest verdict on the current version of an item.
+function verdicts(item) {
+  const latest = {};
+  for (const f of state.data.feedback) if (f.item === item.id && f.item_hash === item.hash && f.verdict !== "note") latest[f.name] = f;
+  return Object.values(latest);
+}
+function myVerdict(item) {
+  const mine = state.data.feedback.filter((f) => f.mine && f.item === item.id && f.item_hash === item.hash && f.verdict !== "note");
+  return mine.length ? mine[mine.length - 1].verdict : null;
+}
+
+async function boot() {
+  state.key = readKey();
+  if (!state.key) return fatal("Open the personal review link you were sent.");
+  try { state.me = await api("/api/me"); } catch (e) { return fatal(e.message); }
+  document.getElementById("who").textContent = state.me.name + (state.me.role === "owner" ? " (owner)" : "");
+  state.episodes = await api("/api/episodes");
+  if (!state.episodes.length) return fatal("Nothing has been published for review yet.", true);
+  const sel = document.getElementById("episode");
+  sel.replaceChildren(...buildEpisodeOptions(state.episodes));
+  const [hashEp, hashStage] = location.hash.slice(1).split("/");
+  state.episode = state.episodes.some((e) => e.id === hashEp) ? hashEp : state.episodes[0].id;
+  sel.value = state.episode;
+  sel.onchange = () => { state.episode = sel.value; pickStage(); };
+  const del = document.getElementById("delete-episode");
+  if (state.me.role === "owner") { del.hidden = false; del.onclick = deleteEpisode; }
+  pickStage(hashStage);
+}
+// Owner only: removes every published file of the episode from storage and drops it from the list. Typing the
+// episode's name is the safeguard, since the files cannot be brought back from the board.
+async function deleteEpisode() {
+  const ep = state.episodes.find((e) => e.id === state.episode);
+  const name = ep.title || ep.id;
+  const typed = prompt(`Delete "${name}" from the board?\n\nAll of its published files are removed from storage and cannot be restored here. Comments stay in the record.\n\nType the episode id to confirm:\n${ep.id}`);
+  if (typed === null) return;
+  if (typed.trim() !== ep.id) return toast("Not deleted: the id did not match");
+  try {
+    // the server deletes one batch per call (a request's CPU budget is small); repeat until nothing is left
+    let total = 0, r;
+    do {
+      r = await api(`/api/admin/episode/${encodeURIComponent(ep.id)}`, { method: "DELETE" });
+      total += r.deleted;
+      toast(`Deleting… ${total} file(s)`);
+    } while (r.remaining && r.deleted > 0);
+    toast(`Deleted ${total} file(s)`);
+    state.episodes = state.episodes.filter((e) => e.id !== ep.id);
+    if (!state.episodes.length) return fatal("Nothing has been published for review yet.", true);
+    const sel = document.getElementById("episode");
+    sel.replaceChildren(...buildEpisodeOptions(state.episodes));
+    state.episode = state.episodes[0].id; sel.value = state.episode; pickStage();
+  } catch (e) { toast(e.message); }
+}
+function fatal(text, calm) { document.getElementById("main").replaceChildren(el("p", { class: calm ? "empty" : "error" }, text)); }
+
+function pickStage(wanted) {
+  const ep = state.episodes.find((e) => e.id === state.episode);
+  const published = ep.stages || [];
+  const nav = document.getElementById("stages");
+  const latest = [...STAGES].reverse().find(([s]) => published.includes(s));
+  const stage = published.includes(wanted) ? wanted : latest && latest[0];
+  nav.replaceChildren(...STAGES.map(([s, label]) => el("button", {
+    "aria-current": String(s === stage), disabled: !published.includes(s), onclick: () => pickStage(s),
+  }, label)));
+  if (!stage) return fatal("No stage of this episode is published yet.", true);
+  state.stage = stage; state.filter = "all";
+  location.hash = `${state.episode}/${stage}`;
+  load();
+}
+async function load() {
+  document.getElementById("main").replaceChildren(el("p", { class: "empty" }, "Loading…"));
+  try { state.data = await api(`/api/stage/${state.episode}/${state.stage}`); render(); }
+  catch (e) { fatal(e.message); }
+}
+
+function render() {
+  const { manifest, signoffs } = state.data;
+  const items = manifest.items;
+  const counts = { ok: 0, change: 0, todo: 0 };
+  for (const it of items) {
+    const v = verdicts(it);
+    if (v.some((f) => f.verdict === "change")) counts.change++; else if (v.length) counts.ok++;
+    if (!myVerdict(it)) counts.todo++;
+  }
+  const approved = signoffs.find((s) => s.manifest_hash === manifest.manifest_hash);
+  const filters = [["all", `All ${items.length}`], ["change", `Needs change ${counts.change}`], ["todo", `Not reviewed by me ${counts.todo}`]];
+  const summary = el("div", { class: "summary" },
+    el("div", { class: "row" },
+      el("strong", {}, manifest.title || manifest.episode),
+      el("span", { class: "chip ok" }, `${counts.ok} good`),
+      el("span", { class: "chip chg" }, `${counts.change} need change`),
+      approved ? el("span", { class: "chip ok" }, `Stage approved by ${approved.name}`) : el("span", { class: "chip" }, "Waiting for approval")),
+    manifest.note ? el("p", { class: "en" }, manifest.note) : null,
+    el("p", { class: "emo" }, `Published ${when(manifest.published_at.replace("T", " ").slice(0, 19))}. Tap "Looks good" or "Needs change" on each item.`),
+    el("div", { class: "filters" }, filters.map(([f, label]) =>
+      el("button", { "aria-pressed": String(state.filter === f), onclick: () => { state.filter = f; render(); } }, label))));
+
+  const shown = items.map((it, i) => [it, i]).filter(([it]) =>
+    state.filter === "all" || (state.filter === "change" && verdicts(it).some((f) => f.verdict === "change")) ||
+    (state.filter === "todo" && !myVerdict(it)));
+  const cards = shown.length ? shown.map(([it, i]) => card(it, i)) : [el("p", { class: "empty" }, "Nothing here.")];
+
+  const tail = [];
+  if (state.me.role === "owner") {
+    tail.push(el("div", { class: "signoff" }, approved
+      ? el("p", { class: "emo" }, `You approved this version on ${when(approved.created_at)}.`)
+      : el("button", { class: "primary", onclick: signoff }, `Approve the whole ${state.stage} stage`)));
+  }
+  document.getElementById("main").replaceChildren(summary, ...cards, ...tail);
+}
+
+function card(it, i) {
+  const v = verdicts(it);
+  const mine = myVerdict(it);
+  const head = el("h3", {}, el("span", { class: "num" }, `#${i + 1}`), it.title || it.id,
+    it.who ? el("span", { class: "chip" }, it.who) : null,
+    ...v.map((f) => el("span", { class: "chip " + (f.verdict === "ok" ? "ok" : "chg") }, `${f.verdict === "ok" ? "✓" : "✎"} ${f.name}`)));
+  const body = [];
+  if (it.te) body.push(el("p", { class: "te", lang: "te" }, it.te));
+  if (it.en) body.push(el("p", { class: "en" }, it.en));
+  if (it.emotion) body.push(el("p", { class: "emo" }, `Intended emotion: ${it.emotion}`));
+  if (it.markdown) { const d = el("div", { class: "md" }); // Markdown is sanitized before it reaches the page; without both libraries it shows as plain text.
+    if (window.marked && window.DOMPurify) d.innerHTML = DOMPurify.sanitize(marked.parse(it.markdown)); else d.textContent = it.markdown; body.push(d); }
+  if (it.media) {
+    const src = mediaUrl(it.media);
+    if (it.kind === "image") body.push(el("img", { class: "media", src, loading: "lazy", alt: it.title || it.id }));
+    if (it.kind === "video") body.push(el("video", { class: "media", src, controls: true, preload: "metadata", playsinline: true }));
+    if (it.kind === "audio") body.push(el("audio", { src, controls: true, preload: "none" }));
+  }
+  const box = el("div");
+  const open = (verdict) => {
+    const ta = el("textarea", { placeholder: verdict === "change" ? "What should change? (required)" : "Comment (optional)" });
+    box.replaceChildren(ta, el("div", { class: "actions" },
+      el("button", { class: verdict === "change" ? "bad" : "good", onclick: () => send(it, verdict, ta.value) }, verdict === "change" ? "Send change request" : "Send comment"),
+      el("button", { onclick: () => box.replaceChildren() }, "Cancel")));
+    ta.focus();
+  };
+  const actions = el("div", { class: "actions" },
+    el("button", { class: "good", "aria-pressed": String(mine === "ok"), onclick: () => send(it, "ok", "") }, mine === "ok" ? "✓ You said good" : "Looks good"),
+    el("button", { class: "bad", onclick: () => open("change") }, mine === "change" ? "✎ Change again" : "Needs change"),
+    el("button", { onclick: () => open("note") }, "Comment"));
+  const thread = state.data.feedback.filter((f) => f.item === it.id && (f.comment || f.item_hash !== it.hash));
+  return el("article", { class: "card", id: `item-${i + 1}` }, head, ...body, actions, box,
+    thread.length ? el("div", { class: "thread" }, thread.map((f) => el("div", { class: "msg" + (f.item_hash !== it.hash ? " old" : "") },
+      el("div", { class: "meta" }, `${f.name} · ${f.verdict === "change" ? "needs change" : f.verdict === "ok" ? "good" : "comment"} · ${when(f.created_at)}${f.item_hash !== it.hash ? " · on an earlier version" : ""}`),
+      f.comment))) : null);
+}
+
+async function send(it, verdict, comment) {
+  try {
+    await api(`/api/stage/${state.episode}/${state.stage}/feedback`, { method: "POST", body: JSON.stringify({ item: it.id, item_hash: it.hash, verdict, comment }) });
+    toast(verdict === "ok" ? "Marked good" : "Sent"); load();
+  } catch (e) { toast(e.message); }
+}
+async function signoff() {
+  const open = state.data.manifest.items.filter((it) => verdicts(it).some((f) => f.verdict === "change")).length;
+  if (!confirm(open ? `${open} item(s) still have change requests. Approve the stage anyway?` : `Approve the ${state.stage} stage?`)) return;
+  try {
+    await api(`/api/stage/${state.episode}/${state.stage}/signoff`, { method: "POST", body: JSON.stringify({ manifest_hash: state.data.manifest.manifest_hash }) });
+    toast("Stage approved"); load();
+  } catch (e) { toast(e.message); }
+}
+window.addEventListener("hashchange", () => {
+  const [ep, stage] = location.hash.slice(1).split("/");
+  if (!state.me || (ep === state.episode && stage === state.stage)) return;
+  if (state.episodes.some((e) => e.id === ep) && ep !== state.episode) { state.episode = ep; document.getElementById("episode").value = ep; }
+  pickStage(stage);
+});
+boot();
+</script>
+</body>
+</html>

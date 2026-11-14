@@ -1,0 +1,22 @@
+[project]
+name = "drama-studio"
+version = "0.1.0"
+description = "Telugu drama episode pipeline: review gates, storyboard board, dialogue and story checks"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+# Same rule set as video-editor, where this code was linted before the split.
+select = ["E", "F", "I", "N", "W", "UP", "B", "C4", "SIM", "BLE001", "S110"]
+ignore = ["E501"]

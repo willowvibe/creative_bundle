@@ -1,0 +1,615 @@
+{
+ "fps": 25,
+ "total": 297.88,
+ "shots": [
+  {
+   "id": "s01",
+   "kind": "establishing",
+   "start": 0.0,
+   "end": 3.84,
+   "seconds": 3.84
+  },
+  {
+   "id": "s02",
+   "kind": "insert",
+   "start": 3.84,
+   "end": 7.4,
+   "seconds": 3.56
+  },
+  {
+   "id": "s03",
+   "kind": "speak",
+   "start": 7.4,
+   "end": 12.0,
+   "seconds": 4.6
+  },
+  {
+   "id": "s04",
+   "kind": "insert",
+   "start": 12.0,
+   "end": 13.72,
+   "seconds": 1.72
+  },
+  {
+   "id": "s05",
+   "kind": "speak",
+   "start": 13.72,
+   "end": 18.32,
+   "seconds": 4.6
+  },
+  {
+   "id": "s06",
+   "kind": "living",
+   "start": 18.32,
+   "end": 22.08,
+   "seconds": 3.76
+  },
+  {
+   "id": "s07",
+   "kind": "speak",
+   "start": 22.08,
+   "end": 26.68,
+   "seconds": 4.6
+  },
+  {
+   "id": "s08",
+   "kind": "insert",
+   "start": 26.68,
+   "end": 29.68,
+   "seconds": 3.0
+  },
+  {
+   "id": "s09",
+   "kind": "speak",
+   "start": 29.68,
+   "end": 33.0,
+   "seconds": 3.32
+  },
+  {
+   "id": "s10",
+   "kind": "action",
+   "start": 33.0,
+   "end": 37.8,
+   "seconds": 4.8
+  },
+  {
+   "id": "s11",
+   "kind": "action",
+   "start": 37.8,
+   "end": 40.8,
+   "seconds": 3.0
+  },
+  {
+   "id": "s12",
+   "kind": "hero",
+   "start": 40.8,
+   "end": 44.8,
+   "seconds": 4.0
+  },
+  {
+   "id": "s13",
+   "kind": "action",
+   "start": 44.8,
+   "end": 48.32,
+   "seconds": 3.52
+  },
+  {
+   "id": "s14",
+   "kind": "speak",
+   "start": 48.32,
+   "end": 52.56,
+   "seconds": 4.24
+  },
+  {
+   "id": "s15",
+   "kind": "speak",
+   "start": 52.56,
+   "end": 57.16,
+   "seconds": 4.6
+  },
+  {
+   "id": "s16",
+   "kind": "action",
+   "start": 57.16,
+   "end": 58.8,
+   "seconds": 1.64
+  },
+  {
+   "id": "s17",
+   "kind": "action",
+   "start": 58.8,
+   "end": 62.48,
+   "seconds": 3.68
+  },
+  {
+   "id": "s18",
+   "kind": "action",
+   "start": 62.48,
+   "end": 65.48,
+   "seconds": 3.0
+  },
+  {
+   "id": "s19",
+   "kind": "insert",
+   "start": 65.48,
+   "end": 69.2,
+   "seconds": 3.72
+  },
+  {
+   "id": "s20",
+   "kind": "speak",
+   "start": 69.2,
+   "end": 73.8,
+   "seconds": 4.6
+  },
+  {
+   "id": "s21",
+   "kind": "living",
+   "start": 73.8,
+   "end": 75.48,
+   "seconds": 1.68
+  },
+  {
+   "id": "s22",
+   "kind": "speak",
+   "start": 75.48,
+   "end": 79.72,
+   "seconds": 4.24
+  },
+  {
+   "id": "s23",
+   "kind": "speak",
+   "start": 79.72,
+   "end": 84.32,
+   "seconds": 4.6
+  },
+  {
+   "id": "s24",
+   "kind": "shock",
+   "start": 84.32,
+   "end": 87.08,
+   "seconds": 2.76
+  },
+  {
+   "id": "s25",
+   "kind": "insert",
+   "start": 87.08,
+   "end": 88.28,
+   "seconds": 1.2
+  },
+  {
+   "id": "s26",
+   "kind": "speak",
+   "start": 88.28,
+   "end": 90.96,
+   "seconds": 2.68
+  },
+  {
+   "id": "s27",
+   "kind": "action",
+   "start": 90.96,
+   "end": 93.8,
+   "seconds": 2.84
+  },
+  {
+   "id": "s28",
+   "kind": "living",
+   "start": 93.8,
+   "end": 97.2,
+   "seconds": 3.4
+  },
+  {
+   "id": "s29",
+   "kind": "establishing",
+   "start": 97.2,
+   "end": 99.2,
+   "seconds": 2.0
+  },
+  {
+   "id": "s30",
+   "kind": "speak",
+   "start": 99.2,
+   "end": 103.8,
+   "seconds": 4.6
+  },
+  {
+   "id": "s31",
+   "kind": "living",
+   "start": 103.8,
+   "end": 105.48,
+   "seconds": 1.68
+  },
+  {
+   "id": "s32",
+   "kind": "speak",
+   "start": 105.48,
+   "end": 109.48,
+   "seconds": 4.0
+  },
+  {
+   "id": "s33",
+   "kind": "speak",
+   "start": 109.48,
+   "end": 113.88,
+   "seconds": 4.4
+  },
+  {
+   "id": "s34",
+   "kind": "insert",
+   "start": 113.88,
+   "end": 117.6,
+   "seconds": 3.72
+  },
+  {
+   "id": "s35",
+   "kind": "living",
+   "start": 117.6,
+   "end": 119.12,
+   "seconds": 1.52
+  },
+  {
+   "id": "s36",
+   "kind": "insert",
+   "start": 119.12,
+   "end": 121.36,
+   "seconds": 2.24
+  },
+  {
+   "id": "s37",
+   "kind": "living",
+   "start": 121.36,
+   "end": 125.92,
+   "seconds": 4.56
+  },
+  {
+   "id": "s38",
+   "kind": "living",
+   "start": 125.92,
+   "end": 132.28,
+   "seconds": 6.36
+  },
+  {
+   "id": "s39",
+   "kind": "speak",
+   "start": 132.28,
+   "end": 134.88,
+   "seconds": 2.6
+  },
+  {
+   "id": "s40",
+   "kind": "flashback",
+   "start": 134.88,
+   "end": 137.72,
+   "seconds": 2.84
+  },
+  {
+   "id": "s41",
+   "kind": "insert",
+   "start": 137.72,
+   "end": 139.24,
+   "seconds": 1.52
+  },
+  {
+   "id": "s42",
+   "kind": "living",
+   "start": 139.24,
+   "end": 142.92,
+   "seconds": 3.68
+  },
+  {
+   "id": "s43",
+   "kind": "insert",
+   "start": 142.92,
+   "end": 144.12,
+   "seconds": 1.2
+  },
+  {
+   "id": "s44",
+   "kind": "living",
+   "start": 144.12,
+   "end": 147.04,
+   "seconds": 2.92
+  },
+  {
+   "id": "s45",
+   "kind": "action",
+   "start": 147.04,
+   "end": 149.52,
+   "seconds": 2.48
+  },
+  {
+   "id": "s46",
+   "kind": "living",
+   "start": 149.52,
+   "end": 152.04,
+   "seconds": 2.52
+  },
+  {
+   "id": "s47",
+   "kind": "living",
+   "start": 152.04,
+   "end": 157.2,
+   "seconds": 5.16
+  },
+  {
+   "id": "s48",
+   "kind": "speak",
+   "start": 157.2,
+   "end": 162.0,
+   "seconds": 4.8
+  },
+  {
+   "id": "s49",
+   "kind": "living",
+   "start": 162.0,
+   "end": 164.0,
+   "seconds": 2.0
+  },
+  {
+   "id": "s50",
+   "kind": "speak",
+   "start": 164.0,
+   "end": 169.44,
+   "seconds": 5.44
+  },
+  {
+   "id": "s51",
+   "kind": "speak",
+   "start": 169.44,
+   "end": 174.44,
+   "seconds": 5.0
+  },
+  {
+   "id": "s52",
+   "kind": "living",
+   "start": 174.44,
+   "end": 177.92,
+   "seconds": 3.48
+  },
+  {
+   "id": "s53",
+   "kind": "insert",
+   "start": 177.92,
+   "end": 180.96,
+   "seconds": 3.04
+  },
+  {
+   "id": "s54",
+   "kind": "speak",
+   "start": 180.96,
+   "end": 185.92,
+   "seconds": 4.96
+  },
+  {
+   "id": "s55",
+   "kind": "insert",
+   "start": 185.92,
+   "end": 188.96,
+   "seconds": 3.04
+  },
+  {
+   "id": "s56",
+   "kind": "hero",
+   "start": 188.96,
+   "end": 193.44,
+   "seconds": 4.48
+  },
+  {
+   "id": "s57",
+   "kind": "hero",
+   "start": 193.44,
+   "end": 198.44,
+   "seconds": 5.0
+  },
+  {
+   "id": "s58",
+   "kind": "living",
+   "start": 198.44,
+   "end": 204.28,
+   "seconds": 5.84
+  },
+  {
+   "id": "s59",
+   "kind": "speak",
+   "start": 204.28,
+   "end": 208.16,
+   "seconds": 3.88
+  },
+  {
+   "id": "s60",
+   "kind": "speak",
+   "start": 208.16,
+   "end": 211.84,
+   "seconds": 3.68
+  },
+  {
+   "id": "s61",
+   "kind": "speak",
+   "start": 211.84,
+   "end": 216.64,
+   "seconds": 4.8
+  },
+  {
+   "id": "s62",
+   "kind": "hero",
+   "start": 216.64,
+   "end": 219.52,
+   "seconds": 2.88
+  },
+  {
+   "id": "s63",
+   "kind": "speak",
+   "start": 219.52,
+   "end": 224.44,
+   "seconds": 4.92
+  },
+  {
+   "id": "s64",
+   "kind": "action",
+   "start": 224.44,
+   "end": 227.2,
+   "seconds": 2.76
+  },
+  {
+   "id": "s65",
+   "kind": "speak",
+   "start": 227.2,
+   "end": 229.84,
+   "seconds": 2.64
+  },
+  {
+   "id": "s66",
+   "kind": "hero",
+   "start": 229.84,
+   "end": 232.84,
+   "seconds": 3.0
+  },
+  {
+   "id": "s67",
+   "kind": "insert",
+   "start": 232.84,
+   "end": 234.32,
+   "seconds": 1.48
+  },
+  {
+   "id": "s68",
+   "kind": "speak",
+   "start": 234.32,
+   "end": 239.12,
+   "seconds": 4.8
+  },
+  {
+   "id": "s69",
+   "kind": "shock",
+   "start": 239.12,
+   "end": 243.88,
+   "seconds": 4.76
+  },
+  {
+   "id": "s70",
+   "kind": "speak",
+   "start": 243.88,
+   "end": 247.16,
+   "seconds": 3.28
+  },
+  {
+   "id": "s71",
+   "kind": "speak",
+   "start": 247.16,
+   "end": 250.64,
+   "seconds": 3.48
+  },
+  {
+   "id": "s72",
+   "kind": "establishing",
+   "start": 250.64,
+   "end": 252.64,
+   "seconds": 2.0
+  },
+  {
+   "id": "s73",
+   "kind": "living",
+   "start": 252.64,
+   "end": 255.12,
+   "seconds": 2.48
+  },
+  {
+   "id": "s74",
+   "kind": "speak",
+   "start": 255.12,
+   "end": 259.72,
+   "seconds": 4.6
+  },
+  {
+   "id": "s75",
+   "kind": "living",
+   "start": 259.72,
+   "end": 261.04,
+   "seconds": 1.32
+  },
+  {
+   "id": "s76",
+   "kind": "speak",
+   "start": 261.04,
+   "end": 266.6,
+   "seconds": 5.56
+  },
+  {
+   "id": "s77",
+   "kind": "speak",
+   "start": 266.6,
+   "end": 271.2,
+   "seconds": 4.6
+  },
+  {
+   "id": "s78",
+   "kind": "flashback",
+   "start": 271.2,
+   "end": 274.52,
+   "seconds": 3.32
+  },
+  {
+   "id": "s79",
+   "kind": "living",
+   "start": 274.52,
+   "end": 276.04,
+   "seconds": 1.52
+  },
+  {
+   "id": "s80",
+   "kind": "provided",
+   "start": 276.04,
+   "end": 286.24,
+   "seconds": 10.2
+  },
+  {
+   "id": "s81",
+   "kind": "endcard",
+   "start": 286.24,
+   "end": 297.88,
+   "seconds": 11.64
+  }
+ ],
+ "lines": {
+  "c01a_vo": 0.25,
+  "c01b_line": 7.39,
+  "c01c_line": 13.73,
+  "c01d_line": 22.07,
+  "c01e_line": 29.69,
+  "c02a_vo": 33.23,
+  "c03a_line": 48.3,
+  "c03b_line": 52.56,
+  "c04a_vo": 59.06,
+  "c05a_line": 69.2,
+  "c05b_line": 75.46,
+  "c05c_line": 79.72,
+  "c05d_line": 88.29,
+  "c06a_line": 91.19,
+  "c07a_line": 99.2,
+  "c07b_line": 105.46,
+  "c07c_line": 109.48,
+  "c07d_line": 115.18,
+  "c08a_line": 119.36,
+  "c08b_line": 126.18,
+  "c08c_line": 132.28,
+  "c09a_line": 139.48,
+  "c09b_line": 144.38,
+  "c10a_vo": 152.28,
+  "c10b_line": 157.18,
+  "chant": 169.44,
+  "c12a_line": 204.28,
+  "c12b_line": 208.14,
+  "c12c_line": 211.84,
+  "c12d_line": 216.9,
+  "c12e_line": 224.68,
+  "c12f_line": 227.18,
+  "c13a_line": 234.33,
+  "c13b_line": 243.87,
+  "c13c_line": 247.17,
+  "c14a_line": 255.12,
+  "c14b_line": 261.06,
+  "c14c_line": 266.6,
+  "c15a_line": 276.03,
+  "c16a_vo": 286.493
+ }
+}

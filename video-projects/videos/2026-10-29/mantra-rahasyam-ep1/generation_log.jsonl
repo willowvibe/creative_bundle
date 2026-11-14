@@ -1,0 +1,92 @@
+{"out": "refs/lakshmi.jpg", "secs": 28}
+{"out": "refs/abhinav.jpg", "secs": 37}
+{"out": "refs/raghava.jpg", "secs": 39}
+{"out": "refs/doctor.jpg", "secs": 47}
+{"out": "frames/s01.jpg", "secs": 37}
+{"out": "frames/s02.jpg", "secs": 41}
+{"out": "frames/s06.jpg", "secs": 45}
+{"out": "frames/s08.jpg", "secs": 49}
+{"out": "frames/s09.jpg", "secs": 55}
+{"out": "frames/s10.jpg", "secs": 59}
+{"out": "frames/s11.jpg", "secs": 66}
+{"out": "frames/s12.jpg", "secs": 70}
+{"out": "frames/s13.jpg", "secs": 73}
+{"out": "frames/s14.jpg", "secs": 77}
+{"out": "frames/s15.jpg", "secs": 82}
+{"out": "frames/s16.jpg", "secs": 90}
+{"out": "frames/s17.jpg", "secs": 99}
+{"out": "frames/s18.jpg", "secs": 103}
+{"out": "frames/s19.jpg", "secs": 108}
+{"out": "frames/s03.jpg", "secs": 141}
+{"out": "frames/s04.jpg", "secs": 144}
+{"out": "frames/s05.jpg", "secs": 147}
+{"out": "frames/s07.jpg", "secs": 148}
+{"out": "frames/s01.jpg", "secs": 33}
+{"out": "frames/s13.jpg", "secs": 35}
+{"out": "refs/grandfather.jpg", "secs": 40}
+{"out": "frames/s03c.jpg", "secs": 44}
+{"out": "frames/s06b.jpg", "secs": 48}
+{"out": "frames/s10b.jpg", "secs": 50}
+{"out": "frames/s16b.jpg", "secs": 53}
+{"out": "frames/s03b.jpg", "secs": 62}
+{"out": "clips/s01.mp4", "workflow": "wan22_i2v", "secs": 269}
+{"out": "clips/s02.mp4", "workflow": "wan22_i2v", "secs": 213}
+{"out": "clips/s10.mp4", "workflow": "wan22_i2v", "secs": 214}
+{"out": "clips/s11.mp4", "workflow": "wan22_i2v", "secs": 212}
+{"out": "clips/s12.mp4", "workflow": "wan22_i2v", "secs": 214}
+{"out": "clips/s13.mp4", "workflow": "wan22_i2v", "secs": 214}
+{"out": "clips/s14.mp4", "workflow": "wan22_i2v", "secs": 215}
+{"out": "clips/s04.mp4", "workflow": "infinitetalk", "secs": 468}
+{"out": "clips/s05.mp4", "workflow": "infinitetalk", "secs": 280}
+{"out": "clips/s09.mp4", "workflow": "infinitetalk", "secs": 489}
+{"out": "clips/s15.mp4", "workflow": "infinitetalk", "secs": 158}
+{"out": "clips/s16.mp4", "workflow": "infinitetalk", "secs": 264}
+{"out": "clips/s17.mp4", "workflow": "infinitetalk", "secs": 379}
+{"out": "frames/s05.jpg", "secs": 47}
+{"out": "frames/s06.jpg", "secs": 50}
+{"out": "frames/s07.jpg", "secs": 51}
+{"out": "frames/s09.jpg", "secs": 56}
+{"out": "frames/s14.jpg", "secs": 68}
+{"out": "frames/s15.jpg", "secs": 74}
+{"out": "frames/s16.jpg", "secs": 78}
+{"out": "frames/s17.jpg", "secs": 80}
+{"out": "frames/s03.jpg", "secs": 88}
+{"out": "frames/s04.jpg", "secs": 90}
+{"out": "frames/s04.jpg", "secs": 93}
+{"out": "clips/s14.mp4", "workflow": "wan22_i2v", "secs": 277}
+{"out": "clips/s01.mp4", "workflow": "interpolate", "secs": 24}
+{"out": "clips/s02.mp4", "workflow": "interpolate", "secs": 36}
+{"out": "clips/s10.mp4", "workflow": "interpolate", "secs": 20}
+{"out": "clips/s11.mp4", "workflow": "interpolate", "secs": 20}
+{"out": "clips/s12.mp4", "workflow": "interpolate", "secs": 17}
+{"out": "clips/s13.mp4", "workflow": "interpolate", "secs": 26}
+{"out": "clips/s14.mp4", "workflow": "interpolate", "secs": 23}
+{"out": "clips/s09.mp4", "workflow": "infinitetalk", "secs": 740}
+{"out": "clips/s15.mp4", "workflow": "infinitetalk", "secs": 181}
+{"out": "clips/s16.mp4", "workflow": "infinitetalk", "secs": 334}
+{"out": "clips/s17.mp4", "workflow": "infinitetalk", "secs": 486}
+{"out": "frames_qwen/s01.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 0, "secs": 117}
+{"out": "frames_qwen/s03c.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 0, "secs": 8}
+{"out": "frames_qwen/s10b.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 0, "secs": 8}
+{"out": "frames_qwen/s13.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 0, "secs": 8}
+{"out": "frames_qwen/s18.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 0, "secs": 8}
+{"out": "frames_qwen/s19.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 0, "secs": 8}
+{"out": "frames_qwen/s03.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 2, "secs": 146}
+{"out": "frames_qwen/s03b.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 3, "secs": 44}
+{"out": "frames_qwen/s04.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 3, "secs": 42}
+{"out": "frames_qwen/s05.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 2, "secs": 31}
+{"out": "frames_qwen/s06.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 2, "secs": 31}
+{"out": "frames_qwen/s06b.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 2, "secs": 31}
+{"out": "frames_qwen/s07.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 2, "secs": 31}
+{"out": "frames_qwen/s08.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 1, "secs": 21}
+{"out": "frames_qwen/s09.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 2, "secs": 32}
+{"out": "frames_qwen/s10.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 2, "secs": 31}
+{"out": "frames_qwen/s11.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 2, "secs": 31}
+{"out": "frames_qwen/s12.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 2, "secs": 31}
+{"out": "frames_qwen/s14.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 2, "secs": 32}
+{"out": "frames_qwen/s15.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 2, "secs": 32}
+{"out": "frames_qwen/s16.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 2, "secs": 29}
+{"out": "frames_qwen/s16b.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 2, "secs": 31}
+{"out": "frames_qwen/s17.png", "model": "qwen_image_edit_2511 8-step (self-hosted)", "refs": 2, "secs": 31}
+{"out": "clips/s05.mp4", "workflow": "infinitetalk", "secs": 519}
+{"out": "clips/s17.mp4", "workflow": "infinitetalk", "secs": 667}

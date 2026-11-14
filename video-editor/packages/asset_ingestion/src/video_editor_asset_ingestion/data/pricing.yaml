@@ -1,0 +1,508 @@
+# GENERATED FILE - do not edit by hand.
+# Source: models.yaml  (regenerate with: ve gen-models)
+last_updated: '2026-10-22'
+providers:
+  elevenlabs_tts:
+    models:
+      eleven_v4:
+        cost_per_1k_chars: 0.08
+        currency: USD
+        note: most emotive
+      eleven_v3:
+        cost_per_1k_chars: 0.08
+        currency: USD
+      eleven_v3_conversational:
+        cost_per_1k_chars: 0.04
+        currency: USD
+      eleven_v4_turbo:
+        cost_per_1k_chars: 0.04
+        currency: USD
+        note: cheapest v4 tier
+      eleven_multilingual_v2:
+        cost_per_1k_chars: 0.08
+        currency: USD
+      eleven_flash_v2_5:
+        cost_per_1k_chars: 0.04
+        currency: USD
+        note: recommended low-latency
+      eleven_turbo_v2_5:
+        cost_per_1k_chars: 0.04
+        currency: USD
+        note: superseded by Flash
+  openai_tts:
+    models:
+      tts-1:
+        cost_per_1k_chars: 0.015
+        currency: USD
+      tts-1-hd:
+        cost_per_1k_chars: 0.03
+        currency: USD
+      gpt-4o-mini-tts:
+        cost_per_1k_chars: 0.015
+        currency: USD
+        note: token-billed (audio $12/1M out); ~$0.015/1k chars equivalent
+  sarvam_tts:
+    models:
+      bulbul:v4-flash:
+        cost_per_1k_chars: 0.023
+        billing_unit: per_call
+        currency: USD
+        note: INR 2/1k chars, billed per call (rounded to the character); confirmed
+          by invoice - 657 chars billed 1 call = $0.023. Sarvam's public price page
+          still lists only v3, so treat the rate as account-verified rather than sourced
+          from the docs.
+      bulbul:v3:
+        cost_per_1k_chars: 0.034
+        billing_unit: per_call
+        currency: USD
+        note: INR 30/10k chars (docs.sarvam.ai); stable API default
+      bulbul:v2:
+        cost_per_1k_chars: 0.034
+        billing_unit: per_call
+        currency: USD
+        note: legacy; no longer on the public price page
+  sarvam_clone:
+    models:
+      voice-clone:
+        cost_per_1k_chars: 0.023
+        billing_unit: per_call
+        currency: USD
+        note: Instant Voice Cloning (#312); billed per character. Placeholder at the
+          v4-flash rate until Sarvam publishes the clone rate.
+  kokoro_tts:
+    cost_per_1k_chars: 0.0
+    currency: USD
+    note: local
+  kitten_tts:
+    cost_per_1k_chars: 0.0
+    currency: USD
+    note: local
+  moss_tts:
+    cost_per_1k_chars: 0.0
+    currency: USD
+    note: local
+  stub_tts:
+    cost_per_1k_chars: 0.0
+    currency: USD
+    note: offline test tone; free by construction
+  stub_image:
+    cost_per_image: 0.0
+    currency: USD
+    note: offline test gradient; free by construction
+  poyo_ai:
+    models:
+      gpt-image-2:
+        cost_per_image: 0.01
+        currency: USD
+        note: the default image model; priced on a quality x resolution matrix (low/medium/high
+          at 1K/2K/4K) rather than on one row. The base scalar is low 1K and every
+          other cell is priced below; leaving the matrix in this note was bug 270.
+        price_by:
+          quality:
+            low:
+              cost_per_image: 0.01
+              price_by:
+                resolution:
+                  1K:
+                    cost_per_image: 0.01
+                  2K:
+                    cost_per_image: 0.02
+                  4K:
+                    cost_per_image: 0.04
+            medium:
+              cost_per_image: 0.042
+              price_by:
+                resolution:
+                  1K:
+                    cost_per_image: 0.042
+                  2K:
+                    cost_per_image: 0.045
+                  4K:
+                    cost_per_image: 0.081
+            high:
+              cost_per_image: 0.169
+              price_by:
+                resolution:
+                  1K:
+                    cost_per_image: 0.169
+                  2K:
+                    cost_per_image: 0.178
+                  4K:
+                    cost_per_image: 0.321
+      gpt-image-2-edit:
+        cost_per_image: 0.01
+        currency: USD
+        note: reference-image variant of gpt-image-2, same price (PoYo catalog 2026-11-11)
+        price_by:
+          quality:
+            low:
+              cost_per_image: 0.01
+              price_by:
+                resolution:
+                  1K:
+                    cost_per_image: 0.01
+                  2K:
+                    cost_per_image: 0.02
+                  4K:
+                    cost_per_image: 0.04
+            medium:
+              cost_per_image: 0.042
+              price_by:
+                resolution:
+                  1K:
+                    cost_per_image: 0.042
+                  2K:
+                    cost_per_image: 0.045
+                  4K:
+                    cost_per_image: 0.081
+            high:
+              cost_per_image: 0.169
+              price_by:
+                resolution:
+                  1K:
+                    cost_per_image: 0.169
+                  2K:
+                    cost_per_image: 0.178
+                  4K:
+                    cost_per_image: 0.321
+      nano-banana-2-lite:
+        cost_per_image: 0.025
+        currency: USD
+        note: Gemini Flash Lite, 5 credits; cheapest good-quality still
+      nano-banana-2-lite-edit:
+        cost_per_image: 0.025
+        currency: USD
+        note: reference-image variant of nano-banana-2-lite, same price (PoYo catalog
+          2026-11-11)
+      nano-banana-2:
+        cost_per_image: 0.04
+        currency: USD
+        note: new@2K default (8 credits); 1K $0.025, 4K $0.060; the `official@` tiers
+          are $0.050/$0.075/$0.100
+      nano-banana-2-api:
+        cost_per_image: 0.04
+        currency: USD
+        note: nano-banana-pro; 1K/2K $0.040, 4K $0.070; official@ $0.090/$0.175
+      gpt-image-2.5-fixed:
+        cost_per_image: 0.0085
+        currency: USD
+        note: flat tier, 1.7 credits at 1K (6 at 2K, 8 at 4K). The family's other
+          API ids are gpt-image-2.5-flare and gpt-image-2.5-sunburst, which are token-billed
+          ($4/1M text in, $6.40/1M image in, $24/1M image out) with no published per-image
+          price, so they are not registered. PoYo's price table spells this flat row
+          gpt-image-2-5. The rate depends on the requested resolution, so every tier
+          is priced below; leaving the 2K tier unpriced was bug 269.
+        price_by:
+          resolution:
+            1K:
+              cost_per_image: 0.0085
+            2K:
+              cost_per_image: 0.03
+            4K:
+              cost_per_image: 0.04
+      z-image:
+        cost_per_image: 0.01
+        currency: USD
+        note: 2 credits; cheapest per-generation still
+      seedream-5-0-lite-api:
+        cost_per_image: 0.025
+        currency: USD
+        note: text-to-image and image edit, 5 credits
+      nano-banana-2-1:
+        cost_per_image: 0.02
+        currency: USD
+        note: Gemini Flash 2.1, 1K; newer than nano-banana-2-lite and cheaper
+      seedream-5-0-flash:
+        cost_per_image: 0.02
+        currency: USD
+        note: Seedream 5.0 Flash; text-to-image and edit
+      flux-3-klein:
+        cost_per_image: 0.009
+        currency: USD
+        note: FLUX 3 Klein 1K; 2K $0.014
+      flux-schnell:
+        cost_per_image: 0.0024
+        currency: USD
+        note: per megapixel
+      seedance-2-mini:
+        cost_per_second: 0.12
+        currency: USD
+        note: 720p with no video input; 480p $0.050, 720p $0.063 with input
+      seedance-2-fast:
+        cost_per_second: 0.14
+        currency: USD
+        note: 720p with no video input; 480p $0.070, 720p $0.100 with input
+      seedance-2:
+        cost_per_second: 0.2
+        currency: USD
+        note: 720p with no video input; 480p $0.100, 1080p $0.450, 4K $1.00
+      seedance-2-5:
+        cost_per_second: 0.315
+        currency: USD
+        note: 720p with no video input; 480p $0.140, 1080p $0.570
+      gemini-omni-1-1-flash:
+        cost_per_second: 0.056
+        currency: USD
+        note: 720p, no input; billed per clip - $0.225/4 s, $0.300/6 s, $0.375/8 s,
+          $0.450/10 s; 4K $0.750/10 s
+      veo-3-1-official:
+        cost_per_second: 0.018
+        currency: USD
+        note: cheapest tier (720p, no audio); 1080p silent $0.030, 720p with audio
+          $0.030, 4K silent $0.150
+      minimax-h3-max-turbo:
+        cost_per_second: 0.04
+        currency: USD
+        note: 768p; 480p $0.025, 1080p $0.080
+      wan2.2-image-to-video-fast:
+        cost_per_generation: 0.06
+        currency: USD
+        note: billed per request by resolution, fixed-length clip with no duration
+          input (PoYo catalog 2026-11-11, 480p 6 credits, 720p 12 credits)
+        price_by:
+          resolution:
+            480p:
+              cost_per_generation: 0.03
+            720p:
+              cost_per_generation: 0.06
+  fal_ai:
+    models:
+      fal-ai/flux/dev:
+        cost_per_image: 0.025
+        currency: USD
+        note: FLUX.1 dev, per megapixel
+      fal-ai/flux-pro:
+        cost_per_image: 0.05
+        currency: USD
+        note: per megapixel
+      blackforestlabs/flux-3:
+        cost_per_image: 0.048
+        currency: USD
+        note: per megapixel (FAL lists $0.048/MP)
+      fal-ai/nano-banana-2:
+        cost_per_image: 0.08
+        currency: USD
+      fal-ai/z-image/turbo:
+        cost_per_image: 0.005
+        currency: USD
+        note: per megapixel
+      bytedance/seedance-2.0/mini/text-to-video:
+        cost_per_second: 0.155
+        currency: USD
+        note: token-billed; FAL quotes ~$0.0721/s at 480p and ~$0.1547/s at 720p (the
+          default); the reference-to-video tier is $7/1M tokens
+  replicate_image:
+    models:
+      black-forest-labs/flux-schnell:
+        cost_per_image: 0.003
+        currency: USD
+      black-forest-labs/flux-dev:
+        cost_per_image: 0.025
+        currency: USD
+      black-forest-labs/flux-1.1-pro:
+        cost_per_image: 0.04
+        currency: USD
+  poyo_music:
+    models:
+      minimax-music-2.6:
+        cost_per_generation: 0.1
+        cost_per_second: 0.0017
+        currency: USD
+        note: 20 credits/gen
+      generate-music:
+        cost_per_generation: 0.1
+        cost_per_second: 0.0017
+        currency: USD
+        note: Suno, 20 credits/gen
+  elevenlabs_music:
+    models:
+      eleven_music_v1:
+        cost_per_second: 0.0025
+        currency: USD
+        note: $0.15/min
+  elevenlabs_sfx:
+    models:
+      default:
+        cost_per_second: 0.002
+        currency: USD
+        note: $0.12/min
+  freesound_sfx:
+    models:
+      default:
+        cost_per_second: 0.0
+        currency: USD
+        note: Free CC0 / CC BY previews; CC BY needs attribution
+  openverse_sfx:
+    models:
+      default:
+        cost_per_second: 0.0
+        currency: USD
+        note: Free CC0 / PDM / CC BY index; CC BY needs attribution
+  earshot_sfx:
+    models:
+      default:
+        cost_per_second: 0.0
+        currency: USD
+        note: Local CPU render from the code-synthesized bank; no per-use cost
+  elevenlabs_isolation:
+    models:
+      default:
+        cost_per_second: 0.002
+        currency: USD
+        note: Voice Isolator $0.12/min
+  elevenlabs_speech_to_speech:
+    models:
+      eleven_english_sts_v2:
+        cost_per_second: 0.002
+        currency: USD
+        note: Voice Changer $0.12/min
+  elevenlabs_forced_alignment:
+    models:
+      default:
+        cost_per_second: 0.0
+        currency: USD
+        note: included with plan
+  elevenlabs_clone:
+    models:
+      default:
+        cost_per_sample: 0.0
+        currency: USD
+        note: included in plan usage
+  ace_step:
+    cost_per_second: 0.0
+    currency: USD
+    note: local
+  pexels:
+    cost_per_asset: 0.0
+    currency: USD
+    note: free stock
+  pixabay:
+    cost_per_asset: 0.0
+    currency: USD
+    note: free stock
+  coverr:
+    cost_per_asset: 0.0
+    currency: USD
+    note: free stock
+  mixkit:
+    cost_per_asset: 0.0
+    currency: USD
+    note: free stock
+  hyperframes_video:
+    cost_per_second: 0.0
+    currency: USD
+    note: local render
+  matplotlib_data_viz:
+    cost_per_image: 0.0
+    currency: USD
+    note: local
+  openrouter:
+    models:
+      anthropic/claude-sonnet-5.5:
+        cost_per_1M_input: 2.0
+        cost_per_1M_output: 10.0
+      google/gemini-3.8-flash:
+        cost_per_1M_input: 0.825
+        cost_per_1M_output: 4.125
+      openai/gpt-image-2:
+        cost_per_image: 0.13
+        currency: USD
+        note: token-priced at $30/1M image-output tokens; ~$0.008 low, ~$0.032 medium,
+          ~$0.13 high at 1536x864
+      google/gemini-3-pro-image:
+        cost_per_image: 0.155
+        currency: USD
+        note: Nano Banana Pro; $120/1M image-output tokens, ~1290 tokens/image
+      bytedance-seed/seedream-5-0-pro:
+        cost_per_image: 0.045
+        currency: USD
+        note: token-priced at $10.78/1M image tokens; OpenRouter's own example response
+          bills 4175 tokens = $0.04-$0.045 per image
+      black-forest-labs/flux-3-image:
+        cost_per_image: 0.041
+        currency: USD
+        note: token-priced at $9.82/1M image tokens; ~4175 tokens/image
+      black-forest-labs/flux-3-image-klein:
+        cost_per_image: 0.008
+        currency: USD
+        note: token-priced at $1.92/1M image tokens; cheapest FLUX 3 tier
+      bytedance-seed/seedream-5-0-flash:
+        cost_per_image: 0.018
+        currency: USD
+        note: token-priced at $4.31/1M image tokens
+      google/veo-3.1:
+        cost_per_second: 0.4
+        currency: USD
+        note: 1080p with audio; $0.20/s silent, $0.60/s 4K with audio
+      google/veo-3.1-fast:
+        cost_per_second: 0.12
+        currency: USD
+        note: with audio; $0.10/s silent, $0.08/s silent 720p
+      google/veo-3.1-lite:
+        cost_per_second: 0.08
+        currency: USD
+        note: with audio; $0.05/s silent, $0.03/s silent 720p
+      kwaivgi/kling-v3.0-pro:
+        cost_per_second: 0.112
+        currency: USD
+        note: $0.168/s with audio
+      kwaivgi/kling-v3.0-std:
+        cost_per_second: 0.084
+        currency: USD
+        note: $0.126/s with audio
+      minimax/hailuo-3:
+        cost_per_second: 0.13
+        currency: USD
+      alibaba/wan-3.0:
+        cost_per_second: 0.1
+        currency: USD
+        note: 720p; $0.05/s 480p, $0.20/s 1080p
+      runway/gen-4.5:
+        cost_per_second: 0.12
+        currency: USD
+      google/lyria-3-pro-preview:
+        cost_per_generation: 0.0
+        currency: USD
+        note: preview; pricing not published by OpenRouter
+  ollama_cloud_pro:
+    models:
+      minimax-m3:cloud:
+        cost_per_1M_input: 0.6
+        cost_per_1M_output: 2.4
+      glm-5.3:cloud:
+        cost_per_1M_input: 1.4
+        cost_per_1M_output: 4.4
+      glm-5.3-flash:cloud:
+        cost_per_1M_input: 0.15
+        cost_per_1M_output: 0.5
+      kimi-k2.7-code:cloud:
+        cost_per_1M_input: 0.95
+        cost_per_1M_output: 4.0
+      kimi-k3:cloud:
+        cost_per_1M_input: 3.0
+        cost_per_1M_output: 15.0
+      deepseek-v4.1-flash:cloud:
+        cost_per_1M_input: 0.3
+        cost_per_1M_output: 1.2
+      deepseek-v4-pro:cloud:
+        cost_per_1M_input: 1.32
+        cost_per_1M_output: 3.96
+      gemma4:cloud:
+        cost_per_1M_input: 0.14
+        cost_per_1M_output: 0.4
+      minimax-m3.1-flash:cloud:
+        cost_per_1M_input: 0.15
+        cost_per_1M_output: 0.6
+model_equivalents:
+  gpt-image-2:
+    poyo_ai: gpt-image-2
+    openrouter: openai/gpt-image-2
+  flux-schnell:
+    poyo_ai: flux-schnell
+    replicate_image: black-forest-labs/flux-schnell
+  flux-dev:
+    fal_ai: fal-ai/flux/dev
+    replicate_image: black-forest-labs/flux-dev
+  seedance-2-mini:
+    poyo_ai: seedance-2-mini
+    fal_ai: bytedance/seedance-2.0/mini/text-to-video

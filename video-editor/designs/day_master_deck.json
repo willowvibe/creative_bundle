@@ -1,0 +1,65 @@
+{
+  "name": "day_master_deck",
+  "palette": {
+    "bg": "#071317",
+    "ink": "#F5EBDC",
+    "accent": "#E2543A",
+    "muted": "#86A79C"
+  },
+  "type": {
+    "display": "Montserrat",
+    "body": "Inter",
+    "display_weight": 700
+  },
+  "theme": "dark",
+  "motion": {
+    "tempo": 1.15,
+    "entry": "rise",
+    "drift": 1.10
+  },
+  "layers": {
+    "safe_area": "vertical_short",
+    "caption_preset": "karaoke",
+    "scrim": {
+      "top_height": 300,
+      "bottom_height": 600,
+      "top": "linear-gradient(#071317 0%, rgba(7,19,23,0.70) 55%, rgba(7,19,23,0) 100%)",
+      "bottom": "linear-gradient(rgba(7,19,23,0) 0%, rgba(7,19,23,0.82) 45%, #071317 100%)"
+    },
+    "chip": {
+      "font": "Noto Serif KR",
+      "font_size": 104,
+      "font_color": "#D9A441",
+      "y": 220
+    },
+    "pill": {
+      "font": "Inter",
+      "font_size": 48,
+      "font_weight": 600,
+      "font_color": "#F5EBDC",
+      "background": "rgba(7,19,23,0.84)",
+      "x": 90,
+      "width": 900,
+      "first_y": 520,
+      "gap": 88
+    },
+    "caption_line": {
+      "font": "Inter",
+      "font_size": 62,
+      "font_weight": 700,
+      "font_color": "#F5EBDC",
+      "highlight_color": "#E2543A",
+      "upcoming_opacity": 0.6,
+      "box": {"x": 90, "y": 1356, "width": 900, "height": 180}
+    },
+    "end_card": {
+      "font": "Montserrat",
+      "font_size": 64,
+      "font_weight": 700,
+      "font_color": "#F5EBDC",
+      "url_color": "#D9A441",
+      "url_font_size": 34,
+      "box": {"x": 90, "y": 760, "width": 900, "height": 320}
+    }
+  }
+}

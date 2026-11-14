@@ -1,0 +1,59 @@
+{
+  "name": "podcast_studio",
+  "description": "16:9 two-host podcast studio layout with split-screen on dialogue turns, full-screen on solo segments, animated captions, and chapter titles.",
+  "aspect_ratio": "16:9",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "layout": {
+    "video": { "x": 0, "y": 0, "width": 1920, "height": 1080 },
+    "graphics": { "x": 0, "y": 0, "width": 1920, "height": 1080 },
+    "host_main": { "x": 0, "y": 0, "width": 960, "height": 1080 },
+    "guest_main": { "x": 960, "y": 0, "width": 960, "height": 1080 },
+    "host_solo": { "x": 192, "y": 108, "width": 1536, "height": 864 },
+    "guest_solo": { "x": 192, "y": 108, "width": 1536, "height": 864 },
+    "lower_thirds": { "x": 120, "y": 760, "width": 1100, "height": 150 },
+    "chapter_title": { "x": 96, "y": 54, "width": 1728, "height": 200 },
+    "captions": { "x": 120, "y": 916, "width": 1680, "height": 110 }
+  },
+  "captions": {
+    "font": "Montserrat",
+    "font_size": 52,
+    "font_color": "#FFFFFF",
+    "border_width": 5,
+    "border_color": "#000000",
+    "speaker_label": "above",
+    "speaker_label_color": "#FBBF24",
+    "animation": "karaoke",
+    "font_weight": 800,
+    "text_effect": "shadow"
+  },
+  "branding": {
+    "logo_position": "bottom_right",
+    "accent_color": "#F59E0B",
+    "watermark": true
+  },
+  "audio": {
+    "host_gain_db": 0,
+    "guest_gain_db": 0,
+    "music_gain_db": -18,
+    "target_lufs": -16,
+    "true_peak_dbtp": -1.0,
+    "duck_music_under_speech": true,
+    "duck_amount_db": 12,
+    "edge_bleed_ms": 80
+  },
+  "transitions": {
+    "kind": "cut",
+    "fade_duration_ms": 180,
+    "default_speaker_switch": "cut"
+  },
+  "chapters": {
+    "enabled": true,
+    "min_segment_duration_s": 15,
+    "max_chapters": 12,
+    "auto_title": true,
+    "show_onscreen": true,
+    "youtube_format": true
+  }
+}
