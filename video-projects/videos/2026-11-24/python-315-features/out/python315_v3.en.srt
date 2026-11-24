@@ -1,0 +1,476 @@
+1
+00:00:04,000 --> 00:00:05,760
+Python 3.15 is out,
+
+2
+00:00:05,780 --> 00:00:07,860
+it shipped in October and the latest version
+
+3
+00:00:07,860 --> 00:00:10,440
+3.15.2 is already here.
+
+4
+00:00:10,660 --> 00:00:13,080
+And this release is not just speed tweaks,
+
+5
+00:00:13,080 --> 00:00:14,400
+there are new keywords,
+
+6
+00:00:14,560 --> 00:00:17,740
+new built-in types and a brand new profiler.
+
+7
+00:00:17,940 --> 00:00:20,160
+I tested every feature in this video on
+
+8
+00:00:20,160 --> 00:00:22,560
+the real release, so you will see actual
+
+9
+00:00:22,560 --> 00:00:26,120
+output not slides. Here are 6 features you
+
+10
+00:00:26,120 --> 00:00:28,140
+will actually use. First,
+
+11
+00:00:28,140 --> 00:00:30,520
+let's install it. If you use uv,
+
+12
+00:00:30,560 --> 00:00:35,480
+it is one command. uv python install 3.15.
+
+13
+00:00:35,780 --> 00:00:37,140
+A few seconds later,
+
+14
+00:00:37,140 --> 00:00:39,560
+you have Python 3.15.2.
+
+15
+00:00:39,680 --> 00:00:42,740
+No installer, no admin rights and your old
+
+16
+00:00:42,740 --> 00:00:44,600
+versions stay untouched.
+
+17
+00:00:45,060 --> 00:00:46,740
+If uv is new to you,
+
+18
+00:00:46,740 --> 00:00:48,940
+my next video covers it from scratch.
+
+19
+00:00:49,420 --> 00:00:51,460
+Feature one, lazy imports.
+
+20
+00:00:51,640 --> 00:00:52,720
+Here is the problem.
+
+21
+00:00:52,920 --> 00:00:54,300
+This little command line,
+
+22
+00:00:54,360 --> 00:00:56,860
+tool imports eight modules at the top.
+
+23
+00:00:57,120 --> 00:00:59,160
+But when you just ask for the version,
+
+24
+00:00:59,160 --> 00:01:00,560
+it uses only one of them.
+
+25
+00:01:00,560 --> 00:01:02,840
+Python still loads all eight,
+
+26
+00:01:02,880 --> 00:01:05,280
+every single run. In 3.15,
+
+27
+00:01:05,460 --> 00:01:07,540
+you put the new lazy keyword in front of
+
+28
+00:01:07,540 --> 00:01:10,420
+the import. The module is only loaded the
+
+29
+00:01:10,420 --> 00:01:12,480
+first time you actually use it.
+
+30
+00:01:12,480 --> 00:01:15,000
+Same code, same imports at the top of the
+
+31
+00:01:15,000 --> 00:01:17,600
+file. I timed both versions,
+
+32
+00:01:17,740 --> 00:01:21,520
+30 runs each. The normal imports took 355
+
+33
+00:01:21,520 --> 00:01:23,200
+milliseconds to start.
+
+34
+00:01:23,340 --> 00:01:25,440
+The lazy version took 87,
+
+35
+00:01:25,760 --> 00:01:28,160
+that is four times faster just by adding
+
+36
+00:01:28,160 --> 00:01:30,880
+one word. This is huge for command line
+
+37
+00:01:30,880 --> 00:01:33,040
+tools and big applications.
+
+38
+00:01:33,520 --> 00:01:35,180
+Feature two, frozendict,
+
+39
+00:01:35,180 --> 00:01:36,560
+a new built-in type.
+
+40
+00:01:36,560 --> 00:01:38,640
+It is a dictionary that cannot be changed.
+
+41
+00:01:38,780 --> 00:01:40,040
+Why would you want that?
+
+42
+00:01:40,160 --> 00:01:41,420
+Because it is hashable.
+
+43
+00:01:41,560 --> 00:01:43,860
+So you can use a whole settings dictionary
+
+44
+00:01:43,860 --> 00:01:48,060
+as a key in another dictionary or in a cache.
+
+45
+00:01:48,420 --> 00:01:51,080
+Here I look up the cached connection with
+
+46
+00:01:51,080 --> 00:01:53,880
+a new frozendict that has the same settings.
+
+47
+00:01:53,880 --> 00:01:56,820
+And it finds it even with the keys in a
+
+48
+00:01:56,820 --> 00:01:59,440
+different order. You can still make a modified
+
+49
+00:01:59,440 --> 00:02:01,400
+copy with the pipe operator.
+
+50
+00:02:01,820 --> 00:02:03,920
+But if you try to change it in place,
+
+51
+00:02:04,120 --> 00:02:06,620
+Python stops you with a TypeError.
+
+52
+00:02:06,940 --> 00:02:08,760
+Perfect for configuration that should never
+
+53
+00:02:08,760 --> 00:02:10,220
+change by accident.
+
+54
+00:02:10,680 --> 00:02:12,200
+Feature three, sentinel.
+
+55
+00:02:12,460 --> 00:02:14,360
+You have probably written this pattern.
+
+56
+00:02:14,360 --> 00:02:15,880
+You need a default value.
+
+57
+00:02:15,980 --> 00:02:18,520
+That means nothing was passed and None will
+
+58
+00:02:18,520 --> 00:02:22,020
+not work because None might be a real value.
+
+59
+00:02:22,300 --> 00:02:25,080
+Most people create a private object and
+
+60
+00:02:25,080 --> 00:02:26,220
+compare against it.
+
+61
+00:02:26,220 --> 00:02:28,600
+Now there's a built-in for it.
+
+62
+00:02:28,820 --> 00:02:31,440
+MISSING equals sentinel with a name.
+
+63
+00:02:31,700 --> 00:02:34,200
+Call get setting with no default and the
+
+64
+00:02:34,200 --> 00:02:36,360
+function knows nothing was passed.
+
+65
+00:02:36,800 --> 00:02:39,780
+Pass None and it treats None as a real value.
+
+66
+00:02:39,780 --> 00:02:40,800
+And when you print it,
+
+67
+00:02:40,800 --> 00:02:42,080
+you see a clear name,
+
+68
+00:02:42,080 --> 00:02:44,640
+not some random object address.
+
+69
+00:02:44,740 --> 00:02:47,980
+Feature four, unpacking in comprehensions.
+
+70
+00:02:48,040 --> 00:02:50,540
+Say you have a list of lists and you want
+
+71
+00:02:50,540 --> 00:02:52,960
+one flat list. In 3.15,
+
+72
+00:02:52,960 --> 00:02:56,000
+you can write star batch for batch in batches.
+
+73
+00:02:56,200 --> 00:02:59,680
+It just works. The same idea works for dictionaries
+
+74
+00:02:59,680 --> 00:03:02,440
+with double star to merged them.
+
+75
+00:03:02,440 --> 00:03:06,080
+Run the same file on Python 3.14 and you
+
+76
+00:03:06,080 --> 00:03:07,720
+get a syntax error.
+
+77
+00:03:08,000 --> 00:03:11,200
+On 3.15, you get the flat list and the merged
+
+78
+00:03:11,200 --> 00:03:13,840
+dictionary. Feature five is quiet,
+
+79
+00:03:13,840 --> 00:03:15,800
+but it fixes a classic bug.
+
+80
+00:03:16,020 --> 00:03:18,020
+When you open a file without saying which
+
+81
+00:03:18,020 --> 00:03:20,860
+encoding to use, Python used to pick your
+
+82
+00:03:20,860 --> 00:03:23,200
+system's setting. On Windows,
+
+83
+00:03:23,200 --> 00:03:25,260
+that was often an old code page.
+
+84
+00:03:25,260 --> 00:03:27,180
+So writing text like café,
+
+85
+00:03:27,180 --> 00:03:31,700
+or an emoji or Telugu could crash or save
+
+86
+00:03:31,700 --> 00:03:33,660
+garbage. From 3.15,
+
+87
+00:03:33,660 --> 00:03:36,180
+the default is UTF-8 everywhere.
+
+88
+00:03:36,740 --> 00:03:39,380
+Here I open a file with no encoding argument
+
+89
+00:03:39,380 --> 00:03:41,640
+and the encoding is UTF-8.
+
+90
+00:03:41,700 --> 00:03:44,660
+Your scripts now behave the same on every
+
+91
+00:03:44,660 --> 00:03:47,220
+machine. Feature six is my favorite.
+
+92
+00:03:47,640 --> 00:03:51,140
+Python 3.15 ships a new profiling package
+
+93
+00:03:51,280 --> 00:03:54,120
+with a sampling profiler called Tachyon.
+
+94
+00:03:54,380 --> 00:03:56,880
+Here is a script that builds a report and
+
+95
+00:03:56,880 --> 00:03:59,240
+it feels slow instead of guessing,
+
+96
+00:03:59,460 --> 00:04:03,440
+run python -m profiling.sampling,
+
+97
+00:04:03,860 --> 00:04:05,200
+run, and your script.
+
+98
+00:04:05,340 --> 00:04:07,380
+It samples your program a thousand times
+
+99
+00:04:07,380 --> 00:04:09,800
+a second with very low overhead.
+
+100
+00:04:10,040 --> 00:04:12,760
+The report shows slow total was on the stack
+
+101
+00:04:12,760 --> 00:04:16,920
+72 % of the time. And the culprit is JSON,
+
+102
+00:04:17,260 --> 00:04:20,720
+encoding and decoding every row for no reason.
+
+103
+00:04:21,480 --> 00:04:24,840
+Add dash dash flame graph and you get an
+
+104
+00:04:24,840 --> 00:04:27,620
+interactive flame graph in your browser.
+
+105
+00:04:27,820 --> 00:04:30,840
+One line fix, add the price directly.
+
+106
+00:04:30,840 --> 00:04:36,080
+The script went from 0.79 seconds to 0.24
+
+107
+00:04:36,080 --> 00:04:40,300
+more than three times faster found in seconds.
+
+108
+00:04:40,500 --> 00:04:42,420
+So that is Python 3.15.
+
+109
+00:04:42,420 --> 00:04:45,020
+Lazy imports, frozendict,
+
+110
+00:04:45,220 --> 00:04:48,520
+sentinel, unpacking in comprehensions,
+
+111
+00:04:48,680 --> 00:04:52,380
+UTF-8 by default and the Tachyon profiler.
+
+112
+00:04:52,380 --> 00:04:55,240
+The full list is in the official what's
+
+113
+00:04:55,240 --> 00:04:57,220
+new page linked below.
+
+114
+00:04:57,760 --> 00:04:59,360
+Which one will you use first?
+
+115
+00:04:59,460 --> 00:05:00,560
+Tell me in the comments.
+
+116
+00:05:00,760 --> 00:05:01,880
+And in the next video,
+
+117
+00:05:01,980 --> 00:05:03,110
+I will show you uv,
+
+118
+00:05:03,110 --> 00:05:06,700
+the fastest way to set up Python in 2026.
+
+119
+00:05:07,460 --> 00:05:08,740
+Subscribe so you do not miss it.
+

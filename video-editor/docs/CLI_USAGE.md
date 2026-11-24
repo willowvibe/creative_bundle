@@ -680,6 +680,36 @@ skill tools: `broll`, `reframe`, `screen_tutorial`, `sfx_placement`,
 takes a single `video_path` (or `transcript` for the doc-only ones) and
 returns the same artifacts the pipeline would write.
 
+### Talking avatar over a screen recording (`ve talking-avatar`)
+
+Overlays a lip-synced cartoon avatar (PNG sprite folder or layered SVG) in a corner of a recording, with optional
+speech bubbles and avatar actions. English narration. Recipe for whole tutorials: `docs/TECH_TUTORIALS.md`.
+
+```bash
+uv run ve talking-avatar --screen screen.mp4 --audio narration.wav --avatar avatar/sprites \
+  --script narration.txt --bubbles bubbles.yaml --out out/video.mp4
+```
+
+| Flag | Default | Meaning |
+|---|---|---|
+| `--lipsync` | `hybrid` | `hybrid` (Rhubarb shapes, lip closures on wav2vec2-measured M/B/P, dictionary vowel fixes), `rhubarb`, or `loudness` |
+| `--script` | — | Dialogue text; required by `hybrid` unless `--align-hints` is given |
+| `--align-hints` | — | Precomputed hints JSON (skips the aligner subprocess) |
+| `--lead` | `0.02` | Seconds the mouth leads the audio |
+| `--bubbles` | — | YAML of bubbles (`word`/`nth`/`time`, `text`, `emoji`, `hold`) and actions (`action: glance|brows`) |
+| `--position` / `--size` / `--margin` | `br` / `0.30` / `32` | Corner, avatar height as a fraction of the frame, edge distance |
+| `--no-motion`, `--bounce`, `--no-crossfade` | off / off / off | Disable breathing/tilts/slide; enable head bounce (the user prefers none); disable the 1-frame mouth crossfade |
+| `--stress-open/--no-stress-open`, `--stress-percentile` | on, `80` | Wider mouth on loud syllables |
+
+The hybrid aligner runs from an optional environment (CPU torch, ~1 GB), created once:
+
+```bash
+uv venv .venv-lipsync && uv pip install --python .venv-lipsync/bin/python torch --index-url https://download.pytorch.org/whl/cpu && uv pip install --python .venv-lipsync/bin/python transformers g2p_en numpy
+```
+
+Without it, `hybrid` warns and falls back to `rhubarb`. Hints are cached per audio + script in the render work dir.
+A sidecar `<out>.json` records the engine, every frame's mouth shape and the bubbles.
+
 ## Utility commands
 
 ### Tool doctor

@@ -13,8 +13,8 @@ order, per-repo commands, API keys, MCP connections and gotchas.
 
 | Repo | What it does | Stack |
 |---|---|---|
-| `video-editor/` | `ve` CLI: transcript-first video editing, script-to-video generation, HyperFrames/FFmpeg rendering | Python (uv), Node/pnpm |
-| `video-projects/` | Content made with `ve`: per-video scripts, prompts, notes, shorts packs | Markdown/JSON content |
+| `video-editor/` | `ve` CLI: transcript-first video editing, script-to-video generation, HyperFrames/FFmpeg rendering; `ve talking-avatar` (lip-synced cartoon avatar over screen recordings) | Python (uv), Node/pnpm |
+| `video-projects/` | Content made with `ve`: per-video scripts, prompts, notes, shorts packs, channel `brand/` assets (e.g. Python Decoder bumpers) | Markdown/JSON content |
 | `vocal-to-song/` | Claude Code skill: raw vocal → tuned, arranged, mixed song; chant ×N tracks | Python scripts (librosa, pyworld, …) |
 | `social-engine/` | Publishing and channel management (YouTube first): API lane + browser lane | Python (uv), Node (Playwright) |
 | `drama-studio/` | Telugu drama pipeline: review gates, dialogue/story checks, review board | Python (uv), Cloudflare Worker |

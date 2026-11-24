@@ -1,0 +1,45 @@
+# Speech bubbles for "Python 3.15 Is Out": key or fun points only (about one a minute).
+# Times are from audio/words.json (faster-whisper small.en on audio/narration.wav).
+- time: 14.18            # "I tested every feature ... on the real release"
+  text: "Real 3.15.2 output"
+  emoji: "✅"
+  hold: 2.6
+- time: 82.12            # "four times faster" (355 ms -> 87 ms)
+  text: "355 ms → 87 ms"
+  emoji: "⚡"
+  hold: 3.0
+- time: 96.16            # "Because it is hashable"
+  text: "A dict you can hash!"
+  emoji: "🧊"
+  hold: 2.4
+- time: 142.22           # "Now there's a built-in for it"
+  text: "No more object()"
+  emoji: "🎯"
+  hold: 2.4
+- time: 182.5            # 3.14: SyntaxError
+  text: "3.14 says no"
+  emoji: "🙅"
+  hold: 1.8
+- time: 248.76           # slow_total on the stack ~72% of samples
+  text: "Found the slow part"
+  emoji: "🔍"
+  hold: 2.6
+- time: 273.12           # "more than three times faster" (0.79 s -> 0.24 s)
+  text: "0.79 s → 0.24 s"
+  emoji: "🚀"
+  hold: 2.6
+- time: 303.46           # "Subscribe"
+  text: "Next: uv from scratch"
+  emoji: "🔔"
+  hold: 1.7
+
+# Avatar-only actions
+- time: 62.2             # the lazy keyword types in
+  action: glance
+  hold: 1.4
+- time: 230.4            # the slow script appears
+  action: glance
+  hold: 1.2
+- time: 259.04           # flame graph opens
+  action: brows
+  hold: 1.0

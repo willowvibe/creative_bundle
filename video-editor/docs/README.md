@@ -17,6 +17,7 @@ records — kept for provenance, not maintained.
 | [`STOCK_EXPLAINERS.md`](STOCK_EXPLAINERS.md) | Stock footage scenes (vision-checked), running tally, checked calculations, ledger, per-scene narration, AI image labels |
 | [`MAP_STORIES.md`](MAP_STORIES.md) | Map-story reels: journeys with km counter and icon, night_map, state/district fills and photos, bubbles, stickers |
 | [`DEVOTIONAL_CHANTS.md`](DEVOTIONAL_CHANTS.md) | Japa ×108 chant videos: chant-grid sync, 75% Tamil+English captions, counter, petal/glitter loops, rotating deity images, memory-safe pieces render |
+| [`TECH_TUTORIALS.md`](TECH_TUTORIALS.md) | Coding tutorials: verified demos, real page captures, editor/terminal screen track, talking avatar (hybrid lip sync), section titles, SFX, music bed, channel bumpers, Flow thumbnails, upload gotchas |
 
 ## Providers, models, and routing
 

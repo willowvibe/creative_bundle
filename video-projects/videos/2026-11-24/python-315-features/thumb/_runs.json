@@ -1,0 +1,20 @@
+{
+ "thumb_p1": {
+  "task_id": "HEHO9CRSX2OYXJZ3",
+  "model": "nano-banana-pro-edit",
+  "credits": 18.0,
+  "status": "finished"
+ },
+ "thumb_p2": {
+  "task_id": "LFU7VOOABHV6GPG0",
+  "model": "nano-banana-pro-edit",
+  "credits": 18.0,
+  "status": "finished"
+ },
+ "thumb_p3": {
+  "task_id": "PXPEPPRARBXHZKM9",
+  "model": "nano-banana-pro-edit",
+  "credits": 18.0,
+  "status": "finished"
+ }
+}

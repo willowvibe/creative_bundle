@@ -152,3 +152,33 @@ else was added on the Studio Languages and Details pages. Record: the episode fo
 2. Fix the upload flow's language dropdown and add tags/category to it.
 3. Add `localized_thumbnails` to the manifest model (published in the episode's `publish.yaml` as an extra key).
 4. Commit `browser/lib/files.mjs` + test (uncommitted at the time of writing; 18/18 browser tests pass).
+
+## 2026-11-24 — first upload for `python-decoder` (@pythondecoder101)
+
+Account `python-decoder` (channel `UCPZkusaUv8NhcoBJDma4m1g`, CDP 9335), browser lane. Result: private upload
+https://youtu.be/zDa-6B-8f-s, then tags, playlist, captions and the schedule set in Studio by hand (Claude in Chrome
+on the owner's account).
+
+- **`social auth` → "access denied".** The OAuth client is in Testing mode and the channel's Google account is not a
+  test user. The API lane (captions, playlists, localizations, stats) stays unavailable until the owner adds it in the
+  Cloud console; the browser lane does not need it.
+- **`login` reports `sign-in` while signed in.** `isSignedIn` waits for the `Create` button to be *visible*; when the
+  Chrome window is behind other windows (Wayland) Chrome stops painting and the check fails. Studio was on the right
+  channel. Same cause made later `upload` screen checks fail ("visibility" text not visible within 15 s).
+- **`Create` is ambiguous on a new channel.** The dashboard's quick action "Create post" also matches
+  `getByRole('button', { name: 'Create' })` (strict-mode violation). Workaround: start from the Content page
+  (`/channel/<id>/videos/upload`). Fix: `{ name: 'Create', exact: true }`.
+- **Files under 50 MiB time out.** `setLocalFiles` uses `locator.setInputFiles` below `PLAYWRIGHT_TRANSFER_LIMIT`, which
+  streams bytes over CDP; a 41 MB video hit the 30 s timeout. The file still attached later, leaving an orphan draft
+  titled from the channel's upload defaults ("video title : python tut"; deleted by the owner). Workaround: re-encode
+  above 52.4 MB. Fix: hand everything above a few MB over by path (`DOM.setFileInputFiles`).
+- **Upload defaults leak in.** The channel's Studio upload defaults set tags (`#codecorner …`), category Education
+  and language English (India); the browser lane does not overwrite tags.
+- **Correction to the subtitle map above:** "Upload manual" now saves the file as a **draft** ("1 draft" on the
+  Languages row). Publish it from the language row → Manual subtitles ⋮ → Edit (check the text) → Publish. The
+  top-level "Edit subtitles" opens YouTube's automatic transcript instead.
+- **Scheduling:** Details → Visibility → Schedule → date picker + `HH:MM` field (time zone defaults to the channel's,
+  GMT+05:30) → Done → Save. Visibility then reads "Scheduled".
+
+Follow-ups: the two driver fixes above (exact `Create`, path hand-over threshold), an occlusion-proof `isSignedIn`
+(DOM presence + URL instead of visibility), and a tags step in `upload`.

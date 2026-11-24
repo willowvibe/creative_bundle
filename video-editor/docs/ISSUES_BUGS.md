@@ -11,6 +11,19 @@ and rationale stay in `docs/archive/audits/AUDIT_2026-10-28.md`; this file track
 
 ## Open work
 
+### 2026-11-24 tech tutorial (Python Decoder EP1) — #372–#373
+
+- [ ] **#372 Tutorial screen track is per-project scripts.** `render_scenes.py` (web captures + editor/terminal
+  scenes + section cards + callouts), `capture_outputs.py`, `make_sfx.py`, `mix_music.sh` and the channel bumpers live in
+  `../video-projects` (`videos/2026-11-24/python-315-features/`, `brand/python-decoder/`). Port them into the engine as
+  a `ve tutorial` command (scene YAML instead of Python cue lists) when a second video reuses them. Recipe:
+  `docs/TECH_TUTORIALS.md`.
+- [ ] **#373 Flow image generation is broken.** Google Flow renamed its agent toggle from "Agent" to "Flow agent";
+  flow-mcp (`~/flow-mcp/src/flow.ts`, two `getByRole("button", { name: "Agent", exact: true })` locators) times out on
+  every job, so the `flow_image` provider fails too. Fix: match `/^(Flow agent|Agent)$/` and rebuild `dist/`. The
+  cheap worker needs `npx cheap-agent allow` in `~/flow-mcp` first. Workaround used: Claude in Chrome in the user's
+  Chrome (uploads via flow-mcp's Chrome on CDP 9333, since the extension cannot answer a file picker).
+
 ### 2026-11-13 devotional chant video — #370–#371
 
 Found while making Om Saravana Bhava ×108 (see `DEVOTIONAL_CHANTS.md`).

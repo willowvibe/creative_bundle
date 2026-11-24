@@ -1,0 +1,92 @@
+{
+ "base_0": {
+  "task_id": "0X0N0MPNYCBI895M",
+  "model": "nano-banana-pro-edit",
+  "credits": 18.0,
+  "status": "finished"
+ },
+ "base_1": {
+  "task_id": "81MC5X7WMIC9HNGL",
+  "model": "nano-banana-pro-edit",
+  "credits": 18.0,
+  "status": "finished"
+ },
+ "mouth_A": {
+  "task_id": "FP7KRBETB4SFAS9J",
+  "model": "nano-banana-pro-edit",
+  "credits": 18.0,
+  "status": "finished"
+ },
+ "mouth_B": {
+  "task_id": "S0DJ4V0LLRJX19ZY",
+  "model": "nano-banana-pro-edit",
+  "credits": 18.0,
+  "status": "finished"
+ },
+ "mouth_C": {
+  "task_id": "V7CXBQZWJRX9R9QX",
+  "model": "nano-banana-pro-edit",
+  "credits": 18.0,
+  "status": "finished"
+ },
+ "mouth_D": {
+  "task_id": "A4HV010BP64QU9O8",
+  "model": "nano-banana-pro-edit",
+  "credits": 18.0,
+  "status": "finished"
+ },
+ "mouth_E": {
+  "task_id": "M7361MRZQQNUHKV8",
+  "model": "nano-banana-pro-edit",
+  "credits": 18.0,
+  "status": "finished"
+ },
+ "mouth_F": {
+  "task_id": "K2Q9I690LYKGVDV4",
+  "model": "nano-banana-pro-edit",
+  "credits": 18.0,
+  "status": "finished"
+ },
+ "mouth_G": {
+  "task_id": "0FRGX8MVNYJIHKF1",
+  "model": "nano-banana-pro-edit",
+  "credits": 18.0,
+  "status": "finished"
+ },
+ "mouth_H": {
+  "task_id": "JDX38MN4LIPRZ584",
+  "model": "nano-banana-pro-edit",
+  "credits": 18.0,
+  "status": "finished"
+ },
+ "blink": {
+  "task_id": "UQ37G41J64AGL9MK",
+  "model": "nano-banana-pro-edit",
+  "credits": 18.0,
+  "status": "finished"
+ },
+ "mouth_G2": {
+  "task_id": "8G98P1QUNK6URSZQ",
+  "model": "nano-banana-pro-edit",
+  "credits": 18.0,
+  "status": "finished"
+ },
+ "mouth_H2": {
+  "task_id": "OLUXMGLXXZAN0XO2",
+  "model": "nano-banana-pro-edit",
+  "credits": 18.0,
+  "status": "finished"
+ },
+ "brows": {
+  "task_id": "94LL3F4ZL9I5OI29",
+  "model": "nano-banana-pro-edit",
+  "credits": 18.0,
+  "status": "finished"
+ },
+ "glance": {
+  "task_id": "NGZET6JGZOTV776O",
+  "model": "nano-banana-pro-edit",
+  "credits": 18.0,
+  "status": "finished"
+ }
+}

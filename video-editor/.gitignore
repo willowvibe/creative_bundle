@@ -21,6 +21,7 @@ dist/
 build/
 .venv/
 venv/
+.venv-lipsync/
 .env
 .env.local
 .mypy_cache/

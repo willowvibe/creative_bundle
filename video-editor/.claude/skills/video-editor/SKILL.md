@@ -16,6 +16,12 @@ Drama episodes (script → voices → stills → animatic → clips → cut → 
 `../drama-studio` (skill `drama-episode`, playbook `docs/DRAMA_PRODUCTION_PLAYBOOK.md` there). Video scripts
 and short packs live in `../video-projects`, reached here through the `videos` and `shorts` symlinks.
 
+Editing the user's own phone-recorded talking-head clips (stitch, 9:16 → 16:9, voice cleanup, trim to a
+time limit from a transcript): skill `phone-vlog-edit`.
+
+Coding/tech tutorials with the user's talking cartoon avatar over real screen captures (Python Decoder channel):
+skill `tech-tutorial-video`, recipe `docs/TECH_TUTORIALS.md`.
+
 Trying an outside repo, skill pack or model before adopting it: do it in `../tool-lab` (skill `tool-trial`,
 `REGISTRY.md` first); adopted pieces are ported here with tests.
 

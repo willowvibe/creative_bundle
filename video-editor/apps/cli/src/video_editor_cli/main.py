@@ -607,6 +607,7 @@ def _register_group_commands() -> None:
     from video_editor_cli.commands.run import register_run
     from video_editor_cli.commands.short import register_short
     from video_editor_cli.commands.style_from import register_style_from
+    from video_editor_cli.commands.talking_avatar import register_talking_avatar
     from video_editor_cli.commands.voice_clone import register_voice_clone
 
     register_assets(app)
@@ -622,6 +623,7 @@ def _register_group_commands() -> None:
     register_run(app)
     register_short(app)
     register_style_from(app)
+    register_talking_avatar(app)
     register_voice_clone(app)
 
 

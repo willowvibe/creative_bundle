@@ -1,0 +1,31 @@
+# Speech bubbles for the talking-avatar pilot: only key or fun moments (about 4 per minute).
+# Cue words are resolved against Whisper word timings; times in comments are from audio/words.json.
+- word: install          # 9.36 s
+  text: "pip install httpx"
+  emoji: "📦"
+  hold: 2.5
+- word: flamingos        # 40.42 s, the fun fact
+  text: "A flamboyance!"
+  emoji: "🦩"
+  hold: 1.3
+- word: tip              # 41.96 s
+  text: "Always set a timeout!"
+  emoji: "⏱"
+  hold: 3.0
+- word: subscribe        # 52.80 s
+  text: "Subscribe for more"
+  emoji: "👍"
+  hold: 2.0
+
+# Avatar-only actions (no bubble). Text bubbles above also raise the eyebrows at pop-in.
+- word: import           # 17.76 s, first code line types in
+  action: glance
+  hold: 1.4
+- word: status           # 29.24 s, print(status) types in
+  action: glance
+  hold: 1.2
+- word: run              # 35.54 s, output appears in the terminal
+  action: glance
+  hold: 1.6
+- word: three            # 48.22 s, "three lines of real code"
+  action: brows

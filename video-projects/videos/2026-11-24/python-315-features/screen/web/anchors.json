@@ -1,0 +1,28 @@
+{
+ "downloads": {
+  "url": "https://www.python.org/downloads/",
+  "ys": {}
+ },
+ "whatsnew": {
+  "url": "https://docs.python.org/3.15/whatsnew/3.15.html",
+  "ys": {
+   "summary-release-highlights": 363,
+   "pep-810-explicit-lazy-imports": 1983,
+   "pep-814-add-frozendict-built-in-type": 4210,
+   "pep-661-add-sentinel-built-in-type": 5199,
+   "pep-798-unpacking-in-comprehensions": 8761,
+   "tachyon-high-frequency-statistical-sampling-profiler": 5910
+  }
+ },
+ "pep686": {
+  "url": "https://peps.python.org/pep-0686/",
+  "ys": {
+   "abstract": 532,
+   "motivation": 706
+  }
+ },
+ "flame": {
+  "url": "flame.html",
+  "ys": {}
+ }
+}

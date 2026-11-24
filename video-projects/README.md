@@ -8,6 +8,12 @@ Split out of `video-editor` on 2026-11-11 with its history.
 | `videos/<date>/<slug>/` | One video per folder: `script.md`, notes, prompts. Renders and caches stay on disk, untracked. |
 | `videos/mantra-rahasyam/` | Drama series bible and episodes (pipeline: `../drama-studio`). |
 | `shorts/` | Short and long-form packs (`short.yaml`, `longform.yaml`). |
+| `brand/<channel>/` | Reusable channel assets and generators, e.g. `brand/python-decoder/make_bumpers.py` (intro/outro) and upload defaults. |
+
+Channels: Mantra Shakti (devotional, Telugu/Tamil), DeveeKitchen (Telugu food explainers), Python Decoder
+(@pythondecoder101, English coding tutorials with the talking avatar; plan in
+`docs/superpowers/specs/2026-11-24-pythondecoder-channel-first-3-videos.md`, EP1 in
+`videos/2026-11-24/python-315-features/`, recipe `../video-editor/docs/TECH_TUTORIALS.md`).
 
 `video-editor` reaches this content through two symlinks (`videos`, `shorts`), so commands such as
 `uv run ve explain videos/2026-11-10/india-geography/script.md` still run from the engine folder.

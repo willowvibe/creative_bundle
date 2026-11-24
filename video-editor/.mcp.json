@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "comfyui": {
+      "command": "/mnt/data2/git_repos/creative_repos/video-editor/.venv/bin/python",
+      "args": ["/mnt/data2/git_repos/creative_repos/video-editor/scripts/comfyui_mcp_server.py"],
+      "env": {
+        "COMFYUI_URL": "http://localhost:18188"
+      }
+    },
+    "openrouter": {
+      "type": "http",
+      "url": "https://mcp.openrouter.ai/mcp"
+    },
+    "video-editor": {
+      "command": "uv",
+      "args": ["run", "video-editor-mcp"]
+    }
+  }
+}

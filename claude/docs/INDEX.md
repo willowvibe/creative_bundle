@@ -27,6 +27,9 @@ All of these ship inside the bundle, so they are readable offline.
 | `video-editor/docs/CLAUDE_TOOLS.md` | Tooling notes for Claude-driven runs |
 | `video-editor/docs/MAP_STORIES.md` | Map-scene recipe details |
 | `video-editor/docs/DEVOTIONAL_CHANTS.md` | Chant ×N workflow |
+| `video-editor/docs/TECH_TUTORIALS.md` | Coding tutorials: verified demos, real page captures, editor/terminal screen track, talking avatar, SFX, music bed, bumpers, thumbnails, upload gotchas |
+| `video-editor/.claude/skills/tech-tutorial-video/SKILL.md` | Skill for those tutorials (Python Decoder channel) |
+| `video-editor/.claude/skills/phone-vlog-edit/SKILL.md` | Editing self-recorded phone talking-head footage |
 | `video-editor/docs/LIVE_PROVIDER_RUN.md` | Live provider smoke runs |
 | `video-editor/docs/design/`, `docs/archive/` | Design notes and historical plans/audits |
 | `video-editor/.claude/skills/video-editor/SKILL.md` | Skill entry point |
@@ -39,6 +42,10 @@ All of these ship inside the bundle, so they are readable offline.
 |---|---|
 | `video-projects/README.md` | Content layout and how `ve` reaches it |
 | `video-projects/videos/mantra-rahasyam/` | Drama series bible and episodes |
+| `video-projects/brand/python-decoder/` | Channel intro/outro generator (`make_bumpers.py`) and upload defaults |
+| `video-projects/videos/2026-11-24/python-315-features/` | Python Decoder EP1: template project (capture, screen-track, SFX, music, thumbnail, publish scripts) |
+| `video-projects/videos/2026-11-24/talking-avatar-pilot/` | Talking-avatar pilot: sprites generation, bubbles, lip-sync versions |
+| `video-projects/docs/superpowers/specs/2026-11-24-pythondecoder-channel-first-3-videos.md` | Python Decoder channel plan |
 | Per-project `README.md`, `script.md`, notes | Individual video briefs and prompts |
 
 ## vocal-to-song

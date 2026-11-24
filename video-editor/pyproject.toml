@@ -207,6 +207,7 @@ root_packages = [
     "transitions",
     "sfx_placement",
     "screen_tutorial",
+    "talking_avatar",
     "chapters",
     "motion_graphics",
     "dubbing",
@@ -250,7 +251,7 @@ type = "forbidden"
 source_modules = [
     "broll", "music", "qa", "verify", "review", "captions", "graphics",
     "second_pass", "export", "rough_cut", "audio_cleanup", "reframe",
-    "transitions", "sfx_placement", "screen_tutorial", "chapters",
+    "transitions", "sfx_placement", "screen_tutorial", "talking_avatar", "chapters",
     "motion_graphics", "dubbing", "shorts_factory", "thumbnail", "beat_sync",
     "skills",
 ]

@@ -72,6 +72,8 @@ ffprobe -version | head -1
 | **Xvfb** | `social-engine` runs Chrome hidden on a virtual `:99` display on Linux | `sudo apt install xvfb` |
 | **Cloudflare `wrangler`** | deploy the drama review board | `npm i -g wrangler` then `wrangler login` |
 | **Modal CLI** | MiniMax H3 lip-sync (`v2_h3_lipsync.py`) | `uv tool install modal` then `modal token new` |
+| **Rhubarb Lip Sync 1.14** | mouth cues for `ve talking-avatar` (cartoon avatar over screen recordings) | release binary from github.com/DanielSWolf/rhubarb-lip-sync on `PATH`; without it the engine falls back to loudness timing |
+| **`.venv-lipsync`** (CPU torch + transformers + g2p_en, ~1 GB) | default `--lipsync hybrid`: lip closures on wav2vec2-measured M/B/P letters | in `video-editor/`: `uv venv .venv-lipsync && uv pip install --python .venv-lipsync/bin/python torch --index-url https://download.pytorch.org/whl/cpu && uv pip install --python .venv-lipsync/bin/python transformers g2p_en numpy`; without it hybrid falls back to Rhubarb |
 | **`agent-browser`** | browser automation preferred by `CLAUDE.md` | `npm i -g agent-browser` (source machine: 0.27.0) |
 | **`agy`** | optional draft-image agent that `ve doctor` reports on | separate Antigravity CLI install |
 | **`rpc` / RunPod ComfyUI** | upscales, Wan/InfiniteTalk renders — a *separate* repo not in this bundle | clone `runpod-comfyui` and follow its README |
@@ -363,6 +365,11 @@ Add it to `.mcp.json` if Claude should drive Flow directly:
   }
 }
 ```
+
+> **Known break (2026-11-24):** Flow renamed its agent toggle from "Agent" to "Flow agent", so flow-mcp
+> generations time out (`src/flow.ts`, two `getByRole("button", { name: "Agent", exact: true })` locators; see
+> `video-editor/docs/ISSUES_BUGS.md` #373). Until it is patched, drive Flow in your own Chrome with the Claude in
+> Chrome extension (Image mode, Nano Banana, 0 credits).
 
 `drama-studio/scripts/flow_call.py` hardcodes `~/flow-mcp/dist/index.js`. Keep
 the checkout there, or edit the `SERVER` line in that script if yours lives
