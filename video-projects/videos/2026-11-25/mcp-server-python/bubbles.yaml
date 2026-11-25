@@ -1,0 +1,66 @@
+# Speech bubbles for EP3 (MCP server): key or fun points only. Times from audio/words.json.
+- time: 9.64          # "about 404"
+  text: "~404 miles"
+  emoji: "🧭"
+  hold: 2.2
+- time: 35.28          # "usb"
+  text: "USB-C for AI"
+  emoji: "🔌"
+  hold: 2.4
+- time: 53.72          # "version 4"
+  text: "FastMCP 4.2.6"
+  emoji: "🚀"
+  hold: 2.0
+- time: 112.82          # "about 35"
+  text: "~35 lines!"
+  emoji: "✨"
+  hold: 2.0
+- time: 160.76          # "three calls"
+  text: "AI chose 3 calls"
+  emoji: "🤖"
+  hold: 2.2
+- time: 179.34          # "ap key"
+  text: "Leaked!"
+  emoji: "😱"
+  hold: 1.8
+- time: 196.72          # "gets an error"
+  text: "Blocked!"
+  emoji: "🛡️"
+  hold: 2.0
+- time: 239.30          # "two locks"
+  text: "Two locks"
+  emoji: "🔒"
+  hold: 2.0
+- time: 287.40          # "i did not write"
+  text: "0 lines of SQL by me"
+  emoji: "🤯"
+  hold: 2.2
+- time: 311.10          # "claude stopped"
+  text: "It asked first"
+  emoji: "🙋"
+  hold: 2.2
+- time: 332.00          # "still there"
+  text: "Nothing deleted"
+  emoji: "✅"
+  hold: 2.0
+- time: 386.17          # "subscribe"
+  text: "More modern Python"
+  emoji: "🔔"
+  hold: 1.7
+
+# Avatar-only actions
+- time: 69.74          # "here is the whole"
+  action: glance
+  hold: 1.2
+- time: 154.22          # "watch the tool"
+  action: glance
+  hold: 1.2
+- time: 173.22          # "but ask it"
+  action: brows
+  hold: 1.0
+- time: 278.04          # "here is one of them"
+  action: glance
+  hold: 1.2
+- time: 307.80          # "then i asked it to delete"
+  action: brows
+  hold: 1.0

@@ -1,0 +1,40 @@
+# Speech bubbles for EP2 (uv): key or fun points only. Times from audio/words.json (after the sync-line cut).
+- time: 12.48          # "about 5"
+  text: "4× faster"
+  emoji: "⚡"
+  hold: 2.4
+- time: 17.62          # "hundredths"
+  text: "0.05 s!"
+  emoji: "🚀"
+  hold: 2.2
+- time: 95.16          # "older tutorials"
+  text: "Old layout!"
+  emoji: "🙈"
+  hold: 2.6
+- time: 140.06          # "pins the exact"
+  text: "Commit uv.lock"
+  emoji: "📌"
+  hold: 2.4
+- time: 178.44          # "my favorite"
+  text: "My favourite!"
+  emoji: "❤️"
+  hold: 2.0
+- time: 227.76          # "and it finds"
+  text: "Found it"
+  emoji: "🔍"
+  hold: 2.0
+- time: 290.46          # "subscribe"
+  text: "Next: MCP server"
+  emoji: "🔔"
+  hold: 1.7
+
+# Avatar-only actions
+- time: 112.60          # "if you want the old"
+  action: brows
+  hold: 1.0
+- time: 152.92          # "here is a tiny app"
+  action: glance
+  hold: 1.2
+- time: 181.66          # "this script needs"
+  action: glance
+  hold: 1.2

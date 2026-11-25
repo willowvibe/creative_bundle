@@ -3,7 +3,7 @@
 Reusable bumpers for every @pythondecoder101 video. One script makes both, per episode:
 
 ```
-uv run python brand/python-decoder/make_bumpers.py OUT_DIR --episode "EP 1 · Python 3.15" --next "Up next: uv from scratch"
+uv run python brand/python-decoder/make_bumpers.py OUT_DIR --episode "EP 1 · Python 3.15" --next "Up next: uv from scratch" [--question "Which feature will you use first?"]
 ```
 → `OUT_DIR/intro.mp4` (4 s) and `OUT_DIR/outro.mp4` (12 s), 1920×1080, 30 fps, AAC 44.1 kHz stereo (matches
 `ve talking-avatar` output, so they join with the stream-copy concat demuxer).
@@ -47,3 +47,5 @@ screen, choose the "1 video, 1 subscribe" layout and drag the elements onto the 
   animated, and music is a background bed. Re-check only if a video adds realistic AI footage of real people/places,
   someone else's voice, or AI music as the main focus.
 - Category Education, language English (India) (channel defaults), not made for kids, playlist per series.
+- Pass each episode's own `--question` (EP2: "Will you switch from pip to uv?", EP3: "What tool would you give your AI
+  first?"); without it the outro shows the default EP1 question. Put it in the episode's `render_all.sh` too.

@@ -1,0 +1,6 @@
+fastapi
+pandas
+requests
+rich
+httpx
+pydantic

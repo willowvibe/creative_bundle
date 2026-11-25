@@ -1,0 +1,31 @@
+{
+ "home": {
+  "url": "https://docs.astral.sh/uv/",
+  "ys": {
+   "highlights": 538,
+   "installation": 1224
+  }
+ },
+ "install": {
+  "url": "https://docs.astral.sh/uv/getting-started/installation/",
+  "ys": {
+   "installing-uv": 183,
+   "installation-methods": 290
+  }
+ },
+ "init": {
+  "url": "https://docs.astral.sh/uv/concepts/projects/init/",
+  "ys": {
+   "creating-projects": 183,
+   "applications": 1115,
+   "creating-a-project-without-a-build-system": 7396
+  }
+ },
+ "pep723": {
+  "url": "https://peps.python.org/pep-0723/",
+  "ys": {
+   "abstract": 861,
+   "example": 3897
+  }
+ }
+}

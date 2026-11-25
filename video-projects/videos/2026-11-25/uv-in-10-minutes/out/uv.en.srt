@@ -1,0 +1,435 @@
+1
+00:00:04,000 --> 00:00:06,780
+This is pip installing 6 popular packages,
+
+2
+00:00:07,120 --> 00:00:09,120
+FastAPI, pandas, requests,
+
+3
+00:00:09,340 --> 00:00:11,880
+rich, httpx, and pydantic,
+
+4
+00:00:12,140 --> 00:00:15,100
+about 19 seconds. Now the exact same packages
+
+5
+00:00:15,100 --> 00:00:17,800
+with uv, about 5 seconds,
+
+6
+00:00:18,040 --> 00:00:20,280
+and once uv has them cached,
+
+7
+00:00:20,320 --> 00:00:22,320
+a fresh install takes 5 hundredths of a
+
+8
+00:00:22,320 --> 00:00:24,640
+second, uv replaces pip,
+
+9
+00:00:24,660 --> 00:00:26,960
+venv, pyenv, and pipx with one tool.
+
+10
+00:00:27,200 --> 00:00:28,380
+In the next few minutes,
+
+11
+00:00:28,380 --> 00:00:31,760
+I will set it up from scratch the 2026 way,
+
+12
+00:00:31,820 --> 00:00:34,420
+and if you learned uv from an older tutorial,
+
+13
+00:00:34,760 --> 00:00:36,820
+stay with me, because a few things changed
+
+14
+00:00:36,820 --> 00:00:38,360
+and I will show you what.
+
+15
+00:00:38,600 --> 00:00:41,420
+uv is a single program written in Rust by
+
+16
+00:00:41,420 --> 00:00:43,400
+Astral, the team behind Ruff.
+
+17
+00:00:43,660 --> 00:00:44,980
+On macOS and Linux,
+
+18
+00:00:45,040 --> 00:00:47,260
+paste this one line into your terminal.
+
+19
+00:00:47,520 --> 00:00:50,500
+On Windows, use this PowerShell line instead.
+
+20
+00:00:51,000 --> 00:00:54,100
+Homebrew, winget, and even pip install uv
+
+21
+00:00:54,100 --> 00:00:57,780
+work too. Then check it with uv --version.
+
+22
+00:00:57,860 --> 00:01:01,480
+I am on 0.13.9, the latest release right
+
+23
+00:01:01,480 --> 00:01:03,440
+now. First surprise,
+
+24
+00:01:03,560 --> 00:01:05,600
+you do not need to install Python separately
+
+25
+00:01:05,600 --> 00:01:09,100
+anymore. uv python install downloads a ready-made
+
+26
+00:01:09,100 --> 00:01:12,980
+Python. Here it fetched Python 3.13 in about
+
+27
+00:01:12,980 --> 00:01:15,220
+3 seconds. No installer,
+
+28
+00:01:15,540 --> 00:01:18,240
+no admin rights. With no version number,
+
+29
+00:01:18,260 --> 00:01:20,080
+you get the newest stable one,
+
+30
+00:01:20,080 --> 00:01:23,980
+3.15. uv python list shows every Python
+
+31
+00:01:23,980 --> 00:01:26,080
+on your machine, including the ones that
+
+32
+00:01:26,080 --> 00:01:27,580
+were already there.
+
+33
+00:01:27,670 --> 00:01:33,100
+And uv run --python 3.14 runs anything on
+
+34
+00:01:33,100 --> 00:01:34,340
+that exact version.
+
+35
+00:01:35,080 --> 00:01:36,240
+Now a real project,
+
+36
+00:01:36,340 --> 00:01:38,680
+uv init weather, here is what changed.
+
+37
+00:01:39,160 --> 00:01:42,500
+Older tutorials show a single main.py file.
+
+38
+00:01:42,960 --> 00:01:46,020
+Since uv 0.12, uv init creates a proper
+
+39
+00:01:46,020 --> 00:01:49,360
+package, your code lives in src slash weather,
+
+40
+00:01:49,520 --> 00:01:52,080
+and pyproject.toml gets a command entry
+
+41
+00:01:52,080 --> 00:01:53,680
+and a build system.
+
+42
+00:01:53,780 --> 00:01:56,040
+That avoids the classic import headaches
+
+43
+00:01:56,040 --> 00:01:58,820
+later. If you want the old flat layout,
+
+44
+00:01:59,060 --> 00:02:02,340
+add --no-package. And notice,
+
+45
+00:02:02,560 --> 00:02:04,760
+there is no virtual environment yet,
+
+46
+00:02:04,840 --> 00:02:06,280
+let's add two libraries.
+
+47
+00:02:06,860 --> 00:02:08,820
+uv add requests rich.
+
+48
+00:02:09,140 --> 00:02:10,560
+In about one second,
+
+49
+00:02:10,560 --> 00:02:12,940
+uv created the virtual environment,
+
+50
+00:02:13,000 --> 00:02:15,020
+picked Python 3.15,
+
+51
+00:02:15,080 --> 00:02:17,720
+resolved 10 packages and installed them.
+
+52
+00:02:18,100 --> 00:02:20,380
+pyproject now lists both dependencies and
+
+53
+00:02:20,380 --> 00:02:21,680
+a new file appeared,
+
+54
+00:02:21,740 --> 00:02:25,380
+uv.lock. The lock file pins the exact version
+
+55
+00:02:25,380 --> 00:02:28,080
+of every package. So your teammate,
+
+56
+00:02:28,200 --> 00:02:29,920
+your server, and you,
+
+57
+00:02:29,920 --> 00:02:32,800
+a year from now, all get the same environment.
+
+58
+00:02:33,220 --> 00:02:36,120
+Commit it to git. uv tree shows who depends
+
+59
+00:02:36,120 --> 00:02:38,460
+on what. Here is a tiny app that fetches
+
+60
+00:02:38,460 --> 00:02:41,160
+the current temperature for three cities
+
+61
+00:02:41,320 --> 00:02:42,800
+and prints a table.
+
+62
+00:02:42,980 --> 00:02:45,640
+To run it, you do not activate anything,
+
+63
+00:02:45,640 --> 00:02:47,520
+just uv run weather.
+
+64
+00:02:47,720 --> 00:02:49,640
+uv checks the lock file,
+
+65
+00:02:49,940 --> 00:02:52,260
+syncs the environment if needed and runs
+
+66
+00:02:52,260 --> 00:02:55,500
+your code. Cloned a project from GitHub,
+
+67
+00:02:55,960 --> 00:02:59,980
+run uv sync. 10 packages installed the exact
+
+68
+00:02:59,980 --> 00:03:01,800
+versions from the lock file.
+
+69
+00:03:02,020 --> 00:03:03,840
+This is my favorite feature,
+
+70
+00:03:03,860 --> 00:03:05,160
+single file scripts.
+
+71
+00:03:05,660 --> 00:03:07,220
+This script needs rich.
+
+72
+00:03:07,540 --> 00:03:10,380
+Normally, that means making a virtual environment
+
+73
+00:03:10,380 --> 00:03:13,040
+just for one file. Instead,
+
+74
+00:03:13,240 --> 00:03:17,060
+uv add --script writes the dependency into
+
+75
+00:03:17,060 --> 00:03:19,520
+the script itself in this comment block.
+
+76
+00:03:19,700 --> 00:03:22,780
+It is a Python standard PEP 723.
+
+77
+00:03:23,300 --> 00:03:26,460
+Now, uv run hello_rich.py.
+
+78
+00:03:26,700 --> 00:03:29,580
+uv builds a cached throwaway environment
+
+79
+00:03:29,580 --> 00:03:32,660
+and runs it. Send this one file to a friend
+
+80
+00:03:32,660 --> 00:03:35,360
+who has uv. And it just works.
+
+81
+00:03:35,600 --> 00:03:37,720
+Command line tools like Ruff do not belong
+
+82
+00:03:37,720 --> 00:03:39,080
+inside your project.
+
+83
+00:03:39,420 --> 00:03:42,400
+uv tool install ruff installs it once in
+
+84
+00:03:42,400 --> 00:03:44,300
+its own isolated environment.
+
+85
+00:03:44,720 --> 00:03:45,920
+And it works everywhere.
+
+86
+00:03:46,180 --> 00:03:48,160
+Want to try a tool just once?
+
+87
+00:03:48,340 --> 00:03:50,780
+uvx runs it without installing anything.
+
+88
+00:03:50,840 --> 00:03:53,520
+uvx ruff check and it finds the unused import
+
+89
+00:03:53,520 --> 00:03:56,620
+in my file and even offers to fix it.
+
+90
+00:03:56,620 --> 00:03:59,940
+Already have a project with a requirements.txt
+
+91
+00:03:59,940 --> 00:04:05,940
+file. uv add -r requirements.txt moves every
+
+92
+00:04:05,940 --> 00:04:08,300
+package into pyproject in one go.
+
+93
+00:04:08,500 --> 00:04:11,620
+Or keep your old workflow and just put uv
+
+94
+00:04:11,620 --> 00:04:16,880
+in front. uv pip install -r requirements.txt.
+
+95
+00:04:16,960 --> 00:04:19,200
+That is exactly the command I used in the
+
+96
+00:04:19,200 --> 00:04:23,260
+race. In VS Code, uv's .venv folder sits
+
+97
+00:04:23,260 --> 00:04:24,960
+right inside the project.
+
+98
+00:04:25,360 --> 00:04:27,060
+So, VS Code finds it.
+
+99
+00:04:27,200 --> 00:04:28,520
+Open the command palette,
+
+100
+00:04:28,700 --> 00:04:31,060
+choose Python: Select Interpreter,
+
+101
+00:04:31,220 --> 00:04:33,860
+and pick .venv. Quick recap.
+
+102
+00:04:34,040 --> 00:04:36,120
+uv python install for Python,
+
+103
+00:04:36,420 --> 00:04:39,100
+uv init and uv add for projects.
+
+104
+00:04:39,220 --> 00:04:43,080
+uv run to run, uv add --script for single
+
+105
+00:04:43,080 --> 00:04:45,740
+files and uvx for tools,
+
+106
+00:04:45,780 --> 00:04:47,480
+one tool instead of five.
+
+107
+00:04:47,740 --> 00:04:50,140
+In the next video, we use uv to build an
+
+108
+00:04:50,140 --> 00:04:53,380
+MCP server so AI can call your own Python
+
+109
+00:04:53,380 --> 00:04:56,340
+code. Subscribe so you do not miss it.

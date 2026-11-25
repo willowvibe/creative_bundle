@@ -1,0 +1,1 @@
+{"mcpServers": {"my-notes": {"command": "uvx", "args": ["--from", "fastmcp==4.2.6", "fastmcp", "run", "/mnt/data2/git_repos/creative_repos/video-projects/videos/2026-11-25/mcp-server-python/demos/server.py"]}}}

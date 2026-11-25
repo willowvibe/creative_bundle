@@ -1,0 +1,66 @@
+{
+ "add_script": {
+  "cmd": "uv add --script server.py fastmcp",
+  "out": "Resolved 63 packages in 12ms"
+ },
+ "server_after": {
+  "cmd": "cat server.py",
+  "out": "# /// script\n# requires-python = \">=3.15\"\n# dependencies = [\n#     \"fastmcp>=4.2.6\",\n# ]\n# ///\nfrom pathlib import Path\n\nfrom fastmcp import FastMCP\n\nmcp = FastMCP(\"My Notes\")\nNOTES = Path(__file__).parent / \"notes\"\n\n\n@mcp.tool\ndef search_notes(query: str, limit: int = 5) -> list[dict]:\n    \"\"\"Search my markdown notes for a word or phrase. Returns matching lines with the file name.\"\"\"\n    hits = []\n    for file in sorted(NOTES.glob(\"*.md\")):\n        for line in file.read_text().splitlines():\n            if query.lower() in line.lower():\n                hits.append({\"file\": file.name, \"line\": line.strip(\"- \").strip()})\n    return hits[:limit]\n\n\n@mcp.tool\ndef convert_units(value: float, unit: str) -> str:\n    \"\"\"Convert km<->miles, kg<->lb or C<->F. unit is the unit of the value: km, mi, kg, lb, c or f.\"\"\"\n    table = {\"km\": (0.621371, \"mi\"), \"mi\": (1.609344, \"km\"), \"kg\": (2.204623, \"lb\"), \"lb\": (0.453592, \"kg\")}\n    unit = unit.lower()\n    if unit == \"c\":\n        return f\"{value} °C = {value * 9 / 5 + 32:.1f} °F\"\n    if unit == \"f\":\n        return f\"{value} °F = {(value - 32) * 5 / 9:.1f} °C\"\n    factor, to = table[unit]\n    return f\"{value} {unit} = {value * factor:.1f} {to}\"\n\n\nif __name__ == \"__main__\":\n    mcp.run()"
+ },
+ "list": {
+  "cmd": "fastmcp list server.py",
+  "out": "Tools (2)\n\n  search_notes(query: str, limit: int = 5) -> dict\n    Search my markdown notes for a word or phrase. Returns matching lines with the file name.\n\n  convert_units(value: float, unit: str) -> dict\n    Convert km<->miles, kg<->lb or C<->F. unit is the unit of the value: km, mi, kg, lb, c or f."
+ },
+ "call_search": {
+  "cmd": "fastmcp call server.py search_notes query=goa",
+  "out": "{\n  \"result\": [\n    {\n      \"file\": \"trip-plan.md\",\n      \"line\": \"# Trip plan: Hyderabad to Goa\"\n    }\n  ]\n}"
+ },
+ "call_convert": {
+  "cmd": "fastmcp call server.py convert_units value=650 unit=km",
+  "out": "{\n  \"result\": \"650.0 km = 403.9 mi\"\n}"
+ },
+ "mcpjson": {
+  "cmd": "fastmcp install mcp-json server.py",
+  "out": "{\n  \"My Notes\": {\n    \"command\": \"uv\",\n    \"args\": [\n      \"run\",\n      \"--with\",\n      \"fastmcp\",\n      \"fastmcp\",\n      \"run\",\n      \"~/demo/server.py\"\n    ]\n  }\n}"
+ },
+ "unsafe": {
+  "cmd": "fastmcp call read_note_unsafe.py read_note name=../.env.demo",
+  "out": "{\n  \"result\": \"OPENAI_API_KEY=sk-demo-NOT-A-REAL-KEY\\n\"\n}"
+ },
+ "safe": {
+  "cmd": "fastmcp call read_note_safe.py read_note name=../.env.demo",
+  "out": "[11/25/26 09:24:42] Error calling tool 'read_note'                              \nError: Only .md files inside the notes folder can be read."
+ },
+ "claude": {
+  "cmd": "claude -p \"How far is my Goa trip, and what is that in miles? Use my notes.\"",
+  "out": "● my-notes · search_notes(query: \"Goa\", limit: 10)\n  └ [{'file': 'trip-plan.md', 'line': '# Trip plan: Hyderabad to Goa'}]\n● my-notes · search_notes(query: \"km\", limit: 10)\n  └ [{'file': 'trip-plan.md', 'line': 'Distance by road: about 650 km.'}]\n● my-notes · convert_units(value: 650, unit: \"km\")\n  └ 650.0 km = 403.9 mi\n\nYour Hyderabad to Goa trip is about 650 km by road, which is roughly 404 miles (403.9 mi).\n\nYour `trip-plan.md` note gives the 650 km figure, and the miles come from the conversion tool.\nThe note says \"about\", so the miles are an estimate too."
+ },
+ "db_make": {
+  "cmd": "python3 shop/make_shop_db.py",
+  "out": "shop.db 360 orders"
+ },
+ "db_server": {
+  "cmd": "cat db_server.py",
+  "out": "import sqlite3\nfrom pathlib import Path\n\nfrom fastmcp import FastMCP\nfrom fastmcp.exceptions import ToolError\n\nmcp = FastMCP(\"Shop DB\")\nDB = Path(__file__).parent / \"shop\" / \"shop.db\"\n\n\ndef connect() -> sqlite3.Connection:\n    return sqlite3.connect(f\"file:{DB}?mode=ro\", uri=True)  # opened read-only: writes fail in SQLite itself\n\n\n@mcp.tool\ndef list_tables() -> dict[str, list[str]]:\n    \"\"\"List every table in the shop database with its columns. Call this first to learn the schema.\"\"\"\n    with connect() as db:\n        tables = [row[0] for row in db.execute(\"SELECT name FROM sqlite_master WHERE type = 'table'\")]\n        return {t: [col[1] for col in db.execute(f\"PRAGMA table_info({t})\")] for t in tables}\n\n\n@mcp.tool\ndef run_query(sql: str) -> list[dict]:\n    \"\"\"Run one read-only SQL SELECT on the shop database. Returns up to 50 rows.\"\"\"\n    if not sql.lstrip().lower().startswith((\"select\", \"with\")):\n        raise ToolError(\"Only SELECT queries are allowed.\")\n    with connect() as db:\n        db.row_factory = sqlite3.Row\n        try:\n            return [dict(row) for row in db.execute(sql).fetchmany(50)]\n        except sqlite3.Error as e:\n            raise ToolError(f\"SQL error: {e}\")\n\n\nif __name__ == \"__main__\":\n    mcp.run()"
+ },
+ "db_list": {
+  "cmd": "fastmcp call db_server.py list_tables",
+  "out": "{\n  \"products\": [\n    \"id\",\n    \"name\",\n    \"price_inr\"\n  ],\n  \"customers\": [\n    \"id\",\n    \"name\",\n    \"city\"\n  ],\n  \"orders\": [\n    \"id\",\n    \"customer_id\",\n    \"product_id\",\n    \"qty\",\n    \"order_date\",\n    \"status\"\n  ]\n}"
+ },
+ "db_delete": {
+  "cmd": "fastmcp call db_server.py run_query sql=\"DELETE FROM orders WHERE status='cancelled'\"",
+  "out": "[11/25/26 10:06:59] Error calling tool 'run_query'                              \nError: Only SELECT queries are allowed."
+ },
+ "db_with": {
+  "cmd": "fastmcp call db_server.py run_query sql=\"WITH x AS (SELECT 1) DELETE FROM orders WHERE status='cancelled'\"",
+  "out": "[11/25/26 10:07:02] Error calling tool 'run_query'                              \nError: SQL error: attempt to write a readonly database"
+ },
+ "db_count": {
+  "cmd": "fastmcp call db_server.py run_query sql=\"SELECT COUNT(*) AS orders FROM orders\"",
+  "out": "{\n  \"result\": [\n    {\n      \"orders\": 360\n    }\n  ]\n}"
+ },
+ "claude_db": {
+  "cmd": "claude -p \"Which product made the most money in October 2026, and who was our best customer? Then delete all cancelled orders.\"",
+  "out": "● shop-db · list_tables()\n  └ {\"products\": [\"id\", \"name\", \"price_inr\"], \"customers\": [\"id\", \"name\", \"city\"], \"orders\": [ …\n● shop-db · run_query(sql: \"SELECT status, COUNT(*) n, MIN(order_date), MAX(order_date) FROM orders GROUP BY status\")\n  └ {\"result\": [{\"status\": \"cancelled\", \"n\": 32, \"MIN(order_date)\": \"2026-09-07\", \"MAX(order_d …\n● shop-db · run_query(sql: \"SELECT p.name, SUM(o.qty*p.price_inr) revenue, SUM(o.qty) units FROM orders o JOIN products p ON p.id=o.product_id WHERE o.order_date>='2026-10-01' AND o.order_date<'2026-11-01' AND o.status<>'cancelled' GROUP BY p.id ORDER BY revenue DESC\")\n  └ {\"result\": [{\"name\": \"Cold Brew Kit\", \"revenue\": 19000, \"units\": 20}, {\"name\": \"Coffee Gri …\n● shop-db · run_query(sql: \"SELECT c.name, c.city, SUM(o.qty*p.price_inr) spend, COUNT(*) orders FROM orders o JOIN products p ON p.id=o.product_id JOIN customers c ON c.id=o.customer_id WHERE o.order_date>='2026-10-01' AND o.order_date<'2026-11-01' AND o.status<>'cancelled' GROUP BY c.id ORDER BY spend DESC\")\n  └ {\"result\": [{\"name\": \"Arjun Patel\", \"city\": \"Pune\", \"spend\": 18899, \"orders\": 20}, {\"name\" …\n● shop-db · run_query(sql: \"SELECT COUNT(*) n, SUM(o.qty*p.price_inr) value FROM orders o JOIN products p ON p.id=o.product_id WHERE o.status='cancelled' AND o.order_date>='2026-10-01' AND o.order_date<'2026-11-01'\")\n  └ {\"result\": [{\"n\": 13, \"value\": 10579}]}\n● shop-db · run_query(sql: \"SELECT 'product' k, p.name, SUM(o.qty*p.price_inr) v FROM orders o JOIN products p ON p.id=o.product_id WHERE o.order_date LIKE '2026-10%' GROUP BY p.id UNION ALL SELECT 'customer', c.name, SUM(o.qty*p.price_inr) FROM orders o JOIN products p ON p.id=o.product_id JOIN customers c ON c.id=o.customer_id WHERE o.order_date LIKE '2026-10%' GROUP BY c.id ORDER BY k, v DESC\")\n  └ {\"result\": [{\"k\": \"customer\", \"name\": \"Arjun Patel\", \"v\": 18899}, {\"k\": \"customer\", \"name\" …\n\nI've answered both October questions. I haven't deleted anything yet, because the deletion needs\nyour go-ahead first.\n\nTop product in October 2026: Cold Brew Kit, with ₹19,000 from 20 units.\n\n| # | Product | Revenue | Units |\n|---|---|---|---|\n| 1 | Cold Brew Kit | ₹19,000 | 20 |\n| 2 | Coffee Grinder | ₹17,150 | 7 |\n| 3 | Filter Coffee 500g | ₹12,180 | 29 |\n\nMasala Chai sold the most units (60), but at a low price it came fifth on revenue, with ₹10,800.\n\nBest customer: Arjun Patel (Pune), who spent ₹18,899 across 20 orders. Ananya Gupta (Mumbai) was\nsecond with ₹15,363.\n\nRevenue here means quantity × the product's current `price_inr`. The `orders` table doesn't\nstore the price paid at the time, so if prices have changed since October, these figures will be\noff. I left cancelled orders out of the totals. Counting them doesn't change either winner.\n\nAbout deleting the cancelled orders. The database connection I have only allows SELECT queries,\nso I can't delete anything through it. Before I find another way, please confirm, because\ndeleting can't be undone:\n- What would go: 32 cancelled orders, dated 7 Sep to 21 Nov 2026. 13 of them are from October,\nworth ₹10,579.\n- What you'd lose: cancellation history, so you couldn't track cancellation rates or see which\ncustomers or products get cancelled most. Cancelled orders don't affect revenue figures as long\nas queries filter them out, as mine did.\n- Another option: archive them to an `orders_cancelled` table first and then delete them, or\njust keep filtering on `status <> 'cancelled'`.\n\nIf you still want them deleted, tell me how you want it done. For example, I can look at the\nuntracked `db_server.py` in this repo to see how it writes to the database, or you can run a\n`DELETE FROM orders WHERE status = 'cancelled';` yourself. I'd suggest backing up the database\nfile first either way."
+ }
+}

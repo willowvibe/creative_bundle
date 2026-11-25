@@ -133,13 +133,13 @@ VIDEO_BOX = (1000, 150, 1000 + 800, 150 + 450)    # YouTube "video" end-screen e
 SUB_CIRCLE = (1290, 680, 1290 + 230, 680 + 230)   # YouTube "subscribe" element goes here
 
 
-def outro_frame(t: float, nxt: str, av: Image.Image, dur: float) -> Image.Image:
+def outro_frame(t: float, nxt: str, av: Image.Image, dur: float, question: str = "Which feature will you use first?") -> Image.Image:
     im = background(t + 4)
     d = ImageDraw.Draw(im, "RGBA")
     a = ease(t / 0.5)
     # left: title and prompt
     d.text((110, 150), "Thanks for watching!", font=F_H1, fill=WHITE + (int(255 * a),))
-    body = "Which feature will you use first?"
+    body = question
     d.text((116, 275), body, font=F_BODY, fill=(200, 210, 230, int(255 * ease((t - 0.4) / 0.5))))
     line2 = "Tell me in the comments "
     d.text((116, 335), line2, font=F_BODY, fill=(200, 210, 230, int(255 * ease((t - 0.7) / 0.5))))
@@ -243,6 +243,7 @@ def main() -> None:
     ap.add_argument("out")
     ap.add_argument("--episode", default=None)
     ap.add_argument("--next", dest="nxt", default="Up next")
+    ap.add_argument("--question", default="Which feature will you use first?", help="outro prompt above 'Tell me in the comments'")
     ap.add_argument("--still", type=float, nargs="*", help="write intro/outro PNG stills at these times instead")
     a = ap.parse_args()
     out = Path(a.out)
@@ -251,13 +252,13 @@ def main() -> None:
     if a.still is not None:
         for t in a.still:
             intro_frame(min(t, 3.99), a.episode, av_intro).save(out / f"intro_{t:.1f}.png")
-            outro_frame(t, a.nxt, av_outro, 12.0).save(out / f"outro_{t:.1f}.png")
+            outro_frame(t, a.nxt, av_outro, 12.0, a.question).save(out / f"outro_{t:.1f}.png")
         return
     di, do = 4.0, 12.0
     write_wav(out / "_intro.wav", intro_audio(di))
     write_wav(out / "_outro.wav", outro_audio(do))
     render(out / "intro.mp4", lambda t: intro_frame(t, a.episode, av_intro), int(di * FPS), out / "_intro.wav", -18)
-    render(out / "outro.mp4", lambda t: outro_frame(t, a.nxt, av_outro, do), int(do * FPS), out / "_outro.wav", -20)
+    render(out / "outro.mp4", lambda t: outro_frame(t, a.nxt, av_outro, do, a.question), int(do * FPS), out / "_outro.wav", -20)
     (out / "_intro.wav").unlink()
     (out / "_outro.wav").unlink()
 

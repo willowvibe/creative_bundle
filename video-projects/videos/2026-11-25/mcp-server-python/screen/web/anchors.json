@@ -1,0 +1,21 @@
+{
+ "mcp": {
+  "url": "https://modelcontextprotocol.io/docs/getting-started/intro",
+  "ys": {
+   "page-title": 221,
+   "what-can-mcp-enable": 1089
+  }
+ },
+ "fastmcp": {
+  "url": "https://gofastmcp.com/getting-started/welcome",
+  "ys": {
+   "page-title": 217
+  }
+ },
+ "tools": {
+  "url": "https://gofastmcp.com/servers/tools",
+  "ys": {
+   "the-@tool-decorator": 860
+  }
+ }
+}

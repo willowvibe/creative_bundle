@@ -1,0 +1,599 @@
+1
+00:00:04,000 --> 00:00:07,060
+I asked Claude, how far is my Goa trip in
+
+2
+00:00:07,060 --> 00:00:09,380
+miles? It searched my own notes,
+
+3
+00:00:09,380 --> 00:00:11,640
+found 650 kilometers,
+
+4
+00:00:11,960 --> 00:00:14,740
+and called a converter to get about 404
+
+5
+00:00:14,740 --> 00:00:17,960
+miles. Both of those tools are tiny Python
+
+6
+00:00:17,960 --> 00:00:20,740
+functions I wrote. The thing that connects
+
+7
+00:00:20,740 --> 00:00:22,780
+them to the AI is called MCP.
+
+8
+00:00:23,020 --> 00:00:24,340
+In the next few minutes,
+
+9
+00:00:24,340 --> 00:00:26,280
+we build this server from scratch,
+
+10
+00:00:26,500 --> 00:00:28,280
+test it, connect it,
+
+11
+00:00:28,280 --> 00:00:30,960
+and make sure it cannot leak your secrets.
+
+12
+00:00:31,300 --> 00:00:33,800
+MCP, the Model Context Protocol,
+
+13
+00:00:33,800 --> 00:00:36,640
+is an open standard for connecting AI apps
+
+14
+00:00:36,640 --> 00:00:39,940
+to tools and data. Think of it like a USB-C
+
+15
+00:00:39,940 --> 00:00:42,940
+port for AI. You write a server once,
+
+16
+00:00:43,040 --> 00:00:44,780
+and Claude, VS Code,
+
+17
+00:00:44,840 --> 00:00:47,680
+Cursor, and other apps can all use it.
+
+18
+00:00:47,760 --> 00:00:49,400
+Your server offers tools,
+
+19
+00:00:49,500 --> 00:00:51,920
+and the AI decides when to call them.
+
+20
+00:00:52,120 --> 00:00:54,100
+We will use FastMCP,
+
+21
+00:00:54,100 --> 00:00:56,760
+the most popular Python framework for MCP.
+
+22
+00:00:56,760 --> 00:00:59,000
+It is on version 4 now.
+
+23
+00:00:59,440 --> 00:01:00,700
+Following my uv video,
+
+24
+00:01:00,980 --> 00:01:02,800
+this is a single file script,
+
+25
+00:01:02,960 --> 00:01:08,340
+uv add --script server.py fastmcp.
+
+26
+00:01:08,480 --> 00:01:10,980
+That writes the dependency into the file,
+
+27
+00:01:10,980 --> 00:01:13,560
+so there is no virtual environment to manage.
+
+28
+00:01:13,740 --> 00:01:15,300
+Here is the whole server.
+
+29
+00:01:15,480 --> 00:01:19,120
+We create a FastMCP app called My Notes.
+
+30
+00:01:19,560 --> 00:01:21,960
+Then each tool is just a Python function
+
+31
+00:01:21,960 --> 00:01:25,340
+with the @mcp.tool decorator.
+
+32
+00:01:25,340 --> 00:01:28,000
+This one searches my notes folder for a
+
+33
+00:01:28,000 --> 00:01:30,460
+word and returns the matching lines.
+
+34
+00:01:30,960 --> 00:01:32,060
+The important part,
+
+35
+00:01:32,060 --> 00:01:34,620
+the type hints and the docstring are not
+
+36
+00:01:34,620 --> 00:01:38,340
+decoration here. FastMCP turns them into
+
+37
+00:01:38,340 --> 00:01:40,820
+the description the AI reads.
+
+38
+00:01:40,980 --> 00:01:43,680
+So a clear docstring is how the AI knows
+
+39
+00:01:43,680 --> 00:01:45,840
+when to use your tool.
+
+40
+00:01:46,120 --> 00:01:49,020
+The second tool converts kilometers to miles,
+
+41
+00:01:49,160 --> 00:01:50,460
+kilograms to pounds,
+
+42
+00:01:50,560 --> 00:01:52,160
+and Celsius to Fahrenheit.
+
+43
+00:01:52,260 --> 00:01:55,060
+And at the bottom, mcp.run() starts the
+
+44
+00:01:55,060 --> 00:01:56,720
+server. That is it.
+
+45
+00:01:56,820 --> 00:01:59,120
+About 35 lines, two tools.
+
+46
+00:01:59,280 --> 00:02:00,800
+Before connecting an AI,
+
+47
+00:02:01,020 --> 00:02:04,180
+test it yourself. fastmcp list shows both
+
+48
+00:02:04,180 --> 00:02:07,060
+tools with the inputs the AI will see.
+
+49
+00:02:07,440 --> 00:02:10,080
+fastmcp call runs one directly.
+
+50
+00:02:10,180 --> 00:02:13,240
+Search for Goa, and it finds my trip plan.
+
+51
+00:02:13,700 --> 00:02:15,800
+Convert 650 kilometers,
+
+52
+00:02:16,280 --> 00:02:19,080
+and you get 403.9 miles.
+
+53
+00:02:19,080 --> 00:02:22,520
+If this works, the AI side will work too.
+
+54
+00:02:22,860 --> 00:02:23,960
+Now let's connect it.
+
+55
+00:02:24,120 --> 00:02:26,740
+fastmcp install has ready commands for Claude
+
+56
+00:02:26,740 --> 00:02:29,180
+Desktop, Claude Code,
+
+57
+00:02:29,460 --> 00:02:32,840
+Cursor, and more. or mcp-json prints the
+
+58
+00:02:32,840 --> 00:02:34,960
+config to paste into any app.
+
+59
+00:02:34,980 --> 00:02:37,200
+I gave this config to Claude Code and asked
+
+60
+00:02:37,200 --> 00:02:39,580
+my question. Watch the tool calls.
+
+61
+00:02:39,580 --> 00:02:41,060
+It searched for Goa,
+
+62
+00:02:41,400 --> 00:02:43,240
+then searched again for kilometers,
+
+63
+00:02:43,300 --> 00:02:44,760
+then called convert units.
+
+64
+00:02:44,760 --> 00:02:47,520
+Three calls, all decided by the AI,
+
+65
+00:02:47,900 --> 00:02:49,940
+all running my Python on my machine.
+
+66
+00:02:50,060 --> 00:02:52,500
+Now, the part most tutorials skip.
+
+67
+00:02:52,800 --> 00:02:55,080
+Here is a read_note tool that takes a file
+
+68
+00:02:55,080 --> 00:02:57,100
+name. Looks harmless,
+
+69
+00:02:57,220 --> 00:03:00,420
+but ask it for ../.env,
+
+70
+00:03:00,860 --> 00:03:02,760
+and it walks out of the notes folder and
+
+71
+00:03:02,760 --> 00:03:04,320
+returns my API key.
+
+72
+00:03:04,580 --> 00:03:06,880
+An AI can be tricked into asking for exactly
+
+73
+00:03:06,880 --> 00:03:09,740
+that. For example, by a hidden instruction
+
+74
+00:03:09,740 --> 00:03:11,480
+in a web page it reads.
+
+75
+00:03:11,480 --> 00:03:14,440
+The fix is two lines: resolve the path,
+
+76
+00:03:14,720 --> 00:03:16,820
+and refuse anything outside the notes folder
+
+77
+00:03:16,820 --> 00:03:19,600
+or anything that is not a markdown file.
+
+78
+00:03:19,840 --> 00:03:21,880
+Now the same request gets an error.
+
+79
+00:03:22,060 --> 00:03:24,300
+My rules: never expose a tool that runs
+
+80
+00:03:24,300 --> 00:03:26,600
+shell commands or takes any path.
+
+81
+00:03:26,900 --> 00:03:29,380
+Keep tools read only unless they must write,
+
+82
+00:03:29,500 --> 00:03:31,540
+and never put secrets where a tool can reach
+
+83
+00:03:31,540 --> 00:03:34,000
+them. Now a real use case,
+
+84
+00:03:34,220 --> 00:03:36,620
+every small business has a database and
+
+85
+00:03:36,620 --> 00:03:39,200
+most owners cannot write SQL.
+
+86
+00:03:39,680 --> 00:03:42,120
+So let's give an AI safe access to one.
+
+87
+00:03:42,240 --> 00:03:44,040
+This is a demo shop database,
+
+88
+00:03:44,200 --> 00:03:49,100
+8 products, 12 customers and 360 orders.
+
+89
+00:03:49,340 --> 00:03:51,380
+The server is just two tools.
+
+90
+00:03:51,480 --> 00:03:53,560
+list_tables returns every table with its
+
+91
+00:03:53,560 --> 00:03:56,400
+columns so the AI can learn the schema by
+
+92
+00:03:56,400 --> 00:03:59,820
+itself. run_query takes one SQL statement
+
+93
+00:03:59,820 --> 00:04:01,980
+and returns up to 50 rows.
+
+94
+00:04:02,120 --> 00:04:03,840
+Now notice the two locks.
+
+95
+00:04:04,140 --> 00:04:07,240
+First, the tool only accepts SELECT queries.
+
+96
+00:04:07,460 --> 00:04:09,900
+Second, the database file itself is opened
+
+97
+00:04:09,900 --> 00:04:12,780
+read-only. So even if a query slips past
+
+98
+00:04:12,780 --> 00:04:15,540
+the first check, SQLite refuses to write.
+
+99
+00:04:15,740 --> 00:04:17,520
+Here is how a question flows.
+
+100
+00:04:17,520 --> 00:04:19,040
+You ask in plain English.
+
+101
+00:04:19,340 --> 00:04:22,640
+The AI calls list_tables to learn the schema,
+
+102
+00:04:22,640 --> 00:04:24,240
+writes the SQL itself,
+
+103
+00:04:24,340 --> 00:04:27,080
+runs it through run_query and turns the
+
+104
+00:04:27,080 --> 00:04:28,220
+rows into an answer.
+
+105
+00:04:28,220 --> 00:04:31,060
+I asked Claude, which product made the most
+
+106
+00:04:31,060 --> 00:04:34,180
+money in October and who was our best customer
+
+107
+00:04:34,180 --> 00:04:36,740
+that month? It read the schema first,
+
+108
+00:04:36,740 --> 00:04:39,440
+then wrote five queries on its own with
+
+109
+00:04:39,440 --> 00:04:41,840
+joins across all three tables.
+
+110
+00:04:42,040 --> 00:04:43,160
+Here is one of them.
+
+111
+00:04:43,160 --> 00:04:45,740
+It joins orders, products and customers,
+
+112
+00:04:45,800 --> 00:04:47,200
+filters to October,
+
+113
+00:04:47,240 --> 00:04:50,420
+skips cancelled orders and sorts by money
+
+114
+00:04:50,420 --> 00:04:52,840
+spent. I did not write a single line of
+
+115
+00:04:52,840 --> 00:04:54,760
+that SQL. The answer,
+
+116
+00:04:55,100 --> 00:04:58,380
+the Cold Brew Kit, 19,000 rupees from 20
+
+117
+00:04:58,380 --> 00:05:01,020
+units. And the best customer was Arjun Patel
+
+118
+00:05:01,020 --> 00:05:05,540
+from Pune with 18,899 rupees.
+
+119
+00:05:05,620 --> 00:05:08,640
+It even noticed that Masala Chai sold the
+
+120
+00:05:08,640 --> 00:05:11,400
+most units but came fifth on revenue.
+
+121
+00:05:11,780 --> 00:05:13,700
+Then I asked it to delete all cancelled
+
+122
+00:05:13,700 --> 00:05:16,560
+orders. Claude stopped and asked me first
+
+123
+00:05:16,560 --> 00:05:18,880
+and pointed out that this connection only
+
+124
+00:05:18,880 --> 00:05:22,480
+allows SELECT. So let's test the locks ourselves.
+
+125
+00:05:22,560 --> 00:05:25,380
+A plain DELETE is refused by the first check.
+
+126
+00:05:25,680 --> 00:05:27,740
+A sneaky one that starts with WITH gets
+
+127
+00:05:27,740 --> 00:05:29,520
+past the first check,
+
+128
+00:05:29,520 --> 00:05:31,220
+but SQLite blocks it.
+
+129
+00:05:31,360 --> 00:05:33,660
+Attempt to write a read-only database.
+
+130
+00:05:33,980 --> 00:05:36,940
+All 360 orders are still there.
+
+131
+00:05:37,000 --> 00:05:40,500
+That is the pattern for any real MCP server.
+
+132
+00:05:40,500 --> 00:05:42,160
+Small, clear tools,
+
+133
+00:05:42,200 --> 00:05:44,860
+a schema the AI can discover and safety
+
+134
+00:05:44,860 --> 00:05:47,440
+enforced in your code and in the system
+
+135
+00:05:47,440 --> 00:05:49,880
+underneath. Not just in the prompt.
+
+136
+00:05:50,280 --> 00:05:53,260
+Swap SQLite for your company database and
+
+137
+00:05:53,260 --> 00:05:55,100
+you have an analyst that answers questions
+
+138
+00:05:55,100 --> 00:05:58,140
+in seconds. The same pattern works for your
+
+139
+00:05:58,140 --> 00:06:00,940
+expenses sheet, your support tickets or
+
+140
+00:06:00,940 --> 00:06:04,240
+your server logs. Expose them read-only,
+
+141
+00:06:04,240 --> 00:06:06,820
+describe the tools clearly and let the AI
+
+142
+00:06:06,820 --> 00:06:09,530
+do the digging. Quick recap,
+
+143
+00:06:09,730 --> 00:06:13,330
+uv add --script for the setup.
+
+144
+00:06:13,330 --> 00:06:16,670
+@mcp.tool on a typed function with a good
+
+145
+00:06:16,670 --> 00:06:20,030
+docstring. fastmcp list and fastmcp call
+
+146
+00:06:20,030 --> 00:06:24,350
+to test. fastmcp install to connect and
+
+147
+00:06:24,350 --> 00:06:26,070
+lock down every path.
+
+148
+00:06:26,270 --> 00:06:28,310
+What tool would you give your AI first?
+
+149
+00:06:28,670 --> 00:06:30,830
+Tell me in the comments and subscribe for
+
+150
+00:06:30,830 --> 00:06:31,810
+more modern Python.

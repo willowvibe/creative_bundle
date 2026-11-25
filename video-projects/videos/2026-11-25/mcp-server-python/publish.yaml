@@ -1,0 +1,79 @@
+# Upload manifest for social-engine (`social validate|publish publish.yaml`). Channel: @pythondecoder101.
+# Not uploaded yet. Upload private first, then schedule in Studio (see youtube.md).
+video: out/mcp_v3_upload.mp4   # mcp_v3 re-encoded above 52.4 MB (social-engine times out on files <50 MiB)
+thumbnail: thumb/flow/mcp_05_1280.jpg   # default; owner to pick (see youtube.md)
+title: "Build Your First MCP Server in Python (FastMCP Tutorial)"
+description: |
+  MCP (Model Context Protocol) lets AI apps like Claude, VS Code and Cursor call your own code. I build a real MCP server in Python with FastMCP 4: two tools (search my notes, convert units), tested without any AI, connected to Claude Code, and locked down so it can't leak your secrets. Then a real use case: an MCP server that lets Claude answer business questions from a shop database in plain English, with two locks so it can never write. Every output on screen is from a real run (FastMCP 4.2.6, MCP SDK 2.3.0, uv 0.13.9, Python 3.15.2).
+
+  ⏱️ Chapters
+  0:00 Intro
+  0:04 An AI using my own code
+  0:31 What MCP is (USB-C for AI)
+  0:52 1. Setup with uv
+  1:13 2. Tool 1: search_notes
+  1:46 3. Tool 2: convert_units
+  1:59 4. Test without AI (fastmcp list / call)
+  2:22 5. Connect it to an AI app
+  2:50 6. Never expose this (path traversal)
+  3:32 Use case: talk to your database
+  4:28 Claude writes the SQL itself
+  5:11 Try to delete: two locks
+  5:37 The pattern for any real MCP server
+  6:08 Recap
+
+  💻 Commands from the video
+  uv add --script server.py fastmcp
+  uv run server.py
+  fastmcp list server.py
+  fastmcp call server.py search_notes query=goa
+  fastmcp call server.py convert_units value=650 unit=km
+  fastmcp install mcp-json server.py      (or: install claude-code / claude-desktop / cursor)
+  fastmcp call db_server.py list_tables
+  fastmcp call db_server.py run_query sql="SELECT COUNT(*) AS orders FROM orders"
+  Tip: in FastMCP 4 the fastmcp command comes from the fastmcp-slim package: uv tool install fastmcp-slim --with fastmcp
+
+  🔒 Security rules from the video
+  Never expose a tool that runs shell commands or takes a raw path. Resolve paths and refuse anything outside the folder you allow. Keep tools read-only unless they must write. Keep secrets out of reach.
+  For databases: two locks. Your tool accepts only SELECT, and the database file is opened read-only (sqlite3.connect("file:shop.db?mode=ro", uri=True)), so even a query that slips past your check can't write. The shop data in the video is fictional demo data.
+
+  📚 Official sources
+  What is MCP: https://modelcontextprotocol.io/docs/getting-started/intro
+  FastMCP docs: https://gofastmcp.com
+  FastMCP tools: https://gofastmcp.com/servers/tools
+  uv: https://docs.astral.sh/uv/
+
+  Previous videos: Python 3.15 Is Out · Stop Using pip: uv in 5 Minutes. What tool would you give your AI first? Tell me in the comments, and subscribe for more modern Python.
+
+  #python #mcp #ai
+language: en
+synthetic_media: false  # channel rule: own voice clone + real screen captures + cartoon avatar -> no disclosure
+captions:
+  en: out/mcp.en.srt   # +4 s for the intro (make_srt.py --offset 4.0; 150 cues)
+youtube:
+  account: python-decoder
+  kind: long
+  tags:
+    - mcp server python
+    - fastmcp
+    - fastmcp tutorial
+    - model context protocol
+    - mcp tutorial
+    - build mcp server
+    - python mcp
+    - claude code mcp
+    - mcp server example
+    - ai tools python
+    - mcp security
+    - path traversal
+    - mcp sqlite
+    - ai sql database
+    - uv python
+    - python tutorial 2026
+    - python decoder
+  category: 28            # Science & Technology
+  made_for_kids: false
+  privacy: private
+  publish_at: "2026-12-12T18:30:00+05:30"   # tentative: weekly slot after EP2; confirm from EP1/EP2 analytics
+  playlists:
+    - Modern Python 2026

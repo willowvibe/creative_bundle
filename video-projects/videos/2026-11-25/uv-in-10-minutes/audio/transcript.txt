@@ -1,0 +1,73 @@
+This is pip installing 6 popular packages, FastAPI, pandas, requests, rich, httpx, and
+pydantic, about 19 seconds.
+Now the exact same packages with uv, about 5 seconds, and once uv has them cached, a fresh
+install takes 5 hundredths of a second, uv replaces pip, venv, penv, and pipx with one
+tool.
+In the next few minutes, I will set it up from scratch the 2026 way, and if you learned uv
+from an older tutorial, stay with me, because a few things changed and I will show you what.
+uv is a single program written in Rust by Astral, the team behind Ruff.
+On MacOS and Linux, paste this one line into your terminal.
+On Windows, use this PowerShell line instead.
+Homebrew, Winget, and even pip install uv work too.
+Then check it with uv-dash version.
+I am on 0.13.9, the latest release right now.
+First surprise, you do not need to install python separately anymore.
+uv python install downloads a ready-made python.
+Here it fetched python 3.13 in about 3 seconds.
+No installer, no admin writes.
+With no version number, you get the newest stable one, 3.15.
+uv python list shows every python on your machine, including the ones that were already
+there.
+And uv run dash dash python 3.14 runs anything on that exact version.
+Now a real project, uv init weather, here is what changed.
+Older tutorials show a single main .py file.
+Since uv 0.12, uv init creates a proper package, your code lives in src slash weather,
+and pyproject.2ml gets a command entry and a build system.
+That avoids the classic import headaches later.
+If you want the old flat layout, add dash dash no package.
+And notice, there is no virtual environment yet, let's add two libraries.
+uv add requests rich.
+In about one second, uv created the virtual environment, picked python 3.15, resolved 10
+packages and installed them.
+Pyproject now lists both dependencies and a new file appeared, uv.log.
+The log file pins the exact version of every package.
+So your teammate, your server, and you, a year from now, all get the same environment.
+Committed to get, uv tree shows who depends on what.
+Here is a tiny app that fetches the current temperature for three cities
+and prints a table.
+To run it, you do not activate anything, just uv run weather.
+uv checks the log file, syncs the environment if needed and runs your code.
+Cloned a project from GitHub, run uv sync.
+10 packages installed in 12 milliseconds, the exact versions from the log file.
+This is my favorite feature, single file scripts.
+This script needs rich.
+Normally, that means making a virtual environment just for one file.
+Instead, uv add dash dash script writes the dependency into the script itself
+in this comment block.
+It is a python standard pep 723.
+Now, uv run hello rich.py.
+uv builds a cached throwaway environment and runs it.
+Send this one file to a friend who has uv.
+And it just works.
+Command line tools like rough do not belong inside your project.
+uv tool install, rough installs it once in its own isolated environment.
+And it works everywhere.
+Want to try a tool just once?
+uvx runs it without installing anything.
+uvx rough check and it finds the unused import in my file
+and even offers to fix it.
+Already have a project with a requirements dot txt file.
+uv add dash r requirements dot txt moves every package into py project in one go.
+Or keep your old workflow and just put uv in front.
+uv pip install dash r requirements dot txt.
+That is exactly the command I used in the race.
+In vs code, uv's dot when folder sits right inside the project.
+So, vs code finds it.
+Open the command palette, choose python, select interpreter
+and pick dot when quick recap.
+uv python install for python, uv init and uv add for projects.
+uv run to run, uv add dash dash script for single files
+and uvx for tools, one tool instead of five.
+In the next video, we use uv to build an mcp server
+so AI can call your own python code.
+Subscribe so you do not miss it.

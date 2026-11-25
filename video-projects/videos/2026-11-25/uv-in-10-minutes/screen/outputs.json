@@ -1,0 +1,163 @@
+{
+ "race_pip": {
+  "cmd": "python3 -m venv .venv && .venv/bin/pip install --no-cache-dir -r requirements.txt",
+  "cwd": "race",
+  "out": "Collecting fastapi (from -r requirements.txt (line 1))\n  Downloading fastapi-0.165.0-py3-none-any.whl.metadata (27 kB)\nCollecting pandas (from -r requirements.txt (line 2))\n  Downloading pandas-3.1.1-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (16 kB)\nCollecting requests (from -r requirements.txt (line 3))\n  Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)\nCollecting rich (from -r requirements.txt (line 4))\n  Downloading rich-15.0.0-py3-none-any.whl.metadata (18 kB)\nCollecting httpx (from -r requirements.txt (line 5))\n  Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)\nCollecting pydantic (from -r requirements.txt (line 6))\n  Downloading pydantic-2.14.4-py3-none-any.whl.metadata (143 kB)\n     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 144.0/144.0 kB 1.9 MB/s eta 0:00:00\nCollecting starlette>=1.6.0 (from fastapi->-r requirements.txt (line 1))\n  Downloading starlette-1.10.0-py3-none-any.whl.metadata (6.6 kB)\nCollecting anyio>=4.1.0 (from fastapi->-r requirements.txt (line 1))\n  Downloading anyio-4.16.0-py3-none-any.whl.metadata (4.7 kB)\nCollecting typing-extensions>=4.8.0 (from fastapi->-r requirements.txt (line 1))\n  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)\nCollecting typing-inspection>=0.4.2 (from fastapi->-r requirements.txt (line 1))\n  Downloading typing_inspection-0.4.5-py3-none-any.whl.metadata (2.6 kB)\nCollecting annotated-doc>=0.0.2 (from fastapi->-r requirements.txt (line 1))\n  Downloading annotated_doc-0.0.7-py3-none-any.whl.metadata (6.4 kB)\nCollecting opentelemetry-api>=1.44.0 (from fastapi->-r requirements.txt (line 1))\n  Downloading opentelemetry_api-1.45.2-py3-none-any.whl.metadata (1.4 kB)\nCollecting numpy>=2.0.2 (from pandas->-r requirements.txt (line 2))\n  Downloading numpy-2.5.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)\nCollecting python-dateutil>=2.9.0 (from pandas->-r requirements.txt (line 2))\n  Downloading python_dateutil-4.0.0-py3-none-any.whl.metadata (7.3 kB)\nCollecting charset_normalizer<4,>=2 (from requests->-r requirements.txt (line 3))\n  Downloading charset_normalizer-3.5.3-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (43 kB)\n     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.3/43.3 kB 19.6 MB/s eta 0:00:00\nCollecting idna<4,>=2.5 (from requests->-r requirements.txt (line 3))\n  Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)\nCollecting urllib3<3,>=1.26 (from requests->-r requirements.txt (line 3))\n  Downloading urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)\nCollecting certifi>=2023.5.7 (from requests->-r requirements.txt (line 3))\n  Downloading certifi-2026.11.20-py3-none-any.whl.metadata (2.5 kB)\nCollecting markdown-it-py>=2.2.0 (from rich->-r requirements.txt (line 4))\n  Downloading markdown_it_py-4.3.0-py3-none-any.whl.metadata (7.9 kB)\nCollecting pygments<3.0.0,>=2.13.0 (from rich->-r requirements.txt (line 4))\n  Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)\nCollecting httpcore==1.* (from httpx->-r requirements.txt (line 5))\n  Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)\nCollecting h11>=0.16 (from httpcore==1.*->httpx->-r requirements.txt (line 5))\n  Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)\nCollecting annotated-types>=0.6.0 (from pydantic->-r requirements.txt (line 6))\n  Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)\nCollecting pydantic-core==2.50.5 (from pydantic->-r requirements.txt (line 6))\n  Downloading pydantic_core-2.50.5-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (6.6 kB)\nCollecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich->-r requirements.txt (line 4))\n  Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)\nCollecting tzdata (from python-dateutil>=2.9.0->pandas->-r requirements.txt (line 2))\n  Downloading tzdata-2026.6-py2.py3-none-any.whl.metadata (1.4 kB)\nDownloading fastapi-0.165.0-py3-none-any.whl (159 kB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 159.5/159.5 kB 8.9 MB/s eta 0:00:00\nDownloading pandas-3.1.1-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.0 MB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.0/12.0 MB 21.8 MB/s eta 0:00:00\nDownloading requests-2.34.2-py3-none-any.whl (73 kB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.1/73.1 kB 18.2 MB/s eta 0:00:00\nDownloading rich-15.0.0-py3-none-any.whl (310 kB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 310.7/310.7 kB 5.7 MB/s eta 0:00:00\nDownloading httpx-0.28.1-py3-none-any.whl (73 kB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.5/73.5 kB 42.6 MB/s eta 0:00:00\nDownloading httpcore-1.0.9-py3-none-any.whl (78 kB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.8/78.8 kB 13.2 MB/s eta 0:00:00\nDownloading pydantic-2.14.4-py3-none-any.whl (494 kB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 494.9/494.9 kB 14.2 MB/s eta 0:00:00\nDownloading pydantic_core-2.50.5-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (2.3 MB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.3/2.3 MB 10.9 MB/s eta 0:00:00\nDownloading annotated_doc-0.0.7-py3-none-any.whl (5.3 kB)\nDownloading annotated_types-0.8.0-py3-none-any.whl (13 kB)\nDownloading anyio-4.16.0-py3-none-any.whl (134 kB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 134.5/134.5 kB 15.7 MB/s eta 0:00:00\nDownloading certifi-2026.11.20-py3-none-any.whl (127 kB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 127.9/127.9 kB 9.0 MB/s eta 0:00:00\nDownloading charset_normalizer-3.5.3-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (257 kB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 257.1/257.1 kB 12.2 MB/s eta 0:00:00\nDownloading idna-3.20-py3-none-any.whl (69 kB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 69.6/69.6 kB 8.1 MB/s eta 0:00:00\nDownloading markdown_it_py-4.3.0-py3-none-any.whl (96 kB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 97.0/97.0 kB 26.4 MB/s eta 0:00:00\nDownloading numpy-2.5.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (15.7 MB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 15.7/15.7 MB 11.1 MB/s eta 0:00:00\nDownloading opentelemetry_api-1.45.2-py3-none-any.whl (60 kB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 60.3/60.3 kB 8.4 MB/s eta 0:00:00\nDownloading pygments-2.21.0-py3-none-any.whl (1.3 MB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 12.3 MB/s eta 0:00:00\nDownloading python_dateutil-4.0.0-py3-none-any.whl (92 kB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 92.9/92.9 kB 14.0 MB/s eta 0:00:00\nDownloading starlette-1.10.0-py3-none-any.whl (80 kB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 80.6/80.6 kB 31.4 MB/s eta 0:00:00\nDownloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.6/45.6 kB 23.4 MB/s eta 0:00:00\nDownloading typing_inspection-0.4.5-py3-none-any.whl (14 kB)\nDownloading urllib3-2.8.0-py3-none-any.whl (135 kB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 135.7/135.7 kB 2.1 MB/s eta 0:00:00\nDownloading h11-0.16.0-py3-none-any.whl (37 kB)\nDownloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)\nDownloading tzdata-2026.6-py2.py3-none-any.whl (348 kB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 348.2/348.2 kB 60.2 MB/s eta 0:00:00\nInstalling collected packages: urllib3, tzdata, typing-extensions, pygments, numpy, mdurl, idna, h11, charset_normalizer, certifi, annotated-types, annotated-doc, typing-inspection, requests, python-dateutil, pydantic-core, opentelemetry-api, markdown-it-py, httpcore, anyio, starlette, rich, pydantic, pandas, httpx, fastapi\nSuccessfully installed annotated-doc-0.0.7 annotated-types-0.8.0 anyio-4.16.0 certifi-2026.11.20 charset_normalizer-3.5.3 fastapi-0.165.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 markdown-it-py-4.3.0 mdurl-0.1.2 numpy-2.5.5 opentelemetry-api-1.45.2 pandas-3.1.1 pydantic-2.14.4 pydantic-core-2.50.5 pygments-2.21.0 python-dateutil-4.0.0 requests-2.34.2 rich-15.0.0 starlette-1.10.0 typing-extensions-4.16.0 typing-inspection-0.4.5 tzdata-2026.6 urllib3-2.8.0\n\nreal\t0m19.162s",
+  "tries": 8,
+  "matched": true
+ },
+ "race_uv": {
+  "cmd": "uv venv && uv pip install -r requirements.txt",
+  "cwd": "race",
+  "out": "Using CPython 3.15.2\nCreating virtual environment at: .venv\nActivate with: source .venv/bin/activate\nResolved 26 packages in 986ms\nDownloading pygments (1.2MiB)\nDownloading pandas (11.5MiB)\nDownloading numpy (15.0MiB)\nDownloading pydantic-core (2.2MiB)\n Downloaded pygments\n Downloaded pydantic-core\n Downloaded pandas\n Downloaded numpy\nPrepared 26 packages in 3.33s\nInstalled 26 packages in 29ms\n + annotated-doc==0.0.7\n + annotated-types==0.8.0\n + anyio==4.16.0\n + certifi==2026.11.20\n + charset-normalizer==3.5.3\n + fastapi==0.165.0\n + h11==0.16.0\n + httpcore==1.0.9\n + httpx==0.28.1\n + idna==3.20\n + markdown-it-py==4.3.0\n + mdurl==0.1.2\n + numpy==2.5.5\n + opentelemetry-api==1.45.2\n + pandas==3.1.1\n + pydantic==2.14.4\n + pydantic-core==2.50.5\n + pygments==2.21.0\n + python-dateutil==4.0.0\n + requests==2.34.2\n + rich==15.0.0\n + starlette==1.10.0\n + typing-extensions==4.16.0\n + typing-inspection==0.4.5\n + tzdata==2026.6\n + urllib3==2.8.0\n\nreal\t0m4.692s",
+  "tries": 6,
+  "matched": true
+ },
+ "race_uv_warm": {
+  "cmd": "uv venv && uv pip install -r requirements.txt",
+  "cwd": "race",
+  "out": "Using CPython 3.15.2\nCreating virtual environment at: .venv\nActivate with: source .venv/bin/activate\nResolved 26 packages in 5ms\nInstalled 26 packages in 22ms\n + annotated-doc==0.0.7\n + annotated-types==0.8.0\n + anyio==4.16.0\n + certifi==2026.11.20\n + charset-normalizer==3.5.3\n + fastapi==0.165.0\n + h11==0.16.0\n + httpcore==1.0.9\n + httpx==0.28.1\n + idna==3.20\n + markdown-it-py==4.3.0\n + mdurl==0.1.2\n + numpy==2.5.5\n + opentelemetry-api==1.45.2\n + pandas==3.1.1\n + pydantic==2.14.4\n + pydantic-core==2.50.5\n + pygments==2.21.0\n + python-dateutil==4.0.0\n + requests==2.34.2\n + rich==15.0.0\n + starlette==1.10.0\n + typing-extensions==4.16.0\n + typing-inspection==0.4.5\n + tzdata==2026.6\n + urllib3==2.8.0\n\nreal\t0m0.049s",
+  "tries": 3,
+  "matched": true
+ },
+ "version": {
+  "cmd": "uv --version",
+  "cwd": ".",
+  "out": "uv 0.13.9 (x86_64-unknown-linux-gnu)",
+  "tries": 1,
+  "matched": true
+ },
+ "py_install": {
+  "cmd": "uv python install 3.13",
+  "cwd": ".",
+  "out": "Downloading cpython-3.13.18-linux-x86_64-gnu (download) (33.9MiB)\n Downloaded cpython-3.13.18-linux-x86_64-gnu (download)\nInstalled Python 3.13.18 in 3.01s\n + cpython-3.13.18-linux-x86_64-gnu (python3.13)\nwarning: `~/.scratch/pybin` is not on your PATH. To use installed Python executables, run `export PATH=\"~/.scratch/pybin:$PATH\"` or `uv python update-shell`.",
+  "tries": 1,
+  "matched": true
+ },
+ "py_list": {
+  "cmd": "uv python list --only-installed",
+  "cwd": ".",
+  "out": "cpython-3.15.2-linux-x86_64-gnu     ~/.local/bin/python3.15 -> ~/.local/share/uv/python/cpython-3.15-linux-x86_64-gnu/bin/python3.15\ncpython-3.15.2-linux-x86_64-gnu     ~/.local/share/uv/python/cpython-3.15-linux-x86_64-gnu/bin/python3.15\ncpython-3.14.10-linux-x86_64-gnu    ~/.local/bin/python3.14 -> ~/.local/share/uv/python/cpython-3.14-linux-x86_64-gnu/bin/python3.14\ncpython-3.14.10-linux-x86_64-gnu    ~/.local/share/uv/python/cpython-3.14-linux-x86_64-gnu/bin/python3.14\ncpython-3.13.12-linux-x86_64-gnu    ~/.local/bin/python3.13 -> ~/.local/share/uv/python/cpython-3.13-linux-x86_64-gnu/bin/python3.13\ncpython-3.13.12-linux-x86_64-gnu    ~/.local/share/uv/python/cpython-3.13-linux-x86_64-gnu/bin/python3.13\ncpython-3.12.3-linux-x86_64-gnu     /usr/bin/python3.12\ncpython-3.12.3-linux-x86_64-gnu     /usr/bin/python3 -> python3.12\ncpython-3.11.15-linux-x86_64-gnu    ~/.local/bin/python3.11 -> ~/.local/share/uv/python/cpython-3.11-linux-x86_64-gnu/bin/python3.11\ncpython-3.11.15-linux-x86_64-gnu    ~/.local/share/uv/python/cpython-3.11-linux-x86_64-gnu/bin/python3.11\ncpython-3.10.21-linux-x86_64-gnu    ~/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/bin/python3.10",
+  "tries": 1,
+  "matched": true
+ },
+ "run314": {
+  "cmd": "uv run --python 3.14 python --version",
+  "cwd": ".",
+  "out": "Python 3.14.10",
+  "tries": 1,
+  "matched": true
+ },
+ "init": {
+  "cmd": "uv init weather",
+  "cwd": ".",
+  "out": "Initialized project `weather` at `~/demo/weather`",
+  "tries": 1,
+  "matched": true
+ },
+ "init_tree": {
+  "cmd": "tree -a -I .git weather",
+  "cwd": ".",
+  "out": "weather\n├── .gitignore\n├── pyproject.toml\n├── .python-version\n├── README.md\n└── src\n    └── weather\n        └── __init__.py\n\n3 directories, 5 files",
+  "tries": 1,
+  "matched": true
+ },
+ "add": {
+  "cmd": "uv add requests rich",
+  "cwd": "weather",
+  "out": "Using CPython 3.15.2\nCreating virtual environment at: .venv\nResolved 10 packages in 155ms\n   Building weather @ file://~/demo/weather\n      Built weather @ file://~/demo/weather\nPrepared 1 package in 3ms\nInstalled 10 packages in 5ms\n + certifi==2026.11.20\n + charset-normalizer==3.5.3\n + idna==3.20\n + markdown-it-py==4.3.0\n + mdurl==0.1.2\n + pygments==2.21.0\n + requests==2.34.2\n + rich==15.0.0\n + urllib3==2.8.0\n + weather==0.1.0 (from file://~/demo/weather)",
+  "tries": 1,
+  "matched": true
+ },
+ "tree": {
+  "cmd": "uv tree",
+  "cwd": "weather",
+  "out": "weather v0.1.0\n├── requests v2.34.2\n│   ├── certifi v2026.11.20\n│   ├── charset-normalizer v3.5.3\n│   ├── idna v3.20\n│   └── urllib3 v2.8.0\n└── rich v15.0.0\n    ├── markdown-it-py v4.3.0\n    │   └── mdurl v0.1.2\n    └── pygments v2.21.0\nResolved 10 packages in 0.88ms",
+  "tries": 1,
+  "matched": true
+ },
+ "run": {
+  "cmd": "uv run weather",
+  "cwd": "weather",
+  "out": "    Weather right now    \n┏━━━━━━━━━━━┳━━━━━━━━━━━┓\n┃ City      ┃ Temp (°C) ┃\n┡━━━━━━━━━━━╇━━━━━━━━━━━┩\n│ Hyderabad │      23.8 │\n│ London    │       5.2 │\n│ New York  │       9.5 │\n└───────────┴───────────┘",
+  "tries": 1,
+  "matched": true
+ },
+ "sync": {
+  "cmd": "rm -rf .venv && uv sync",
+  "cwd": "weather",
+  "out": "Using CPython 3.15.2\nCreating virtual environment at: .venv\nResolved 10 packages in 0.66ms\nInstalled 10 packages in 8ms\n + certifi==2026.11.20\n + charset-normalizer==3.5.3\n + idna==3.20\n + markdown-it-py==4.3.0\n + mdurl==0.1.2\n + pygments==2.21.0\n + requests==2.34.2\n + rich==15.0.0\n + urllib3==2.8.0\n + weather==0.1.0 (from file://~/demo/weather)",
+  "tries": 200,
+  "matched": false
+ },
+ "add_script": {
+  "cmd": "uv add --script hello_rich.py rich",
+  "cwd": ".",
+  "out": "Resolved 4 packages in 2ms",
+  "tries": 1,
+  "matched": true
+ },
+ "run_script": {
+  "cmd": "uv run hello_rich.py",
+  "cwd": ".",
+  "out": "Installed 4 packages in 7ms\nHello from a script with no venv!",
+  "tries": 1,
+  "matched": true
+ },
+ "tool_install": {
+  "cmd": "uv tool install ruff",
+  "cwd": ".",
+  "out": "Resolved 1 package in 373ms\nDownloading ruff (10.2MiB)\n Downloaded ruff\nPrepared 1 package in 742ms\nInstalled 1 package in 2ms\n + ruff==0.17.6\nInstalled 1 executable: ruff\nwarning: `~/.scratch/toolbin` is not on your PATH. To use installed tools, run `export PATH=\"~/.scratch/toolbin:$PATH\"` or `uv tool update-shell`.",
+  "tries": 1,
+  "matched": true
+ },
+ "uvx_ruff": {
+  "cmd": "uvx ruff check messy.py",
+  "cwd": ".",
+  "out": "F401 [*] `os` imported but unused\n --> messy.py:1:8\n  |\n1 | import os\n  |        ^^\n2 | import sys\n  |\nhelp: Remove unused import: `os`\n  |\n  - import os\n1 | import sys\n  |\n\nFound 1 error.\n[*] 1 fixable with `--fix`.",
+  "tries": 1,
+  "matched": true
+ },
+ "add_r": {
+  "cmd": "uv add -r requirements.txt",
+  "cwd": "legacy",
+  "out": "Using CPython 3.15.2\nCreating virtual environment at: .venv\nResolved 27 packages in 167ms\n   Building legacy @ file://~/demo/legacy\n      Built legacy @ file://~/demo/legacy\nPrepared 1 package in 3ms\nInstalled 27 packages in 20ms\n + annotated-doc==0.0.7\n + annotated-types==0.8.0\n + anyio==4.16.0\n + certifi==2026.11.20\n + charset-normalizer==3.5.3\n + fastapi==0.165.0\n + h11==0.16.0\n + httpcore==1.0.9\n + httpx==0.28.1\n + idna==3.20\n + legacy==0.1.0 (from file://~/demo/legacy)\n + markdown-it-py==4.3.0\n + mdurl==0.1.2\n + numpy==2.5.5\n + opentelemetry-api==1.45.2\n + pandas==3.1.1\n + pydantic==2.14.4\n + pydantic-core==2.50.5\n + pygments==2.21.0\n + python-dateutil==4.0.0\n + requests==2.34.2\n + rich==15.0.0\n + starlette==1.10.0\n + typing-extensions==4.16.0\n + typing-inspection==0.4.5\n + tzdata==2026.6\n + urllib3==2.8.0",
+  "tries": 1,
+  "matched": true
+ },
+ "add_r_deps": {
+  "cmd": "grep -A8 '^dependencies' pyproject.toml",
+  "cwd": "legacy",
+  "out": "dependencies = [\n    \"fastapi>=0.165.0\",\n    \"httpx>=0.28.1\",\n    \"pandas>=3.1.1\",\n    \"pydantic>=2.14.4\",\n    \"requests>=2.34.2\",\n    \"rich>=15.0.0\",\n]",
+  "tries": 1,
+  "matched": true
+ },
+ "init_pyproject": {
+  "cmd": "cat pyproject.toml",
+  "cwd": "weather",
+  "out": "[project]\nname = \"weather\"\nversion = \"0.1.0\"\ndescription = \"Add your description here\"\nreadme = \"README.md\"\nrequires-python = \">=3.15\"\ndependencies = []\n\n[project.scripts]\nweather = \"weather:main\"\n\n[build-system]\nrequires = [\"uv_build>=0.13.9,<0.14.0\"]\nbuild-backend = \"uv_build\"",
+  "tries": 1,
+  "matched": true
+ },
+ "add_pyproject": {
+  "cmd": "cat pyproject.toml",
+  "cwd": "weather",
+  "out": "[project]\nname = \"weather\"\nversion = \"0.1.0\"\ndescription = \"Add your description here\"\nreadme = \"README.md\"\nrequires-python = \">=3.15\"\ndependencies = [\n    \"requests>=2.34.2\",\n    \"rich>=15.0.0\",\n]\n\n[project.scripts]\nweather = \"weather:main\"\n\n[build-system]\nrequires = [\"uv_build>=0.13.9,<0.14.0\"]\nbuild-backend = \"uv_build\"",
+  "tries": 1,
+  "matched": true
+ },
+ "lock_head": {
+  "cmd": "head -24 uv.lock",
+  "cwd": "weather",
+  "out": "version = 1\nrevision = 5\nrequires-python = \">=3.15\"\n\n[[package]]\nname = \"certifi\"\nversion = \"2026.11.20\"\nsource = { registry = \"https://pypi.org/simple\" }\nsdist = { url = \"https://files.pythonhosted.org/packages/51/33/4cd27639502f010084bcef7a2036391dd637439901341ce1a530f36f6e51/certifi-2026.11.20.tar.gz\", hash = \"sha256:af1cb240a8133f105aa52684a3a3258339d7f2fd0bd4e2812698ff5cf5588c4e\", size = 128901, upload-time = \"2026-11-20T23:37:49.522Z\" }\nwheels = [\n    { url = \"https://files.pythonhosted.org/packages/6d/39/5eec3296860b94ac20bb8ed807725b88f6adfab3f343df592afd975f5f86/certifi-2026.11.20-py3-none-any.whl\", hash = \"sha256:7422df25243767b9877031a2248cb14d09ddac9beee846f4cef3d5c9191d488f\", size = 127913, upload-time = \"2026-11-20T23:37:48.117Z\" },\n]\n\n[[package]]\nname = \"charset-normalizer\"\nversion = \"3.5.3\"\nsource = { registry = \"https://pypi.org/simple\" }\nsdist = { url = \"https://files.pythonhosted.org/packages/c2/c3/cae6d3bdefd96a941ffc247c714ac4babc488a69012e11c058f6c17c6c47/charset_normalizer-3.5.3.tar.gz\", hash = \"sha256:a250888753faa289e2997962fbb17c4960cbdb58575533ca6fceee68c224bdff\", size = 189359, upload-time = \"2026-11-23T02:46:51.755Z\" }\nwheels = [\n    { url = \"https://files.pythonhosted.org/packages/7d/63/99fe455c382b9ae254baa0eac2b252d83d174d42ff39557083cc6d1a6e85/charset_normalizer-3.5.3-cp315-cp315-macosx_10_15_universal2.whl\", hash = \"sha256:f7fb9a3275f1a1528e542a0f5a3d2c89fcaf68e797fc5c6530434cbd92a852c4\", size = 388433, upload-time = \"2026-11-23T02:45:29.061Z\" },\n    { url = \"https://files.pythonhosted.org/packages/d3/0b/2cca2599ccb85cb31c60d8d19fcd9f89bc113696b2be2fd774288bc78691/charset_normalizer-3.5.3-cp315-cp315-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl\", hash = \"sha256:ef8b925f2b331a1f17d6fb32625e09fd571cf41844f578379f934dab0067cf0d\", size = 257397, upload-time = \"2026-11-23T02:45:30.196Z\" },\n    { url = \"https://files.pythonhosted.org/packages/e2/fc/7f46bdf26bed47cee8f053dda462b9e00dc56cf767f99a88b077ebfdf30b/charset_normalizer-3.5.3-cp315-cp315-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl\", hash = \"sha256:390ef7c7e018c0abb8c0ec2d28ee137567ff50c3706facf6d115cac832ac993b\", size = 241315, upload-time = \"2026-11-23T02:45:31.352Z\" },\n    { url = \"https://files.pythonhosted.org/packages/8e/55/a6be3d284ea45451d700d1fb58fd9db7155dbbfff7799b7c6351e419c528/charset_normalizer-3.5.3-cp315-cp315-manylinux2014_armv7l.manylinux_2_17_armv7l.manylinux_2_31_armv7l.whl\", hash = \"sha256:106b9d0438e2ff0a0e8ebd869273fcb3640af28323bba8651c714c57efb38e51\", size = 249109, upload-time = \"2026-11-23T02:45:32.508Z\" },\n    { url = \"https://files.pythonhosted.org/packages/57/5a/5cd92437895d67c77add5adebc512a00fe06b7146dd679cdb8b146b94a9f/charset_normalizer-3.5.3-cp315-cp315-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl\", hash = \"sha256:6bfbbb9414dd0f5b81c259deb7e50b4b44e65e05879eee482351bdabed49d7f4\", size = 276158, upload-time = \"2026-11-23T02:45:33.752Z\" },",
+  "tries": 1,
+  "matched": true
+ },
+ "script_after": {
+  "cmd": "cat hello_rich.py",
+  "cwd": ".",
+  "out": "# /// script\n# requires-python = \">=3.15\"\n# dependencies = [\n#     \"rich>=15.0.0\",\n# ]\n# ///\nfrom rich import print\n\nprint(\"[bold green]Hello from a script with no venv![/]\")",
+  "tries": 1,
+  "matched": true
+ }
+}

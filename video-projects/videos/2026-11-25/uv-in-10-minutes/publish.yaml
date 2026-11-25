@@ -1,0 +1,76 @@
+# Upload manifest for social-engine (`social validate|publish publish.yaml`). Channel: @pythondecoder101.
+# Not uploaded yet. Upload private first, then schedule in Studio (see youtube.md).
+video: out/uv_v3_upload.mp4   # uv_v3 at CRF 3 so the file is above 52.4 MB (social-engine times out on files <50 MiB)
+thumbnail: thumb/flow/uv_06_1280.jpg   # chosen by the owner 2026-11-25
+title: "Stop Using pip: uv in 5 Minutes (2026 Setup)"
+description: |
+  uv replaces pip, venv, pyenv and pipx with one fast tool. I set it up from scratch the 2026 way, and every output on screen is from a real run (uv 0.13.9, Python 3.15.2): installing the same six packages took pip about 19 seconds, uv about 5, and uv with a warm cache 0.05 seconds. If you learned uv from an older tutorial: since uv 0.12, uv init creates a src/ package with a build system, not a single main.py.
+
+  ⏱️ Chapters
+  0:00 Intro
+  0:04 The race: pip vs uv
+  0:38 1. Install uv
+  1:01 2. Install any Python version
+  1:35 3. uv init (what changed)
+  2:01 4. uv add + uv.lock
+  2:36 5. uv run and uv sync
+  3:02 6. Single-file scripts (PEP 723)
+  3:35 7. Tools: uv tool install and uvx
+  3:56 8. Move an old requirements.txt project
+  4:20 9. VS Code + recap
+
+  💻 Commands from the video
+  curl -LsSf https://astral.sh/uv/install.sh | sh        (macOS / Linux)
+  powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"   (Windows)
+  uv python install 3.13
+  uv init weather
+  uv add requests rich
+  uv run weather
+  uv sync
+  uv add --script hello_rich.py rich
+  uv tool install ruff
+  uvx ruff check messy.py
+  uv add -r requirements.txt
+  uv pip install -r requirements.txt
+
+  📚 Official sources
+  uv docs: https://docs.astral.sh/uv/
+  Installing uv: https://docs.astral.sh/uv/getting-started/installation/
+  Creating projects (uv init): https://docs.astral.sh/uv/concepts/projects/init/
+  PEP 723 (inline script metadata): https://peps.python.org/pep-0723/
+
+  Timings are real runs on one Linux machine (pip 24.0 on Python 3.12, empty caches); your numbers will differ.
+
+  Previous video: Python 3.15 Is Out: 6 Features You'll Actually Use. Next video: build your first MCP server in Python with uv. Subscribe so you don't miss it.
+
+  #python #uv #programming
+language: en
+synthetic_media: false  # channel rule: own voice clone + real screen captures + cartoon avatar -> no disclosure
+captions:
+  en: out/uv.en.srt   # +4 s for the intro (make_srt.py --offset 4.0)
+youtube:
+  account: python-decoder
+  kind: long
+  tags:
+    - uv python
+    - uv tutorial
+    - python uv
+    - uv vs pip
+    - astral uv
+    - uv init
+    - uv add
+    - uv lock
+    - uvx
+    - pep 723
+    - python setup 2026
+    - python virtual environment
+    - pip alternative
+    - python package manager
+    - python tutorial 2026
+    - python decoder
+  category: 28            # Science & Technology
+  made_for_kids: false
+  privacy: private        # scheduled in Studio
+  publish_at: "2026-12-05T18:30:00+05:30"   # tentative: same weekly slot as EP1; re-check EP1 analytics on 30 Nov first
+  playlists:
+    - Modern Python 2026

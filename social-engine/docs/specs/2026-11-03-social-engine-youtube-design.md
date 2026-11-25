@@ -171,7 +171,7 @@ after a printed summary, `confirm: true` in MCP, and the browser lane's `ready_t
   `browser` until the account file says `api_audited: true`.
 - MCP server `social-engine` (stdio, Python `mcp` SDK): `social_validate`, `social_publish`
   (requires `confirm: true`), `social_update`, `social_list`, `social_stats`. Manifest paths must
-  resolve inside allowed roots (default: `/mnt/data2/git_repos/video-editor/videos`, configurable).
+  resolve inside allowed roots (default: `/mnt/data2/git_repos/creative_repos/video-editor/videos`, configurable).
 - Skill `social-publish` in this repo's `.claude/skills/`.
 
 ## Testing

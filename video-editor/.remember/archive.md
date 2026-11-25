@@ -1,16 +1,16 @@
 # Archive
 
 ## Week of 2026-11-16
-Om Saravana Bhava 108 v5 uploaded to Mantra Shakti as private draft, scheduled 13 Nov 17:00 IST after resuming a 600MB upload (unpushed). Social-engine Chrome hidden by default (Xvfb :99, `SOCIAL_ENGINE_VISIBLE=1` override). DeveeKitchen: Telugu-only 3-video spec with tiffin teardown #1 committed, plus first-3 plan (tiffin teardown, chilli map, oil chemistry) and exec plan; no spend. Cheap Agent upgraded to 1.4.3 on local Ollama with stale config removed. Reviewed 7 repos: adopt ffmpeg-skill QC/xcorr sync/loudness ideas, ghost-editor best-of-N, motion-skills; defer threejs-skills; skip whisper and LPengYang/MotionClone.
+Om ×108 v5 uploaded private to Mantra Shakti, scheduled 13 Nov. DeveeKitchen Telugu-only spec, no spend. Cheap Agent 1.4.3 on Ollama. Upwork intro via Google Flow: clips rendered, 419/1050 credits spent. Reviewed 7 repos; adopted ffmpeg-skill QC/sync/loudness ideas, skipped whisper.
 
 ## Week of 2026-11-09
-Audited 7 ext repos, adopted QC/sync/loudness and motion packs, skipped whisper/unlicensed forks. Shipped editorial explainer stack; malacca-3 pilot 20/20 QA, cost-gate gap open. Shipped Om ×108 chant (final audio, v5 video); DeveeKitchen slate planned. Open: #370 agy save-path bug; #371 OOM fixed.
+Audited 7 ext repos, adopted QC/sync/loudness packs. Shipped editorial explainer stack; malacca-3 pilot 20/20 QA. Shipped Om ×108 chant. Open: #370 agy save-path bug.
 
 ## Week of 2026-11-02
 Ep1 master done (−14.9 LUFS); repo audit Phases 0–2; Manifold MCP (113 tools).
 
 ## Week of 2026-10-26
-HyperFrames slice 1; audits #274–#318 → Phases 0–2; Mantra Ep1 on 6-gate pipeline; video-editor Phases 0–5.
+HyperFrames slice 1; audits → Phases 0–2; Mantra Ep1 6-gate pipeline; video-editor Phases 0–5.
 
 ## Week of 2026-10-19
 Motion-QA bugs #240–#271 closed; explainer_stills; Saju Video 2; Composition IR spec.

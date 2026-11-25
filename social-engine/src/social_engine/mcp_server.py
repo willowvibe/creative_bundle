@@ -31,7 +31,7 @@ from .platforms.youtube.auth import load_credentials
 from .platforms.youtube.costs import estimate
 
 YOUTUBE = "youtube"
-DEFAULT_ROOTS = "/mnt/data2/git_repos/video-editor/videos"
+DEFAULT_ROOTS = "/mnt/data2/git_repos/creative_repos/video-editor/videos"
 
 mcp = FastMCP("social-engine")
 _pending: dict[str, str] = {}

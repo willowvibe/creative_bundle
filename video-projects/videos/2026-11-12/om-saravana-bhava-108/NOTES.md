@@ -246,3 +246,9 @@ Free, local and $0: PIL art, numpy/PIL effect loops, ffmpeg render.
 - 2026-11-13: at the user's request ("delete all old version videos"), the v3 and v4 mp4s, their previews and
   their .ffgraph files were moved to the system Trash. Only v5 and its preview remain.
 - Renders are in `video/` (untracked).
+
+## Published (2026-11-13)
+
+- Mantra Shakti, https://youtu.be/1e9l7MDYjcs, **scheduled public 2026-11-13 17:00 IST** (private until then). Metadata in `publish.yaml`.
+- Uploaded through the browser lane, then tags (19), category Music and the schedule set on the Studio details page and checked after a reload.
+- The first upload was interrupted when the channel's Chrome closed; it was resumed with Studio's "Resume upload" in a hidden Xvfb Chrome.

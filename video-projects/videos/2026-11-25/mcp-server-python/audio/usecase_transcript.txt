@@ -1,0 +1,40 @@
+Now a real use case, every small business has a database and most owners cannot write SQL.
+So let's give an AI safe access to one.
+This is a demo shop database, 8 products, 12 customers and 360 orders.
+The server is just two tools.
+List tables returns every table with its columns so the AI can learn the schema by itself.
+Run query takes one SQL statement and returns up to 50 rows.
+Now notice the two logs.
+First, the tool only accepts SELECT queries.
+Second, the database file itself is opened read-only.
+So even if a query slips past the first check, SQLite refuses to write.
+Here is how a question flows.
+You ask in plain English.
+The AI calls list tables to learn the schema, writes the SQL itself, runs it through a run query
+and turns the rows into an answer.
+I asked Claude, which product made the most money in October and who was our best customer
+that month?
+It read the schema first, then wrote five queries on its own with joins across all three tables.
+Here is one of them.
+It joins orders, products and customers, filters to October, skips, cancelled orders and sorts
+by money spent.
+I did not write a single line of that SQL.
+The answer, the cold brew kit, 19,000 rupees from 20 units.
+And the best customer was Arjun Patel from Pune with 18,899 rupees.
+It even noticed that Masala Chai sold the most units but came fifth on revenue.
+Then I asked it to delete all cancelled orders.
+Claude stopped and asked me first and pointed out that this connection only allows SELECT.
+So let's test the logs ourselves.
+A plain delete is refused by the first check.
+A sneaky one that starts with WITH gets passed the first check, but SQLite blocks it.
+Attempt to write a read-only database.
+All 360 orders are still there.
+That is the pattern for any real MCP server.
+Small, clear tools, a schema the AI can discover and safety enforced in your code and
+in the system underneath.
+Not just in the prompt.
+Swap SQLite for your company database and you have an analyst that answers questions
+in seconds.
+The same pattern works for your expenses sheet, your support tickets or your server
+logs.
+Expose them read-only, describe the tools clearly and let the AI do the digging.
