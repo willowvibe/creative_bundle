@@ -14,6 +14,7 @@ records — kept for provenance, not maintained.
 | [`Templates_capabilities.md`](Templates_capabilities.md) | Per-template capabilities, variations, and examples |
 | [`not_possible.md`](not_possible.md) | Request shapes that will not produce correct results |
 | [`WORKFLOWS.md`](WORKFLOWS.md) | End-to-end recipes (raw footage, script-to-video, music) |
+| [`RENDERING.md`](RENDERING.md) | Render passes and timings, the automatic NVIDIA profile (NVENC, Chrome on the RTX), transparent caption overlay (no Telugu drawtext), image chain, detached capped runs, where final cuts go |
 | [`STOCK_EXPLAINERS.md`](STOCK_EXPLAINERS.md) | Stock footage scenes (vision-checked), running tally, checked calculations, ledger, per-scene narration, AI image labels |
 | [`MAP_STORIES.md`](MAP_STORIES.md) | Map-story reels: journeys with km counter and icon, night_map, state/district fills and photos, bubbles, stickers |
 | [`DEVOTIONAL_CHANTS.md`](DEVOTIONAL_CHANTS.md) | Japa ×108 chant videos: chant-grid sync, 75% Tamil+English captions, counter, petal/glitter loops, rotating deity images, memory-safe pieces render |

@@ -34,6 +34,7 @@ from video_editor_core.designs import DesignTokens
 from video_editor_core.fonts import font_stack
 from video_editor_core.motion.registry import MotionError, build_motion
 from video_editor_core.paper import colors_for, paper_css, paper_layers
+from video_editor_core.script_text import NON_LATIN_CSS, tag_non_latin_text
 
 DESIGN_WIDTH = 1920
 DESIGN_HEIGHT = 1080
@@ -816,8 +817,8 @@ def render_composite(
         stage_motion=stage_motion,
     )
     return CompositeSceneRender(
-        markup=markup,
-        css=css,
+        markup=tag_non_latin_text(markup),
+        css=css + NON_LATIN_CSS,
         media=media_rects,
         background=background,
     )

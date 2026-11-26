@@ -264,6 +264,7 @@ _BUILTIN_DEFAULTS: dict[str, Any] = {
         "ace_step": {"cost_per_second": 0.0, "currency": "USD", "note": "local"},
         # ---- stock (free) ----
         "pexels": {"cost_per_asset": 0.0, "currency": "USD", "note": "free stock"},
+        "local_media": {"cost_per_asset": 0.0, "currency": "USD", "note": "own file"},
         "pixabay": {"cost_per_asset": 0.0, "currency": "USD", "note": "free stock"},
         "coverr": {"cost_per_asset": 0.0, "currency": "USD", "note": "free stock"},
         "mixkit": {"cost_per_asset": 0.0, "currency": "USD", "note": "free stock"},

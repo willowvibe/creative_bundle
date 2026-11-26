@@ -33,12 +33,28 @@ from video_editor_core.composition import (
     quantise,
 )
 from video_editor_core.designs import DesignTokens, load_design
+from video_editor_core.hook_card import parse_hook, render_hook
+from video_editor_core.progress_strip import parse_progress, render_progress
 from video_editor_core.render_graph import Rect
 from video_editor_core.scene_renderers import scene_renderer
-from video_editor_core.tally_chip import indian_format, parse_tally, render_tally
+from video_editor_core.sfx_synth import coin_path
+from video_editor_core.tally_chip import (
+    COUNT_DELAY_SECONDS,
+    COUNT_SECONDS,
+    TALLY_AFTER_RESULT_SECONDS,
+    parse_tally,
+    render_tally,
+)
 from video_editor_core.typographic_scenes import SceneRenderError, render_typographic
 
 DEFAULT_FPS = 30
+
+#: The coin clink sits this far under the narration.
+COIN_GAIN = 10 ** (-8 / 20)
+#: Own mixer track range for tally coins (narration 150, music 200, tts 100+n).
+COIN_TRACK_BASE = 400
+#: Longest the coin cue plays; the bundled WAVs run about 0.45 s.
+COIN_MAX_SECONDS = 0.5
 
 
 def from_scene_plan(plan: dict[str, Any], *, fps: int = DEFAULT_FPS) -> Composition:
@@ -51,24 +67,46 @@ def from_scene_plan(plan: dict[str, Any], *, fps: int = DEFAULT_FPS) -> Composit
     audio: list[AudioCue] = []
     cursor = 0.0
     previous_tally: int | None = None
+    tally_sound = plan.get("tally_sound", True) is not False
     for index, scene in enumerate(raw_scenes):
         duration = float(scene.get("duration_seconds", 0.0))
         if duration <= 0:
             continue
         start = quantise(cursor, fps)
         end = quantise(cursor + duration, fps)
-        layers = _scene_layers(scene, index, start, end, duration, width, height, design)
+        layers = _scene_layers(scene, index, start, end, duration, width, height, design, fps)
+        layers += _hook_layers(scene, index, LayerTime(start=start, end=end), layers, width, height)
         layers += _tally_layers(
-            scene, previous_tally, index, LayerTime(start=start, end=end), layers, width, height
+            scene,
+            previous_tally,
+            index,
+            start,
+            duration,
+            LayerTime(start=start, end=end),
+            layers,
+            width,
+            height,
         )
         layers += _calc_layers(
             scene, index, start, duration, LayerTime(start=start, end=end), layers, width, height
+        )
+        layers += _progress_layers(
+            scene, index, LayerTime(start=start, end=end), layers, width, height
         )
         scenes.append(
             CompositionScene(id=_scene_id(scene, index), start=start, end=end, layers=layers)
         )
         declared = parse_tally((scene.get("props") or {}).get("tally"))
         if declared is not None:
+            if tally_sound and previous_tally is not None and declared.value != previous_tally:
+                cue = _coin_cue(
+                    index,
+                    start + (_tally_delay(scene, start, duration) or 0.0),
+                    end,
+                    rising=declared.value > previous_tally,
+                )
+                if cue is not None:
+                    audio.append(cue)
             previous_tally = declared.value
         tts = _asset_by_type(scene, "tts")
         if tts is not None:
@@ -113,20 +151,138 @@ def from_scene_plan(plan: dict[str, Any], *, fps: int = DEFAULT_FPS) -> Composit
     )
 
 
-def _tally_layers(
+def _tally_delay(scene: Mapping[str, Any], start: float, duration: float) -> float | None:
+    """Clip-relative second the tally's count begins; ``None`` without a tally.
+
+    With a calc card it waits for the last cash row's result to land and read
+    (``TALLY_AFTER_RESULT_SECONDS``), keeps the whole count on screen with a
+    beat left after it, and never precedes the result.
+    """
+    props = scene.get("props") or {}
+    if parse_tally(props.get("tally")) is None:
+        return None
+    delay = COUNT_DELAY_SECONDS
+    if props.get("calc"):
+        rows = parse_calc(props["calc"])
+        reveal_at = _calc_reveal_times(scene, start, duration)
+        moved = [reveal_at[i][1] for i, row in enumerate(rows) if row.in_tally]
+        if moved:
+            delay = moved[-1] + TALLY_AFTER_RESULT_SECONDS
+            # Keep the whole count on screen with a beat left after it,
+            # but never before its result has landed.
+            delay = max(moved[-1] + 0.2, min(delay, duration - COUNT_SECONDS - 0.3))
+    return delay
+
+
+def _coin_cue(index: int, at: float, scene_end: float, *, rising: bool) -> AudioCue | None:
+    """The coin clink for a tally that counts up (money in) or down (money out)."""
+    if at >= scene_end:
+        return None
+    return AudioCue(
+        id=f"scene_{index}_tally_coin",
+        source=str(coin_path("in" if rising else "out")),
+        start=at,
+        duration=min(COIN_MAX_SECONDS, scene_end - at),
+        track=COIN_TRACK_BASE + index,
+        volume=COIN_GAIN,
+    )
+
+
+def _hook_layers(
     scene: Mapping[str, Any],
-    previous: int | None,
     index: int,
     window: LayerTime,
     below: list[CompositionLayer],
     width: int,
     height: int,
 ) -> list[CompositionLayer]:
+    """The hook card over the scene's first seconds: above footage, below the chip and card."""
+    hook = parse_hook((scene.get("props") or {}).get("hook"))
+    if hook is None:
+        return []
+    card_w, card_h = round(width * 0.7), round(height * 0.2)
+    markup, css = render_hook(hook, index=index, width=width)
+    return [
+        CompositionLayer(
+            id=f"scene_{index}_hook",
+            kind="html",
+            preset="hook",
+            rect=Rect(
+                x=round((width - card_w) / 2),
+                # Vertical centre at 38% of the height.
+                y=round(height * 0.38 - card_h / 2),
+                width=card_w,
+                height=card_h,
+            ),
+            time=window,
+            content=LayerContent(text=markup),
+            style={"extra_css": css},
+            track=index * 10 + 7,
+            z=max((layer.z for layer in below), default=0) + 1,
+        )
+    ]
+
+
+def _progress_layers(
+    scene: Mapping[str, Any],
+    index: int,
+    window: LayerTime,
+    below: list[CompositionLayer],
+    width: int,
+    height: int,
+) -> list[CompositionLayer]:
+    """The cost checklist strip, directly under the tally chip's rectangle."""
+    progress = parse_progress((scene.get("props") or {}).get("progress"))
+    if progress is None:
+        return []
+    markup, css = render_progress(progress, index=index, width=width)
+    # The tally chip owns x=4% width, y=6% height, w=30%, h=16%; sit just below it.
+    tally_bottom = round(height * 0.06) + round(height * 0.16)
+    gap = round(height * 0.01)
+    # Panel height from the strip's own metrics (see render_progress): padding
+    # 2 x 12 units, then 26-unit text at 1.25 line height plus a 6-unit gap per row.
+    unit = max(0.5, width / 1920.0)
+    panel_h = round((24 + 38.5 * len(progress.items) - 6) * unit)
+    return [
+        CompositionLayer(
+            id=f"scene_{index}_progress",
+            kind="html",
+            preset="progress",
+            rect=Rect(
+                x=round(width * 0.04),
+                y=tally_bottom + gap,
+                width=round(width * 0.24),
+                height=panel_h,
+            ),
+            time=window,
+            content=LayerContent(text=markup),
+            style={"extra_css": css},
+            track=index * 10 + 6,
+            z=max((layer.z for layer in below), default=0) + 1,
+        )
+    ]
+
+
+def _tally_layers(
+    scene: Mapping[str, Any],
+    previous: int | None,
+    index: int,
+    start: float,
+    duration: float,
+    window: LayerTime,
+    below: list[CompositionLayer],
+    width: int,
+    height: int,
+) -> list[CompositionLayer]:
     """The running tally chip, above everything else in the scene."""
-    tally = parse_tally((scene.get("props") or {}).get("tally"))
+    props = scene.get("props") or {}
+    tally = parse_tally(props.get("tally"))
     if tally is None:
         return []
-    markup, css = render_tally(tally, previous, index=index, width=width)
+    delay = _tally_delay(scene, start, duration)
+    if delay is None:
+        return []
+    markup, css = render_tally(tally, previous, index=index, width=width, delay=delay)
     margin_x, margin_y = round(width * 0.04), round(height * 0.06)
     return [
         CompositionLayer(
@@ -145,21 +301,107 @@ def _tally_layers(
     ]
 
 
-def _spoken_at(row: CalcRow, words: list[Any]) -> float | None:
-    """Clip time of the first word that says this row's amount (``1,488`` in ``₹1,488``)."""
+_NUMBER = re.compile(r"\d[\d,]*(?:\.\d+)?")
+#: How far back from a result the words that set up its calculation may sit.
+_EXPR_WINDOW_SECONDS = 6.0
+#: The expression appears this long before its result when nothing is heard.
+_EXPR_LEAD_SECONDS = 0.8
+#: A row's calculation appears at least this long after the row above lands.
+_ROW_GAP_SECONDS = 0.4
+
+
+def _number_tokens(text: str) -> set[str]:
+    """The digits in ``text`` without currency marks, commas or trailing punctuation."""
+    return {match.replace(",", "") for match in _NUMBER.findall(text)}
+
+
+def _spoken_at(row: CalcRow, words: list[Any], after: float = -1.0) -> float | None:
+    """Clip time of the first word after ``after`` that says this row's amount.
+
+    Digits must match exactly (``₹150.`` says 150, ``₹3,764`` does not say 3), and
+    each row searches after the previous row's word, so two rows with the same
+    amount land on the two places it is said.
+    """
     if row.unit == "%":
         token = f"{row.amount:g}%"
     elif float(row.amount).is_integer():
-        token = indian_format(abs(int(row.amount)))
+        token = str(abs(int(row.amount)))
     else:
         token = f"{abs(row.amount):g}"
     for word in words:
-        if isinstance(word, Mapping) and token in str(word.get("word", "")):
-            try:
-                return float(word["start"])
-            except (KeyError, TypeError, ValueError):
-                return None
+        if not isinstance(word, Mapping):
+            continue
+        text = str(word.get("word", ""))
+        said = token in text if row.unit == "%" else token in _number_tokens(text)
+        if not said:
+            continue
+        try:
+            at = float(word["start"])
+        except (KeyError, TypeError, ValueError):
+            continue
+        if at > after:
+            return at
     return None
+
+
+def _expr_at(row: CalcRow, words: list[Any], result_at: float, after: float = -1.0) -> float:
+    """When the row's label and expression appear: the word that sets up the result."""
+    numbers = _number_tokens(row.expr)
+    if numbers:
+        earliest: float | None = None
+        for word in words:
+            if not isinstance(word, Mapping):
+                continue
+            if not _number_tokens(str(word.get("word", ""))) & numbers:
+                continue
+            try:
+                at = float(word["start"])
+            except (KeyError, TypeError, ValueError):
+                continue
+            # Only words after the row above: its own amount is not this row's setup.
+            if at <= after or not result_at - _EXPR_WINDOW_SECONDS <= at <= result_at:
+                continue
+            if earliest is None or at < earliest:
+                earliest = at
+        if earliest is not None:
+            return max(0.0, earliest)
+    return max(0.0, result_at - _EXPR_LEAD_SECONDS)
+
+
+def _calc_reveal_times(
+    scene: Mapping[str, Any], start: float, duration: float
+) -> list[tuple[float, float]]:
+    """Clip-relative ``(expr_at, result_at)`` for each calc row.
+
+    The result lands when its amount is spoken; the expression appears at the
+    word that sets it up, so the calculation reads before its answer.
+    """
+    props = scene.get("props") or {}
+    if not props.get("calc"):
+        return []
+    rows = parse_calc(props["calc"])
+    words = _clip_relative_words(props.get("word_times"), start)
+    stagger = max(0.4, duration * 0.6) / max(1, len(rows))
+    latest = max(0.3, duration - MIN_ROW_HOLD_SECONDS)
+    reveal_at: list[tuple[float, float]] = []
+    heard = -1.0
+    for position, row in enumerate(rows):
+        spoken = _spoken_at(row, words, after=heard)
+        fallback = spoken is None
+        if spoken is not None:
+            heard = spoken
+        at = spoken if spoken is not None else 0.4 + position * stagger
+        result_at = min(at, latest)
+        expr_at = (
+            max(0.0, result_at - _EXPR_LEAD_SECONDS)
+            if fallback
+            else _expr_at(row, words, result_at, after=reveal_at[-1][1] if reveal_at else -1.0)
+        )
+        if reveal_at:
+            # The next calculation starts only once the row above has landed.
+            expr_at = min(result_at, max(expr_at, reveal_at[-1][1] + _ROW_GAP_SECONDS))
+        reveal_at.append((expr_at, result_at))
+    return reveal_at
 
 
 def _calc_layers(
@@ -177,14 +419,7 @@ def _calc_layers(
     if not props.get("calc"):
         return []
     rows = parse_calc(props["calc"])
-    words = _clip_relative_words(props.get("word_times"), start)
-    stagger = max(0.4, duration * 0.6) / max(1, len(rows))
-    latest = max(0.3, duration - MIN_ROW_HOLD_SECONDS)
-    reveal_at = []
-    for position, row in enumerate(rows):
-        spoken = _spoken_at(row, words)
-        at = spoken if spoken is not None else 0.4 + position * stagger
-        reveal_at.append(min(at, latest))
+    reveal_at = _calc_reveal_times(scene, start, duration)
     markup, css = render_calc_card(rows, index=index, width=width, reveal_at=reveal_at)
     card_w, card_h = round(width * 0.44), round(height * 0.4)
     return [
@@ -234,6 +469,85 @@ def _asset_by_type(scene: dict[str, Any], *types: str) -> dict[str, Any] | None:
     return None
 
 
+#: A photo shot's Ken Burns: zoom 1.0 to 1.08 with a slight pan, alternating
+#: direction shot by shot so neighbouring photos do not drift the same way.
+_PHOTO_PANS = (("0%, 0%", "1.5%, -1%"), ("1.5%, 1%", "-1%, 0%"))
+
+
+def _shot_layers(
+    scene: dict[str, Any],
+    index: int,
+    start: float,
+    end: float,
+    width: int,
+    height: int,
+    fps: int,
+) -> list[CompositionLayer]:
+    """Sequential media layers for a footage scene's ``shots``; ``[]`` if it has none.
+
+    The scene's window is split evenly in shot order and the cuts are hard. Each
+    shot covers the frame and is muted; a clip shorter than its slot loops and a
+    longer one is cut off by the layer's duration. A photo gets a gentle drift.
+    """
+    shots = (scene.get("props") or {}).get("shots") if scene.get("type") == "footage" else None
+    if not shots:
+        return []
+    if any(not (isinstance(shot, dict) and shot.get("path")) for shot in shots):
+        raise SceneRenderError(
+            f"scene {scene.get('id')!r} has shots without media; run the asset stage first"
+        )
+    count = len(shots)
+    layers: list[CompositionLayer] = []
+    for position, shot in enumerate(shots):
+        slot_start = (
+            start if position == 0 else quantise(start + (end - start) * position / count, fps)
+        )
+        slot_end = (
+            end
+            if position == count - 1
+            else quantise(start + (end - start) * (position + 1) / count, fps)
+        )
+        if slot_end <= slot_start:
+            continue
+        common: dict[str, Any] = {
+            "id": f"scene_{index}_shot{position}",
+            "kind": "media",
+            "rect": _full_canvas(width, height),
+            "time": LayerTime(start=slot_start, end=slot_end),
+            "content": LayerContent(source=str(shot["path"])),
+            "track": index,
+            "z": 0,
+        }
+        if shot.get("kind") == "video":
+            layers.append(
+                CompositionLayer(
+                    media_kind="video",
+                    style={"object_fit": "cover", "loop": True},
+                    **common,
+                )
+            )
+        else:
+            pan_from, pan_to = _PHOTO_PANS[position % len(_PHOTO_PANS)]
+            layers.append(
+                CompositionLayer(
+                    media_kind="image",
+                    style={"object_fit": "cover"},
+                    motions=[
+                        MotionSpec(
+                            name="drift",
+                            params={
+                                "from": f"scale(1) translate({pan_from})",
+                                "to": f"scale(1.08) translate({pan_to})",
+                            },
+                            ease="ease-in-out",
+                        )
+                    ],
+                    **common,
+                )
+            )
+    return layers
+
+
 def _full_canvas(width: int, height: int) -> Rect:
     return Rect(x=0, y=0, width=width, height=height)
 
@@ -247,6 +561,7 @@ def _scene_layers(
     width: int,
     height: int,
     design: DesignTokens | None,
+    fps: int = DEFAULT_FPS,
 ) -> list[CompositionLayer]:
     # The scene's window is the one the caller already quantised from the
     # running cursor. Re-deriving it here as ``quantise(start + duration)``
@@ -422,6 +737,10 @@ def _scene_layers(
             )
         )
         return layers
+
+    shot_layers = _shot_layers(scene, index, start, end, width, height, fps)
+    if shot_layers:
+        return shot_layers
 
     visual = _asset_by_type(scene, "video", "image", "data_viz")
     if visual is not None:

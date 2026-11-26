@@ -18,7 +18,7 @@ from typing import Protocol
 
 import structlog
 from video_editor_ffmpeg.probe import probe_media
-from video_editor_ffmpeg.run import run_ffmpeg
+from video_editor_ffmpeg.run import FFmpegError, run_ffmpeg
 
 from video_editor_core.compile_ffmpeg import (
     compile_ffmpeg,
@@ -35,6 +35,7 @@ from video_editor_core.hyperframes_cli import (
 )
 from video_editor_core.hyperframes_project import compile_hyperframes_project
 from video_editor_core.render_graph import RenderGraph
+from video_editor_core.shaped_text import needs_shaping
 
 logger = structlog.get_logger(__name__)
 
@@ -45,6 +46,30 @@ _FULL_CUT_EPSILON = 1e-3
 
 class RenderError(RuntimeError):
     """Raised when a render produces no usable output."""
+
+
+class ComplexScriptRenderError(RenderError):
+    """A HyperFrames render failed and the text needs shaping that FFmpeg cannot do."""
+
+
+def graph_needs_shaping(graph: RenderGraph) -> bool:
+    """True when an overlay's text is in a script ``drawtext`` would draw broken.
+
+    Telugu, Devanagari and the other complex scripts need a shaping engine
+    (Chrome has one); FFmpeg's ``drawtext`` detaches vowel signs and skips
+    conjuncts, so such a graph must never silently fall back to it.
+    """
+    return any(layer.kind == "text" and needs_shaping(layer.text) for layer in graph.overlays)
+
+
+def _refuse_ffmpeg_fallback(graph: RenderGraph, exc: Exception) -> None:
+    """Raise instead of falling back to FFmpeg when the text is a complex script."""
+    if graph_needs_shaping(graph):
+        raise ComplexScriptRenderError(
+            f"HyperFrames render of {graph.job_id!r} failed ({exc}); not falling back to "
+            "FFmpeg drawtext because the text needs complex-script shaping (it would ship "
+            "detached vowel signs and no conjuncts). Fix the HyperFrames render and re-run."
+        ) from exc
 
 
 def _validate_output(output: Path) -> None:
@@ -152,13 +177,25 @@ def select_renderer(engine: EngineName = "auto", cli_path: str = "hyperframes") 
     return FFmpegRenderer()
 
 
+#: Floor and per-second budget for one HyperFrames render. A long, caption-heavy
+#: page (305 caption lines over 560 s) captures at about 6x video length on this
+#: host, so this is a hang guard with generous headroom, not a speed target.
+MIN_HYPERFRAMES_TIMEOUT = 600
+HYPERFRAMES_SECONDS_PER_VIDEO_SECOND = 12.0
+
+
+def hyperframes_timeout(duration: float) -> int:
+    """Seconds one HyperFrames render of ``duration`` seconds of video may take."""
+    return max(MIN_HYPERFRAMES_TIMEOUT, int(duration * HYPERFRAMES_SECONDS_PER_VIDEO_SECOND))
+
+
 def render_graph(
     graph: RenderGraph,
     output: Path | str,
     *,
     engine: EngineName = "auto",
     cli_path: str = "hyperframes",
-    timeout: int = 600,
+    timeout: int | None = None,
 ) -> Path:
     """Render ``graph`` to ``output`` using the selected engine.
 
@@ -169,7 +206,14 @@ def render_graph(
 
     ``"ffmpeg"`` forces the single-pass renderer; ``"hyperframes"`` forces the
     HTML composition renderer (falling back to FFmpeg if it fails).
+
+    ``timeout`` (seconds) bounds one HyperFrames render; ``None`` scales it with
+    the video length (see :func:`hyperframes_timeout`). A fixed 600 s once cut
+    off a 560 s explainer's caption pass, and the silent FFmpeg fallback then
+    drew the captions with a font that has no Telugu glyphs.
     """
+    if timeout is None:
+        timeout = hyperframes_timeout(graph.duration)
     if engine == "auto":
         chosen = choose_engine(
             graph,
@@ -181,6 +225,7 @@ def render_graph(
                 renderer: Renderer = HyperFramesRenderer(cli_path=cli_path, timeout=timeout)
                 return renderer.render(graph, Path(output))
             except (RenderSegmentError, HyperFramesLintError) as exc:
+                _refuse_ffmpeg_fallback(graph, exc)
                 logger.warning(
                     "hyperframes_render_failed_fallback_ffmpeg",
                     job_id=graph.job_id,
@@ -192,3 +237,38 @@ def render_graph(
     if isinstance(renderer, HyperFramesRenderer):
         renderer.timeout = timeout
     return renderer.render(graph, Path(output))
+
+
+def burn_overlays(
+    graph: RenderGraph,
+    output: Path | str,
+    *,
+    cli_path: str = "hyperframes",
+    timeout: int | None = None,
+    cache_dir: Path | None = None,
+) -> Path:
+    """Burn ``graph``'s overlays onto ``graph.source`` without loading the video in Chrome.
+
+    The overlays render on a transparent HyperFrames page and FFmpeg composites
+    them (see :mod:`video_editor_core.overlay_burn`). If that fails, Latin-only
+    text falls back to the FFmpeg renderer; text in a complex script raises
+    :class:`ComplexScriptRenderError` rather than ship unshaped ``drawtext``.
+    """
+    from video_editor_core.overlay_burn import OverlayBurnError, render_overlay_burn
+
+    output = Path(output)
+    if not hyperframes_available(cli_path):
+        _refuse_ffmpeg_fallback(graph, RuntimeError("HyperFrames is unavailable"))
+        return FFmpegRenderer().render(graph, output)
+    try:
+        return render_overlay_burn(
+            graph,
+            output,
+            cli_path=cli_path,
+            timeout=timeout,
+            cache_dir=cache_dir,
+        )
+    except (RenderSegmentError, HyperFramesLintError, OverlayBurnError, FFmpegError) as exc:
+        _refuse_ffmpeg_fallback(graph, exc)
+        logger.warning("overlay_burn_failed_fallback_ffmpeg", job_id=graph.job_id, error=str(exc))
+        return FFmpegRenderer().render(graph, output)

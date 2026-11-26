@@ -39,6 +39,8 @@ from typing import Any
 from video_editor_core.cues import declared_cue, find_cue, resolve_cues
 from video_editor_core.designs import DesignTokens
 from video_editor_core.fonts import font_stack
+from video_editor_core.icons import IconError, icon_svg
+from video_editor_core.script_text import NON_LATIN_CSS, tag_non_latin_text
 
 #: Base entry motion. Divided by the design's ``motion.tempo`` so a bolder
 #: design moves faster without every layout knowing about it.
@@ -69,11 +71,17 @@ class SceneRender:
 
 @dataclass(frozen=True)
 class _Item:
-    """One revealable block: markup, the words that cue it, and its class."""
+    """One revealable block: markup, the words that cue it, and its class.
+
+    ``opening`` marks the piece that gives the layout its meaning (a headline,
+    the first step, the first donut slice). The no-empty-opening rule watches
+    these pieces instead of an uncued scaffold that happens to reveal first.
+    """
 
     html: str
     cue: str = ""
     class_name: str = "typo-line"
+    opening: bool = False
 
 
 #: A word run for the readability floor, matching the craft check's tokeniser
@@ -219,6 +227,17 @@ def _word_markup(text: str) -> str:
     )
 
 
+def _icon_markup(props_or_bar: Mapping[str, Any], *, where: str) -> str:
+    """The inline icon named by ``icon``, or ``""``; a bad name is a scene error."""
+    name = str(props_or_bar.get("icon") or "").strip()
+    if not name:
+        return ""
+    try:
+        return icon_svg(name)
+    except IconError as exc:
+        raise SceneRenderError(f"{where}: {exc}") from exc
+
+
 def _big_stat(
     props: Mapping[str, Any],
     scene: Mapping[str, Any],
@@ -239,7 +258,10 @@ def _big_stat(
     if unit:
         head += f'<span class="typo-unit">{html.escape(unit)}</span>'
     head += '<span class="typo-rule"></span>'
-    items = [_Item(head, cue=cue)]
+    icon = _icon_markup(props, where="big_stat")
+    if icon:
+        head = f'<span class="typo-icon">{icon}</span>{head}'
+    items = [_Item(head, cue=cue, opening=True)]
     if sub:
         items.append(_Item(html.escape(sub), class_name="typo-line typo-sub"))
     return items, ""
@@ -274,13 +296,18 @@ def _bar_compare(
     for bar, value in zip(bars, values, strict=True):
         label = html.escape(str(bar.get("label") or ""))
         unit = html.escape(str(bar.get("unit") or ""))
+        icon = _icon_markup(bar, where="bar_compare bar")
+        if icon:
+            label = f'<span class="typo-icon typo-icon-bar">{icon}</span>{label}'
         percent = max(4.0, 100.0 * value / largest)
+        formatted = f"{value:g}"
+        amount = unit.replace("{v}", formatted) if "{v}" in unit else f"{formatted}{unit}"
         items.append(
             _Item(
                 f'<div class="typo-bar-label">{label}</div>'
                 f'<div class="typo-bar-track"><div class="typo-bar" '
                 f'style="width:{percent:.1f}%"></div></div>'
-                f'<div class="typo-bar-value">{value:g}{unit}</div>',
+                f'<div class="typo-bar-value">{amount}</div>',
                 # A chart label usually reads differently from the sentence
                 # that introduces it ("Wiz" vs "Google's biggest deal"), so a
                 # bar may carry the spoken phrase explicitly; the cue gate
@@ -358,6 +385,7 @@ def _sequence(
                 f'<span class="typo-label">{order}. {html.escape(label)}</span>',
                 cue=cue,
                 class_name="typo-step",
+                opening=order == 1,
             )
         )
     return items, ""
@@ -400,6 +428,628 @@ def _array(
     return [_Item(markup, class_name="typo-grid-row")], extra
 
 
+# --- chart layouts ----------------------------------------------------------
+#
+# ``waterfall``, ``line`` and ``donut`` draw into one shared chart box. Every
+# item is a full-box *layer* (class ``typo-chart``), so each reveal is its own
+# cue-timed item while all pieces share one coordinate frame. The box keeps a
+# fixed aspect ratio (``--r``) sized from the stage with container units, so
+# circles stay round and text never stretches at any video aspect. Pieces are
+# positioned in percent of the box and animated with transforms/opacity or
+# SVG dash offsets only: seekable CSS, no JavaScript.
+
+#: A step that lowers a waterfall; the palette has no negative colour of its own.
+NEGATIVE_COLOR = "#C0392B"
+
+#: Unit symbols written before the number ("₹1,200"); anything else follows it.
+_PREFIX_UNITS = frozenset({"₹", "$", "€", "£", "¥", "Rs", "Rs."})
+
+MINUS = "\u2212"
+
+
+def _number(value: Any, where: str) -> float:
+    """A finite number from a YAML number or a string such as ``"1,52,000"``."""
+    if isinstance(value, bool):
+        raise SceneRenderError(f"{where} must be a number, got {value!r}")
+    try:
+        number = (
+            float(str(value).replace(",", "").strip()) if isinstance(value, str) else float(value)
+        )
+    except (TypeError, ValueError) as exc:
+        raise SceneRenderError(f"{where} must be a number, got {value!r}") from exc
+    if not math.isfinite(number):
+        raise SceneRenderError(f"{where} must be finite, got {value!r}")
+    return number
+
+
+def _decimals(*values: Any) -> int:
+    """Decimal places the authored numbers use (at most 2)."""
+    places = 0
+    for value in values:
+        text = str(value).replace(",", "").strip()
+        if "." in text and "e" not in text.lower():
+            places = max(places, len(text.split(".", 1)[1].rstrip("0")))
+    return min(places, 2)
+
+
+def indian_number(value: float, decimals: int = 0) -> str:
+    """``1234567.5`` -> ``12,34,567.5`` (lakh/crore grouping, no sign)."""
+    text = f"{abs(value):.{decimals}f}"
+    whole, _, frac = text.partition(".")
+    if len(whole) > 3:
+        head, tail = whole[:-3], whole[-3:]
+        groups = []
+        while len(head) > 2:
+            groups.insert(0, head[-2:])
+            head = head[:-2]
+        if head:
+            groups.insert(0, head)
+        whole = ",".join([*groups, tail])
+    return f"{whole}.{frac}" if frac else whole
+
+
+def format_amount(value: float, unit: str = "", *, decimals: int = 0, signed: bool = False) -> str:
+    """Indian-grouped amount with the unit before (``₹``) or after (``%``).
+
+    A negative value always carries ``−``; ``signed`` adds ``+`` to a positive.
+    """
+    body = indian_number(value, decimals)
+    if unit in _PREFIX_UNITS:
+        body = f"{unit}{body}"
+    elif unit:
+        body = f"{body}{unit}"
+    if round(value, decimals) < 0:
+        return f"{MINUS}{body}"
+    return f"+{body}" if signed and round(value, decimals) > 0 else body
+
+
+def _label_entry(raw: Any, where: str, *, need_value: bool = True) -> tuple[str, float | None]:
+    if not isinstance(raw, Mapping):
+        raise SceneRenderError(f"{where} must be an object with a `label`")
+    label = str(raw.get("label") or "").strip()
+    if not label:
+        raise SceneRenderError(f"{where} needs a non-empty `label`")
+    if raw.get("value") is None:
+        if need_value:
+            raise SceneRenderError(f"{where} needs a numeric `value`")
+        return label, None
+    return label, _number(raw["value"], f"{where} `value`")
+
+
+def waterfall_end_error(props: Mapping[str, Any]) -> str | None:
+    """Why an explicit ``end.value`` disagrees with start + steps, else ``None``.
+
+    The comparison is to the shown decimals (to the rupee for whole numbers).
+    """
+    end = props.get("end")
+    if not isinstance(end, Mapping) or end.get("value") is None:
+        return None
+    try:
+        start = props["start"]
+        steps = props["steps"]
+        total = _number(start["value"], "start `value`")
+        raw_values = [start["value"], end["value"]]
+        for step in steps:
+            total += _number(step["value"], "step `value`")
+            raw_values.append(step["value"])
+        stated = _number(end["value"], "end `value`")
+    except (KeyError, TypeError, SceneRenderError):
+        return None  # shape problems are the renderer's to report
+    places = _decimals(*raw_values)
+    if abs(total - stated) >= 0.5 * 10 ** (-places) - 1e-9:
+        shown = indian_number(total, places)
+        return (
+            f"waterfall `end.value` {indian_number(stated, places)} does not equal "
+            f"start + steps = {shown}"
+        )
+    return None
+
+
+def _chart_class(kind: str) -> str:
+    return f"typo-chart typo-chart-{kind}"
+
+
+def _waterfall(
+    props: Mapping[str, Any],
+    scene: Mapping[str, Any],
+    index: int,
+    duration: float,
+    width: int,
+    entry: float,
+) -> tuple[list[_Item], str]:
+    start_label, start_value = _label_entry(props.get("start"), "waterfall `start`")
+    raw_steps = props.get("steps")
+    if not isinstance(raw_steps, list) or not 2 <= len(raw_steps) <= 8:
+        raise SceneRenderError("waterfall needs `steps` with 2-8 entries")
+    steps: list[tuple[str, float, str]] = []
+    for position, raw in enumerate(raw_steps, start=1):
+        label, value = _label_entry(raw, f"waterfall step {position}")
+        assert value is not None
+        steps.append((label, value, declared_cue(raw.get("cue"), label)))
+    end_raw = props.get("end")
+    end_label, _ = _label_entry(end_raw, "waterfall `end`", need_value=False)
+    mismatch = waterfall_end_error(props)
+    if mismatch:
+        raise SceneRenderError(mismatch)
+    assert start_value is not None
+    unit = str(props.get("unit") or "").strip()
+    places = _decimals(
+        start_value if not isinstance(props["start"], Mapping) else props["start"].get("value"),
+        *(raw.get("value") for raw in raw_steps),
+    )
+
+    # Levels the running total passes through; every bar is a span between two.
+    levels = [start_value]
+    for _, value, _ in steps:
+        levels.append(levels[-1] + value)
+    spans: list[tuple[float, float, str]] = [(0.0, start_value, "is-total")]
+    for position, (_, value, _) in enumerate(steps):
+        spans.append((levels[position], levels[position + 1], "is-down" if value < 0 else "is-up"))
+    spans.append((0.0, levels[-1], "is-total"))
+    labels = [start_label, *(label for label, _, _ in steps), end_label]
+    shown = [start_value, *(value for _, value, _ in steps), levels[-1]]
+    cues = [
+        declared_cue(props["start"].get("cue"), ""),
+        *(cue for _, _, cue in steps),
+        declared_cue(end_raw.get("cue"), ""),
+    ]
+
+    top, bottom = 14.0, 78.0
+    low = min(0.0, *levels)
+    high = max(0.0, *levels)
+    scale = (bottom - top) / ((high - low) or 1.0)
+
+    def y_of(value: float) -> float:
+        return top + (high - value) * scale
+
+    count = len(labels)
+    slot = 100.0 / count
+    pad = slot * 0.19
+    label_size = 0.034 * min(1.0, 6.0 / count)
+    items: list[_Item] = []
+    for position in range(count):
+        a, b, kind = spans[position]
+        left = position * slot + pad
+        bar_w = slot - 2 * pad
+        y_top, y_bottom = y_of(max(a, b)), y_of(min(a, b))
+        height = max(y_bottom - y_top, 0.7)
+        # A bar grows away from the level it continues from: up from the
+        # baseline, or down from the previous level for a negative step.
+        grows_from = "0%" if (kind == "is-down" or (kind == "is-total" and b < 0)) else "100%"
+        parts: list[str] = []
+        if position == 0:
+            parts.append(f'<div class="typo-wf-zero" style="top:{y_of(0.0):.2f}%"></div>')
+        else:
+            prev_right = (position - 1) * slot + slot - pad
+            link = a if position <= len(steps) else levels[-1]
+            parts.append(
+                f'<div class="typo-wf-conn" style="left:{prev_right:.2f}%;'
+                f'width:{left - prev_right:.2f}%;top:{y_of(link):.2f}%"></div>'
+            )
+        parts.append(
+            f'<div class="typo-wf-bar {kind}" style="left:{left:.2f}%;width:{bar_w:.2f}%;'
+            f'top:{y_top:.2f}%;height:{height:.2f}%;transform-origin:50% {grows_from}"></div>'
+        )
+        text = format_amount(
+            shown[position], unit, decimals=places, signed=kind in ("is-up", "is-down")
+        )
+        parts.append(
+            f'<div class="typo-wf-val" style="left:{position * slot:.2f}%;width:{slot:.2f}%;'
+            f'bottom:{100.0 - y_top + 1.4:.2f}%;font-size:calc(var(--cw) * {label_size * 0.78:.4f})">'
+            f"{html.escape(text)}</div>"
+        )
+        parts.append(
+            f'<div class="typo-wf-label" style="left:{position * slot:.2f}%;width:{slot:.2f}%;'
+            f'top:{bottom + 3.0:.2f}%;font-size:calc(var(--cw) * {label_size:.4f})">'
+            f"{html.escape(labels[position])}</div>"
+        )
+        items.append(_Item("".join(parts), cue=cues[position], class_name=_chart_class("wf")))
+    return items, ""
+
+
+#: The line chart's plot rectangle, in percent of the chart box.
+_LN_LEFT, _LN_RIGHT, _LN_TOP, _LN_BOTTOM = 13.0, 95.0, 8.0, 80.0
+#: The line chart box is 3:2, so an SVG user unit is a percent of its width.
+_LN_ASPECT = 1.5
+#: Seconds the line takes to draw on, and a dot to slide between two x values.
+LINE_DRAW_SECONDS = 1.2
+DOT_SLIDE_SECONDS = 1.1
+
+
+def _pair(raw: Any, where: str) -> tuple[float, float]:
+    if not isinstance(raw, Sequence) or isinstance(raw, str) or len(raw) != 2:
+        raise SceneRenderError(f"{where} must be a [low, high] pair")
+    low, high = _number(raw[0], f"{where} low"), _number(raw[1], f"{where} high")
+    if not low < high:
+        raise SceneRenderError(f"{where} needs low < high, got [{raw[0]}, {raw[1]}]")
+    return low, high
+
+
+def _line_points(props: Mapping[str, Any]) -> list[tuple[float, float]] | None:
+    """Explicit ``points`` as validated, x-increasing pairs, or ``None``."""
+    raw = props.get("points")
+    if raw is None:
+        return None
+    if not isinstance(raw, list) or not 3 <= len(raw) <= 30:
+        raise SceneRenderError("line `points` needs 3-30 [x, y] pairs")
+    points = [_pair_xy(item, f"line point {n}") for n, item in enumerate(raw, start=1)]
+    if any(b[0] <= a[0] for a, b in zip(points, points[1:], strict=False)):
+        raise SceneRenderError("line `points` need strictly increasing x values")
+    return points
+
+
+def _pair_xy(raw: Any, where: str) -> tuple[float, float]:
+    if not isinstance(raw, Sequence) or isinstance(raw, str) or len(raw) != 2:
+        raise SceneRenderError(f"{where} must be an [x, y] pair")
+    return _number(raw[0], f"{where} x"), _number(raw[1], f"{where} y")
+
+
+def _line_marks(
+    props: Mapping[str, Any],
+) -> tuple[tuple[float, str, str] | None, list[tuple[float, str, str]]]:
+    """``mark`` and ``dots`` as ``(x, label, cue)`` tuples."""
+    mark = None
+    raw_mark = props.get("mark")
+    if raw_mark is not None:
+        if not isinstance(raw_mark, Mapping):
+            raise SceneRenderError("line `mark` must be an object {x, label, cue?}")
+        label = str(raw_mark.get("label") or "").strip()
+        if not label:
+            raise SceneRenderError("line `mark` needs a non-empty `label`")
+        mark = (
+            _number(raw_mark.get("x"), "line `mark` x"),
+            label,
+            declared_cue(raw_mark.get("cue"), label),
+        )
+    dots: list[tuple[float, str, str]] = []
+    raw_dots = props.get("dots")
+    if raw_dots is not None:
+        if not isinstance(raw_dots, list) or not 1 <= len(raw_dots) <= 3:
+            raise SceneRenderError("line `dots` needs 1-3 entries {x, label, cue?}")
+        for n, raw in enumerate(raw_dots, start=1):
+            if not isinstance(raw, Mapping):
+                raise SceneRenderError(f"line dot {n} must be an object {{x, label, cue?}}")
+            label = str(raw.get("label") or "").strip()
+            if not label:
+                raise SceneRenderError(f"line dot {n} needs a non-empty `label`")
+            dots.append(
+                (
+                    _number(raw.get("x"), f"line dot {n} x"),
+                    label,
+                    declared_cue(raw.get("cue"), label),
+                )
+            )
+    return mark, dots
+
+
+def _line(
+    props: Mapping[str, Any],
+    scene: Mapping[str, Any],
+    index: int,
+    duration: float,
+    width: int,
+    entry: float,
+) -> tuple[list[_Item], str]:
+    points = _line_points(props)
+    has_formula = props.get("slope") is not None or props.get("intercept") is not None
+    if points is not None and has_formula:
+        raise SceneRenderError("line takes either `slope`/`intercept` or `points`, not both")
+    if points is None and not has_formula:
+        raise SceneRenderError("line needs `slope` + `intercept` or `points`")
+    mark, dots = _line_marks(props)
+    unit = str(props.get("unit") or "").strip()
+    x_label = str(props.get("x_label") or "").strip()
+    y_label = str(props.get("y_label") or "").strip()
+    marked_x = [x for x, _, _ in ([mark] if mark else [])] + [x for x, _, _ in dots]
+
+    if points is None:
+        slope = _number(props.get("slope", 0), "line `slope`")
+        intercept = _number(props.get("intercept", 0), "line `intercept`")
+        if props.get("x_range") is not None:
+            x0, x1 = _pair(props["x_range"], "line `x_range`")
+        elif marked_x:
+            x0, x1 = 0.0, max(marked_x) * 1.3 or 1.0
+        else:
+            raise SceneRenderError("a line from `slope` needs an `x_range` (or a mark/dots)")
+        points = [(x0, slope * x0 + intercept), (x1, slope * x1 + intercept)]
+        authored = [slope, intercept]
+    else:
+        if props.get("x_range") is not None:
+            x0, x1 = _pair(props["x_range"], "line `x_range`")
+        else:
+            x0, x1 = points[0][0], points[-1][0]
+        authored = [value for pair in props["points"] for value in pair[1:]]
+    places = _decimals(*authored, *(props.get("y_range") or []))
+
+    ys = [y for _, y in points]
+    if props.get("y_range") is not None:
+        y0, y1 = _pair(props["y_range"], "line `y_range`")
+    else:
+        low, high = min(0.0, min(ys)), max(0.0, max(ys))
+        pad = ((high - low) or 1.0) * 0.08
+        y0, y1 = (low - pad if low < 0 else low), high + pad
+    for x in marked_x:
+        if not x0 <= x <= x1:
+            raise SceneRenderError(f"line mark/dot x={x:g} lies outside x_range [{x0:g}, {x1:g}]")
+
+    def px(x: float) -> float:
+        return _LN_LEFT + (x - x0) / (x1 - x0) * (_LN_RIGHT - _LN_LEFT)
+
+    def py(y: float) -> float:
+        return _LN_BOTTOM - (y - y0) / (y1 - y0) * (_LN_BOTTOM - _LN_TOP)
+
+    def y_at(x: float) -> float:
+        for (xa, ya), (xb, yb) in zip(points, points[1:], strict=False):
+            if xa <= x <= xb:
+                return ya + (yb - ya) * (x - xa) / (xb - xa)
+        # Beyond the drawn polyline (an explicit x_range wider than the data):
+        # hold the nearest end rather than inventing a value.
+        return points[0][1] if x < points[0][0] else points[-1][1]
+
+    hs = 100.0 / _LN_ASPECT  # SVG height in user units (width is 100)
+
+    def sv(percent_y: float) -> float:
+        return percent_y * hs / 100.0
+
+    label_size = 0.03
+    tick = f"font-size:calc(var(--cw) * {label_size * 0.85:.4f})"
+    clip = f"ln-clip-{index}"
+    axes = [
+        f'<svg class="typo-ln-svg" viewBox="0 0 100 {hs:.4f}" aria-hidden="true">',
+        f'<line class="typo-ln-axis" x1="{_LN_LEFT}" y1="{sv(_LN_TOP):.3f}" '
+        f'x2="{_LN_LEFT}" y2="{sv(_LN_BOTTOM):.3f}"/>',
+        f'<line class="typo-ln-axis" x1="{_LN_LEFT}" y1="{sv(_LN_BOTTOM):.3f}" '
+        f'x2="{_LN_RIGHT}" y2="{sv(_LN_BOTTOM):.3f}"/>',
+    ]
+    if y0 < 0 < y1:
+        axes.append(
+            f'<line class="typo-ln-zero" x1="{_LN_LEFT}" y1="{sv(py(0.0)):.3f}" '
+            f'x2="{_LN_RIGHT}" y2="{sv(py(0.0)):.3f}"/>'
+        )
+    axes.append("</svg>")
+    ticks = [
+        (_LN_LEFT, _LN_BOTTOM + 3.0, "x", format_amount(x0, "", decimals=0)),
+        (_LN_RIGHT, _LN_BOTTOM + 3.0, "x", format_amount(x1, "", decimals=0)),
+        (_LN_LEFT, _LN_TOP, "y", format_amount(y1, unit, decimals=places)),
+        (_LN_LEFT, _LN_BOTTOM, "y", format_amount(y0, unit, decimals=places)),
+    ]
+    if y0 < 0 < y1:
+        ticks.append((_LN_LEFT, py(0.0), "y", format_amount(0.0, unit)))
+    for left, top, axis, text in ticks:
+        if axis == "x":
+            axes.append(
+                f'<div class="typo-ln-tick is-x" style="left:{left:.2f}%;top:{top:.2f}%;{tick}">'
+                f"{html.escape(text)}</div>"
+            )
+        else:
+            axes.append(
+                f'<div class="typo-ln-tick is-y" style="right:{100 - left + 1.2:.2f}%;'
+                f'top:{top:.2f}%;{tick}">{html.escape(text)}</div>'
+            )
+    if x_label:
+        axes.append(
+            f'<div class="typo-ln-axis-label is-x" style="left:{_LN_LEFT}%;width:'
+            f"{_LN_RIGHT - _LN_LEFT}%;top:{_LN_BOTTOM + 9.0}%;"
+            f'font-size:calc(var(--cw) * {label_size:.4f})">{html.escape(x_label)}</div>'
+        )
+    if y_label:
+        axes.append(
+            f'<div class="typo-ln-axis-label is-y" style="left:0;top:0;'
+            f'font-size:calc(var(--cw) * {label_size:.4f})">{html.escape(y_label)}</div>'
+        )
+
+    path = " ".join(
+        f"{'M' if n == 0 else 'L'}{px(x):.3f} {sv(py(y)):.3f}" for n, (x, y) in enumerate(points)
+    )
+    plot = (
+        f'<svg class="typo-ln-svg" viewBox="0 0 100 {hs:.4f}" aria-hidden="true">'
+        f'<clipPath id="{clip}"><rect x="{_LN_LEFT}" y="{sv(_LN_TOP):.3f}" '
+        f'width="{_LN_RIGHT - _LN_LEFT}" height="{sv(_LN_BOTTOM - _LN_TOP):.3f}"/></clipPath>'
+        f'<path class="typo-ln-path" d="{path}" pathLength="1" clip-path="url(#{clip})"/></svg>'
+    )
+    items = [
+        _Item("".join(axes), class_name=_chart_class("ln")),
+        _Item(plot, class_name=_chart_class("ln")),
+    ]
+    extra: list[str] = []
+
+    if mark:
+        mx, mlabel, mcue = mark
+        on_left = (mx - x0) / (x1 - x0) > 0.6
+        side = (
+            f"right:{100 - px(mx) + 1.2:.2f}%;text-align:right"
+            if on_left
+            else f"left:{px(mx) + 1.2:.2f}%"
+        )
+        items.append(
+            _Item(
+                f'<div class="typo-ln-mark" style="left:{px(mx):.2f}%;top:{_LN_TOP:.2f}%;'
+                f'height:{_LN_BOTTOM - _LN_TOP:.2f}%"></div>'
+                f'<div class="typo-ln-mark-label" style="{side};top:{_LN_TOP:.2f}%;'
+                f'font-size:calc(var(--cw) * {label_size:.4f})">{html.escape(mlabel)}'
+                f'<span class="typo-ln-sub">{html.escape(format_amount(mx, ""))}</span></div>',
+                cue=mcue,
+                class_name=_chart_class("ln"),
+            )
+        )
+
+    previous_x: float | None = None
+    for n, (dx, dlabel, dcue) in enumerate(dots):
+        last = n == len(dots) - 1
+        value = format_amount(y_at(dx), unit, decimals=places)
+        flip = (dx - x0) / (x1 - x0) > 0.6
+        text = (
+            f'<span class="typo-ln-dot-label{" is-flip" if flip else ""}" '
+            f'style="font-size:calc(var(--cw) * {label_size:.4f})">{html.escape(dlabel)}'
+            f'<span class="typo-ln-sub">{html.escape(value)}</span></span>'
+        )
+        name = f"tp_ln_dot_{index}_{n}"
+        start_x = dx if previous_x is None else previous_x
+        if start_x != dx:
+            lo, hi = sorted((start_x, dx))
+            xs = [start_x]
+            xs += [vx for vx, _ in (points if dx > start_x else reversed(points)) if lo < vx < hi]
+            xs.append(dx)
+            stops = "".join(
+                f"{100.0 * (vx - start_x) / (dx - start_x):.3f}% "
+                f"{{ left: {px(vx):.3f}%; top: {py(y_at(vx)):.3f}%; }} "
+                for vx in xs
+            )
+            extra.append(f"      @keyframes {name} {{ {stops}}}\n")
+            move = (
+                f"animation: {name} {DOT_SLIDE_SECONDS:.2f}s linear var(--d, 0s) both; "
+                f"left: {px(start_x):.3f}%; top: {py(y_at(start_x)):.3f}%;"
+            )
+        else:
+            move = f"left: {px(dx):.3f}%; top: {py(y_at(dx)):.3f}%;"
+        wrap = "typo-ln-dots" + ("" if last else " is-passed")
+        items.append(
+            _Item(
+                f'<div class="{wrap}"><div class="typo-ln-dot" style="{move}">{text}</div></div>',
+                cue=dcue,
+                class_name=_chart_class("ln"),
+            )
+        )
+        previous_x = dx
+    return items, "".join(extra)
+
+
+#: Seconds one donut segment takes to sweep in.
+DONUT_SWEEP_SECONDS = 0.9
+_DN_RADIUS = 40.0
+
+#: Segment colours, in order: the palette's three inks, then a tint of each, so
+#: six slices stay distinct on any design (``{}`` is filled with the palette).
+_DONUT_FILLS = (
+    "{accent}",
+    "{ink}",
+    "{muted}",
+    "color-mix(in srgb, {accent} 50%, {bg})",
+    "color-mix(in srgb, {ink} 50%, {bg})",
+    "color-mix(in srgb, {muted} 50%, {bg})",
+)
+
+
+def _donut_parts(props: Mapping[str, Any]) -> list[tuple[str, float, str]]:
+    raw = props.get("parts")
+    if not isinstance(raw, list) or not 2 <= len(raw) <= 6:
+        raise SceneRenderError("donut needs `parts` with 2-6 entries")
+    parts: list[tuple[str, float, str]] = []
+    for position, item in enumerate(raw, start=1):
+        label, value = _label_entry(item, f"donut part {position}")
+        assert value is not None
+        if value <= 0:
+            raise SceneRenderError(f"donut part {position} `value` must be positive, got {value:g}")
+        parts.append((label, value, declared_cue(item.get("cue"), label)))
+    return parts
+
+
+def donut_center_error(props: Mapping[str, Any]) -> str | None:
+    """Why an explicit ``center.value`` is not the sum of ``parts``, else ``None``.
+
+    Compared to the decimals the authored numbers show (whole numbers exactly).
+    """
+    center = props.get("center")
+    if not isinstance(center, Mapping) or center.get("value") is None:
+        return None
+    try:
+        raw_values = [part["value"] for part in props["parts"]]
+        total = sum(_number(value, "part `value`") for value in raw_values)
+        stated = _number(center["value"], "center `value`")
+    except (KeyError, TypeError, SceneRenderError):
+        return None  # shape problems are the renderer's to report
+    places = _decimals(*raw_values, center["value"])
+    if abs(total - stated) >= 0.5 * 10 ** (-places) - 1e-9:
+        return (
+            f"donut `center.value` {indian_number(stated, places)} does not equal "
+            f"the sum of parts = {indian_number(total, places)}"
+        )
+    return None
+
+
+def _donut(
+    props: Mapping[str, Any],
+    scene: Mapping[str, Any],
+    index: int,
+    duration: float,
+    width: int,
+    entry: float,
+) -> tuple[list[_Item], str]:
+    parts = _donut_parts(props)
+    mismatch = donut_center_error(props)
+    if mismatch:
+        raise SceneRenderError(mismatch)
+    unit = str(props.get("unit") or "").strip()
+    places = _decimals(*(part["value"] for part in props["parts"]))
+    total = sum(value for _, value, _ in parts)
+    center = props.get("center")
+    center_cue = ""
+    center_markup = ""
+    if center is not None:
+        if not isinstance(center, Mapping):
+            raise SceneRenderError("donut `center` must be an object {value, label}")
+        c_label = str(center.get("label") or "").strip()
+        value = (
+            _number(center["value"], "donut `center` value")
+            if center.get("value") is not None
+            else None
+        )
+        if value is None and not c_label:
+            raise SceneRenderError("donut `center` needs a `value` or a `label`")
+        shown = total if value is None and not c_label else value
+        center_cue = declared_cue(center.get("cue"), "")
+        if shown is not None:
+            counted = _count_markup(format_amount(shown, unit, decimals=places))
+            text = counted or html.escape(format_amount(shown, unit, decimals=places))
+            size = min(0.1, 0.7 / max(len(format_amount(shown, unit, decimals=places)), 1))
+            center_markup += (
+                f'<span class="typo-dn-value" style="font-size:calc(var(--cw) * {size:.4f})">'
+                f"{text}</span>"
+            )
+        if c_label:
+            center_markup += f'<span class="typo-dn-caption">{html.escape(c_label)}</span>'
+
+    circumference_gap = 0.006
+    track = (
+        f'<svg class="typo-dn-ring" viewBox="0 0 100 100" aria-hidden="true">'
+        f'<circle class="typo-dn-track" cx="50" cy="50" r="{_DN_RADIUS}"/></svg>'
+    )
+    frame = track + (f'<div class="typo-dn-center">{center_markup}</div>' if center_markup else "")
+    items = [_Item(frame, cue=center_cue, class_name=_chart_class("dn"), opening=True)]
+    rows = len(parts)
+    row_h = min(6.2, 36.0 / rows)
+    legend_top = 63.0
+    start = 0.0
+    for position, (label, value, cue) in enumerate(parts):
+        fraction = value / total
+        dash = max(fraction - circumference_gap, 0.0005)
+        ring = (
+            f'<svg class="typo-dn-ring" viewBox="0 0 100 100" aria-hidden="true">'
+            f'<circle class="typo-dn-seg" cx="50" cy="50" r="{_DN_RADIUS}" pathLength="1" '
+            f'transform="rotate(-90 50 50)" '
+            f'style="stroke:var(--dn-{position}); stroke-dasharray:{dash:.5f} 1; '
+            f'stroke-dashoffset:{-start:.5f}"/></svg>'
+        )
+        legend = (
+            f'<div class="typo-dn-row" style="top:{legend_top + position * row_h:.2f}%;'
+            f'height:{row_h:.2f}%">'
+            f'<span class="typo-dn-swatch" style="background:var(--dn-{position})"></span>'
+            f'<span class="typo-dn-name">{html.escape(label)}</span>'
+            f'<span class="typo-dn-amount">'
+            f"{html.escape(format_amount(value, unit, decimals=places))}</span></div>"
+        )
+        items.append(
+            _Item(
+                ring + legend,
+                cue=cue,
+                class_name=_chart_class("dn"),
+                opening=position == 0,
+            )
+        )
+        start += fraction
+    return items, ""
+
+
 _Layout = Callable[
     [Mapping[str, Any], Mapping[str, Any], int, float, int, float],
     tuple[list[_Item], str],
@@ -411,6 +1061,9 @@ _LAYOUTS: dict[str, _Layout] = {
     "definition": _definition,
     "sequence": _sequence,
     "array": _array,
+    "waterfall": _waterfall,
+    "line": _line,
+    "donut": _donut,
 }
 
 
@@ -513,6 +1166,10 @@ def _base_css(index: int, design: DesignTokens, duration: float, width: int, ent
         from {{ opacity: 0; transform: translate3d(0, {int(12 * u)}px, 0); }}
         to {{ opacity: 1; transform: translate3d(0, 0, 0); }}
       }}
+      @keyframes tp_icon_{index} {{
+        from {{ opacity: 0; transform: scale(0.6); }}
+        to {{ opacity: 1; transform: scale(1); }}
+      }}
       @keyframes tp_rule_{index} {{ from {{ width: 0; }} to {{ width: 100%; }} }}
       .typo-{index} {{ position: absolute; inset: 0; background: {palette.bg}; overflow: hidden; }}
       .typo-{index} .typo-stage {{ position: absolute; inset: 0; display: flex;
@@ -526,6 +1183,14 @@ def _base_css(index: int, design: DesignTokens, duration: float, width: int, ent
       .typo-{index} .typo-headline {{ font-family: {display};
         font-weight: {design.type.display_weight}; font-size: {int(168 * u)}px;
         line-height: 0.95; letter-spacing: -0.02em; color: {palette.ink}; }}
+      .typo-{index} .typo-icon {{ display: block; width: {int(140 * min(u, 1.4))}px;
+        height: {int(140 * min(u, 1.4))}px; margin: 0 auto {int(18 * u)}px;
+        color: {palette.accent};
+        animation: tp_icon_{index} {entry * 1.6:.3f}s ease-out var(--d, 0s) both; }}
+      .typo-{index} .typo-icon-svg {{ display: block; width: 100%; height: 100%; }}
+      .typo-{index} .typo-icon-bar {{ display: inline-block; width: {int(40 * u)}px;
+        height: {int(40 * u)}px; margin: 0 {int(10 * u)}px 0 0; vertical-align: middle;
+        animation-name: tp_icon_{index}; }}
       .typo-{index} .typo-rule {{ display: block; height: {max(2, int(3 * u))}px;
         margin: {int(14 * u)}px auto 0; background: {palette.accent};
         animation: tp_rule_{index} {duration:.3f}s linear both; }}
@@ -556,7 +1221,8 @@ def _base_css(index: int, design: DesignTokens, duration: float, width: int, ent
       .typo-{index} .typo-bar {{ height: 100%; background: {palette.accent};
         animation: tp_grow_{index} {entry * 1.6:.3f}s ease-out both; }}
       .typo-{index} .typo-bar-value {{ font-family: {display};
-        font-weight: {design.type.display_weight}; font-size: {int(44 * u)}px; }}
+        font-weight: {design.type.display_weight}; font-size: {int(44 * u)}px;
+        white-space: nowrap; }}
       .typo-{index} .typo-connector-row {{ opacity: 0;
         animation: tp_entry_{index} {entry:.3f}s ease-out both; flex: none; }}
       .typo-{index} .typo-connector {{ width: {max(2, int(4 * u))}px;
@@ -576,6 +1242,98 @@ def _base_css(index: int, design: DesignTokens, duration: float, width: int, ent
       .typo-{index} .typo-cell.is-hot {{ background: {palette.accent};
         border-color: {palette.accent};
         animation: tp_entry_{index} {entry:.3f}s ease-out both; }}
+    """
+
+
+def _chart_css(index: int, design: DesignTokens, width: int, entry: float) -> str:
+    """Shared box, typography and keyframes for the chart layouts."""
+    palette = design.palette
+    body = font_stack(design.type.body)
+    display = font_stack(design.type.display)
+    u = _unit(width)
+    dn_vars = " ".join(
+        f"--dn-{position}: {fill.format(accent=palette.accent, ink=palette.ink, muted=palette.muted, bg=palette.bg)};"
+        for position, fill in enumerate(_DONUT_FILLS)
+    )
+    return f"""
+      @keyframes tp_wfgrow_{index} {{ from {{ transform: scaleY(0); }} }}
+      .typo-{index} .typo-stage {{ container-type: size; }}
+      .typo-{index} .typo-chart {{ position: absolute; inset: 0; margin: auto; opacity: 0;
+        --r: 1.5; --cw: min(92cqw, calc(76cqh * var(--r)));
+        width: var(--cw); height: calc(var(--cw) / var(--r));
+        animation: tp_entry_{index} {entry:.3f}s ease-out both;
+        font-family: {body}; color: {palette.ink}; }}
+      .typo-{index} .typo-chart > * {{ position: absolute; box-sizing: border-box; }}
+      .typo-{index} .typo-wf-zero {{ left: 0; width: 100%; height: {max(1, int(2 * u))}px;
+        background: {palette.muted}; opacity: 0.6; }}
+      .typo-{index} .typo-wf-conn {{ height: {max(1, int(2 * u))}px;
+        background: {palette.muted}; }}
+      .typo-{index} .typo-wf-bar {{ border-radius: {int(3 * u)}px;
+        animation: tp_wfgrow_{index} {entry * 2.2:.3f}s ease-out var(--d, 0s) both; }}
+      .typo-{index} .typo-wf-bar.is-total {{ background: {palette.accent}; }}
+      .typo-{index} .typo-wf-bar.is-up {{ background: {palette.muted}; }}
+      .typo-{index} .typo-wf-bar.is-down {{ background: {NEGATIVE_COLOR}; }}
+      .typo-{index} .typo-wf-val {{ text-align: center; font-family: {display};
+        font-weight: {design.type.display_weight}; line-height: 1.1; white-space: nowrap; }}
+      .typo-{index} .typo-wf-label {{ text-align: center; line-height: 1.2;
+        overflow-wrap: anywhere; color: {palette.ink}; }}
+      @keyframes tp_dnsweep_{index} {{ from {{ stroke-dasharray: 0 1; }} }}
+      .typo-{index} .typo-chart-dn {{ --r: 0.8; --cw: min(92cqw, 76cqh);
+        {dn_vars} }}
+      .typo-{index} .typo-dn-ring {{ left: 15%; top: 0; width: 70%; height: calc(var(--cw) * 0.7); }}
+      .typo-{index} .typo-dn-track {{ fill: none; stroke: {palette.muted}; opacity: 0.22;
+        stroke-width: 14; }}
+      .typo-{index} .typo-dn-seg {{ fill: none; stroke-width: 14; stroke-linecap: butt;
+        animation: tp_dnsweep_{index} {DONUT_SWEEP_SECONDS:.2f}s ease-out var(--d, 0s) both; }}
+      .typo-{index} .typo-dn-center {{ left: 15%; top: 0; width: 70%; height: calc(var(--cw) * 0.7);
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        text-align: center; }}
+      .typo-{index} .typo-dn-value {{ font-family: {display}; font-weight: {design.type.display_weight};
+        line-height: 1; color: {palette.ink}; white-space: nowrap; }}
+      .typo-{index} .typo-dn-caption {{ font-size: calc(var(--cw) * 0.036); margin-top: 0.4em;
+        color: {palette.muted}; max-width: 90%; line-height: 1.2; overflow-wrap: anywhere; }}
+      .typo-{index} .typo-dn-row {{ left: 8%; width: 84%; display: flex; align-items: center;
+        gap: calc(var(--cw) * 0.025); font-size: calc(var(--cw) * 0.04); color: {palette.ink}; }}
+      .typo-{index} .typo-dn-swatch {{ flex: none; width: 0.7em; height: 0.7em;
+        border-radius: 0.14em; }}
+      .typo-{index} .typo-dn-name {{ flex: 1; min-width: 0; line-height: 1.15;
+        overflow-wrap: anywhere; }}
+      .typo-{index} .typo-dn-amount {{ font-family: {display}; font-weight: {design.type.display_weight};
+        white-space: nowrap; }}
+      @keyframes tp_lndraw_{index} {{ from {{ stroke-dashoffset: 1; }} to {{ stroke-dashoffset: 0; }} }}
+      @keyframes tp_ln_hide_{index} {{ from {{ opacity: 1; }} to {{ opacity: 0; }} }}
+      .typo-{index} .typo-ln-svg {{ position: absolute; inset: 0; width: 100%; height: 100%;
+        overflow: hidden; }}
+      .typo-{index} .typo-ln-axis {{ stroke: {palette.muted}; stroke-width: 0.25; }}
+      .typo-{index} .typo-ln-zero {{ stroke: {palette.ink}; stroke-width: 0.35;
+        stroke-dasharray: 1.2 0.8; }}
+      .typo-{index} .typo-ln-path {{ fill: none; stroke: {palette.accent}; stroke-width: 1.1;
+        stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1;
+        animation: tp_lndraw_{index} {LINE_DRAW_SECONDS:.2f}s ease-in-out var(--d, 0s) both; }}
+      .typo-{index} .typo-ln-tick {{ color: {palette.muted}; white-space: nowrap;
+        line-height: 1; font-variant-numeric: tabular-nums; }}
+      .typo-{index} .typo-ln-tick.is-x {{ transform: translateX(-50%); }}
+      .typo-{index} .typo-ln-tick.is-y {{ transform: translateY(-50%); }}
+      .typo-{index} .typo-ln-axis-label {{ color: {palette.ink}; text-align: center;
+        line-height: 1.2; font-weight: 600; }}
+      .typo-{index} .typo-ln-axis-label.is-y {{ text-align: left; white-space: nowrap; }}
+      .typo-{index} .typo-ln-mark {{ border-left: {max(2, int(3 * u))}px dashed {palette.ink};
+        width: 0; }}
+      .typo-{index} .typo-ln-mark-label {{ font-family: {display};
+        font-weight: {design.type.display_weight}; line-height: 1.15; white-space: nowrap; }}
+      .typo-{index} .typo-ln-sub {{ display: block; font-family: {body}; font-weight: 500;
+        color: {palette.accent}; font-size: 0.85em; }}
+      .typo-{index} .typo-ln-dots {{ inset: 0; }}
+      .typo-{index} .typo-ln-dot {{ position: absolute; box-sizing: border-box; width: {int(30 * u)}px; height: {int(30 * u)}px;
+        margin: -{int(15 * u)}px 0 0 -{int(15 * u)}px; border-radius: 50%;
+        background: {palette.accent}; border: {max(3, int(5 * u))}px solid {palette.bg};
+        box-shadow: 0 0 0 {max(2, int(3 * u))}px {palette.accent}; }}
+      .typo-{index} .typo-ln-dots.is-passed {{
+        animation: tp_ln_hide_{index} 0.2s ease-out var(--n, 9999s) forwards; }}
+      .typo-{index} .typo-ln-dot-label {{ position: absolute; left: 150%; bottom: 120%;
+        font-family: {display}; font-weight: {design.type.display_weight};
+        line-height: 1.15; white-space: nowrap; color: {palette.ink}; }}
+      .typo-{index} .typo-ln-dot-label.is-flip {{ left: auto; right: 150%; text-align: right; }}
     """
 
 
@@ -670,7 +1428,38 @@ def silence_unspoken_typographic_cues(
         bars = out.get("bars")
         if isinstance(bars, Sequence) and not isinstance(bars, str):
             out["bars"] = [_silenced_label_entry(bar, words) for bar in bars]
+    elif layout == "waterfall":
+        steps = out.get("steps")
+        if isinstance(steps, Sequence) and not isinstance(steps, str):
+            out["steps"] = [_silenced_label_entry(step, words) for step in steps]
+    elif layout == "donut":
+        parts = out.get("parts")
+        if isinstance(parts, Sequence) and not isinstance(parts, str):
+            out["parts"] = [_silenced_label_entry(part, words) for part in parts]
+    elif layout == "line":
+        if isinstance(out.get("mark"), Mapping):
+            out["mark"] = _silenced_label_entry(out["mark"], words)
+        dots = out.get("dots")
+        if isinstance(dots, Sequence) and not isinstance(dots, str):
+            out["dots"] = [_silenced_label_entry(dot, words) for dot in dots]
     return out
+
+
+def _delay_style(item: _Item, item_html: str, delay: float, following: float | None = None) -> str:
+    """The item's reveal delay, plus ``--d`` when its children time off it.
+
+    Icons and chart layers animate pieces inside the item (an icon's pop, a
+    bar's grow) that must start with the item itself; they read the delay from
+    the inherited ``--d`` custom property so one resolved cue drives them all.
+    """
+    style = f"animation-delay:{delay:.3f}s"
+    if "typo-icon" in item_html or "typo-chart" in item.class_name:
+        style += f";--d:{delay:.3f}s"
+    if following is not None and "typo-chart" in item.class_name:
+        # The next layer's reveal, for a piece that hands over to it (a line
+        # chart's dot hides as the following dot starts sliding).
+        style += f";--n:{following:.3f}s"
+    return style
 
 
 def render_typographic(
@@ -707,6 +1496,20 @@ def render_typographic(
         budget = seconds - entry - _read_floor_seconds(items[position].html)
         delays.append(min(latest, max(0.0, budget), max(0.0, resolved)))
 
+    openings = [position for position, item in enumerate(items) if item.opening]
+    if openings:
+        # The layout's meaningful opening (a headline, the first step, the
+        # first slice and donut frame) must be on screen even when the
+        # narration first names it late. Uncued scaffolding such as a sequence
+        # connector or a donut track no longer masks it by revealing sooner.
+        if any(delays[position] > 0.5 for position in openings):
+            for position in openings:
+                delays[position] = 0.4
+    elif delays:
+        earliest = min(range(len(delays)), key=delays.__getitem__)
+        if delays[earliest] > 0.5:
+            delays[earliest] = 0.4
+
     motion_css: list[str] = []
     rendered: list[str] = []
     for item, delay in zip(items, delays, strict=True):
@@ -720,8 +1523,11 @@ def render_typographic(
             )
         rendered.append(item_html)
     body = "".join(
-        f'<div class="{item.class_name}" style="animation-delay:{delay:.3f}s">{item_html}</div>'
-        for item, item_html, delay in zip(items, rendered, delays, strict=True)
+        f'<div class="{item.class_name}" '
+        f'style="{_delay_style(item, item_html, delay, following)}">{item_html}</div>'
+        for item, item_html, delay, following in zip(
+            items, rendered, delays, [*delays[1:], None], strict=True
+        )
     )
     markup = f'<div class="typo-{index}"><div class="typo-stage">{body}</div></div>'
     # A bar that grows inside a row still hidden by its own reveal would already
@@ -732,9 +1538,12 @@ def render_typographic(
         for position, (item, delay) in enumerate(zip(items, delays, strict=True), start=1)
         if item.class_name == "typo-bar-row"
     )
+    charts = any("typo-chart" in item.class_name for item in items)
     return SceneRender(
-        markup=markup,
-        css=_base_css(index, design, seconds, width, entry)
+        markup=tag_non_latin_text(markup),
+        css=NON_LATIN_CSS
+        + _base_css(index, design, seconds, width, entry)
+        + (_chart_css(index, design, width, entry) if charts else "")
         + extra_css
         + bar_css
         + "".join(motion_css),

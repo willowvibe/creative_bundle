@@ -36,7 +36,7 @@ import structlog
 
 from video_editor_core.composition import Composition, CompositionLayer
 from video_editor_core.designs import Grade
-from video_editor_core.fonts import font_face_css, font_stack
+from video_editor_core.fonts import font_face_css, font_stack, with_indic_fallbacks
 from video_editor_core.motion import MotionCSS, MotionError, build_motion
 from video_editor_core.project_assets import AssetCopier
 from video_editor_core.scene_transitions import apply_scene_transitions
@@ -463,7 +463,7 @@ def _font_families(composition: Composition) -> list[str]:
         for layer in scene.layers:
             if layer.kind in {"text", "rich_text"}:
                 families.append(str(layer.style.get("font") or "Inter"))
-    return families
+    return with_indic_fallbacks(families)
 
 
 def _tempo(composition: Composition) -> float:
@@ -606,6 +606,7 @@ def _render_html(
     fonts_css: str,
 ) -> str:
     canvas = composition.canvas
+    backdrop = "transparent" if composition.transparent else "#000"
     return f"""<!doctype html>
 <html lang="en">
   <head>
@@ -614,9 +615,9 @@ def _render_html(
     <title>{html_escape(composition.job_id)}</title>
     <style>
 {fonts_css}
-      html, body {{ margin: 0; padding: 0; background: #000; }}
+      html, body {{ margin: 0; padding: 0; background: {backdrop}; }}
       #root {{ position: relative; width: {canvas.width}px; height: {canvas.height}px;
-        overflow: hidden; background: #000; }}
+        overflow: hidden; background: {backdrop}; }}
       .clip {{ position: absolute; }}
       .ve-line {{ display: inline-block; animation: ve_line_in 0.22s cubic-bezier(0.2, 0.8, 0.2, 1) 0s both; }}
       .ve-word {{ white-space: pre; display: inline-block; }}

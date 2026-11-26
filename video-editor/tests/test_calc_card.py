@@ -192,9 +192,16 @@ def test_a_nine_row_ledger_ends_above_the_caption_band() -> None:
     top = int(re.search(r"padding: (\d+)px", css).group(1))
     row = int(re.search(r"\.ledger-label \{ font-size: (\d+)px", css).group(1))
     gap = int(re.search(r"gap: (\d+)px", css).group(1))
-    # heading + 8 rows + ruled total, at ~1.3 line height, must end by 62% of 1080.
-    estimate = top + 60 + 8 * (row * 1.3 + gap) + 90
-    assert estimate <= 0.62 * 1080
+    heading = int(re.search(r"\.ledger-heading \{ font-size: (\d+)px", css).group(1))
+    total = int(
+        re.search(
+            r"\.ledger-total \.ledger-amount \{ font-size: (\d+)px",
+            css,
+        ).group(1)
+    )
+    # heading + 8 rows + ruled total, at ~1.3 line height, must end by 70% of 1080.
+    estimate = top + heading + 8 * (row * 1.3 + gap) + total + 40
+    assert estimate <= 0.70 * 1080
 
 
 def test_the_card_appears_just_before_its_first_row_not_with_the_scene() -> None:

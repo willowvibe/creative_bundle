@@ -127,3 +127,12 @@ def test_an_unchanged_or_first_tally_shows_no_change_line() -> None:
     first, _ = render_tally(Tally("cash", 0), None, index=0, width=1920)
     same, _ = render_tally(Tally("cash", 2432), 2432, index=8, width=1920)
     assert "tally-change" not in first and "tally-change" not in same
+
+
+def test_the_count_can_wait_for_the_calculation_to_be_spoken() -> None:
+    markup, _css = render_tally(Tally("cash", -1812), -1488, index=4, width=1920, delay=9.5)
+
+    step_styles = re.findall(r'class="tally-step[^"]*" style="([^"]*)"', markup)
+    assert step_styles and all("9.50s" in style for style in step_styles)
+    change = re.search(r'class="tally-change[^"]*" style="([^"]*)"', markup)
+    assert change is not None and "9.50s" in change.group(1)

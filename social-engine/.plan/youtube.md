@@ -124,7 +124,7 @@ files: src/social_engine/mcp_server.py, pyproject.toml, tests/test_mcp_server.py
 needs: 6, 9
 do: stdio MCP server with the `mcp` SDK, console script `social-engine-mcp`. Tools social_validate {manifest}, social_publish {manifest, platform?, via?, confirm}, social_update {manifest, confirm?}, social_list {platform, account, limit?}, social_stats {manifest, days?}.
   - social_publish and social_update refuse unless `confirm` is literally true; via browser, the first call returns ready_to_confirm and a second call with `confirm: true` and the returned id publishes.
-  - manifest paths must resolve (after symlinks) inside the allowed roots from env `SOCIAL_ENGINE_ROOTS` (colon-separated), default `/mnt/data2/git_repos/creative_repos/video-editor/videos`; anything else is refused.
+  - manifest paths must resolve (after symlinks) inside the allowed roots from env `SOCIAL_ENGINE_ROOTS` (colon-separated), default `/mnt/data2/git_repos/video-editor/videos`; anything else is refused.
 done-when: `uv run pytest tests/test_mcp_server.py -q`; `uv run ruff check .`; tests: tool list, confirm guard, browser two-call flow with patched bridge, path outside roots refused, symlink escape refused
 difficulty: medium
 

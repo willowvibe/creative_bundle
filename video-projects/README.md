@@ -5,7 +5,7 @@ Split out of `video-editor` on 2026-11-11 with its history.
 
 | Folder | What |
 |---|---|
-| `videos/<date>/<slug>/` | One video per folder: `script.md`, notes, prompts. Renders and caches stay on disk, untracked. |
+| `videos/<date>/<slug>/` | One video per folder: `script.md`, notes, prompts. The finished cut is copied here as `<slug>.mp4` (gitignored); job work and older cuts stay under `/mnt/data2/video-editor-data/`. |
 | `videos/mantra-rahasyam/` | Drama series bible and episodes (pipeline: `../drama-studio`). |
 | `shorts/` | Short and long-form packs (`short.yaml`, `longform.yaml`). |
 | `brand/<channel>/` | Reusable channel assets and generators, e.g. `brand/python-decoder/make_bumpers.py` (intro/outro) and upload defaults. |

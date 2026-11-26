@@ -131,7 +131,7 @@ and adds the video once. Dubs is the browser lane; without `--yes` it stops at
 | Variable | Default | Meaning |
 |---|---|---|
 | `SOCIAL_ENGINE_HOME` | `~/.config/social-engine` | Tokens, account files, Chrome profiles, logs |
-| `SOCIAL_ENGINE_ROOTS` | `/mnt/data2/git_repos/creative_repos/video-editor/videos` | Colon-separated roots the MCP server may read manifests from |
+| `SOCIAL_ENGINE_ROOTS` | `/mnt/data2/git_repos/video-editor/videos` | Colon-separated roots the MCP server may read manifests from |
 | `SOCIAL_ENGINE_DRIVER` | `<repo>/browser/driver.mjs` | Override the Node browser driver path |
 | `SOCIAL_ENGINE_VISIBLE` | unset | Set to `1` to launch the browser lane's Chrome on the owner's desktop instead of a hidden `:99` display (Linux) |
 | `SOCIAL_ENGINE_XVFB_DISPLAY` | `:99` | X display the browser lane's hidden Chrome runs on (Linux, when Xvfb is available) |
@@ -150,7 +150,7 @@ Register the stdio server from `.mcp.json.example`:
       "command": "uv",
       "args": ["run", "--directory", "/path/to/social-engine", "social-engine-mcp"],
       "env": {
-        "SOCIAL_ENGINE_ROOTS": "/mnt/data2/git_repos/creative_repos/video-editor/videos"
+        "SOCIAL_ENGINE_ROOTS": "/mnt/data2/git_repos/video-editor/videos"
       }
     }
   }

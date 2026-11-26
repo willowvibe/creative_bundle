@@ -4,14 +4,13 @@ from __future__ import annotations
 
 from typing import Any
 
+from video_editor_core.caption_text import ends_sentence as _ends_sentence
+from video_editor_core.caption_text import is_orphan
 from video_editor_core.timeline import EDL
 from video_editor_ffmpeg.captions import remap_transcript_to_cuts
 
 from captions.models import CaptionLine, CaptionStyle, CaptionWord
 
-#: A caption line never crosses one of these: a full stop starts a new line.
-_SENTENCE_ENDINGS = (".", "!", "?", "…")
-_TRAILING = "\"'”’)]}"
 #: A frame that is one very short word ("a", "of", "us.") reads as an orphan.
 #: The penalty dominates the slack term so the DP only accepts one when the
 #: chunk has no balanced alternative.
@@ -22,14 +21,9 @@ _CLAUSE_ENDINGS = (",", ";", ":")
 _CLAUSE_BONUS = 40
 
 
-def _ends_sentence(text: str) -> bool:
-    """True when ``text`` closes a sentence, ignoring trailing quotes/brackets."""
-    return text.rstrip().rstrip(_TRAILING).endswith(_SENTENCE_ENDINGS)
-
-
 def _ends_clause(text: str) -> bool:
     """True when ``text`` ends on a comma, semicolon or colon."""
-    return text.rstrip().rstrip(_TRAILING).endswith(_CLAUSE_ENDINGS)
+    return text.rstrip().rstrip("\"'”’)]}").endswith(_CLAUSE_ENDINGS)
 
 
 def _letters(text: str) -> int:
@@ -151,6 +145,35 @@ def _balanced_frames(
     return frames
 
 
+def _merge_orphan_lines(lines: list[CaptionLine]) -> list[CaptionLine]:
+    """Merge a lone short line into a neighbour so the QA gate accepts it.
+
+    A long-spoken token such as ``₹583.`` can fill a frame on its own yet still
+    read as a stranded word. Merge it back into the previous line, or into the
+    next one when it opens the run. Lines are word lists, so timings move with
+    the words.
+    """
+    merged: list[CaptionLine] = []
+    texts: list[str] = []
+    pending: CaptionLine | None = None
+    for line in lines:
+        if pending is not None:
+            line = CaptionLine(words=[*pending.words, *line.words])
+            pending = None
+        if is_orphan([*texts, line.text], len(texts)):
+            if merged:
+                merged[-1].words.extend(line.words)
+                texts[-1] = merged[-1].text
+                continue
+            pending = line
+            continue
+        merged.append(line)
+        texts.append(line.text)
+    if pending is not None:
+        merged.append(pending)
+    return merged
+
+
 def _group_words_to_lines(
     words: list[CaptionWord],
     style: CaptionStyle,
@@ -163,6 +186,8 @@ def _group_words_to_lines(
     than ``max_gap`` break too. Inside those hard-broken chunks the words are
     re-partitioned with the same frame count as greedy grouping, but with
     balanced widths, so a sentence does not end on an orphaned short word.
+    Frames the gate still calls a lone short word are merged back into their
+    neighbour afterwards.
     """
     if not words:
         return []
@@ -171,7 +196,7 @@ def _group_words_to_lines(
     for chunk in _chunks(words, style):
         for frame in _balanced_frames(chunk, style):
             lines.append(CaptionLine(words=list(frame)))
-    return lines
+    return _merge_orphan_lines(lines)
 
 
 def generate_caption_words(

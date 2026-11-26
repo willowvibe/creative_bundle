@@ -6,10 +6,12 @@ renderer can be swapped or mocked in tests.
 
 from __future__ import annotations
 
+import functools
 import json
+import os
 import shutil
 import tempfile
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
@@ -20,6 +22,72 @@ from video_editor_ffmpeg.run import CommandError, run_subprocess
 logger = structlog.get_logger(__name__)
 
 DEFAULT_TIMEOUT = 600
+DEFAULT_GPU_WORKERS = 6
+
+_GPU_ENABLE_VALUES = {"1", "on", "true", "yes"}
+_GPU_DISABLE_VALUES = {"0", "off", "false", "no"}
+_GPU_RENDER_ENV = {
+    "__NV_PRIME_RENDER_OFFLOAD": "1",
+    "__GLX_VENDOR_LIBRARY_NAME": "nvidia",
+    "__VK_LAYER_NV_optimus": "NVIDIA_only",
+}
+
+
+@functools.lru_cache(maxsize=1)
+def _nvidia_smi_available() -> bool:
+    """Return True when ``nvidia-smi -L`` lists an NVIDIA GPU."""
+    # Through the module (not the imported name) so mocks of render commands never see it.
+    from video_editor_ffmpeg import run as ffmpeg_run
+
+    try:
+        result = ffmpeg_run.run_subprocess(["nvidia-smi", "-L"], check=False, timeout=10)
+    except (OSError, CommandError):
+        return False
+    return result.returncode == 0 and bool((result.stdout or "").strip())
+
+
+def _gpu_render_enabled() -> bool:
+    setting = os.environ.get("VE_RENDER_GPU", "").strip().lower()
+    if setting in _GPU_ENABLE_VALUES:
+        return True
+    if setting in _GPU_DISABLE_VALUES:
+        return False
+    return _nvidia_smi_available()
+
+
+def _gpu_workers() -> str:
+    workers = os.environ.get("VE_RENDER_WORKERS", "").strip()
+    return workers or str(DEFAULT_GPU_WORKERS)
+
+
+def gpu_render_profile(
+    extra_args: Mapping[str, Any] | None = None,
+) -> tuple[list[str], dict[str, str]]:
+    """Return the NVIDIA GPU CLI flags and Chrome environment for a render.
+
+    The profile is opt-in via ``VE_RENDER_GPU=1|on``, or automatic when the
+    variable is unset/``auto`` and ``nvidia-smi -L`` finds a GPU. Explicit
+    caller ``extra_args`` win, so a key that is already present is not added.
+    """
+    if not _gpu_render_enabled():
+        return [], {}
+
+    supplied = {str(key).lstrip("-") for key in (extra_args or {})}
+    args: list[str] = []
+    if "gpu" not in supplied:
+        args.append("--gpu")
+    if "browser-gpu" not in supplied:
+        args.append("--browser-gpu")
+    if "workers" not in supplied:
+        args.extend(["--workers", _gpu_workers()])
+
+    return args, dict(_GPU_RENDER_ENV)
+
+
+def _gpu_browser_env() -> dict[str, str] | None:
+    """Environment that puts HyperFrames' Chrome on the NVIDIA card (check, snapshot)."""
+    _, env = gpu_render_profile()
+    return {**os.environ, **env} if env else None
 
 
 class RenderSegmentError(Exception):
@@ -117,8 +185,12 @@ def render_project(
     fps: int | None = None,
     resolution: str | None = None,
     extra_args: dict[str, Any] | None = None,
+    output_format: str | None = None,
 ) -> Path:
     """Render a HyperFrames **HTML project** (``hyperframes render <dir>``).
+
+    ``output_format`` is passed as ``--format``. With ``png-sequence`` the
+    ``output_path`` is a directory that receives one RGBA PNG per frame.
 
     This targets the modern CLI (v0.7+), which renders HTML compositions rather
     than a JSON plan. See ``render_segment`` for the legacy JSON-plan interface.
@@ -131,13 +203,29 @@ def render_project(
         cmd.extend(["--fps", str(fps)])
     if resolution:
         cmd.extend(["--resolution", resolution])
+    if output_format:
+        cmd.extend(["--format", output_format])
     if extra_args:
         for key, value in extra_args.items():
             cmd.extend([f"--{key}", str(value)])
 
-    logger.info("hyperframes_render_project", cmd=" ".join(cmd))
+    profile_args, profile_env = gpu_render_profile(extra_args)
+    cmd.extend(profile_args)
+    render_env = {**os.environ, **profile_env} if profile_env else None
+
+    gpu_enabled = bool(profile_env)
+    caller_workers = (extra_args or {}).get("workers")
+    gpu_workers = (
+        str(caller_workers) if caller_workers is not None else _gpu_workers()
+    ) if gpu_enabled else None
+    logger.info(
+        "hyperframes_render_project",
+        cmd=" ".join(cmd),
+        gpu_render=gpu_enabled,
+        gpu_workers=gpu_workers,
+    )
     try:
-        result = run_subprocess(cmd, check=True, timeout=timeout)
+        result = run_subprocess(cmd, check=True, timeout=timeout, env=render_env)
     except CommandError as exc:
         if "timed out" in str(exc).lower():
             raise RenderSegmentError(f"HyperFrames render timed out after {timeout}s") from exc
@@ -145,8 +233,19 @@ def render_project(
             f"HyperFrames render failed\nstderr: {(exc.stderr or '')[-2000:]}"
         ) from exc
 
-    _validate_rendered(output, result.stderr)
+    if output_format == "png-sequence":
+        _validate_frames(output, result.stderr)
+    else:
+        _validate_rendered(output, result.stderr)
     return output
+
+
+def _validate_frames(directory: Path, stderr: str | None) -> None:
+    """Raise ``RenderSegmentError`` unless ``directory`` holds rendered PNG frames."""
+    if not directory.is_dir() or not any(directory.glob("*.png")):
+        raise RenderSegmentError(
+            f"HyperFrames render produced no PNG frames in {directory}\n{stderr}"
+        )
 
 
 def lint_plan(plan: dict[str, Any]) -> list[str]:
@@ -298,7 +397,7 @@ def check_project(
         cmd.append("--strict")
     logger.info("hyperframes_check", cmd=" ".join(cmd))
     try:
-        result = run_subprocess(cmd, check=True, timeout=timeout)
+        result = run_subprocess(cmd, check=True, timeout=timeout, env=_gpu_browser_env())
     except CommandError as exc:
         if "timed out" in str(exc).lower():
             raise HyperFramesCheckError([f"check timed out after {timeout}s"]) from exc
@@ -333,7 +432,7 @@ def snapshot_project(
         cmd.extend(["--frames", str(frames)])
     logger.info("hyperframes_snapshot", cmd=" ".join(cmd))
     try:
-        run_subprocess(cmd, check=True, timeout=timeout)
+        run_subprocess(cmd, check=True, timeout=timeout, env=_gpu_browser_env())
     except CommandError as exc:
         if "timed out" in str(exc).lower():
             raise RenderSegmentError(f"HyperFrames snapshot timed out after {timeout}s") from exc

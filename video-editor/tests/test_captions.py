@@ -15,6 +15,7 @@ from graphics.models import Brand
 from video_editor_core.render_graph import Rect as GraphRect
 from video_editor_core.timeline import EDL, compute_timeline_segments
 from video_editor_ffmpeg.probe import probe_media
+from video_editor_pipelines.caption_qa import caption_tokens_check
 from video_editor_state.job import JobContext
 
 
@@ -211,6 +212,41 @@ def test_caption_lines_prefer_breaking_after_a_comma_when_costs_tie() -> None:
     # Both partitions use 2 frames with equal slack:
     #   ["The cats, is"][beautiful] vs ["The cats,"]["is beautiful"].
     assert _line_texts(lines) == ["The cats,", "is beautiful"]
+
+
+def test_a_short_number_frame_is_merged_into_the_previous_line() -> None:
+    """₹583. is long to say, so it fills a frame, but it is still an orphan."""
+    words = [
+        CaptionWord(text="రోజుకి", start=0.0, end=0.5),
+        CaptionWord(text="₹583.", start=0.55, end=2.7),
+        CaptionWord(text="ఇది", start=2.75, end=3.0),
+        CaptionWord(text="మెయిన్", start=3.0, end=3.4),
+        CaptionWord(text="రోడ్", start=3.4, end=3.7),
+        CaptionWord(text="మీద", start=3.7, end=4.0),
+    ]
+    lines = generate_segment_caption_lines(words, 0.0, 5.0, CaptionStyle())
+    texts = _line_texts(lines)
+    script = "రోజుకి ₹583. ఇది మెయిన్ రోడ్ మీద"
+
+    assert caption_tokens_check(texts, script).ok, texts
+    assert any("రోజుకి" in line and "₹583." in line for line in texts), texts
+
+
+def test_a_leading_short_frame_is_merged_into_the_next_line() -> None:
+    """An orphan that opens the run has no previous line, so it joins the next."""
+    words = [
+        CaptionWord(text="₹583", start=0.0, end=2.7),
+        CaptionWord(text="ఇది", start=2.75, end=3.0),
+        CaptionWord(text="మెయిన్", start=3.0, end=3.4),
+        CaptionWord(text="రోడ్", start=3.4, end=3.7),
+        CaptionWord(text="మీద", start=3.7, end=4.0),
+    ]
+    lines = generate_segment_caption_lines(words, 0.0, 5.0, CaptionStyle())
+    texts = _line_texts(lines)
+    script = "₹583 ఇది మెయిన్ రోడ్ మీద"
+
+    assert caption_tokens_check(texts, script).ok, texts
+    assert texts[0].startswith("₹583 ఇది"), texts
 
 
 def test_captions_skill_run(ctx: JobContext, tmp_media: Path) -> None:

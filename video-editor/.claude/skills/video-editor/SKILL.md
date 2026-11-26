@@ -36,13 +36,26 @@ ve doctor                           # ffmpeg filters, HyperFrames, Chrome, agy
 ```
 
 Every render writes under `projects/<job>/` (work) and `outputs/<job>/`
-(final); `videos/<date>/<project>/` is the delivery copy. The queue DB follows
+(final). Once QA passes, copy `outputs/<job>/final.mp4` to
+`videos/<date>/<slug>/<slug>.mp4`, the delivery copy (gitignored). The queue DB follows
 the output root.
+
+**Rendering** (`docs/RENDERING.md`):
+- **NVIDIA profile:** automatic. NVENC encodes, PRIME offload keeps Chrome on the RTX 3050 and off the AMD
+  iGPU, with 6 workers. `VE_RENDER_GPU=0` turns it off.
+- **Captions:** burned as a transparent overlay; Telugu never falls back to drawtext.
+- **Long renders:** run them detached with `setsid systemd-run --user --scope -p MemoryMax=20G`.
+- **Re-runs:** the same `--job-id` with unchanged narration reuses cached voice at no ElevenLabs cost. Check
+  `character_count` before and after.
 
 ## Explainer features to reach for
 
 - **Business breakdowns** (`docs/STOCK_EXPLAINERS.md`):
-  - `visual: footage` gives a vision-checked stock clip with an AI-still fallback.
+  - `visual: footage` gives a vision-checked stock clip with an AI-still fallback. `shots:` cuts a scene into
+    several stock clips, photos or own files (`query:`, `photo:`, `file:`; `ai: true` labels a file). No stock
+    clip repeats in a video.
+  - The automatic AI-still chain is `poyo_ai → openrouter → fal_ai`. For free Flow stills, drive Flow
+    through Claude in Chrome and use them as `file:` shots.
   - A `tally` chip keeps a running cash box.
   - `calc` cards are arithmetic-checked, and the tally must move by their cash rows.
   - `layout: ledger` closes the day.
@@ -83,6 +96,8 @@ the output root.
 - Media layers are root-level clips; never nest them.
 - No JS-dependent motion; every effect must survive a deterministic frame seek.
 - No test makes a network call or spends money; providers are faked.
+- Inside Claude Code's sandbox `uv run` fails on snap-confine: use `.venv/bin/python -m pytest <files>`
+  and `.venv/bin/ruff`.
 - `uv run pytest -n 8 -m "not integration and not slow"`, `uv run ruff format
   --check .`, `uv run ruff check .`, `uv run mypy apps packages`, `uv run
   lint-imports` before a commit.
@@ -93,7 +108,9 @@ the output root.
 | --- | --- |
 | FFmpeg filter rejected | `ve doctor`; FFmpeg 6.1+ static validation rejects runtime variables in `zoompan` `x`/`y` |
 | Render freezes at t=0 | root `data-no-timeline`; CSS-only motion |
-| Text falls back | the family must be in `BUNDLED_FONTS`; Devanagari and Korean are bundled |
+| Text falls back | the family must be in `BUNDLED_FONTS`; Devanagari, Korean and Telugu are bundled |
+| Telugu letters detached, no conjuncts | text went through FFmpeg drawtext (no shaping); captions must come from the HyperFrames overlay (`overlay_burn`), PIL text needs `Layout.RAQM` and Noto Sans Telugu |
+| Render very slow or AMD in the log | `gpu_render_profile()` env missing on that HyperFrames call; check `nvidia-smi` shows Chrome during the render |
 | `agy` 429 | account `generate_image` quota; re-run `VE_AGY_INTEGRATION=1 uv run pytest -m integration tests/test_agy_image_integration.py` |
 | Parity SSIM miss | compare the primitive/adapter output at the failing frame; do not lower the threshold |
 

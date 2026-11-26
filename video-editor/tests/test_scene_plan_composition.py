@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
+import pytest
 from video_editor_core.scene_plan_composition import (
     canvas_for_aspect,
     compile_scene_plan_project,
@@ -130,3 +131,51 @@ def test_root_opts_out_of_timeline_poll(tmp_path: Path) -> None:
         encoding="utf-8"
     )
     assert "data-no-timeline" in html
+
+
+def test_render_scene_plan_takes_the_chunked_path_when_switched_on(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    import json
+
+    from video_editor_core import chunked_render, hyperframes_cli
+    from video_editor_core.scene_plan_composition import render_scene_plan
+
+    plan_path = tmp_path / "plan.json"
+    plan_path.write_text(json.dumps(_plan(tmp_path)), encoding="utf-8")
+    seen: dict[str, Path] = {}
+
+    def fake_chunked(composition, output_path, work_dir, *, cache_dir, cli_path, timeout):
+        seen["cache_dir"] = cache_dir
+        Path(output_path).write_bytes(b"mp4")
+
+    monkeypatch.setenv("VE_RENDER_CHUNKS", "1")
+    monkeypatch.setattr(hyperframes_cli, "hyperframes_available", lambda cli="hyperframes": True)
+    monkeypatch.setattr(chunked_render, "render_composition_chunked", fake_chunked)
+    project = tmp_path / "job" / "composition"
+    out = render_scene_plan(plan_path, tmp_path / "final.mp4", project)
+    assert out.read_bytes() == b"mp4"
+    assert seen["cache_dir"] == tmp_path / "job" / "render_cache"
+    assert (project / "index.html").exists()  # the full project is still compiled for QA
+
+
+def test_render_scene_plan_keeps_the_single_pass_when_switched_off(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    import json
+
+    from video_editor_core import hyperframes_cli
+    from video_editor_core.scene_plan_composition import render_scene_plan
+
+    plan_path = tmp_path / "plan.json"
+    plan_path.write_text(json.dumps(_plan(tmp_path)), encoding="utf-8")
+
+    def fake_render(project_dir, output_path, **kwargs):
+        Path(output_path).write_bytes(b"single")
+        return Path(output_path)
+
+    monkeypatch.setenv("VE_RENDER_CHUNKS", "0")
+    monkeypatch.setattr(hyperframes_cli, "hyperframes_available", lambda cli="hyperframes": True)
+    monkeypatch.setattr(hyperframes_cli, "render_project", fake_render)
+    out = render_scene_plan(plan_path, tmp_path / "final.mp4", tmp_path / "job" / "composition")
+    assert out.read_bytes() == b"single"

@@ -118,3 +118,32 @@ def test_render_graph_auto_routes_simple_graph_to_ffmpeg(
     out = tmp_path / "out.mp4"
     renderer_mod.render_graph(_graph(), out, engine="auto")
     assert len(recorded) == 1  # one FFmpeg pass
+
+
+def test_hyperframes_timeout_scales_with_video_length() -> None:
+    assert renderer_mod.hyperframes_timeout(30.0) == 600
+    # A 560 s explainer's caption pass needs ~1 h and hit the old fixed 600 s.
+    assert renderer_mod.hyperframes_timeout(560.5) > 6000
+
+
+def test_render_graph_derives_the_hyperframes_timeout_from_duration(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    seen: list[int] = []
+
+    class FakeRenderer:
+        def __init__(self, cli_path: str = "hyperframes", timeout: int = 0) -> None:
+            seen.append(timeout)
+
+        def render(self, graph: RenderGraph, output: Path) -> Path:
+            return output
+
+    monkeypatch.setattr(renderer_mod, "HyperFramesRenderer", FakeRenderer)
+    monkeypatch.setattr(renderer_mod, "choose_engine", lambda *a, **k: "hyperframes")
+    monkeypatch.setattr(renderer_mod, "hyperframes_available", lambda cli="x": True)
+    long = _graph(
+        cuts=[Cut(source_start=0.0, source_end=560.0, timeline_start=0.0, timeline_end=560.0)]
+    )
+    renderer_mod.render_graph(long, tmp_path / "a.mp4", engine="auto")
+    renderer_mod.render_graph(long, tmp_path / "b.mp4", engine="auto", timeout=77)
+    assert seen == [renderer_mod.hyperframes_timeout(560.0), 77]

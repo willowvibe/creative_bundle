@@ -24,6 +24,8 @@ COUNT_SECONDS = 1.2
 COUNT_STEPS = 12
 #: The count starts once the cut has settled.
 COUNT_DELAY_SECONDS = 0.3
+#: After a calc row's result lands, let it read before the tally reacts to it.
+TALLY_AFTER_RESULT_SECONDS = 1.0
 
 MINUS = "−"
 
@@ -115,7 +117,14 @@ def _keyframes(index: int, steps: int) -> str:
     return "".join(chunks)
 
 
-def render_tally(tally: Tally, previous: int | None, *, index: int, width: int) -> tuple[str, str]:
+def render_tally(
+    tally: Tally,
+    previous: int | None,
+    *,
+    index: int,
+    width: int,
+    delay: float = COUNT_DELAY_SECONDS,
+) -> tuple[str, str]:
     """Markup and CSS for one scene's chip, counting on from ``previous``."""
     unit = max(0.5, width / 1920.0)
     values = _values(tally.value if previous is None else previous, tally.value)
@@ -124,7 +133,7 @@ def render_tally(tally: Tally, previous: int | None, *, index: int, width: int) 
     for position, value in enumerate(values):
         style = (
             f' style="animation: tally_{index}_{position} {COUNT_SECONDS:.2f}s linear '
-            f'{COUNT_DELAY_SECONDS:.2f}s both"'
+            f'{delay:.2f}s both"'
             if animated
             else ""
         )
@@ -138,7 +147,7 @@ def render_tally(tally: Tally, previous: int | None, *, index: int, width: int) 
         delta = tally.value - previous
         sign_text = money(delta, tally.prefix) if delta < 0 else f"+{money(delta, tally.prefix)}"
         tone = "tally-neg" if delta < 0 else "tally-pos"
-        appear = COUNT_DELAY_SECONDS
+        appear = delay
         change = (
             f'<span class="tally-change {tone}" style="animation: tally_change_{index} '
             f'0.3s ease-out {appear:.2f}s both">{html.escape(sign_text)}</span>'

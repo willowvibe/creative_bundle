@@ -108,11 +108,14 @@ assets:
   # If every provider fails, the asset fails: assets.strict (default true)
   # refuses the fal_ai -> placeholder fallback so a render cannot ship a stub.
   # Set `strict: false` below to get the placeholder back (drafts, offline).
-  image_chain: [agy_image, flow_image, poyo_ai, openrouter, fal_ai]
+  # agy_image (stalls, writes no file) and flow_image (flow-mcp breaks on Flow UI changes) are
+  # out of the automatic chain (2026-11-25). Flow stills: generate them through Claude in Chrome
+  # and use them as `file:` shots with `ai: true` (docs/STOCK_EXPLAINERS.md).
+  image_chain: [poyo_ai, openrouter, fal_ai]
   # Final renders skip the slow local agent and start with a direct image API.
   image_chain_final: [poyo_ai, openrouter, fal_ai]
   # Bounds chain runs per run: every image request the chain serves counts,
-  # including paid fallbacks (one request that falls agy -> poyo consumes one
+  # including paid fallbacks (one request that falls poyo -> openrouter consumes one
   # unit for two generations). Inert when image_chain is empty, and copies
   # through local_media never count.
   max_images_per_run: 25

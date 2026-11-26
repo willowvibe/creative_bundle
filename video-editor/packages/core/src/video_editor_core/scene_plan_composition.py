@@ -90,9 +90,23 @@ def render_scene_plan(
         )
     plan = json.loads(plan_path.read_text(encoding="utf-8"))
 
+    # The full project is compiled either way: the QA gates (hyperframes check,
+    # frame snapshots) read it.
     compile_scene_plan_project(plan, project_dir, fps=fps)
     rendered = project_dir / "rendered.mp4"
-    render_project(project_dir, rendered, cli_path=cli_path, timeout=timeout, fps=fps)
+    from video_editor_core import chunked_render
+
+    if chunked_render.chunked_render_enabled():
+        chunked_render.render_composition_chunked(
+            from_scene_plan(plan, fps=fps),
+            rendered,
+            project_dir.parent / "chunked",
+            cache_dir=project_dir.parent / "render_cache",
+            cli_path=cli_path,
+            timeout=timeout,
+        )
+    else:
+        render_project(project_dir, rendered, cli_path=cli_path, timeout=timeout, fps=fps)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(rendered, output_path)

@@ -161,6 +161,9 @@ class Composition(BaseModel):
     audio: list[AudioCue] = Field(default_factory=list)
     audio_mode: Literal["embed", "external"] = "embed"
     design: DesignTokens | None = None
+    #: True for an overlay-only page (no base video): the page, ``html`` and
+    #: ``#root`` have no background, so a PNG-sequence render keeps real alpha.
+    transparent: bool = False
 
     @model_validator(mode="after")
     def _scenes_are_contiguous(self) -> Composition:

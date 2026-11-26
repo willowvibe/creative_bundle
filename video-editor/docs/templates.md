@@ -237,6 +237,92 @@ karaoke captions and ducked music. This is the reusable form of the
 - **Typographic motion:** a `big_stat` headline with a number counts up to it
   (`count: false` turns it off), a `definition` gloss reveals word by word, and
   both draw a thin accent rule that grows over the whole scene.
+- **Icons:** a `big_stat` takes an optional `icon: <name>`, drawn about 140 px
+  above the headline in the design's accent and popping in with the headline's
+  cue; a `bar_compare` bar takes the same key (`{label, value, unit, icon}`)
+  and shows a small icon before its label. Icons are the vendored Lucide set
+  (ISC, `packages/core/src/video_editor_core/icons/lucide/`, licence alongside):
+  `wheat`, `flame`, `store`, `users`, `package`, `zap`, `file-badge`, `clock`.
+  An unknown name fails the scene and lists the available ones. To add an icon,
+  drop its Lucide SVG into that folder.
+
+  ```yaml
+  layout: big_stat
+  headline: "₹24"
+  icon: flame
+  ```
+- **`layout: waterfall`:** a running total, left to right. `start: {label, value}`,
+  `steps: [{label, value, cue?}]` (2-8, signed: a negative step hangs down from
+  the running level) and `end: {label, value?}`, whose bar is start + sum(steps).
+  Optional `unit` (`₹`, `$`, `€`, `£` go before the number, anything else
+  after). Step bars grow when their label is spoken (default cue is the label;
+  `cue: false` opts out) with a thin connector between levels; start/end bars
+  use the accent, positive steps the muted colour and negative steps a fixed
+  red (`#C0392B`, the palettes have no negative colour). Values use Indian
+  grouping (`₹1,52,000`) with `+`/`−` on steps. If `end.value` is given it must
+  equal start + steps to the shown decimals or the script fails to parse.
+
+  ```yaml
+  visual: typographic
+  layout: waterfall
+  unit: ₹
+  start: {label: అమ్మకాలు, value: 152000}
+  steps:
+    - {label: అద్దె, value: -40000}
+    - {label: జీతాలు, value: -52000}
+    - {label: టిప్స్, value: 5000}
+  end: {label: లాభం, value: 65000}   # optional; checked
+  ```
+- **`layout: line`:** a line on labelled axes, either `slope` + `intercept`
+  (needs `x_range: [lo, hi]`, or a `mark`/`dots` to derive one) or
+  `points: [[x, y], ...]` (3-30, strictly increasing x). Optional `x_label`,
+  `y_label`, `x_range`, `y_range` (default: the data padded, always including
+  0) and `unit` (applied to y values, Indian grouping). A baseline rule is drawn
+  at y = 0 when 0 is inside the range, and the line draws on at scene start with
+  a CSS dash reveal. `mark: {x, label, cue?}` draws a vertical dashed marker
+  with its label and x value. `dots: [{x, label, cue?}]` (1-3): the first dot
+  appears at its x on the line; each following dot appears at the previous
+  dot's x and slides along the line (through the polyline's vertices) to its
+  own x on its cue, and the previous dot hands over and hides. Each dot
+  label shows the line's value there. Cues default to the labels, as in
+  `bar_compare`; `cue: false` opts out. Marks and dots must lie inside the x
+  range. Everything is seekable CSS (keyframes on `left`/`top`), no JavaScript.
+
+  ```yaml
+  visual: typographic
+  layout: line
+  slope: 60
+  intercept: -9120
+  x_range: [0, 250]
+  unit: ₹
+  x_label: రోజుకు టిఫిన్లు
+  y_label: లాభం
+  mark: {x: 152, label: బ్రేక్-ఈవెన్}
+  dots:
+    - {x: 90, label: నేడు}
+    - {x: 152, label: సమం}
+    - {x: 220, label: లక్ష్యం}
+  ```
+- **`layout: donut`:** a ring split into `parts: [{label, value, cue?}]` (2-6,
+  positive values) with optional `unit` and `center: {value, label, cue?}`.
+  Each segment sweeps in clockwise from 12 o'clock on its cue, in order
+  (default cue is the label, `cue: false` opts out), and its legend row (label
+  and Indian-grouped value) appears with it. The centre value counts up like a
+  `big_stat` (a value of a lakh or more, written with Indian grouping, stays
+  static); it may also be label-only, and an explicit `center.value` must equal
+  the sum of parts to the shown decimals or the script fails to parse.
+  Segment colours are the design's accent, ink and muted, then a tint of each.
+
+  ```yaml
+  visual: typographic
+  layout: donut
+  unit: ₹
+  parts:
+    - {label: అద్దె, value: 40000}
+    - {label: జీతాలు, value: 52000}
+    - {label: గ్యాస్, value: 8000}
+  center: {value: 100000, label: ఖర్చు}
+  ```
 - **Cuts:** after a short pause (under 0.5 s) the cut goes in the silence and
   leaves at least 0.15 s after the last word; the `sentence_cuts` QA check fails
   a cut that clips a word.
@@ -244,7 +330,7 @@ karaoke captions and ducked music. This is the reusable form of the
   `headline`, `body`, `subtitle` turn it into a designed plate — see below),
   `visual: typographic`
   (needs `layout:` — `big_stat`, `bar_compare`, `definition`, `sequence`,
-  `array`), `visual: map` (needs `country:`; optional `focus: "lon,lat"` and
+  `array`, `waterfall`, `line`, `donut`), `visual: map` (needs `country:`; optional `focus: "lon,lat"` and
   `label` for one highlighted point, `bbox`, `projection`, `eyebrow`,
   `eyebrow_color`, `headline`, `subtitle`, `badge`, `badge_sub`, `badge_mark`,
   `watermark`,

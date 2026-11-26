@@ -50,18 +50,22 @@ def compile_hyperframes_project(
     graph: RenderGraph,
     project_dir: Path | str,
     base_video: str | Path | None = None,
+    *,
+    overlay_only: bool = False,
 ) -> Path:
     """Write a HyperFrames project for ``graph`` and return the index.html path.
 
     ``base_video`` overrides the base video source (e.g. a pre-cut
     intermediate); when omitted, ``graph.source`` is used directly.
+    ``overlay_only`` writes a transparent page with no base video.
     """
-    composition = from_render_graph(graph, base_video=base_video)
+    composition = from_render_graph(graph, base_video=base_video, overlay_only=overlay_only)
     index_path = compile_composition(composition, project_dir)
     logger.info(
         "hyperframes_project_written",
         job_id=graph.job_id,
         project=str(project_dir),
         clips=len(composition.scenes[0].layers),
+        overlay_only=overlay_only,
     )
     return index_path

@@ -514,3 +514,532 @@ def test_a_number_the_count_cannot_reproduce_stays_as_written():
         markup = render({"layout": "big_stat", "headline": headline}).markup
         assert "typo-count-step" not in markup, headline
         assert html.escape(headline) in markup or headline in markup
+
+
+# --- icons -----------------------------------------------------------------
+
+
+def test_big_stat_renders_a_vendored_icon_above_the_headline():
+    result = render({"layout": "big_stat", "headline": "₹24", "icon": "wheat"})
+    assert result.markup.index("typo-icon") < result.markup.index("typo-headline")
+    assert "<svg" in result.markup and 'stroke="currentColor"' in result.markup
+    assert "<!--" not in result.markup  # the licence comment stays on disk
+    assert "tp_icon_1" in result.css
+
+
+def test_icon_pops_in_with_the_headline_cue():
+    # A lone item cued after 0.5 s is pulled to 0.4 s (no blank opening).
+    words = [{"word": "gas", "start": 1.5, "end": 1.9}]
+    result = render(
+        {"layout": "big_stat", "headline": "₹24", "icon": "flame", "cue": "gas"},
+        words=words,
+    )
+    assert 'style="animation-delay:0.400s;--d:0.400s"' in result.markup
+
+
+def test_first_revealed_item_moves_to_0_4s_and_later_items_keep_their_cue():
+    words = [
+        {"word": "gas", "start": 2.0, "end": 2.3},
+        {"word": "staff", "start": 3.0, "end": 3.3},
+    ]
+    result = render(
+        {
+            "layout": "bar_compare",
+            "bars": [
+                {"label": "Gas", "value": 5, "cue": "gas"},
+                {"label": "Staff", "value": 3, "cue": "staff"},
+            ],
+        },
+        words=words,
+        duration=6.0,
+    )
+    assert 'class="typo-bar-row" style="animation-delay:0.400s"' in result.markup
+    assert 'class="typo-bar-row" style="animation-delay:3.000s"' in result.markup
+    assert "2.000s" not in result.markup
+
+
+def test_big_stat_headline_opens_at_0_4s_when_its_cue_is_late():
+    words = [
+        {"word": "gas", "start": 2.0, "end": 2.3},
+        {"word": "staff", "start": 3.0, "end": 3.3},
+    ]
+    result = render(
+        {"layout": "big_stat", "headline": "₹24", "cue": "gas", "sub": "largest ever"},
+        words=words,
+        duration=8.0,
+    )
+    headline = float(
+        re.search(r'class="typo-line" style="animation-delay:([\d.]+)s', result.markup).group(1)
+    )
+    assert headline == pytest.approx(0.4)
+    assert _count_delays(result.markup) and all(
+        delay == pytest.approx(0.4) for delay in _count_delays(result.markup)
+    )
+    # Only the opening headline moves; its uncued sub keeps the normal stagger.
+    sub = float(
+        re.search(
+            r'class="typo-line typo-sub" style="animation-delay:([\d.]+)s', result.markup
+        ).group(1)
+    )
+    assert sub < 2.0
+
+
+def test_sequence_first_step_opens_at_0_4s_and_a_later_cue_is_unchanged():
+    words = [
+        {"word": "find", "start": 2.0, "end": 2.3},
+        {"word": "watch", "start": 3.0, "end": 3.3},
+    ]
+    result = render(
+        {"layout": "sequence", "steps": ["Find", "Watch", "Fix"]},
+        words=words,
+        duration=8.0,
+    )
+    delays = [
+        float(delay)
+        for delay in re.findall(r'class="typo-step" style="animation-delay:([\d.]+)s', result.markup)
+    ]
+    assert delays[0] == pytest.approx(0.4)
+    assert delays[1] == pytest.approx(3.0)
+    assert "2.000s" not in result.markup
+
+
+def test_donut_first_slice_opens_at_0_4s_and_a_later_cue_is_unchanged():
+    words = [
+        {"word": "rent", "start": 2.0, "end": 2.3},
+        {"word": "staff", "start": 3.0, "end": 3.3},
+    ]
+    result = render(DONUT, words=words, duration=8.0)
+    delays = [
+        float(delay)
+        for delay in re.findall(r'typo-chart-dn" style="animation-delay:([\d.]+)s', result.markup)
+    ]
+    assert delays[0] == pytest.approx(0.4)  # ring and centre value
+    assert delays[1] == pytest.approx(0.4)  # first slice and legend row
+    assert delays[2] == pytest.approx(3.0)  # later slice keeps its cue
+    assert "2.000s" not in result.markup
+
+
+def test_chart_container_is_sized_to_76cqh():
+    css = render(WATERFALL).css
+    assert "76cqh" in css and "62cqh" not in css
+
+
+def test_donut_container_uses_the_larger_76cqh_rule():
+    css = render(DONUT).css
+    rule = css.split(".typo-1 .typo-chart-dn {", 1)[1].split("}", 1)[0]
+    assert "76cqh" in rule and "78cqh" not in rule
+
+
+def test_bar_value_unit_template_substitutes_the_value():
+    result = render(
+        {
+            "layout": "bar_compare",
+            "bars": [
+                {"label": "A", "value": 40, "unit": "₹{v}/రోజు"},
+                {"label": "B", "value": 20, "unit": "₹{v}/రోజు"},
+            ],
+        }
+    )
+    assert ">₹40/రోజు<" in result.markup and ">₹20/రోజు<" in result.markup
+    result = render(
+        {
+            "layout": "bar_compare",
+            "bars": [
+                {"label": "A", "value": 1.13, "unit": "₹{v} L"},
+                {"label": "B", "value": 2, "unit": "₹{v} L"},
+            ],
+        }
+    )
+    assert ">₹1.13 L<" in result.markup
+    assert "white-space: nowrap" in result.css.split(".typo-bar-value {", 1)[1].split("}", 1)[0]
+
+
+def test_bar_value_without_template_appends_the_unit():
+    result = render(
+        {
+            "layout": "bar_compare",
+            "bars": [
+                {"label": "A", "value": 40, "unit": "%"},
+                {"label": "B", "value": 20, "unit": "%"},
+            ],
+        }
+    )
+    assert ">40%<" in result.markup
+
+
+def test_bar_compare_bar_can_carry_an_icon():
+    result = render(
+        {
+            "layout": "bar_compare",
+            "bars": [
+                {"label": "Gas", "value": 5, "icon": "flame"},
+                {"label": "Staff", "value": 3},
+            ],
+        }
+    )
+    assert result.markup.count('class="typo-icon typo-icon-bar"') == 1
+
+
+def test_unknown_icon_lists_the_available_names():
+    with pytest.raises(SceneRenderError, match="available icons:.*wheat"):
+        render({"layout": "big_stat", "headline": "1", "icon": "rocket"})
+    with pytest.raises(SceneRenderError, match="unknown icon"):
+        render(
+            {
+                "layout": "bar_compare",
+                "bars": [{"label": "A", "value": 1, "icon": "../x"}, {"label": "B", "value": 2}],
+            }
+        )
+
+
+def test_every_vendored_icon_loads_and_ships_with_its_licence():
+    from video_editor_core.icons import ICON_DIR, icon_names, icon_svg
+
+    names = icon_names()
+    assert {"wheat", "flame", "store", "users", "package", "zap", "file-badge", "clock"} <= set(
+        names
+    )
+    assert (ICON_DIR / "LICENSE").is_file()
+    assert all(icon_svg(name).startswith("<svg") for name in names)
+
+
+# --- waterfall ---------------------------------------------------------------
+
+WATERFALL = {
+    "layout": "waterfall",
+    "unit": "₹",
+    "start": {"label": "Sales", "value": 152000},
+    "steps": [
+        {"label": "Rent", "value": -40000},
+        {"label": "Staff", "value": -52000},
+        {"label": "Tips", "value": 5000},
+    ],
+    "end": {"label": "Profit"},
+}
+
+
+def test_waterfall_draws_one_layer_per_bar_with_indian_grouping():
+    result = render(WATERFALL)
+    assert result.markup.count("typo-wf-bar ") == 5
+    assert "₹1,52,000" in result.markup
+    assert "−₹40,000" in result.markup
+    assert "+₹5,000" in result.markup
+    assert "₹65,000" in result.markup  # start + steps, computed
+    assert result.markup.count("typo-wf-conn") == 4
+    assert result.markup.count("is-down") == 2
+    assert "tp_wfgrow_1" in result.css and "container-type: size" in result.css
+
+
+def test_waterfall_escapes_and_renders_telugu_labels():
+    props = {
+        **WATERFALL,
+        "start": {"label": "అమ్మకాలు <b>", "value": 100},
+        "steps": [{"label": "అద్దె", "value": -30}, {"label": "జీతాలు", "value": 10}],
+    }
+    markup = render(props).markup
+    assert "అద్దె" in markup and "&lt;b&gt;" in markup
+
+
+def test_waterfall_step_cues_default_to_the_label_and_can_be_switched_off():
+    props = {
+        **WATERFALL,
+        "steps": [
+            {"label": "Rent", "value": -40000, "cue": "the rent"},
+            {"label": "Staff", "value": -52000, "cue": False},
+            {"label": "Tips", "value": 5000},
+        ],
+    }
+    cues = scene_cues({"id": "s", "props": props})
+    assert cues == {"item_1": "the rent", "item_3": "Tips"}
+
+
+def test_waterfall_step_grows_when_its_label_is_spoken():
+    words = [
+        {"word": "rent", "start": 1.2, "end": 1.5},
+        {"word": "staff", "start": 2.2, "end": 2.5},
+    ]
+    markup = render(WATERFALL, words=words, duration=6.0).markup
+    delays = re.findall(
+        r'class="typo-chart typo-chart-wf" style="animation-delay:([\d.]+)s;--d', markup
+    )
+    assert float(delays[1]) == pytest.approx(1.2)
+    assert float(delays[2]) == pytest.approx(2.2)
+
+
+def test_waterfall_negative_bar_hangs_down_from_the_running_level():
+    markup = render(WATERFALL).markup
+    bars = re.findall(
+        r'typo-wf-bar (is-\w+)" style="[^"]*top:([\d.]+)%;height:([\d.]+)%;'
+        r"transform-origin:50% (\d+%)",
+        markup,
+    )
+    kinds = {kind: origin for kind, _, _, origin in bars}
+    assert kinds["is-down"] == "0%"  # grows downward from the level above
+    assert kinds["is-total"] == "100%"  # grows up from the baseline
+    tops = [float(top) for _, top, _, _ in bars]
+    assert tops[0] == pytest.approx(tops[1])
+
+
+@pytest.mark.parametrize(
+    ("patch", "message"),
+    [
+        ({"steps": [{"label": "A", "value": 1}]}, "2-8"),
+        ({"steps": [{"label": "A", "value": 1}] * 9}, "2-8"),
+        ({"start": {"label": "S"}}, "numeric `value`"),
+        ({"start": {"label": "", "value": 1}}, "non-empty `label`"),
+        ({"steps": [{"label": "A", "value": "x"}, {"label": "B", "value": 1}]}, "must be a number"),
+        ({"end": {"value": 5}}, "non-empty `label`"),
+        ({"end": {"label": "P", "value": 1}}, "does not equal start \\+ steps"),
+    ],
+)
+def test_waterfall_rejects_bad_props(patch, message):
+    with pytest.raises(SceneRenderError, match=message):
+        render({**WATERFALL, **patch})
+
+
+def test_waterfall_end_error_allows_a_matching_value_and_rounds_to_the_rupee():
+    from video_editor_core.typographic_scenes import waterfall_end_error
+
+    assert waterfall_end_error({**WATERFALL, "end": {"label": "P", "value": 65000}}) is None
+    assert waterfall_end_error(WATERFALL) is None
+    assert waterfall_end_error({**WATERFALL, "end": {"label": "P", "value": 65001}})
+
+
+def test_silencing_covers_waterfall_steps():
+    props = silence_unspoken_typographic_cues(
+        WATERFALL, [{"word": "rent", "start": 0.5, "end": 0.9}]
+    )
+    cues = scene_cues({"id": "s", "props": props})
+    assert cues == {"item_1": "Rent"}
+
+
+def test_indian_grouping_and_signs():
+    from video_editor_core.typographic_scenes import format_amount, indian_number
+
+    assert indian_number(12345678) == "1,23,45,678"
+    assert indian_number(999) == "999"
+    assert indian_number(1234.5, 1) == "1,234.5"
+    assert format_amount(-1500, "₹") == "−₹1,500"
+    assert format_amount(12, "%", signed=True) == "+12%"
+
+
+# --- line ----------------------------------------------------------------------
+
+LINE = {
+    "layout": "line",
+    "slope": 60,
+    "intercept": -9120,
+    "x_range": [0, 250],
+    "unit": "₹",
+    "x_label": "Tiffins a day",
+    "y_label": "Profit",
+    "mark": {"x": 152, "label": "Break-even"},
+    "dots": [{"x": 90, "label": "Today"}, {"x": 152, "label": "Even"}, {"x": 220, "label": "Goal"}],
+}
+
+
+def test_line_draws_axes_a_zero_rule_the_dashed_mark_and_a_dash_reveal():
+    result = render(LINE)
+    assert "typo-ln-zero" in result.markup  # profit crosses zero inside the range
+    assert 'pathLength="1"' in result.markup
+    assert "typo-ln-mark" in result.markup and "Break-even" in result.markup
+    assert "Tiffins a day" in result.markup and "Profit" in result.markup
+    assert "tp_lndraw_1" in result.css and "stroke-dashoffset" in result.css
+    assert "₹4,080" in result.markup  # dot at x=220: 60*220-9120, Indian grouping
+    assert "−₹10,320" in result.markup  # padded y axis floor
+
+
+def test_line_follows_a_polyline_and_skips_the_zero_rule_when_all_positive():
+    result = render(
+        {
+            "layout": "line",
+            "points": [[0, 2], [1, 5], [2, 4], [3, 9]],
+            "dots": [{"x": 2, "label": "B"}],
+        }
+    )
+    assert result.markup.count("M") >= 1 and "L" in result.markup
+    assert "typo-ln-zero" not in result.markup
+
+
+def test_each_following_dot_slides_from_the_previous_dots_x():
+    result = render(LINE)
+    assert "tp_ln_dot_1_0" not in result.css  # the first dot just appears
+    assert "@keyframes tp_ln_dot_1_1" in result.css and "@keyframes tp_ln_dot_1_2" in result.css
+    first_stop = re.search(r"tp_ln_dot_1_1 \{ 0\.000% \{ left: ([\d.]+)%", result.css)
+    # x=90 maps to the same percentage the first dot sits at
+    first_dot = re.search(r'typo-ln-dot" style="left: ([\d.]+)%', result.markup)
+    assert float(first_stop.group(1)) == pytest.approx(float(first_dot.group(1)), abs=0.01)
+    assert result.markup.count("typo-ln-dots is-passed") == 2  # all but the last hide
+
+
+def test_a_slide_passes_through_polyline_vertices():
+    result = render(
+        {
+            "layout": "line",
+            "points": [[0, 0], [1, 10], [2, 0], [3, 10]],
+            "dots": [{"x": 0, "label": "A"}, {"x": 3, "label": "B"}],
+        }
+    )
+    stops = re.search(r"@keyframes tp_ln_dot_1_1 \{([^}]*\}[^}]*\}[^}]*\}[^}]*\})", result.css)
+    assert stops.group(1).count("%") >= 4  # 0%, 33%, 67%, 100%
+
+
+def test_line_cues_default_to_labels_and_follow_the_narration():
+    words = [
+        {"word": "today", "start": 1.0, "end": 1.3},
+        {"word": "goal", "start": 3.0, "end": 3.3},
+    ]
+    assert scene_cues({"id": "s", "props": LINE}) == {
+        "item_2": "Break-even",
+        "item_3": "Today",
+        "item_4": "Even",
+        "item_5": "Goal",
+    }
+    markup = render(LINE, words=words, duration=8.0).markup
+    delays = re.findall(r'typo-chart-ln" style="animation-delay:([\d.]+)s', markup)
+    assert float(delays[3]) == pytest.approx(1.0)
+    assert float(delays[5]) == pytest.approx(3.0)
+    assert "--n:3.000s" in markup  # the middle dot hands over to the last
+
+
+def test_silencing_covers_line_mark_and_dots():
+    props = silence_unspoken_typographic_cues(LINE, [{"word": "today", "start": 1, "end": 2}])
+    assert scene_cues({"id": "s", "props": props}) == {"item_3": "Today"}
+
+
+@pytest.mark.parametrize(
+    ("patch", "message"),
+    [
+        ({"slope": None, "intercept": None}, "needs `slope`"),
+        ({"points": [[0, 1], [1, 2], [2, 3]]}, "not both"),
+        ({"x_range": None, "mark": None, "dots": None}, "needs an `x_range`"),
+        ({"x_range": [5, 5]}, "low < high"),
+        ({"mark": {"x": 152}}, "non-empty `label`"),
+        ({"mark": {"x": 999, "label": "far"}}, "outside x_range"),
+        ({"dots": []}, "1-3"),
+        ({"dots": [{"x": 1, "label": "a"}] * 4}, "1-3"),
+        ({"dots": [{"x": "z", "label": "a"}]}, "must be a number"),
+    ],
+)
+def test_line_rejects_bad_props(patch, message):
+    with pytest.raises(SceneRenderError, match=message):
+        render({**LINE, **patch})
+
+
+@pytest.mark.parametrize(
+    ("points", "message"),
+    [
+        ([[0, 1], [1, 2]], "3-30"),
+        ([[0, 1], [0, 2], [1, 3]], "strictly increasing"),
+        ([[0, 1], [1], [2, 3]], "\\[x, y\\] pair"),
+    ],
+)
+def test_line_rejects_bad_points(points, message):
+    with pytest.raises(SceneRenderError, match=message):
+        render({"layout": "line", "points": points})
+
+
+# --- donut ---------------------------------------------------------------------
+
+DONUT = {
+    "layout": "donut",
+    "unit": "₹",
+    "parts": [
+        {"label": "Rent", "value": 40000},
+        {"label": "Staff", "value": 52000},
+        {"label": "Gas", "value": 8000},
+    ],
+    "center": {"value": 100000, "label": "monthly cost"},
+}
+
+
+def test_donut_sweeps_one_segment_per_part_with_a_legend_row_each():
+    result = render(DONUT)
+    assert result.markup.count('class="typo-dn-seg"') == 3
+    assert result.markup.count('class="typo-dn-row"') == 3
+    assert "₹40,000" in result.markup and "₹52,000" in result.markup
+    assert "tp_dnsweep_1" in result.css and "stroke-dasharray" in result.css
+    # arcs run in order: each starts where the previous one ended
+    offsets = [float(v) for v in re.findall(r"stroke-dashoffset:(-?[\d.]+)", result.markup)]
+    assert offsets == pytest.approx([0.0, -0.4, -0.92])
+    fractions = [float(v) for v in re.findall(r"stroke-dasharray:([\d.]+) 1", result.markup)]
+    assert sum(fractions) == pytest.approx(1.0 - 3 * 0.006, abs=0.001)
+
+
+def test_donut_centre_value_counts_up_like_a_big_stat():
+    result = render(
+        {
+            **DONUT,
+            "center": {"value": 2400, "label": "total"},
+            "parts": [{"label": "A", "value": 1400}, {"label": "B", "value": 1000}],
+        }
+    )
+    assert result.markup.count('class="typo-count-step"') >= 2
+    assert "monthly" not in result.markup and "total" in result.markup
+    assert "tp_count_1_0" in result.css
+
+
+def test_donut_segments_start_on_their_cues_in_order():
+    words = [
+        {"word": "rent", "start": 1.0, "end": 1.3},
+        {"word": "staff", "start": 2.5, "end": 2.8},
+    ]
+    markup = render(DONUT, words=words, duration=8.0).markup
+    delays = re.findall(r'typo-chart-dn" style="animation-delay:([\d.]+)s', markup)
+    # The first slice opens the scene at 0.4 s so the donut is never blank;
+    # the later slice keeps its own cue.
+    assert float(delays[1]) == pytest.approx(0.4)
+    assert float(delays[2]) == pytest.approx(2.5)
+    assert scene_cues({"id": "s", "props": DONUT}) == {
+        "item_1": "Rent",
+        "item_2": "Staff",
+        "item_3": "Gas",
+    }
+
+
+def test_donut_escapes_and_renders_telugu_labels():
+    props = {
+        **DONUT,
+        "parts": [{"label": "అద్దె <i>", "value": 1}, {"label": "జీతాలు", "value": 2}],
+        "center": None,
+    }
+    markup = render(props).markup
+    assert "అద్దె &lt;i&gt;" in markup and "జీతాలు" in markup
+
+
+def test_donut_centre_may_be_a_label_only_and_defaults_to_nothing_without_center():
+    assert "typo-dn-center" not in render({**DONUT, "center": None}).markup
+    assert "typo-dn-value" not in render({**DONUT, "center": {"label": "costs"}}).markup
+
+
+def test_silencing_covers_donut_parts():
+    props = silence_unspoken_typographic_cues(DONUT, [{"word": "rent", "start": 0.5, "end": 0.9}])
+    assert scene_cues({"id": "s", "props": props}) == {"item_1": "Rent"}
+
+
+@pytest.mark.parametrize(
+    ("patch", "message"),
+    [
+        ({"parts": [{"label": "A", "value": 1}]}, "2-6"),
+        ({"parts": [{"label": "A", "value": 1}] * 7}, "2-6"),
+        ({"parts": [{"label": "A", "value": 0}, {"label": "B", "value": 1}]}, "positive"),
+        ({"parts": [{"label": "A", "value": -3}, {"label": "B", "value": 1}]}, "positive"),
+        ({"parts": [{"label": "", "value": 1}, {"label": "B", "value": 1}]}, "non-empty `label`"),
+        ({"parts": [{"label": "A"}, {"label": "B", "value": 1}]}, "numeric `value`"),
+        ({"center": {"value": 99999, "label": "x"}}, "does not equal the sum of parts"),
+        ({"center": {}}, "needs a `value` or a `label`"),
+        ({"center": "total"}, "must be an object"),
+    ],
+)
+def test_donut_rejects_bad_props(patch, message):
+    with pytest.raises(SceneRenderError, match=message):
+        render({**DONUT, **patch})
+
+
+def test_donut_centre_check_uses_the_shown_decimals():
+    from video_editor_core.typographic_scenes import donut_center_error
+
+    props = {"parts": [{"label": "A", "value": 0.1}, {"label": "B", "value": 0.2}]}
+    assert donut_center_error({**props, "center": {"value": 0.3}}) is None
+    assert donut_center_error({**props, "center": {"value": 0.4}})
+    assert donut_center_error(props) is None

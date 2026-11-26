@@ -88,7 +88,9 @@ setsid nohup systemd-run --user --scope -q -p MemoryMax=14G \
 
 ## Deity images
 
-- Generate 4–5 images with the free chain: `agy_image`, then `flow_image`.
+- Generate 4–5 images. The automatic chain is `poyo_ai` → `openrouter` → `fal_ai`; `agy_image` is no longer
+  in it (name it with `--image-provider agy_image` if you want its free quota). For free Flow stills, have
+  Claude make them in Chrome (`STOCK_EXPLAINERS.md`, "Flow stills through Claude in Chrome").
 - Prompts ask for a traditional South Indian devotional oil-painting style, exactly two arms, and no text,
   letters, watermark or frame.
 - Look at every image before using it: anatomy, garbled text, attire.

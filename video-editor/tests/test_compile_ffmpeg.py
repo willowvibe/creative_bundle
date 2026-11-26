@@ -215,3 +215,20 @@ def test_mux_audio_copies_video_and_maps_mixed_audio() -> None:
     assert "sidechaincompress" in fc
     assert cmd[cmd.index("-c:v") + 1] == "copy"
     assert cmd[-1] == "out.mp4"
+
+
+def test_drawtext_uses_a_telugu_face_for_telugu_text() -> None:
+    def fontfile(text: str) -> str:
+        layer = Layer(
+            kind="text",
+            name="caption",
+            rect=Rect(x=0, y=900, width=1920, height=200),
+            text=text,
+            timing=Timing(start=0.0, end=1.0),
+        )
+        fc = _filter_complex(compile_ffmpeg(_graph(overlays=[layer]), "out.mp4")[0])
+        return fc.split("fontfile=")[1].split(":")[0]
+
+    # DejaVu Sans has no Telugu glyphs: drawtext would print tofu boxes.
+    assert fontfile("ఉదయం ఎనిమిది గంటలు.").endswith("NotoSansTelugu-Bold.ttf")
+    assert "NotoSansTelugu" not in fontfile("hello world")

@@ -55,6 +55,8 @@ videos/**/work/
 # large binaries, and config.yaml points at them by repo-relative path so a
 # fresh checkout must regenerate them (see docs/POYO_ROUTING.md, music section).
 assets/
+# ...except the small synthesised coin sounds the package ships (sfx_synth.py).
+!packages/core/src/video_editor_core/assets/
 
 # parity rebuild outputs (scripts/parity_rebuild.py)
 /qa/

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import subprocess
+from collections.abc import Mapping
 from typing import Any
 
 import structlog
@@ -120,6 +121,7 @@ def run_subprocess(
     timeout: float = DEFAULT_TIMEOUT_SECONDS,
     check: bool = True,
     text: bool = True,
+    env: Mapping[str, str] | None = None,
     **kwargs: Any,
 ) -> subprocess.CompletedProcess[Any]:
     """Run a generic subprocess with timeout and captured stderr.
@@ -135,6 +137,7 @@ def run_subprocess(
             capture_output=True,
             text=text,
             timeout=timeout,
+            env=env,
             **kwargs,
         )
     except subprocess.TimeoutExpired as exc:

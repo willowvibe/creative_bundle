@@ -12,6 +12,17 @@ from collections.abc import Callable, Sequence
 from typing import Any
 
 
+def excluded_media_ids(request: Any) -> frozenset[str]:
+    """Stock result ids a request must skip (``params["exclude_ids"]``).
+
+    The footage pass fills it with clips already used elsewhere in the video or
+    already rejected for this shot, so a retry moves down the result list
+    instead of returning the same top hit again.
+    """
+    params = getattr(request, "params", None) or {}
+    return frozenset(str(i) for i in params.get("exclude_ids") or ())
+
+
 def requested_duration(request: Any) -> float | None:
     """Return the scene length an :class:`AssetRequest` was generated for."""
     params = getattr(request, "params", None) or {}

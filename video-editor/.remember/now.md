@@ -1,3 +1,3 @@
 
-## 12:04 | main
-Pushed the video-projects and video-editor changes to creative_bundle as requested, after the EP3 use-case cut, docs, skill, and memory updates were committed.
+## 23:10 | main
+Re-set up the DeveeKitchen tiffin video on stock footage with the narration unchanged. Final v5 (9:20, −14 LUFS) is at `video-projects/videos/2026-11-25/tiffin-centre-teardown/tiffin-centre-teardown.mp4`; it has 13 labelled AI stills and is not uploaded. Engine: NVIDIA profile; `shots:` (query/photo/file); no repeated stock clip and round-robin retries; transparent caption overlay (the old pass timed out and fell back to broken Telugu drawtext); Telugu AI label; agy and flow out of the image chain (Flow via Claude in Chrome). New docs/RENDERING.md and issues #374–#376. Next is the chunked render plan.

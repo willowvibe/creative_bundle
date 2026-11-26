@@ -207,7 +207,7 @@ scenes:
     still: {key: window, prompt: "The same corridor at dawn, Lakshmi at the window", edit_of: corridor}
 ```
 
-References need `image.provider: poyo_ai` (paid, up to 14) or `flow_image` (Google Flow: free, up to 3 local images, needs a project open in flow-mcp's Chrome; `provider_options.download_quality: upscaled` for 2K). Without references, `auto` runs the chain agy → flow_image → poyo_ai → openrouter → fal.
+References need `image.provider: poyo_ai` (paid, up to 14) or `flow_image` (Google Flow: free, up to 3 local images, needs a project open in flow-mcp's Chrome; `provider_options.download_quality: upscaled` for 2K). Without references, `auto` runs the chain poyo_ai → openrouter → fal_ai (`agy_image` and `flow_image` are no longer in it; name them with `--image-provider` if you want them, or use Flow stills as `file:` shots, see `STOCK_EXPLAINERS.md`).
 
 Paths are relative to the pack file; URLs pass through. Local images are uploaded once to fal storage
 (`FAL_KEY`) and cached by content hash. An `edit_of` still is generated after its source, with the source as

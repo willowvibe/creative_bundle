@@ -79,6 +79,9 @@ class LocalMediaProvider(GenerativeProvider):
         asset_type = request.asset_type
         duration_ms = 0
         metadata: dict[str, Any] = {"source": str(source.resolve())}
+        if request.params.get("ai") is True:
+            # The script marked this file as AI-generated: the label pass reads it.
+            metadata["ai"] = True
 
         if asset_type == AssetType.VIDEO:
             info = probe_media(output_path)

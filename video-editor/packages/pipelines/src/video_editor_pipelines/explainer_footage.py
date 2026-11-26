@@ -28,7 +28,10 @@ from video_editor_ffmpeg.probe import probe_media
 from video_editor_ffmpeg.run import run_ffmpeg
 
 from video_editor_pipelines.explainer_plan import (
+    FILE_SHOT_PROVIDER,
+    FOOTAGE_SHOT_PREFIX,
     FOOTAGE_VIDEO_SUFFIX,
+    footage_fallback_asset_id,
     footage_fallbacks,
     initial_requests,
 )
@@ -128,6 +131,107 @@ def _is_footage_video(request: AssetRequest) -> bool:
     return request.asset_type is AssetType.VIDEO and request.provider == "stock"
 
 
+def _is_file_shot(request: AssetRequest) -> bool:
+    """A ``file:`` shot: the user's own media, never judged, retried or replaced."""
+    return request.provider == FILE_SHOT_PROVIDER and request.asset_id.startswith(
+        FOOTAGE_SHOT_PREFIX
+    )
+
+
+def _file_row(request: AssetRequest, result: AssetResult | None) -> dict[str, Any]:
+    """The report row of a ``file:`` shot."""
+    ai = bool(request.params.get("ai"))
+    kind = "video" if request.asset_type is AssetType.VIDEO else "image"
+    row: dict[str, Any] = {
+        "scene_id": request.scene_id,
+        "query": "",
+        "asset_id": request.asset_id,
+        "shot": int(request.asset_id.rsplit("_", 1)[1]),
+        "kind": kind,
+        "file": request.prompt,
+        "source": "file",
+        "provider": FILE_SHOT_PROVIDER,
+        "judged": False,
+        "ai": ai,
+        "reason": "own file, not vision-checked",
+        "rejected": [],
+    }
+    if ai and kind == "video":
+        row["ai_label"] = "not burned into video"
+    elif ai and result is not None:
+        row["ai_label"] = str(result.metadata.get("ai_label") or "applied by the label pass")
+    return row
+
+
+def _is_shot_photo(request: AssetRequest) -> bool:
+    """A footage shot's stock photo (``photo:``); judged by nothing, like map photos."""
+    return (
+        request.asset_type is AssetType.IMAGE
+        and request.provider == "stock"
+        and request.asset_id.startswith(FOOTAGE_SHOT_PREFIX)
+    )
+
+
+#: Picks one library may offer for one shot before the next library is tried.
+MAX_TRIES_PER_LIBRARY = 3
+#: Results asked for on a retry, so excluded ids still leave candidates.
+RETRY_PER_PAGE = 15
+
+
+#: Slack on top of the worst case: judge calls that fail and retry on the fallback model.
+JUDGE_BUDGET_MARGIN = 10
+
+
+def footage_judge_attempt_budget(
+    requests: Sequence[AssetRequest], stock_chain: Sequence[str], configured: int
+) -> int:
+    """LLM attempts the footage pass may need: one judge call per pick.
+
+    Each stock video request (a scene, or one shot of a ``shots`` scene) is judged
+    at most ``MAX_TRIES_PER_LIBRARY`` times per library, so the worst case is
+    ``videos x tries x libraries``. The router's per-job ``max_llm_attempts_per_job``
+    (default 50) starved the tiffin explainer: 51 > 50 left 12 clips unchecked. The
+    result is never below ``configured``, so a larger configured budget still wins.
+    """
+    videos = sum(1 for request in requests if _is_footage_video(request))
+    libraries = max(1, len(stock_chain))
+    needed = videos * MAX_TRIES_PER_LIBRARY * libraries + JUDGE_BUDGET_MARGIN
+    return max(configured, needed)
+
+
+def size_router_for_footage(
+    router: Any, requests: Sequence[AssetRequest], stock_chain: Sequence[str]
+) -> int:
+    """Raise ``router``'s attempt budget to what the footage judge needs; return it."""
+    configured = int(router.config.max_llm_attempts_per_job)
+    budget = footage_judge_attempt_budget(requests, stock_chain, configured)
+    if budget != configured:
+        router.config = router.config.model_copy(update={"max_llm_attempts_per_job": budget})
+        logger.info("footage_judge_budget", configured=configured, budget=budget)
+    return budget
+
+
+def _provider(result: AssetResult) -> str:
+    return str(result.metadata.get("provider") or "")
+
+
+def _media_id(result: AssetResult) -> str:
+    attribution = result.metadata.get("attribution") or {}
+    value = attribution.get("video_id") or attribution.get("photo_id")
+    return "" if value is None else str(value)
+
+
+def _is_repeat(result: AssetResult, used: dict[str, set[str]]) -> bool:
+    media_id = _media_id(result)
+    return bool(media_id) and media_id in used.get(_provider(result), set())
+
+
+def _mark_used(result: AssetResult, used: dict[str, set[str]]) -> None:
+    media_id = _media_id(result)
+    if media_id:
+        used.setdefault(_provider(result), set()).add(media_id)
+
+
 async def _verdict(judge: Judge, result: AssetResult, query: str) -> FootageVerdict:
     try:
         return await judge(Path(result.local_path), query)
@@ -145,8 +249,9 @@ async def resolve_with_footage(
 ) -> tuple[list[AssetResult], list[dict[str, Any]]]:
     """Resolve ``requests`` with the footage rules; return results and a report.
 
-    The report has one row per footage scene: ``source`` (``stock`` or
-    ``ai_fallback``), the serving ``provider``, whether it was ``judged``, the
+    The report has one row per footage scene (per shot for a ``shots`` scene,
+    which adds ``shot``, ``asset_id`` and ``kind``): ``source`` (``stock``,
+    ``ai_fallback`` or ``file`` for a ``file:`` shot, which adds ``file`` and ``ai``), the serving ``provider``, whether it was ``judged``, the
     verdict ``reason`` and every ``rejected`` library with its reason.
 
     ``make_manager`` returns a fresh manager per batch, because a manager closes
@@ -154,15 +259,43 @@ async def resolve_with_footage(
     """
     first = initial_requests(requests)
     batch = await make_manager().resolve_partial(first)
-    footage = {r.asset_id: r for r in first if _is_footage_video(r)}
+    footage = {r.asset_id: r for r in first if _is_footage_video(r) or _is_shot_photo(r)}
     hard = [(asset_id, error) for asset_id, error in batch.failures if asset_id not in footage]
     if hard:
         raise RuntimeError(f"{len(hard)} asset request(s) failed: {hard[0][0]}: {hard[0][1]}")
 
     results = [r for r in batch.results if r.asset_id not in footage]
+    # A ``file:`` shot is no stock request: a missing file already failed above
+    # as a hard error, and a served one skips the judge and the dedupe.
+    file_results = {r.asset_id: r for r in results}
     served = {r.asset_id: r for r in batch.results if r.asset_id in footage}
     report: list[dict[str, Any]] = []
     without_clip: set[str] = set()
+    shots_without_media: set[str] = set()
+
+    for request in first:
+        if _is_file_shot(request):
+            report.append(_file_row(request, file_results.get(request.asset_id)))
+
+    # Stock ids already on screen, per library, so no clip or photo is used twice.
+    used: dict[str, set[str]] = {}
+
+    async def _retry(request: AssetRequest, library: str, exclude: set[str], n: int):
+        suffix = f"_{library}" if n == 1 else f"_{library}_{n}"
+        params = {**request.params, "exclude_ids": sorted(exclude), "per_page": RETRY_PER_PAGE}
+        retry = request.model_copy(
+            update={
+                "provider": library,
+                "asset_id": f"{request.asset_id}{suffix}",
+                "params": params,
+            }
+        )
+        retry_batch = await make_manager().resolve_partial([retry])
+        if not retry_batch.results:
+            return None
+        found = retry_batch.results[0]
+        found.metadata.setdefault("provider", library)
+        return found
 
     for asset_id, request in footage.items():
         row: dict[str, Any] = {
@@ -175,40 +308,90 @@ async def resolve_with_footage(
             "rejected": [],
         }
         report.append(row)
+        is_shot = asset_id.startswith(FOOTAGE_SHOT_PREFIX)
+        if is_shot:
+            row["asset_id"] = asset_id
+            row["shot"] = int(asset_id.rsplit("_", 1)[1])
+            row["kind"] = "photo" if _is_shot_photo(request) else "video"
         candidate = served.get(asset_id)
-        tried: list[str] = []
-        if candidate is not None:
-            tried.append(str(candidate.metadata.get("provider") or ""))
-        else:
-            # The whole chain came back empty; nothing left to try.
-            tried.extend(stock_chain)
-        while candidate is not None:
-            verdict = await _verdict(judge, candidate, request.prompt)
-            provider = str(candidate.metadata.get("provider") or "")
-            if verdict.ok:
+        if _is_shot_photo(request):
+            # A photo has no frame to judge; a repeat gets one retry further down the list.
+            if candidate is not None and _is_repeat(candidate, used):
+                provider = _provider(candidate)
+                row["rejected"].append(
+                    {"provider": provider, "reason": "already used in this video"}
+                )
+                candidate = await _retry(request, request.provider, set(used.get(provider, ())), 1)
+                if candidate is not None and _is_repeat(candidate, used):
+                    candidate = None
+            if candidate is not None:
+                _mark_used(candidate, used)
                 results.append(candidate)
                 row.update(
-                    source="stock", provider=provider, judged=verdict.judged, reason=verdict.reason
+                    source="stock",
+                    provider=_provider(candidate),
+                    reason="photo, not vision-checked",
                 )
-                break
-            row["rejected"].append({"provider": provider, "reason": verdict.reason})
-            candidate = None
-            for library in stock_chain:
-                if library in tried:
+            else:
+                shots_without_media.add(footage_fallback_asset_id(asset_id))
+            continue
+        # Each library gets up to MAX_TRIES_PER_LIBRARY picks, skipping clips that were
+        # rejected for this shot or are already used elsewhere in the video.
+        rejected_ids: dict[str, set[str]] = {}
+        libraries = list(stock_chain)
+        first_provider = _provider(candidate) if candidate is not None else ""
+        if first_provider in libraries:
+            libraries.remove(first_provider)
+            libraries.insert(0, first_provider)
+        accepted = False
+        exhausted: set[str] = set()
+        # Round-robin: a fresh library first, then each library's next picks.
+        for tries in range(1, MAX_TRIES_PER_LIBRARY + 1):
+            for library in libraries:
+                if accepted or library in exhausted:
                     continue
-                tried.append(library)
-                retry = request.model_copy(
-                    update={"provider": library, "asset_id": f"{asset_id}_{library}"}
-                )
-                retry_batch = await make_manager().resolve_partial([retry])
-                if retry_batch.results:
-                    candidate = retry_batch.results[0]
-                    candidate.metadata.setdefault("provider", library)
-                    break
+                if not (tries == 1 and library == first_provider and candidate is not None):
+                    exclude = used.get(library, set()) | rejected_ids.get(library, set())
+                    candidate = await _retry(request, library, exclude, tries)
+                if candidate is None:
+                    exhausted.add(library)  # nothing more for this query here
+                    continue
+                provider = _provider(candidate) or library
+                media_id = _media_id(candidate)
+                if _is_repeat(candidate, used):
+                    row["rejected"].append(
+                        {"provider": provider, "reason": "already used in this video"}
+                    )
+                    rejected_ids.setdefault(library, set()).add(media_id)
+                    candidate = None
+                    continue
+                verdict = await _verdict(judge, candidate, request.prompt)
+                if verdict.ok:
+                    _mark_used(candidate, used)
+                    results.append(candidate)
+                    row.update(
+                        source="stock",
+                        provider=provider,
+                        judged=verdict.judged,
+                        reason=verdict.reason,
+                    )
+                    accepted = True
+                    continue
+                row["rejected"].append({"provider": provider, "reason": verdict.reason})
+                if media_id:
+                    rejected_ids.setdefault(library, set()).add(media_id)
+                else:
+                    exhausted.add(library)  # an id-less result would only come back again
+                candidate = None
         if row["source"] != "stock":
-            without_clip.add(request.scene_id)
+            if is_shot:
+                shots_without_media.add(footage_fallback_asset_id(asset_id))
+            else:
+                without_clip.add(request.scene_id)
 
-    fallbacks = footage_fallbacks(requests, scenes_without_clip=without_clip)
+    fallbacks = footage_fallbacks(
+        requests, scenes_without_clip=without_clip, shots_without_media=shots_without_media
+    )
     if fallbacks:
         fallback_batch = await make_manager().resolve_partial(fallbacks)
         if fallback_batch.failures:
@@ -219,6 +402,7 @@ async def resolve_with_footage(
     logger.info(
         "footage_pass_done",
         stock=sum(row["source"] == "stock" for row in report),
+        file=sum(row["source"] == "file" for row in report),
         ai_fallback=sum(row["source"] == "ai_fallback" for row in report),
     )
     return results, report
@@ -230,6 +414,8 @@ __all__ = [
     "Judge",
     "middle_frame",
     "parse_verdict",
+    "footage_judge_attempt_budget",
     "resolve_with_footage",
     "router_judge",
+    "size_router_for_footage",
 ]

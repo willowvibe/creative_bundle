@@ -42,6 +42,7 @@ from video_editor_core.designs import DesignTokens
 from video_editor_core.fonts import font_stack
 from video_editor_core.motion.registry import MotionError, build_motion
 from video_editor_core.paper import colors_for, paper_css, paper_layers, safe_css_color
+from video_editor_core.script_text import NON_LATIN_CSS, tag_non_latin_text
 
 from video_editor_maps.geo import (
     Country,
@@ -3285,9 +3286,9 @@ def render_map(
         journey_css=journey_css,
         journey_animations=journey_animations,
     )
-    css += label_css
+    css += label_css + NON_LATIN_CSS
     return MapSceneRender(
-        markup=markup,
+        markup=tag_non_latin_text(markup),
         css=css,
         dropped_zooms=tuple(dropped.index for dropped in prepared.dropped_zooms),
     )

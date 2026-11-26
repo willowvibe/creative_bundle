@@ -8,48 +8,47 @@ colour against the measured luminance of the backdrop behind it.
 
 from __future__ import annotations
 
-import unicodedata
 from collections.abc import Iterable, Mapping, Sequence
 from typing import Any
 
 from captions.theme import MIN_CAPTION_CONTRAST, contrast_ratio, relative_luminance
+from video_editor_core.caption_text import (
+    ORPHAN_LETTERS,
+    ends_sentence,
+    is_orphan,
+    letters,
+    tokens,
+    whole_sentence,
+)
 
 from video_editor_pipelines.explainer_qa import QaCheck
 
-#: A caption frame of one word shorter than this many letters is an orphan.
-ORPHAN_LETTERS = 4
+__all__ = ["ORPHAN_LETTERS", "caption_contrast_check", "caption_tokens_check"]
 
 
 def _letters(raw: str) -> str:
     """Letters, combining marks and digits of any script (Telugu vowel signs are marks)."""
-    return "".join(ch for ch in raw.lower() if unicodedata.category(ch)[0] in {"L", "M", "N"})
+    return letters(raw)
 
 
 def _tokens(text: str) -> list[str]:
-    return [token for token in (_letters(raw) for raw in text.split()) if token]
+    return tokens(text)
 
 
 def _ends_sentence(text: str) -> bool:
-    return text.rstrip().rstrip("\"'”’)]}").endswith((".", "!", "?", "…"))
+    return ends_sentence(text)
 
 
 def _whole_sentence(lines: Sequence[str], index: int) -> bool:
     """True when frame ``index`` is a complete sentence ("No."), not a stranded word."""
-    starts = index == 0 or _ends_sentence(lines[index - 1])
-    return starts and _ends_sentence(lines[index])
+    return whole_sentence(lines, index)
 
 
 def caption_tokens_check(lines: Sequence[str], script: str) -> QaCheck:
     """Every caption word is a script word; no frame is a lone short word."""
     known = set(_tokens(script))
     unknown = [token for line in lines for token in _tokens(line) if token not in known]
-    orphans = [
-        line
-        for index, line in enumerate(lines)
-        if len(_tokens(line)) == 1
-        and len(_tokens(line)[0]) < ORPHAN_LETTERS
-        and not _whole_sentence(lines, index)
-    ]
+    orphans = [line for index, line in enumerate(lines) if is_orphan(lines, index)]
     problems: list[str] = []
     if unknown:
         problems.append("not in script: " + ", ".join(sorted(set(unknown))[:6]))

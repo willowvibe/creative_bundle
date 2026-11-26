@@ -84,6 +84,8 @@ class ScenePlan(BaseModel):
     #: tail past the last spoken word; the audio cue is shortened to this so
     #: its slot matches the media instead of being trimmed by the runtime.
     narration_duration: float = 0.0
+    #: False silences the coin clink under a counting tally chip.
+    tally_sound: bool = True
 
     @model_validator(mode="after")
     def _validate_scenes(self) -> ScenePlan:

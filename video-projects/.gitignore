@@ -28,3 +28,4 @@ hf_project/
 *.ttf
 *.otf
 *.log
+.cheapag/

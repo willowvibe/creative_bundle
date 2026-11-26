@@ -82,9 +82,11 @@ from video_editor_pipelines.explainer_footage import (
     Judge,
     resolve_with_footage,
     router_judge,
+    size_router_for_footage,
 )
 from video_editor_pipelines.explainer_plan import (
     NARRATION_PREFIX,
+    attach_footage_shots,
     attach_map_media,
     build_explainer_plan,
     counts_as_scene_still,
@@ -300,6 +302,9 @@ def _grouped(
         asset_type = request.asset_type.value
         if provider == "tts_router" and asset_type == "tts":
             provider = router_pricing_provider(request.params)
+        if provider == "local_media" and asset_type in ("video", "image"):
+            # A ``file:`` shot copies the user's own file: free.
+            provider = "pexels"
         if provider == "stock" and asset_type in ("video", "image"):
             # Every stock library is free; price the chain's head (all $0).
             provider = "pexels"
@@ -764,6 +769,7 @@ def burn_captions(
     height: int,
     preset: str = "karaoke",
     report: list[dict[str, Any]] | None = None,
+    cache_dir: Path | None = None,
 ) -> Path:
     """Burn the preset's captions over ``video`` at the plan's canvas size.
 
@@ -775,7 +781,7 @@ def burn_captions(
     from captions.theme import theme_for_backdrop
     from captions.timing import generate_caption_words, generate_segment_caption_lines
     from video_editor_core.render_graph import Cut, RenderGraph
-    from video_editor_core.renderer import render_graph
+    from video_editor_core.renderer import burn_overlays
 
     duration = probe_media(video).duration_ms() / 1000.0
     style = CaptionStyle.preset(preset)
@@ -836,7 +842,10 @@ def burn_captions(
         ],
         overlays=caption_graph_layers(lines, rect, style, end_limit=duration, overrides=overrides),
     )
-    return render_graph(graph, output, engine="auto")
+    # The captions render on a transparent page of their own and FFmpeg lays them over
+    # the finished video; embedding the video in the page took 112 min and then timed
+    # out. A failed render never falls back to drawtext for Telugu (it cannot shape it).
+    return burn_overlays(graph, output, cache_dir=cache_dir)
 
 
 #: The limiter starts this far under the -1.0 dBTP QA ceiling: AAC's decoded
@@ -1184,9 +1193,16 @@ def scene_sfx_timeline(plan: dict[str, Any], clips: dict[str, Path]) -> list[tup
 def footage_check(report: Sequence[dict[str, Any]]) -> QaCheck:
     """How the footage scenes were filled; fails only on an unjudged stock clip."""
     stock = [row for row in report if row["source"] == "stock"]
-    unjudged = [row["scene_id"] for row in stock if not row["judged"]]
-    fallback = len(report) - len(stock)
-    detail = f"{len(stock)}/{len(report)} footage scenes on stock, {fallback} AI fallback"
+    own = [row for row in report if row["source"] == "file"]
+    # A stock photo has no clip to judge; it is reported but never fails the check.
+    unjudged = [
+        row["scene_id"] for row in stock if not row["judged"] and row.get("kind") != "photo"
+    ]
+    fallback = len(report) - len(stock) - len(own)
+    unit = "footage scenes" if not any("shot" in row for row in report) else "footage shots"
+    detail = f"{len(stock)}/{len(report)} {unit} on stock, {fallback} AI fallback"
+    if own:
+        detail += f", {len(own)} own file"
     if unjudged:
         detail += f"; not judged: {', '.join(unjudged)}"
     return QaCheck("footage", not unjudged, detail)
@@ -1236,7 +1252,11 @@ def run_explainer_job(
         if footage_judge is None:
             from video_editor_llm.router import ModelRouter
 
-            footage_judge = router_judge(ModelRouter.from_config(config_path))
+            judge_router = ModelRouter.from_config(config_path)
+            # The judge makes one call per pick, up to tries x libraries per clip;
+            # the stock per-job default (50) ran out mid-pass on a 35-shot video.
+            size_router_for_footage(judge_router, requests, config.stock_video_chain_for())
+            footage_judge = router_judge(judge_router)
         results, footage_report = asyncio.run(
             resolve_with_footage(
                 lambda: AssetIngestionManager(ctx, config=config, final=final),
@@ -1260,6 +1280,7 @@ def run_explainer_job(
     plan = model.model_dump(mode="json")
     # Map regions/stickers that asked for a photo now point at the file.
     attach_map_media(plan, results)
+    attach_footage_shots(plan, results)
     # The narration runs at job scope (``scene_id="job"``), so
     # ``attach_results_to_plan`` drops it; look it up by asset id (F2).
     narrations = [scene.narration for scene in script.scenes]
@@ -1292,7 +1313,11 @@ def run_explainer_job(
         # Each clip's length is measured, so the scene layout is exact; no
         # recogniser is needed (Whisper skipped whole Telugu passages).
         words, timings = per_scene_timings(
-            narrations, durations, gap=SCENE_GAP_SECONDS, ids=scene_ids
+            narrations,
+            durations,
+            gap=SCENE_GAP_SECONDS,
+            ids=scene_ids,
+            spoken=script.spoken,
         )
         transcript: dict[str, Any] = {"words": words}
         (ctx.work_dir / "narration_words.json").write_text(
@@ -1370,6 +1395,7 @@ def run_explainer_job(
         height=height,
         preset=caption_preset or script.caption_preset,
         report=caption_report,
+        cache_dir=ctx.work_dir / "overlay_cache",
     )
     (ctx.work_dir / "caption_lines.json").write_text(
         json.dumps(caption_report, indent=2), encoding="utf-8"

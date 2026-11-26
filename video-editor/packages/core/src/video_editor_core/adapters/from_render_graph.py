@@ -39,11 +39,20 @@ def layer_id(name: str, index: int) -> str:
     return f"{safe}_{index}"
 
 
-def from_render_graph(graph: RenderGraph, base_video: str | Path | None = None) -> Composition:
-    """Build the Composition for ``graph``, with the base video at track 0."""
+def from_render_graph(
+    graph: RenderGraph,
+    base_video: str | Path | None = None,
+    *,
+    overlay_only: bool = False,
+) -> Composition:
+    """Build the Composition for ``graph``, with the base video at track 0.
+
+    ``overlay_only`` leaves the base video out and makes the page transparent:
+    the overlays alone render to RGBA frames that FFmpeg lays over the video.
+    """
     source = str(base_video if base_video is not None else graph.source)
     duration = quantise(float(graph.duration), graph.fps)
-    layers: list[CompositionLayer] = [
+    layers: list[CompositionLayer] = [] if overlay_only else [
         CompositionLayer(
             id="base_video",
             kind="media",
@@ -69,6 +78,7 @@ def from_render_graph(graph: RenderGraph, base_video: str | Path | None = None) 
         scenes=[CompositionScene(id="main", start=0.0, end=duration, layers=layers)],
         audio=[],
         audio_mode="external",
+        transparent=overlay_only,
     )
 
 

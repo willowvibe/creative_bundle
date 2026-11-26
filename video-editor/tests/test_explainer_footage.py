@@ -145,3 +145,75 @@ def test_footage_scenes_get_a_transition_cue() -> None:
 
     scene = Scene(id="s", type="footage", duration_seconds=3.0, narration="x")
     assert sfx_query_for_scene(scene) == "soft whoosh"
+
+
+# --- the vision judge's LLM budget ----------------------------------------------
+
+
+def _stock_video_requests(count: int) -> list:
+    from video_editor_asset_ingestion.models import AssetRequest
+
+    return [
+        AssetRequest(
+            asset_id=f"footage_scene_{i}_0",
+            job_id="job",
+            scene_id=f"scene_{i}",
+            asset_type=AssetType.VIDEO,
+            prompt="q",
+            provider="stock",
+            output_ext="mp4",
+        )
+        for i in range(count)
+    ]
+
+
+def test_the_judge_budget_covers_three_tries_in_every_library() -> None:
+    from video_editor_pipelines.explainer_footage import (
+        JUDGE_BUDGET_MARGIN,
+        MAX_TRIES_PER_LIBRARY,
+        footage_judge_attempt_budget,
+    )
+
+    requests = _stock_video_requests(14)  # 14 clip requests, 2 libraries
+
+    needed = footage_judge_attempt_budget(requests, ["pexels", "pixabay"], configured=50)
+
+    assert needed == 14 * MAX_TRIES_PER_LIBRARY * 2 + JUDGE_BUDGET_MARGIN
+    assert needed > 51  # "LLM attempt budget exceeded: 51 > 50"
+
+
+def test_a_larger_configured_budget_is_kept_and_photos_are_not_counted() -> None:
+    from video_editor_asset_ingestion.models import AssetRequest
+    from video_editor_pipelines.explainer_footage import footage_judge_attempt_budget
+
+    photo = AssetRequest(
+        asset_id="footage_scene_1_1",
+        job_id="job",
+        scene_id="scene_1",
+        asset_type=AssetType.IMAGE,
+        prompt="p",
+        provider="stock",
+        output_ext="jpg",
+    )
+
+    assert footage_judge_attempt_budget([photo], ["pexels"], configured=200) == 200
+    assert footage_judge_attempt_budget([photo], ["pexels"], configured=5) == 10  # margin only
+
+
+def test_the_router_is_resized_so_the_judge_never_starves() -> None:
+    from video_editor_llm.config import LLMConfig
+    from video_editor_llm.router import ModelRouter
+    from video_editor_pipelines.explainer_footage import size_router_for_footage
+
+    router = ModelRouter(config=LLMConfig(max_llm_attempts_per_job=50))
+    requests = _stock_video_requests(14)
+
+    budget = size_router_for_footage(router, requests, ["pexels", "pixabay"])
+
+    assert budget == router.config.max_llm_attempts_per_job == 94
+    # attempt 51 used to raise LLMBudgetExceededError; now the router accepts it
+    router._attempts = 50
+    router._record_attempt("critique", "m", "p")
+    # a config that already allows more is left alone
+    big = ModelRouter(config=LLMConfig(max_llm_attempts_per_job=500))
+    assert size_router_for_footage(big, requests, ["pexels", "pixabay"]) == 500

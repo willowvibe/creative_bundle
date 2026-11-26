@@ -8,6 +8,7 @@ the real CLI to be installed — the binary is mocked via a
 
 from __future__ import annotations
 
+import os
 import shutil
 import subprocess
 from pathlib import Path
@@ -365,3 +366,119 @@ def test_render_segment_rejects_a_json_plan(tmp_path: Path) -> None:
 
     with pytest.raises(hyperframes_cli.RenderSegmentError, match="JSON plan"):
         hyperframes_cli.render_segment(plan, tmp_path / "segment.mp4")
+
+
+# ---------------------------------------------------------------------------
+# NVIDIA GPU render profile
+# ---------------------------------------------------------------------------
+
+
+def _capture_render(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    extra_args: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Render a minimal project and return the captured subprocess arguments."""
+    project = _make_project(tmp_path)
+    output = tmp_path / "segment.mp4"
+    captured: dict[str, Any] = {}
+
+    def fake_run(
+        cmd: list[str],
+        check: bool,
+        timeout: int,
+        env: dict[str, str] | None = None,
+        **kwargs: object,
+    ) -> subprocess.CompletedProcess[bytes]:
+        captured["cmd"] = cmd
+        captured["env"] = env
+        _fake_segment_output(Path(cmd[cmd.index("-o") + 1]))
+        return subprocess.CompletedProcess(cmd, 0)
+
+    monkeypatch.setattr("video_editor_core.hyperframes_cli.run_subprocess", fake_run)
+    hyperframes_cli.render_project(project, output, extra_args=extra_args)
+    return captured
+
+
+def test_gpu_render_profile_adds_flags_and_prime_env(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """An enabled profile adds the GPU flags and forces Chrome onto NVIDIA."""
+    monkeypatch.setenv("VE_RENDER_GPU", "1")
+    monkeypatch.delenv("VE_RENDER_WORKERS", raising=False)
+
+    captured = _capture_render(tmp_path, monkeypatch)
+
+    assert "--gpu" in captured["cmd"]
+    assert "--browser-gpu" in captured["cmd"]
+    assert captured["cmd"][captured["cmd"].index("--workers") + 1] == "6"
+    env = captured["env"]
+    assert env is not None
+    assert env["__NV_PRIME_RENDER_OFFLOAD"] == "1"
+    assert env["__GLX_VENDOR_LIBRARY_NAME"] == "nvidia"
+    assert env["__VK_LAYER_NV_optimus"] == "NVIDIA_only"
+    # The render environment is the caller's environment plus the overrides.
+    assert env.get("PATH") == os.environ.get("PATH")
+
+
+def test_gpu_render_profile_auto_probes_nvidia_smi(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Unset VE_RENDER_GPU follows a successful nvidia-smi probe."""
+    monkeypatch.delenv("VE_RENDER_GPU", raising=False)
+    monkeypatch.setattr("video_editor_core.hyperframes_cli._nvidia_smi_available", lambda: True)
+
+    captured = _capture_render(tmp_path, monkeypatch)
+
+    assert "--gpu" in captured["cmd"]
+    assert "--browser-gpu" in captured["cmd"]
+
+
+def test_gpu_render_profile_disabled_by_env(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """VE_RENDER_GPU=0 leaves both the flags and the PRIME env off."""
+    monkeypatch.setenv("VE_RENDER_GPU", "0")
+
+    def fail_probe() -> bool:
+        raise AssertionError("nvidia-smi probe should not run when VE_RENDER_GPU=0")
+
+    monkeypatch.setattr("video_editor_core.hyperframes_cli._nvidia_smi_available", fail_probe)
+
+    captured = _capture_render(tmp_path, monkeypatch)
+
+    assert "--gpu" not in captured["cmd"]
+    assert "--browser-gpu" not in captured["cmd"]
+    assert "--workers" not in captured["cmd"]
+    assert not captured["env"]
+
+
+def test_gpu_render_profile_respects_worker_env(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """VE_RENDER_WORKERS sets the worker count passed to the CLI."""
+    monkeypatch.setenv("VE_RENDER_GPU", "1")
+    monkeypatch.setenv("VE_RENDER_WORKERS", "3")
+
+    captured = _capture_render(tmp_path, monkeypatch)
+
+    assert captured["cmd"][captured["cmd"].index("--workers") + 1] == "3"
+
+
+def test_gpu_render_profile_caller_workers_wins(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """An explicit extra_args workers value is not overridden by the profile."""
+    monkeypatch.setenv("VE_RENDER_GPU", "1")
+    monkeypatch.delenv("VE_RENDER_WORKERS", raising=False)
+
+    captured = _capture_render(tmp_path, monkeypatch, extra_args={"workers": 2})
+
+    assert captured["cmd"].count("--workers") == 1
+    assert captured["cmd"][captured["cmd"].index("--workers") + 1] == "2"

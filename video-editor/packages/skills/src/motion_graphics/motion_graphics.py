@@ -44,7 +44,7 @@ from pathlib import Path
 from typing import Any
 
 import structlog
-from video_editor_core.fonts import font_face_css
+from video_editor_core.fonts import font_face_css, with_indic_fallbacks
 from video_editor_core.hyperframes_cli import (
     HyperFramesLintError,
     RenderSegmentError,
@@ -1023,7 +1023,7 @@ class MotionGraphicsSkill:
         project_dir.mkdir(parents=True)
         families = [str(layer.get("font", "Inter")) for layer in plan.get("layers", [])]
         families.append("Inter")  # orbit labels use the sans stack
-        fonts_css = font_face_css(families, project_dir / "assets" / "fonts")
+        fonts_css = font_face_css(with_indic_fallbacks(families), project_dir / "assets" / "fonts")
         (project_dir / "index.html").write_text(_plan_to_html(plan, fonts_css), encoding="utf-8")
         return render_project(
             project_dir,

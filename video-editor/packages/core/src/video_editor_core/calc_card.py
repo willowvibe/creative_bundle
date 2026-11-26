@@ -179,28 +179,76 @@ def _tone(row: CalcRow) -> str:
     return "calc-neg" if row.amount < 0 else "calc-pos"
 
 
-def _row_markup(row: CalcRow, css_class: str, delay: float) -> str:
-    expr = f'<span class="{css_class}-expr">{html.escape(row.expr)} =</span>' if row.expr else ""
+def _row_markup(
+    row: CalcRow, css_class: str, delay: float, result_at: float | None = None
+) -> str:
+    expr = (
+        f'<span class="{css_class}-expr">{html.escape(row.expr)}</span>' if row.expr else ""
+    )
+    amount = (
+        f'<span class="{css_class}-amount {_tone(row)}">'
+        f"{html.escape(format_amount(row))}</span>"
+    )
+    if result_at is None or math.isclose(result_at, delay, abs_tol=1e-9):
+        expr_with_eq = (
+            f'<span class="{css_class}-expr">{html.escape(row.expr)} =</span>'
+            if row.expr
+            else ""
+        )
+        return (
+            f'<div class="{css_class}-row" style="animation-delay: {delay:.2f}s">'
+            f'<span class="{css_class}-label">{html.escape(row.label)}</span>{expr_with_eq}'
+            f"{amount}</div>"
+        )
+    equals = f'<span class="{css_class}-eq">=</span>' if row.expr else ""
     return (
         f'<div class="{css_class}-row" style="animation-delay: {delay:.2f}s">'
         f'<span class="{css_class}-label">{html.escape(row.label)}</span>{expr}'
-        f'<span class="{css_class}-amount {_tone(row)}">{html.escape(format_amount(row))}</span>'
-        "</div>"
+        f'<span class="{css_class}-result" style="animation-delay: {result_at:.2f}s">'
+        f"{equals}{amount}</span></div>"
     )
 
 
+def _reveal_pairs(
+    reveal_at: Sequence[float | Sequence[float]], count: int
+) -> list[tuple[float, float]]:
+    """Normalise per-row reveal times to ``(expr_at, result_at)`` pairs.
+
+    Older callers pass one float per row; that moment is both when the
+    expression appears and when the result lands.
+    """
+    pairs: list[tuple[float, float]] = []
+    for position in range(count):
+        entry = reveal_at[position] if position < len(reveal_at) else 0.3
+        if isinstance(entry, int | float):
+            at = float(entry)
+            pairs.append((at, at))
+        else:
+            expr_at, result_at = entry
+            pairs.append((float(expr_at), float(result_at)))
+    return pairs
+
+
 def render_calc_card(
-    rows: Sequence[CalcRow], *, index: int, width: int, reveal_at: Sequence[float]
+    rows: Sequence[CalcRow],
+    *,
+    index: int,
+    width: int,
+    reveal_at: Sequence[float | Sequence[float]],
 ) -> tuple[str, str]:
     """A compact dark card that appears with its first row and grows as rows are added.
 
-    The box fades in ``CARD_LEAD_SECONDS`` before row 0; until a row's moment it
+    Each row's label and expression land first, then its ``=`` and amount. The
+    box fades in ``CARD_LEAD_SECONDS`` before row 0; until a row's moment it
     takes no height (``max-height: 0``), so the box never shows reserved space.
     """
     unit = max(0.5, width / 1920.0)
-    times = [reveal_at[i] if i < len(reveal_at) else 0.3 for i in range(len(rows))]
-    body = "".join(_row_markup(row, "calc", times[i]) for i, row in enumerate(rows))
-    card_at = max(0.0, (min(times) if times else 0.3) - CARD_LEAD_SECONDS)
+    times = _reveal_pairs(reveal_at, len(rows))
+    body = "".join(
+        _row_markup(row, "calc", expr_at, result_at)
+        for row, (expr_at, result_at) in zip(rows, times, strict=True)
+    )
+    card_at = max(0.0, (min(expr_at for expr_at, _ in times) if times else 0.3) - CARD_LEAD_SECONDS)
     markup = (
         f'<div class="calc calc-{index}" style="animation: calc_card_{index} '
         f'{CARD_LEAD_SECONDS:.2f}s ease-out {card_at:.2f}s both">{body}</div>'
@@ -223,10 +271,19 @@ def render_calc_card(
         f"        to {{ opacity: 1; max-height: {row_height:.0f}px; margin-top: {row_gap:.0f}px;\n"
         "          transform: none; } }\n"
         f"      {selector} .calc-row:first-child {{ margin-top: 0 !important; }}\n"
+        f"      {selector} .calc-result {{ display: inline-flex; align-items: baseline;\n"
+        f"        column-gap: {16 * unit:.0f}px;\n"
+        f"        animation: calc_result_{index} {ROW_ENTRY_SECONDS}s ease-out both; }}\n"
+        # No opacity here: HyperFrames drops a child with its own opacity
+        # animation inside the animated, clipped row (chai-stall pilot).
+        f"      @keyframes calc_result_{index} {{ from {{ visibility: hidden;\n"
+        "        transform: translateY(6px); } to { visibility: visible; transform: none; } }\n"
         f"      {selector} .calc-label {{ font-size: {34 * unit:.0f}px; font-weight: 600; }}\n"
         f"      {selector} .calc-expr {{ font-size: {32 * unit:.0f}px;\n"
         "        color: rgba(255, 255, 255, 0.82);\n"
         "        font-variant-numeric: tabular-nums; }\n"
+        f"      {selector} .calc-eq {{ font-size: {32 * unit:.0f}px;\n"
+        "        color: rgba(255, 255, 255, 0.82); }\n"
         f"      {selector} .calc-amount {{ font-size: {42 * unit:.0f}px; font-weight: 800;\n"
         "        text-align: right; font-variant-numeric: tabular-nums; }\n"
         f"      {selector} .calc-neg {{ color: #ff6b5e; }}\n"
@@ -266,18 +323,18 @@ def render_ledger(
         f"        justify-content: flex-start; padding: {80 * unit:.0f}px {360 * unit:.0f}px 0;\n"
         f"        gap: {4 * unit:.0f}px;\n"
         f"        font-family: {font_stack(None)}; color: #1d1b18; }}\n"
-        f"      {selector} .ledger-heading {{ font-size: {40 * unit:.0f}px; font-weight: 700;\n"
+        f"      {selector} .ledger-heading {{ font-size: {40 * unit * 1.4:.0f}px; font-weight: 700;\n"
         f"        margin-bottom: {12 * unit:.0f}px; }}\n"
         f"      {selector} .ledger-row {{ display: grid; grid-template-columns: 1fr auto;\n"
         f"        column-gap: {24 * unit:.0f}px; align-items: baseline; opacity: 0;\n"
         f"        animation: ledger_in_{index} {ROW_ENTRY_SECONDS}s ease-out both; }}\n"
-        f"      {selector} .ledger-label {{ font-size: {32 * unit:.0f}px; font-weight: 600; }}\n"
-        f"      {selector} .ledger-amount {{ font-size: {34 * unit:.0f}px; font-weight: 800;\n"
+        f"      {selector} .ledger-label {{ font-size: {32 * unit * 1.4:.0f}px; font-weight: 600; }}\n"
+        f"      {selector} .ledger-amount {{ font-size: {34 * unit * 1.4:.0f}px; font-weight: 800;\n"
         "        text-align: right; font-variant-numeric: tabular-nums; }\n"
         f"      {selector} .ledger-total {{ border-top: {4 * unit:.0f}px solid #1d1b18;\n"
         f"        padding-top: {14 * unit:.0f}px; margin-top: {8 * unit:.0f}px; }}\n"
         f"      {selector} .ledger-total .ledger-label,\n"
-        f"      {selector} .ledger-total .ledger-amount {{ font-size: {52 * unit:.0f}px; }}\n"
+        f"      {selector} .ledger-total .ledger-amount {{ font-size: {52 * unit * 1.4:.0f}px; }}\n"
         f"      {selector} .calc-neg {{ color: #c0392b; }}\n"
         f"      {selector} .calc-pos {{ color: #1e8449; }}\n"
         f"      @keyframes ledger_in_{index} {{ from {{ opacity: 0; transform: translateY(12px); }}\n"

@@ -11,6 +11,21 @@ and rationale stay in `docs/archive/audits/AUDIT_2026-10-28.md`; this file track
 
 ## Open work
 
+### 2026-11-25 DeveeKitchen tiffin video — #374–#376
+
+Found while re-setting up the tiffin teardown on stock footage (`../video-projects/videos/2026-11-25/tiffin-centre-teardown`).
+Fixed the same day: the NVIDIA profile, multi-shot scenes, stock repeat and retry, the transparent caption overlay
+(the old pass timed out and fell back to Telugu drawtext), AI labels on every provider, the shaped Telugu label, and
+the judge budget. See the closed index and `RENDERING.md`.
+
+- [ ] **#374 Footage pass is serial.** Each shot runs search → download → judge one after another, with up to 6 picks
+  per rejected shot. This pass took 10–30 min of a 40 min tiffin render. Run the shots concurrently, within the stock
+  APIs' rate limits.
+- [ ] **#375 `ve explain` has no captions switch.** There is no `captions: off` script key and no soft-subtitle (`.srt`)
+  export without a burn. The owner asked about dropping burned subtitles once.
+- [ ] **#376 Caption chunks render one after another.** Each 30 s overlay chunk pays about 5 s of Chrome start-up;
+  running 2–3 at once would cut the 9 min burn.
+
 ### 2026-11-24 tech tutorial (Python Decoder EP1) — #372–#373
 
 - [ ] **#372 Tutorial screen track is per-project scripts.** `render_scenes.py` (web captures + editor/terminal
@@ -18,7 +33,7 @@ and rationale stay in `docs/archive/audits/AUDIT_2026-10-28.md`; this file track
   `../video-projects` (`videos/2026-11-24/python-315-features/`, `brand/python-decoder/`). Port them into the engine as
   a `ve tutorial` command (scene YAML instead of Python cue lists) when a second video reuses them. Recipe:
   `docs/TECH_TUTORIALS.md`.
-- [ ] **#373 Flow image generation is broken.** Google Flow renamed its agent toggle from "Agent" to "Flow agent";
+- [ ] **#373 Flow image generation is broken.** (2026-11-25: flow_image was removed from the automatic chain; Flow stills now go through Claude in Chrome as `file:` shots.) Google Flow renamed its agent toggle from "Agent" to "Flow agent";
   flow-mcp (`~/flow-mcp/src/flow.ts`, two `getByRole("button", { name: "Agent", exact: true })` locators) times out on
   every job, so the `flow_image` provider fails too. Fix: match `/^(Flow agent|Agent)$/` and rebuild `dist/`. The
   cheap worker needs `npx cheap-agent allow` in `~/flow-mcp` first. Workaround used: Claude in Chrome in the user's
@@ -28,7 +43,7 @@ and rationale stay in `docs/archive/audits/AUDIT_2026-10-28.md`; this file track
 
 Found while making Om Saravana Bhava ×108 (see `DEVOTIONAL_CHANTS.md`).
 
-- [ ] **#370 `agy_image` rejects every image agy 1.5.7 makes.**
+- [ ] **#370 `agy_image` rejects every image agy 1.5.7 makes.** (2026-11-25: agy was removed from the automatic image chain; this fix only matters if it is named explicitly.)
   - agy now produces the image, but saves it at
     `<profile>/.gemini/antigravity-cli/brain/<session>/<name>_<epoch>.jpg` instead of the requested
     `<turn workspace>/image.png`.
@@ -525,6 +540,7 @@ Rationale and evidence: `docs/archive/audits/AUDIT_2026-10-28.md`. Task ids refe
 
 | Era / pass | Findings | Archive |
 |---|---|---|
+| 2026-11-25 tiffin video | NVIDIA HyperFrames profile (PRIME + NVENC); `shots:` (query/photo/file) per footage scene; no repeated stock clip, round-robin retries with `exclude_ids`; transparent caption overlay burn and no drawtext for complex scripts; AI label on every AI provider plus `ai: true` files, Telugu shaped; footage judge budget; agy/flow out of the auto image chain | this file, `RENDERING.md` |
 | 2026-10-28 P1 correctness | #298–#302, #304, #309, #310: worker lease + off-loop dispatch, MCP command guards, SFX auth/licence, short manifest, `BLE001`/`S110` | this file |
 | 2026-10-28 P2.3 / P3 | #303 queue + MCP parity, A11 matrix, #305 download caps, #306 layerize cache, #307 typer ban, #308 zero-budget SFX | this file |
 | 2026-10-28 P4 start | look-ban gate (P4.1), director's-brief fields (P4.2), vision critique + patches (P4.3 partial), measured style extraction (P4.4), beat grid + quantization (P4.6), wipe/mask_reveal/camera primitives (P4.7 partial) | this file |

@@ -32,7 +32,7 @@ from __future__ import annotations
 import difflib
 import math
 import unicodedata
-from collections.abc import Mapping, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -492,6 +492,7 @@ def per_scene_timings(
     gap: float = SCENE_GAP_SECONDS,
     lead: float = PER_SCENE_LEAD_SECONDS,
     ids: Sequence[str] | None = None,
+    spoken: Callable[[str], str] | None = None,
 ) -> tuple[list[dict[str, Any]], list[SceneTiming]]:
     """Words and scene timings for clips joined with ``gap`` seconds between them.
 
@@ -499,6 +500,10 @@ def per_scene_timings(
     in ``lead`` seconds before its clip and runs to the next scene's cut; the
     last one keeps ``FINAL_TAIL_SECONDS`` after its clip. Words share their
     clip by normalised character count, which is what a karaoke caption needs.
+
+    ``spoken`` maps a display word to what the voice actually reads (numbers,
+    currencies). When given, its normalised length is what weights the word, so
+    a short "₹4,218" that is spoken as a long phrase does not finish too early.
     """
     if len(narrations) != len(durations):
         raise ValueError(f"{len(narrations)} narrations for {len(durations)} clip lengths")
@@ -512,7 +517,10 @@ def per_scene_timings(
     grouped: list[list[dict[str, Any]]] = []
     for text, offset, length in zip(narrations, offsets, durations, strict=True):
         spans = _words_with_spans(text) or [(text, 0, 1)]
-        weights = [max(1, end - start) for _word, start, end in spans]
+        weights = [
+            max(1, len(_norm(spoken(word))) if spoken is not None else end - start)
+            for word, start, end in spans
+        ]
         total = float(sum(weights))
         at = offset
         scene_words = []

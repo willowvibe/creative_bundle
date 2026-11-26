@@ -31,6 +31,7 @@ from video_editor_asset_ingestion.providers.base import GenerativeProvider
 from video_editor_asset_ingestion.providers.visual._selection import (
     DEFAULT_MIN_SHORT_SIDE,
     choose_by_duration,
+    excluded_media_ids,
     pick_sharp_enough,
     requested_duration,
 )
@@ -130,6 +131,7 @@ class PixabayProvider(GenerativeProvider):
             data,
             request.asset_type,
             target_duration=requested_duration(request),
+            exclude_ids=excluded_media_ids(request),
         )
         if media_info is None:
             raise PixabaySearchError(f"Pixabay returned no usable results for query {query!r}")
@@ -219,6 +221,7 @@ class PixabayProvider(GenerativeProvider):
         asset_type: AssetType,
         *,
         target_duration: float | None = None,
+        exclude_ids: frozenset[str] = frozenset(),
     ) -> tuple[str, dict[str, Any], dict[str, Any]] | None:
         """Pick the best media URL and attribution from a Pixabay response.
 
@@ -229,7 +232,7 @@ class PixabayProvider(GenerativeProvider):
         when the response contains no usable results.
         """
         if asset_type == AssetType.IMAGE:
-            photos = data.get("hits", [])
+            photos = [p for p in data.get("hits", []) if str(p.get("id")) not in exclude_ids]
             if not photos:
                 return None
             photo = photos[0]
@@ -252,7 +255,7 @@ class PixabayProvider(GenerativeProvider):
             return str(download_url), attribution, metadata
 
         if asset_type == AssetType.VIDEO:
-            videos = data.get("hits", [])
+            videos = [v for v in data.get("hits", []) if str(v.get("id")) not in exclude_ids]
             if not videos:
                 return None
             video = choose_by_duration(videos, target=target_duration) or videos[0]

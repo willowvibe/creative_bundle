@@ -9,7 +9,7 @@
         "social-engine-mcp"
       ],
       "env": {
-        "SOCIAL_ENGINE_ROOTS": "/mnt/data2/git_repos/creative_repos/video-editor/videos"
+        "SOCIAL_ENGINE_ROOTS": "/mnt/data2/git_repos/video-editor/videos"
       }
     }
   }

@@ -34,14 +34,17 @@ assets:
   # Ordered image providers; a named --image-provider bypasses the list,
   # "auto" does not. When every provider fails the asset fails; set
   # strict: false to get fal_ai's placeholder still instead (drafts, offline).
-  image_chain: [agy_image, flow_image, poyo_ai, openrouter, fal_ai]
+  # agy_image (stalls, writes no file) and flow_image (flow-mcp breaks on Flow UI changes) are
+  # out of the automatic chain (2026-11-25). Flow stills: generate them through Claude in Chrome
+  # and use them as `file:` shots with `ai: true` (docs/STOCK_EXPLAINERS.md).
+  image_chain: [poyo_ai, openrouter, fal_ai]
   # Final renders skip the slow local agent and start with a direct image API.
   image_chain_final: [poyo_ai, openrouter, fal_ai]
   # Never replace a missing or failed provider with a stub (a stub you name
   # explicitly, e.g. defaults.sfx: stub_sfx, is still used).
   strict: true
   # Bounds chain runs per run: every image request the chain serves counts,
-  # including paid fallbacks (one request that falls agy -> poyo consumes one
+  # including paid fallbacks (one request that falls poyo -> openrouter consumes one
   # unit for two generations). Inert when image_chain is empty.
   max_images_per_run: 25
   providers:

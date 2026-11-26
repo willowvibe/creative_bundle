@@ -196,3 +196,96 @@ def test_voice_pace_defaults_to_none():
 def test_a_voice_pace_outside_0_5_to_2_is_refused(bad):
     with pytest.raises(ScriptError, match="voice_pace"):
         parse_explainer_script(SCRIPT.replace("---\n", f"---\nvoice_pace: {bad}\n", 1))
+
+
+WATERFALL = """\
+---
+title: Tiffin teardown
+---
+
+## Scene 1 — Where the money goes
+visual: typographic
+layout: waterfall
+unit: ₹
+start: {label: Sales, value: 152000}
+steps:
+  - {label: Rent, value: -40000}
+  - {label: Staff, value: -52000}
+  - {label: Tips, value: 5000}
+end: {label: Profit%s}
+narration: |
+  Sales, rent, staff and tips.
+"""
+
+
+def test_waterfall_scene_is_a_valid_layout_and_keeps_its_props():
+    script = parse_explainer_script(WATERFALL % "")
+    scene = script.scenes[0]
+    assert scene.layout == "waterfall"
+    assert scene.props["start"] == {"label": "Sales", "value": 152000}
+    assert len(scene.props["steps"]) == 3
+
+
+def test_waterfall_accepts_a_matching_explicit_end_value():
+    parse_explainer_script(WATERFALL % ", value: 65000")
+
+
+def test_waterfall_rejects_an_end_value_that_is_not_start_plus_steps():
+    with pytest.raises(ScriptError, match="does not equal start \\+ steps = 65,000"):
+        parse_explainer_script(WATERFALL % ", value: 66000")
+
+
+def test_line_scene_is_a_valid_layout_and_keeps_mark_and_dots():
+    script = parse_explainer_script(
+        """\
+---
+title: Break-even
+---
+
+## Scene 1 — Break-even
+visual: typographic
+layout: line
+slope: 60
+intercept: -9120
+x_range: [0, 250]
+mark: {x: 152, label: Break-even}
+dots:
+  - {x: 90, label: Today}
+  - {x: 220, label: Goal}
+narration: |
+  Today we are short, and the goal is far.
+"""
+    )
+    scene = script.scenes[0]
+    assert scene.layout == "line"
+    assert scene.props["mark"] == {"x": 152, "label": "Break-even"}
+    assert len(scene.props["dots"]) == 2
+
+
+DONUT = """\
+---
+title: Costs
+---
+
+## Scene 1 — Split
+visual: typographic
+layout: donut
+unit: ₹
+parts:
+  - {label: Rent, value: 40000}
+  - {label: Staff, value: 60000}
+center: {value: %s, label: monthly}
+narration: |
+  Rent and staff.
+"""
+
+
+def test_donut_accepts_a_centre_equal_to_the_sum_of_parts():
+    scene = parse_explainer_script(DONUT % "100000").scenes[0]
+    assert scene.layout == "donut"
+    assert scene.props["center"]["value"] == 100000
+
+
+def test_donut_rejects_a_centre_that_is_not_the_sum_of_parts():
+    with pytest.raises(ScriptError, match="does not equal the sum of parts = 1,00,000"):
+        parse_explainer_script(DONUT % "99000")

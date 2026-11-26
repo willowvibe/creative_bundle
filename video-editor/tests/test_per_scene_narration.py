@@ -82,6 +82,24 @@ def test_timings_put_every_scene_on_its_own_clip() -> None:
     assert all(a["end"] <= b["start"] + 1e-9 for a, b in zip(words, words[1:], strict=False))
 
 
+def test_per_scene_spoken_words_delay_later_words() -> None:
+    narrations = ["₹100 ok"]
+
+    plain, _ = per_scene_timings(narrations, [10.0])
+    spoken, _ = per_scene_timings(
+        narrations,
+        [10.0],
+        spoken=lambda word: "వంద రూపాయలు" if word == "₹100" else word,
+    )
+
+    assert [w["word"] for w in plain] == [w["word"] for w in spoken] == ["₹100", "ok"]
+    assert plain[1]["start"] == pytest.approx(10.0 * 3 / 5)
+    assert spoken[1]["start"] > plain[1]["start"]
+    assert spoken[1]["start"] == pytest.approx(
+        10.0 * len("వందరూపాయలు") / (len("వందరూపాయలు") + 2), abs=0.001
+    )
+
+
 def _tone(path: Path, seconds: float) -> Path:
     from video_editor_ffmpeg.run import run_ffmpeg
 

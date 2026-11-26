@@ -382,6 +382,10 @@ providers:
     cost_per_asset: 0.0
     currency: USD
     note: free stock
+  local_media:
+    cost_per_asset: 0.0
+    currency: USD
+    note: your own file (file shots)
   pixabay:
     cost_per_asset: 0.0
     currency: USD

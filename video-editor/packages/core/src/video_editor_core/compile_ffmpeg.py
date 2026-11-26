@@ -22,6 +22,7 @@ from video_editor_ffmpeg.render_options import (
 from video_editor_ffmpeg.render_options import _add_audio_encode_args as _audio_encode
 from video_editor_ffmpeg.render_options import _add_video_encode_args as _video_encode
 
+from video_editor_core.fonts import FONT_DIR
 from video_editor_core.render_graph import AudioTrack, Layer, RenderGraph
 
 # One pass == one ffmpeg argv. Most graphs compile to a single pass.
@@ -48,7 +49,26 @@ _LINEAR_FLOAT_PIX_FMT = "gbrapf32le"
 _LINEAR_OUTPUT_PIX_FMT = "yuv420p"
 
 
-def _resolve_fontfile() -> str:
+#: Bundled faces for scripts the system Latin fonts lack, as ``(first, last,
+#: file)`` code-point ranges. ``drawtext`` takes one font file and has no
+#: per-glyph fallback, so Telugu or Devanagari text drawn with DejaVu Sans
+#: comes out as tofu boxes.
+_SCRIPT_FONTFILES = (
+    (0x0C00, 0x0C7F, "NotoSansTelugu-Bold.ttf"),
+    (0x0900, 0x097F, "NotoSansDevanagari.woff2"),
+)
+
+
+def _resolve_fontfile(text: str = "") -> str:
+    for first, last, filename in _SCRIPT_FONTFILES:
+        bundled = FONT_DIR / filename
+        # FreeType (drawtext) cannot read WOFF2, so only a TrueType face counts.
+        if (
+            bundled.suffix == ".ttf"
+            and bundled.exists()
+            and any(first <= ord(char) <= last for char in text)
+        ):
+            return str(bundled)
     for candidate in _FONT_CANDIDATES:
         if Path(candidate).exists():
             return candidate
@@ -80,7 +100,7 @@ def _enable_expr(layer: Layer) -> str:
 
 def _drawtext_filter(layer: Layer) -> str:
     style = layer.style
-    fontfile = str(style.get("fontfile") or _resolve_fontfile())
+    fontfile = str(style.get("fontfile") or _resolve_fontfile(layer.text or ""))
     font_size = _style_int(style, "font_size", 48)
     font_color = str(style.get("font_color", "white"))
     border_width = _style_int(style, "border_width", 4)

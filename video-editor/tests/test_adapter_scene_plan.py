@@ -189,3 +189,140 @@ def test_a_longer_measured_narration_never_stretches_the_composition(tmp_path: P
     plan["narration_duration"] = 9.9
     cues = {cue.id: cue for cue in from_scene_plan(plan).audio}
     assert cues["narration"].duration == pytest.approx(5.0)
+
+
+def test_the_tally_counts_when_its_calculation_is_spoken():
+    plan = {
+        "job_id": "tally_job",
+        "aspect_ratio": "9:16",
+        "scenes": [
+            {
+                "id": "open",
+                "type": "narration",
+                "duration_seconds": 3.0,
+                "props": {"tally": {"label": "cash", "value": -12500}},
+            },
+            {
+                "id": "milk",
+                "type": "narration",
+                "duration_seconds": 6.0,
+                "props": {
+                    "tally": {"label": "cash", "value": -1488},
+                    "calc": [{"label": "పాలు", "expr": "24 L × ₹62", "amount": -1488}],
+                    "word_times": [
+                        {"word": "రోజుకి", "start": 3.2, "end": 3.8},
+                        {"word": "₹1,488", "start": 6.1, "end": 6.9},
+                    ],
+                },
+            },
+        ],
+    }
+    composition = from_scene_plan(plan)
+    chip = next(
+        layer for layer in composition.scenes[1].layers if layer.id.endswith("_tally")
+    )
+
+    # Scene 1 starts at 3.0 s, so the amount is spoken 3.10 s into the clip; the
+    # tally waits TALLY_AFTER_RESULT_SECONDS (1.0 s) after the card shows it.
+    assert "4.10s" in chip.content.text
+    assert "3.10s" not in chip.content.text
+
+
+def _sales_plan(word_times, duration=10.0):
+    return {
+        "job_id": "order_job",
+        "aspect_ratio": "16:9",
+        "scenes": [
+            {
+                "id": "open",
+                "type": "narration",
+                "duration_seconds": 2.0,
+                "props": {"tally": {"label": "galla", "value": 0}},
+            },
+            {
+                "id": "sales",
+                "type": "narration",
+                "duration_seconds": duration,
+                "props": {
+                    "tally": {"label": "galla", "value": 12000},
+                    "calc": [{"label": "Sales", "expr": "300 × ₹40", "amount": 12000}],
+                    "word_times": word_times,
+                },
+            }
+        ],
+    }
+
+
+def _layer(composition, suffix):
+    return next(layer for layer in composition.scenes[1].layers if layer.id.endswith(suffix))
+
+
+def test_calculation_then_result_then_tally():
+    # "₹40 ... 300 ప్లేట్లు ... ₹12,000." : the expression shows at ₹40, the result at
+    # ₹12,000, and the tally counts only after the card has shown the result.
+    words = [
+        {"word": "₹40", "start": 3.0, "end": 1.4},
+        {"word": "300", "start": 4.0, "end": 2.4},
+        {"word": "ప్లేట్లు", "start": 4.5, "end": 3.0},
+        {"word": "₹12,000.", "start": 5.5, "end": 4.2},
+    ]
+    composition = from_scene_plan(_sales_plan(words))
+    card = _layer(composition, "_calc").content.text
+    chip = _layer(composition, "_tally").content.text
+    assert 'calc-row" style="animation-delay: 1.00s"' in card
+    assert 'calc-result" style="animation-delay: 3.50s"' in card
+    assert "4.50s both" in chip  # 3.50 + 1.0
+
+
+def test_an_operand_outside_the_window_is_not_the_setup():
+    # ₹40 is said 8 s before the result: too early to count as setting it up.
+    words = [
+        {"word": "₹40", "start": 2.5, "end": 0.9},
+        {"word": "300", "start": 9.0, "end": 7.4},
+        {"word": "₹12,000.", "start": 10.5, "end": 9.0},
+    ]
+    card = _layer(from_scene_plan(_sales_plan(words, duration=12.0)), "_calc").content.text
+    assert 'calc-row" style="animation-delay: 7.00s"' in card
+
+
+def test_unheard_rows_lead_their_result_by_a_beat():
+    card = _layer(from_scene_plan(_sales_plan([])), "_calc").content.text
+    result = float(card.split('calc-result" style="animation-delay: ')[1].split("s")[0])
+    row = float(card.split('calc-row" style="animation-delay: ')[1].split("s")[0])
+    assert row < result
+    assert result - row <= 0.8 + 1e-6
+
+
+def test_a_late_result_still_comes_before_the_tally():
+    # The result is spoken 1 s before the scene ends; the end clamp must not pull the
+    # count ahead of the result.
+    words = [{"word": "₹12,000.", "start": 11.0, "end": 9.6}]
+    chip = _layer(from_scene_plan(_sales_plan(words)), "_tally").content.text
+    card = _layer(from_scene_plan(_sales_plan(words)), "_calc").content.text
+    result = float(card.split('calc-result" style="animation-delay: ')[1].split("s")[0])
+    count = float(chip.split("linear ")[1].split("s")[0])
+    assert count > result
+
+
+def test_two_rows_with_the_same_amount_land_where_each_is_said():
+    plan = _sales_plan([])
+    plan["scenes"][1]["props"]["calc"] = [
+        {"label": "Parcel", "expr": "75 × ₹2", "amount": -150},
+        {"label": "Power", "expr": "₹150", "amount": -150},
+        {"label": "Misc", "expr": "₹3", "amount": -3},
+    ]
+    plan["scenes"][1]["props"]["word_times"] = [
+        {"word": "₹150.", "start": 3.0, "end": 3.5},
+        {"word": "₹3,764", "start": 4.0, "end": 4.5},
+        {"word": "₹150.", "start": 7.0, "end": 7.5},
+        {"word": "₹3", "start": 9.0, "end": 9.3},
+    ]
+    card = _layer(from_scene_plan(plan), "_calc").content.text
+    results = [float(part.split("s")[0]) for part in card.split('calc-result" style="animation-delay: ')[1:]]
+    # Clip-relative (the opener is 2 s); ₹3,764 is not "3". The ₹3 row has no
+    # separate result span (its expression is its answer), so check its row delay.
+    # Power's setup is its own "₹150" (the parcel ₹150 belongs to the row above), so
+    # its expression and result land together, as one span, at 5.0.
+    assert results == [1.0]
+    assert 'calc-row" style="animation-delay: 5.00s"' in card
+    assert 'calc-row" style="animation-delay: 7.00s"' in card

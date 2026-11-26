@@ -43,16 +43,24 @@ resolution tier for the aspect-ratio-only models (`nano-banana-2-lite`,
 
 ## Draft vs final image chain
 
-`assets.image_chain` is the draft chain. It starts with `agy_image` (free
-quota, slower, the local Gemini agent), then falls through to `poyo_ai`,
-`openrouter` and `fal_ai`.
+`assets.image_chain` is the draft chain: `poyo_ai`, then `openrouter`, then
+`fal_ai`. `agy_image` (free quota, slow, the local Gemini agent) and
+`flow_image` (Google Flow through flow-mcp's hidden Chrome) are no longer in
+it: agy stalls without writing a file, and flow-mcp broke when Flow renamed its
+agent toggle. Both providers stay in the code and can still be named
+explicitly (`--image-provider agy_image` / `flow_image`).
 
-`assets.image_chain_final` is the chain for a finished render. It skips the
-local agent and starts with a direct image API:
+Free Google Flow stills (Nano Banana, 0 credits) are made by Claude driving
+Flow in your own Chrome through the Claude in Chrome extension, saved into the
+video folder and used as `file:` shots with `ai: true` (see
+`STOCK_EXPLAINERS.md`, "Flow stills through Claude in Chrome").
+
+`assets.image_chain_final` is the chain for a finished render; it is the same
+three providers today:
 
 ```yaml
 assets:
-  image_chain: [agy_image, poyo_ai, openrouter, fal_ai]
+  image_chain: [poyo_ai, openrouter, fal_ai]
   image_chain_final: [poyo_ai, openrouter, fal_ai]
 ```
 
@@ -608,11 +616,12 @@ ve run ./talk.mp4 --job-id webinar \
   that case.
 - No TTS, music, SFX, or data-viz support — Pexels is image/video only.
 
-## agy (Gemini CLI) as the first image provider
+## agy (Gemini CLI), no longer automatic
 
-`config.yaml` sets `assets.image_chain: [agy_image, poyo_ai, openrouter,
-fal_ai]`; the model default is an empty chain, which restores cost-first
-selection. `agy_image` runs `agy --sandbox -p …` locally and verifies the
+`config.yaml` sets `assets.image_chain: [poyo_ai, openrouter, fal_ai]`
+(2026-11-25; `agy_image` was the head before); the model default is an empty
+chain, which restores cost-first selection. Name it with `--image-provider
+agy_image` to use it. `agy_image` runs `agy --sandbox -p …` locally and verifies the
 written PNG before returning it. It costs $0 (it consumes Google OAuth quota),
 so `--budget` only limits the paid fallbacks. `max_images_per_run` (default 25)
 bounds quota use per run. Expect seconds-to-minutes per image: this is an agent

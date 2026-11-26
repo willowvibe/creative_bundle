@@ -23,16 +23,31 @@ from __future__ import annotations
 
 import re
 from collections.abc import Mapping
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any
 
 import yaml
 from video_editor_core.calc_card import ledger_total_error, parse_calc
+from video_editor_core.hook_card import parse_hook
+from video_editor_core.progress_strip import parse_progress_labels
 from video_editor_core.tally_chip import money, parse_tally
+from video_editor_core.typographic_scenes import donut_center_error, waterfall_end_error
 
 VALID_VISUALS = frozenset({"typographic", "still", "map", "composite", "footage"})
-VALID_LAYOUTS = frozenset({"big_stat", "bar_compare", "definition", "sequence", "array", "ledger"})
+VALID_LAYOUTS = frozenset(
+    {
+        "big_stat",
+        "bar_compare",
+        "definition",
+        "sequence",
+        "array",
+        "ledger",
+        "waterfall",
+        "line",
+        "donut",
+    }
+)
 VALID_COMPOSITE_LAYOUTS = frozenset({"split", "over_media", "compare", "quote", "section"})
 
 #: Composite layouts that need a still, and how many.
@@ -152,6 +167,10 @@ class ExplainerScript:
     narration_mode: str = "single"
     #: Drawn over the Gemini sparkle on Flow/agy stills; "" leaves stills as made.
     ai_label: str = "AI image"
+    #: The ordered cost steps a scene's `progress:` label picks from; () = no strip.
+    progress: tuple[str, ...] = ()
+    #: False silences the coin clink under a counting tally chip.
+    tally_sound: bool = True
 
     @property
     def narration(self) -> str:
@@ -177,10 +196,16 @@ class ExplainerScript:
         return pattern.sub(lambda match: self.pronunciations[match.group(1)], text)
 
 
-def parse_explainer_script(text: str, *, source: str = "<script>") -> ExplainerScript:
-    """Parse ``text`` into an :class:`ExplainerScript`, or raise ``ScriptError``."""
+def parse_explainer_script(
+    text: str, *, source: str = "<script>", base_dir: Path | None = None
+) -> ExplainerScript:
+    """Parse ``text`` into an :class:`ExplainerScript`, or raise ``ScriptError``.
+
+    ``base_dir`` is what a footage shot's relative ``file:`` resolves against
+    (the script's folder; the working directory when omitted).
+    """
     meta, body = _split_front_matter(text, source)
-    scenes = _parse_scenes(body, source)
+    scenes = _parse_scenes(body, source, base_dir)
     title = str(meta.get("title") or "").strip()
     if not title:
         raise ScriptError(f"{source}: front matter needs a non-empty `title`")
@@ -223,6 +248,12 @@ def parse_explainer_script(text: str, *, source: str = "<script>") -> ExplainerS
             f"got {narration_mode!r}"
         )
 
+    progress = _progress_steps(meta.get("progress"), source)
+    scenes = _resolve_progress(scenes, progress, source)
+    tally_sound = meta.get("tally_sound", True)
+    if not isinstance(tally_sound, bool):
+        raise ScriptError(f"{source}: `tally_sound` must be true or false, got {tally_sound!r}")
+
     return ExplainerScript(
         title=title,
         scenes=scenes,
@@ -239,7 +270,53 @@ def parse_explainer_script(text: str, *, source: str = "<script>") -> ExplainerS
         pronunciations=pronunciations,
         narration_mode=narration_mode,
         ai_label=str(meta["ai_label"]).strip() if "ai_label" in meta else "AI image",
+        progress=progress,
+        tally_sound=tally_sound,
     )
+
+
+def _progress_steps(raw: object, source: str) -> tuple[str, ...]:
+    """The front-matter ``progress`` list, or ``()`` when the script has none."""
+    if raw is None:
+        return ()
+    try:
+        return parse_progress_labels(raw)
+    except ValueError as exc:
+        raise ScriptError(f"{source}: front matter {exc}") from exc
+
+
+def _resolve_progress(
+    scenes: list[ScriptScene], steps: tuple[str, ...], source: str
+) -> list[ScriptScene]:
+    """Replace each scene's ``progress: <label>`` with ``{items, current}``.
+
+    The renderer then needs no plan-level lookup. A label that is not one of
+    the front matter's steps is an error.
+    """
+    resolved: list[ScriptScene] = []
+    for scene in scenes:
+        label = scene.props.get("progress")
+        if label is None:
+            resolved.append(scene)
+            continue
+        where = f"{source}: scene {scene.title!r}"
+        if not isinstance(label, str) or not label.strip():
+            raise ScriptError(f"{where}: `progress` must be one of the step labels, got {label!r}")
+        label = label.strip()
+        if not steps:
+            raise ScriptError(
+                f"{where}: `progress: {label}` needs a `progress:` list of steps in the front matter"
+            )
+        if label not in steps:
+            raise ScriptError(
+                f"{where}: `progress` {label!r} is not one of the front matter's steps {list(steps)}"
+            )
+        resolved.append(
+            replace(
+                scene, props={**scene.props, "progress": {"items": list(steps), "current": label}}
+            )
+        )
+    return resolved
 
 
 def load_explainer_script(path: Path | str) -> ExplainerScript:
@@ -249,7 +326,7 @@ def load_explainer_script(path: Path | str) -> ExplainerScript:
         text = path.read_text(encoding="utf-8")
     except OSError as exc:
         raise ScriptError(f"{path}: cannot read script: {exc}") from exc
-    return parse_explainer_script(text, source=str(path))
+    return parse_explainer_script(text, source=str(path), base_dir=path.absolute().parent)
 
 
 def _split_front_matter(text: str, source: str) -> tuple[dict[str, Any], str]:
@@ -293,7 +370,7 @@ def _check_tally_moves(scenes: list[ScriptScene], source: str) -> None:
         previous = tally.value
 
 
-def _parse_scenes(body: str, source: str) -> list[ScriptScene]:
+def _parse_scenes(body: str, source: str, base_dir: Path | None = None) -> list[ScriptScene]:
     """Split the body on ``## `` headings and parse each block as YAML."""
     headings = list(_SCENE_HEADING_RE.finditer(body))
     if not headings:
@@ -311,12 +388,89 @@ def _parse_scenes(body: str, source: str) -> list[ScriptScene]:
             data = {}
         if not isinstance(data, dict):
             raise ScriptError(f"{source}: scene {title!r} must be a YAML mapping")
-        scenes.append(_scene_from(position + 1, title, dict(data), source))
+        scenes.append(_scene_from(position + 1, title, dict(data), source, base_dir))
     _check_tally_moves(scenes, source)
     return scenes
 
 
-def _scene_from(number: int, title: str, data: dict[str, Any], source: str) -> ScriptScene:
+#: ``file:`` shot extensions: stills Chrome can draw, and clips ffmpeg can read.
+FILE_SHOT_IMAGE_EXTENSIONS = frozenset({".png", ".jpg", ".jpeg", ".webp"})
+FILE_SHOT_VIDEO_EXTENSIONS = frozenset({".mp4", ".mov", ".webm"})
+
+
+def _resolve_shot_file(raw: str, label: str, position: int, base_dir: Path | None) -> str:
+    """The absolute path of a ``file:`` shot, or a ``ScriptError`` naming the problem."""
+    where = f"{label}: shot {position} `file`"
+    given = Path(raw).expanduser()
+    candidate = given if given.is_absolute() else (base_dir or Path.cwd()) / given
+    if candidate.is_symlink():
+        raise ScriptError(f"{where} is a symlink ({candidate}); point at the real file")
+    if not candidate.exists():
+        raise ScriptError(f"{where} does not exist: {candidate}")
+    if not candidate.is_file():
+        raise ScriptError(f"{where} is not a regular file: {candidate}")
+    suffix = candidate.suffix.lower()
+    if suffix not in FILE_SHOT_IMAGE_EXTENSIONS | FILE_SHOT_VIDEO_EXTENSIONS:
+        known = sorted(e.lstrip(".") for e in FILE_SHOT_IMAGE_EXTENSIONS | FILE_SHOT_VIDEO_EXTENSIONS)
+        raise ScriptError(f"{where} has unsupported extension {suffix or '(none)'!r}; use {known}")
+    return str(candidate.resolve())
+
+
+def _parse_shots(
+    raw: object, label: str, base_dir: Path | None = None
+) -> list[dict[str, Any]]:
+    """Validate a footage scene's ``shots`` list and return it normalized.
+
+    A shot is one of: a ``query`` (stock clip), a ``photo`` (stock still) or a
+    ``file`` (your own image or clip, path relative to the script; ``ai: true``
+    marks a generated image so it carries the AI label). Exactly one of the
+    three. ``image`` is the stock shot's own AI fallback prompt.
+    """
+    one_of = "exactly one of `query`, `photo` or `file`"
+    if not isinstance(raw, list) or not raw:
+        raise ScriptError(f"{label}: `shots` must be a non-empty list of maps, each with {one_of}")
+    shots: list[dict[str, Any]] = []
+    for position, item in enumerate(raw, start=1):
+        if not isinstance(item, Mapping):
+            raise ScriptError(f"{label}: shot {position} must be a map with {one_of}")
+        query = str(item.get("query") or "").strip()
+        photo = str(item.get("photo") or "").strip()
+        file = str(item.get("file") or "").strip()
+        if sum(bool(value) for value in (query, photo, file)) != 1:
+            raise ScriptError(
+                f"{label}: shot {position} must have {one_of}, got {dict(item)!r}"
+            )
+        unknown = sorted(set(item) - {"query", "photo", "image", "file", "ai"})
+        if unknown:
+            raise ScriptError(
+                f"{label}: shot {position} has unknown key(s) {unknown}; "
+                "use `query`, `photo`, `file` and optionally `image` (a comma ends a value "
+                "inside `{...}`, so keep prompts comma-free or quote them)"
+            )
+        ai = item.get("ai", False)
+        if not isinstance(ai, bool):
+            raise ScriptError(f"{label}: shot {position} `ai` must be true or false, got {ai!r}")
+        if ai and not file:
+            raise ScriptError(f"{label}: shot {position} `ai` is only allowed with `file`")
+        if file and item.get("image"):
+            raise ScriptError(
+                f"{label}: shot {position} is a `file` shot; it has no AI fallback, drop `image`"
+            )
+        shots.append(
+            {
+                "query": query,
+                "photo": photo,
+                "file": _resolve_shot_file(file, label, position, base_dir) if file else "",
+                "ai": ai,
+                "image": str(item.get("image") or "").strip(),
+            }
+        )
+    return shots
+
+
+def _scene_from(
+    number: int, title: str, data: dict[str, Any], source: str, base_dir: Path | None = None
+) -> ScriptScene:
     """Validate one scene mapping; the heading is always named in errors."""
     label = f"{source}: scene {title!r}"
     visual = str(data.get("visual") or "").strip()
@@ -354,12 +508,33 @@ def _scene_from(number: int, title: str, data: dict[str, Any], source: str) -> S
                 f"{label}: composite layout {layout!r} needs a second `image_b` prompt"
             )
     if visual == "footage":
-        # Stock search is English-only on every library; the still is what the
-        # scene shows when no clip passes the relevance check.
-        if not str(data.get("query") or "").strip():
-            raise ScriptError(f"{label}: a footage scene needs a `query` (English stock search)")
-        if not image:
-            raise ScriptError(f"{label}: a footage scene needs a `image` fallback prompt")
+        raw_shots = data.get("shots")
+        if raw_shots is not None:
+            if str(data.get("query") or "").strip():
+                raise ScriptError(
+                    f"{label}: a footage scene takes either `query` or `shots`, not both; "
+                    "move the query into a shot"
+                )
+            data["shots"] = _parse_shots(raw_shots, label, base_dir)
+            bare = [
+                n
+                for n, shot in enumerate(data["shots"], 1)
+                if not (shot["file"] or shot["image"] or image)
+            ]
+            if bare:
+                raise ScriptError(
+                    f"{label}: shot {bare[0]} has no `image` fallback prompt and the scene has "
+                    "no scene-level `image` to fall back on"
+                )
+        else:
+            # Stock search is English-only on every library; the still is what
+            # the scene shows when no clip passes the relevance check.
+            if not str(data.get("query") or "").strip():
+                raise ScriptError(
+                    f"{label}: a footage scene needs a `query` (English stock search) or `shots`"
+                )
+            if not image:
+                raise ScriptError(f"{label}: a footage scene needs a `image` fallback prompt")
     if visual == "still" and not image:
         raise ScriptError(f"{label}: a still scene needs an `image` prompt")
     if visual == "map" and not str(data.get("country") or "").strip():
@@ -367,6 +542,7 @@ def _scene_from(number: int, title: str, data: dict[str, Any], source: str) -> S
 
     try:
         parse_tally(data.get("tally"))
+        parse_hook(data.get("hook"))
         if data.get("calc"):
             parse_calc(data["calc"])
         if visual == "typographic" and layout == "ledger":
@@ -374,6 +550,14 @@ def _scene_from(number: int, title: str, data: dict[str, Any], source: str) -> S
             if not data.get("rows") or not isinstance(total, dict) or "amount" not in total:
                 raise ValueError("a ledger needs `rows` and a `total` with an `amount`")
             error = ledger_total_error(parse_calc(data["rows"]), float(total["amount"]))
+            if error:
+                raise ValueError(error)
+        if visual == "typographic" and layout == "waterfall":
+            error = waterfall_end_error(data)
+            if error:
+                raise ValueError(error)
+        if visual == "typographic" and layout == "donut":
+            error = donut_center_error(data)
             if error:
                 raise ValueError(error)
     except ValueError as exc:

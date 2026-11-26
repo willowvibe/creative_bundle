@@ -66,6 +66,19 @@ def _text(layer_id: str = "title", **overrides) -> CompositionLayer:
     return CompositionLayer(**data)  # type: ignore[arg-type]
 
 
+def test_every_composition_embeds_the_indic_faces(tmp_path):
+    # Telugu/Devanagari text can come from any layer (captions, typographic,
+    # map, composite scenes), so the faces are embedded unconditionally.
+    index = compile_composition(_composition(tmp_path, [_text()]), tmp_path / "proj")
+    html = index.read_text(encoding="utf-8")
+    assert "font-family: 'Noto Sans Telugu'" in html
+    assert "font-family: 'Noto Sans Devanagari'" in html
+    fonts = tmp_path / "proj" / "assets" / "fonts"
+    assert (fonts / "NotoSansTelugu-Regular.ttf").is_file()
+    assert (fonts / "NotoSansTelugu-Bold.ttf").is_file()
+    assert "'Noto Sans Telugu'" in html.split("font-family:'Montserrat',")[1].split(";")[0]
+
+
 def test_root_carries_the_composition_contract(tmp_path):
     index = compile_composition(_composition(tmp_path, [_text()]), tmp_path / "proj")
     html = index.read_text(encoding="utf-8")
