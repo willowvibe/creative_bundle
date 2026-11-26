@@ -136,6 +136,20 @@ are no longer in the automatic image chain (`poyo_ai` → `openrouter` →
    sparkle mark bottom-right; keep `ai: true` so the pill covers it and the
    viewer is told the shot is generated.
 
+Gotchas (tiffin, 2026-11-26):
+
+- **One prompt at a time.** A prompt typed while another is generating is
+  dropped; wait for the tiles before the next one. Each prompt gives two
+  variants (`x2`); keep the better one.
+- **Downloads.** Chrome allows one automatic download per site and then
+  silently blocks the rest. Ask the owner to allow "download multiple files"
+  for flow.google.com (the blocked-download icon in the address bar) once, then
+  download every tile as a file.
+- **Check at full size** for garbled text, extra fingers and a prop repeated
+  across neighbouring scenes, and log each prompt in `flow/prompts.md`.
+- Photos and stills drift 1.00 → 1.10 with an alternating pan, so a 3–9 s
+  still does not read as static.
+
 ## The running tally (a cash box)
 
 ```yaml
@@ -164,9 +178,14 @@ calc:
   `in_tally` result, never before it. Rows match amounts by exact digits, each
   searching after the row above, so two equal amounts land where each is said.
   A row holds at least 1.6 s even if it is the scene's last word.
-- **Coin.** Each tally change plays a short synthesized coin at the count
-  (`coin_in` up, `coin_out` down, about −8 dB under the voice). Front matter
-  `tally_sound: false` turns it off.
+- **Coin and pill.** Each tally change plays a short synthesized coin at the
+  count (`coin_in` up, `coin_out` down, −4 dB). The count takes 0.9 s and the
+  `+₹12,000` / `−₹4,218` pill lands when it ends, so a paused frame never shows
+  the pill beside an intermediate balance.
+- **UI sounds.** A soft swoosh marks each cut from footage to a chart and a
+  low hit lands on each `big_stat` number (`swoosh.wav`, `hit.wav`, synthesized
+  by `python -m video_editor_core.sfx_synth`). `tally_sound: false` turns off
+  the coin, swoosh and hit together.
 - **Arithmetic checks.** All of these are checked before anything is paid
   for:
   - every `expr` is evaluated from its own numbers and must equal `amount`, to

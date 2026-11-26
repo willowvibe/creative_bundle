@@ -237,6 +237,12 @@ karaoke captions and ducked music. This is the reusable form of the
 - **Typographic motion:** a `big_stat` headline with a number counts up to it
   (`count: false` turns it off), a `definition` gloss reveals word by word, and
   both draw a thin accent rule that grows over the whole scene.
+- **End screen:** a `big_stat` takes `align: top|center` (default `center`). `top` puts the
+  headline (one line, 100 px at 1080p) and sub in the top 42% of the frame, left-aligned, so the
+  lower part stays clear for YouTube end-screen cards. Any other value fails the script.
+- **`cue: false` means "from the first frame".** On any chart part, step, dot or bubble it shows
+  the element before anything is said. Give each element a word from the narration instead
+  (a waterfall's last steps and `end`, a line chart's dots).
 - **Icons:** a `big_stat` takes an optional `icon: <name>`, drawn about 140 px
   above the headline in the design's accent and popping in with the headline's
   cue; a `bar_compare` bar takes the same key (`{label, value, unit, icon}`)
@@ -307,9 +313,9 @@ karaoke captions and ducked music. This is the reusable form of the
   positive values) with optional `unit` and `center: {value, label, cue?}`.
   Each segment sweeps in clockwise from 12 o'clock on its cue, in order
   (default cue is the label, `cue: false` opts out), and its legend row (label
-  and Indian-grouped value) appears with it. The centre value counts up like a
-  `big_stat` (a value of a lakh or more, written with Indian grouping, stays
-  static); it may also be label-only, and an explicit `center.value` must equal
+  and Indian-grouped value) appears with it. The centre value counts with the
+  slices: at each part's reveal it steps (0.4 s) from the running sum so far to the new
+  one, ending on `center.value` (₹3.00 → ₹5.40 → ₹7.02 → ₹13.02); it may also be label-only, and an explicit `center.value` must equal
   the sum of parts to the shown decimals or the script fails to parse.
   Segment colours are the design's accent, ink and muted, then a tint of each.
 
@@ -331,7 +337,9 @@ karaoke captions and ducked music. This is the reusable form of the
   `visual: typographic`
   (needs `layout:` — `big_stat`, `bar_compare`, `definition`, `sequence`,
   `array`, `waterfall`, `line`, `donut`), `visual: map` (needs `country:`; optional `focus: "lon,lat"` and
-  `label` for one highlighted point, `bbox`, `projection`, `eyebrow`,
+  `label` for one highlighted point, `bbox` (the map fits it to the plate minus the title
+  block, centred, with a 4% margin; nothing outside it shows, so widen it to keep a river or
+  neighbour in view), `projection`, `eyebrow`,
   `eyebrow_color`, `headline`, `subtitle`, `badge`, `badge_sub`, `badge_mark`,
   `watermark`,
   `callouts` — a short string or `{text, cue}` — `markers`, `route` and

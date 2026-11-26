@@ -23,6 +23,14 @@ the judge budget. See the closed index and `RENDERING.md`.
   APIs' rate limits.
 - [ ] **#375 `ve explain` has no captions switch.** There is no `captions: off` script key and no soft-subtitle (`.srt`)
   export without a burn. The owner asked about dropping burned subtitles once.
+- [ ] **#377 `file:` shots are not confined in job mode (security).** `explainer_script._resolve_shot_file` accepts
+  any absolute or `~` path. `handlers.py` confines the script and `music_path` to the job's roots with
+  `_resolve_payload_path`, but not the `file:` shots inside the script, so a tenant job could pull any readable file
+  into its render. Fix: an optional `allowed_roots` for `load_explainer_script`, passed by the job handler (script
+  folder, `work_dir`, `output_dir`); resolve strictly and refuse paths outside them. The CLI keeps today's
+  behaviour. Flagged by the automated security review on 2026-11-26; waiting for the owner's go-ahead.
+- [ ] **#378 Footage judge verdicts are not cached.** A warm re-run with every shot pinned still spends about 8 min
+  before the render (see `RENDERING.md`, "Caption chunk cache").
 - [ ] **#376 Caption chunks render one after another.** Each 30 s overlay chunk pays about 5 s of Chrome start-up;
   running 2–3 at once would cut the 9 min burn.
 

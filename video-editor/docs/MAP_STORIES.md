@@ -118,8 +118,10 @@ stickers:
   browser's font fallback.
 - **Stickers.** Built-in stickers are flat SVG icons with a white outline. An
   image sticker comes from `image`, `image_prompt` or `image_query`.
-- **Overlap.** Placement is manual; nothing nudges overlapping bubbles or
-  stickers apart yet.
+- **Overlap.** Bubbles go through the same collision pass as marker and region
+  labels: a bubble that would overlap a label or an earlier bubble is nudged
+  (down, right, up, left, in growing steps) and gets a thin leader line back to
+  its anchor. Stickers and callout leader lines are not avoided yet.
 
 ## Rivers
 
