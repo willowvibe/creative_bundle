@@ -289,3 +289,28 @@ def test_donut_accepts_a_centre_equal_to_the_sum_of_parts():
 def test_donut_rejects_a_centre_that_is_not_the_sum_of_parts():
     with pytest.raises(ScriptError, match="does not equal the sum of parts = 1,00,000"):
         parse_explainer_script(DONUT % "99000")
+
+
+BIG_STAT = """\
+---
+title: End
+---
+
+## Scene 1 — Number
+visual: typographic
+layout: big_stat
+headline: $32B
+align: %s
+narration: |
+  Thirty-two billion.
+"""
+
+
+def test_big_stat_script_accepts_align_top():
+    scene = parse_explainer_script(BIG_STAT % "top").scenes[0]
+    assert scene.props["align"] == "top"
+
+
+def test_big_stat_script_rejects_a_bad_align():
+    with pytest.raises(ScriptError, match="align"):
+        parse_explainer_script(BIG_STAT % "bottom")

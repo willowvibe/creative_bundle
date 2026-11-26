@@ -151,7 +151,7 @@ def _subject_width(markup: str) -> float:
 
 
 def test_a_custom_bbox_widens_the_window():
-    default = render({"country": "China"})
+    default = render({"country": "China", "bbox": "73,18,135,54"})
     widened = render({"country": "China", "bbox": "40,0,160,70"})
     # A wider window draws the same country smaller inside the same panel.
     assert _subject_width(widened.markup) < _subject_width(default.markup)
@@ -314,7 +314,7 @@ def test_two_close_labels_flip_to_opposite_sides():
     result = render(
         {
             "country": "Malaysia",
-            "bbox": "95,-5,110,10",
+            "bbox": "60,-30,150,30",
             "markers": [
                 {"text": "Malacca", "lon": 102.25, "lat": 2.19},
                 {"text": "Singapore", "lon": 103.82, "lat": 1.35},
@@ -865,8 +865,9 @@ def test_the_window_fade_is_on_a_non_scaling_wrapper():
     assert fade is not None
     assert "mask-image" in fade.group(0)
     # The wrapper is positioned and sized to the map frame, and is not scaled.
-    assert "left:150.0px; top:158.0px;" in fade.group(0)
-    assert "width:950.0px; height:604.0px;" in fade.group(0)
+    # (a scene with a zoom bbox gets the widened bbox panel: plate minus title)
+    assert "left:60.0px; top:158.0px;" in fade.group(0)
+    assert "width:1800.0px; height:618.0px;" in fade.group(0)
     assert "transform" not in fade.group(0)
     ghost = re.search(r"\.map-1 \.map-ghost-wrap \{[^}]*\}", result.css)
     assert ghost is not None
@@ -1213,7 +1214,7 @@ def test_a_marker_label_that_lands_past_the_map_frame_is_a_motion_problem():
             "zooms": [{"bbox": "100,0.7,112,5"}],
         },
     }
-    problems = map_scene_motion_problems(scene, DESIGN, width=1920, height=1080, duration=8.0)
+    problems = map_scene_motion_problems(scene, DESIGN, width=1080, height=1920, duration=8.0)
     assert any("label lands outside the map frame" in problem for problem in problems)
 
 
@@ -1231,7 +1232,7 @@ def test_the_map_window_clip_moves_to_the_trimmed_overlay():
     assert "clip-path" not in window.group(0)
     overlay = re.search(r"\.map-1 \.map-overlay \{[^}]*\}", result.css)
     assert overlay is not None
-    inset = "inset(158.0px 820.0px 318.0px 150.0px)"
+    inset = "inset(158.0px 60.0px 304.0px 60.0px)"
     assert f"-webkit-clip-path: {inset}" in overlay.group(0)
     assert f"clip-path: {inset}" in overlay.group(0)
 
@@ -1307,7 +1308,7 @@ def test_a_zoomed_marker_label_fits_the_frame_and_the_qa_agrees(monkeypatch):
             "bbox": "72,7,84,22",
             "markers": [
                 {"text": "Western Ghats", "lon": 75.3, "lat": 13.0},
-                {"text": "Eastern Ghats", "lon": 80.0, "lat": 15.0},
+                {"text": "Eastern Ghats", "lon": 78.0, "lat": 15.0},
                 {"text": "Deccan", "lon": 77.5, "lat": 17.5},
             ],
             "zooms": [{"bbox": "73.5,8.5,77.5,15.5"}],
@@ -2066,7 +2067,7 @@ def test_the_shown_label_text_drives_the_label_gate(monkeypatch):
     render(
         {
             "country": "India",
-            "bbox": "72,7,84,22",
+            "bbox": "72,7,92,32",
             "rivers": [{"name": "Ganges", "label": "Ganga"}],
             "regions": [{"name": "Deccan Plateau", "label": "Deccan"}],
         },
@@ -2437,7 +2438,8 @@ def test_a_synthetic_scene_with_unseparable_labels_reports_overlap():
             "country": "Malaysia",
             "bbox": "95,0.5,119,8",
             "markers": [
-                {"text": f"Overlap {position}", "lon": 102.25, "lat": 2.19} for position in range(7)
+                {"text": f"Overlap {position}", "lon": 102.25, "lat": 2.19}
+                for position in range(60)
             ],
         },
     }
@@ -2453,7 +2455,7 @@ def test_overlay_labels_include_markers_rivers_regions_and_focus():
         "type": "map",
         "props": {
             "country": "India",
-            "bbox": "72,7,84,22",
+            "bbox": "72,7,92,32",
             "markers": [{"text": "Marker", "lon": 77.0, "lat": 15.0}],
             "rivers": [{"name": "Ganges", "label": "Ganga"}],
             "regions": [{"name": "Deccan Plateau", "label": "Deccan"}],
@@ -2552,3 +2554,123 @@ def test_a_relief_region_draws_soft_staggered_hills():
 def test_a_to_zoom_across_the_antimeridian_fails_closed():
     with pytest.raises(MapSceneError, match="antimeridian"):
         _zooms({"zooms": [{"to": "Russia"}]})
+
+
+# --- bbox framing and one collision pass for labels and bubbles ----------------
+
+TIFFIN_BBOX = "74,8,85,20"
+
+
+def _bbox_scene(**extra) -> dict:
+    return {
+        "id": "scene_1",
+        "type": "map",
+        "props": {"country": "India", "bbox": TIFFIN_BBOX, **extra},
+    }
+
+
+def _projected_bbox_rect(prepared):
+    west, south, east, north = parse_bounds(TIFFIN_BBOX)
+    x0, y1 = prepared.view.project(west, south)
+    x1, y0 = prepared.view.project(east, north)
+    return x0, y0, x1, y1
+
+
+@pytest.mark.parametrize(("width", "height"), [(1920, 1080), (1080, 1920)])
+def test_a_bbox_fills_the_map_area_and_is_centred(width, height):
+    from video_editor_maps.scenes import _prepare
+
+    prepared = _prepare(_bbox_scene(), DESIGN, width=width, height=height, duration=6.0)
+    frame = tuple(v * prepared.scale for v in prepared.geom.map_frame)
+    x0, y0, x1, y1 = _projected_bbox_rect(prepared)
+    fill_x = (x1 - x0) / frame[2]
+    fill_y = (y1 - y0) / frame[3]
+    assert max(fill_x, fill_y) >= 0.80  # the limiting axis is nearly full
+    assert max(fill_x, fill_y) <= 1.0
+    centre = ((x0 + x1) / 2.0, (y0 + y1) / 2.0)
+    assert abs(centre[0] - (frame[0] + frame[2] / 2.0)) <= 0.05 * frame[2]
+    assert abs(centre[1] - (frame[1] + frame[3] / 2.0)) <= 0.05 * frame[3]
+
+
+def test_a_bbox_map_area_is_the_plate_minus_the_title_block():
+    from video_editor_maps.scenes import _prepare
+
+    prepared = _prepare(_bbox_scene(), DESIGN, width=1920, height=1080, duration=6.0)
+    x, y, w, h = prepared.geom.map_frame
+    assert x + w / 2.0 == pytest.approx(prepared.geom.width / 2.0)  # centred on the plate
+    assert y + h <= _LANDSCAPE.title[1]  # ends above the title block
+    assert w > _LANDSCAPE.map_frame[2]  # wider than the default panel
+    # callout cards keep their column
+    with_cards = _prepare(
+        _bbox_scene(callouts=[{"text": "one"}]), DESIGN, width=1920, height=1080, duration=6.0
+    )
+    assert with_cards.geom.map_frame[0] + with_cards.geom.map_frame[2] <= _LANDSCAPE.cards[0]
+
+
+def test_a_zoom_bbox_scene_gets_the_widened_map_area_too():
+    from video_editor_maps.scenes import _prepare
+
+    scene = {
+        "id": "s",
+        "type": "map",
+        "props": {"country": "India", "zooms": [{"bbox": TIFFIN_BBOX, "cue": False}]},
+    }
+    prepared = _prepare(scene, DESIGN, width=1920, height=1080, duration=6.0)
+    assert prepared.geom.map_frame[2] > _LANDSCAPE.map_frame[2]
+    assert prepared.camera_views
+    landing = prepared.camera_views[0]
+    west, south, east, north = parse_bounds(TIFFIN_BBOX)
+    x0, y1 = landing.project(west, south)
+    x1, y0 = landing.project(east, north)
+    frame = landing.frame
+    assert max((x1 - x0) / frame[2], (y1 - y0) / frame[3]) == pytest.approx(1.0)
+
+
+def test_a_marker_outside_the_bbox_stays_in_the_window():
+    from video_editor_maps.scenes import _prepare
+
+    prepared = _prepare(
+        _bbox_scene(markers=[{"text": "Far", "lon": 86.0, "lat": 15.0, "cue": False}]),
+        DESIGN,
+        width=1920,
+        height=1080,
+        duration=6.0,
+    )
+    assert prepared.view.contains(86.0, 15.0)
+
+
+def test_overlapping_bubbles_are_nudged_apart_with_a_leader_line():
+    from video_editor_maps.scenes import _bubble_box, _overlap, _resolve_bubbles
+    from video_editor_maps.stickers import Bubble
+
+    bubbles = [
+        (Bubble(text="≈ ₹8,200 / day", lon=0.0, lat=0.0, cue=""), 900.0, 500.0, 0.5),
+        (Bubble(text="≈ ₹8,000 / day", lon=0.0, lat=0.0, cue=""), 910.0, 505.0, 1.0),
+    ]
+    offsets = _resolve_bubbles(
+        bubbles, [], [[]], scale=1.0, seconds=6.0, bounds=(0.0, 0.0, 1920.0, 1080.0)
+    )
+    assert offsets[0] == (0.0, 0.0)
+    assert offsets[1] != (0.0, 0.0)
+    boxes = [
+        _bubble_box(b.text, (x, y), 1.0, offset)
+        for (b, x, y, _), offset in zip(bubbles, offsets, strict=True)
+    ]
+    assert not _overlap(boxes[0], boxes[1])
+
+
+def test_a_bubble_on_top_of_a_marker_label_is_nudged_clear_and_drawn_with_a_leader():
+    result = render(
+        {
+            "country": "India",
+            "bbox": TIFFIN_BBOX,
+            "markers": [{"text": "Hyderabad", "lon": 78.47, "lat": 17.38, "cue": False}],
+            "bubbles": [
+                {"text": "≈ ₹8,200 / day", "at": "Hyderabad", "cue": False},
+                {"text": "≈ ₹8,100 / day", "lon": 78.6, "lat": 17.3, "cue": False},
+            ],
+        }
+    )
+    assert result.markup.count('class="map-bubble"') == 2
+    assert 'class="map-bubble-leader"' in result.markup
+    assert ".map-bubble-leader" in result.css

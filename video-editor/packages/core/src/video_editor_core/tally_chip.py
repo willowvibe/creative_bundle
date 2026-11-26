@@ -20,7 +20,7 @@ from dataclasses import dataclass
 from video_editor_core.fonts import font_stack
 
 #: Seconds the digits take to travel, and how many values they pass through.
-COUNT_SECONDS = 1.2
+COUNT_SECONDS = 0.9
 COUNT_STEPS = 12
 #: The count starts once the cut has settled.
 COUNT_DELAY_SECONDS = 0.3
@@ -147,7 +147,9 @@ def render_tally(
         delta = tally.value - previous
         sign_text = money(delta, tally.prefix) if delta < 0 else f"+{money(delta, tally.prefix)}"
         tone = "tally-neg" if delta < 0 else "tally-pos"
-        appear = delay
+        # Wait for the count to finish so the pill never sits beside an
+        # intermediate value (which reads as wrong arithmetic on a pause frame).
+        appear = delay + COUNT_SECONDS
         change = (
             f'<span class="tally-change {tone}" style="animation: tally_change_{index} '
             f'0.3s ease-out {appear:.2f}s both">{html.escape(sign_text)}</span>'
@@ -173,8 +175,9 @@ def render_tally(
         f"      .tally-{index} .tally-step {{ grid-area: 1 / 1; }}\n"
         f"      .tally-{index} .tally-change {{ font-size: {30 * unit:.0f}px; font-weight: 700;\n"
         "        font-variant-numeric: tabular-nums; }\n"
-        f"      @keyframes tally_change_{index} {{ from {{ opacity: 0; transform: translateY(-6px); }}\n"
-        "        to { opacity: 1; transform: none; } }\n"
+        f"      @keyframes tally_change_{index} {{ from {{ visibility: hidden;\n"
+        "        transform: translateY(-6px); }\n"
+        "        to { visibility: visible; transform: none; } }\n"
         f"{_keyframes(index, len(values))}"
     )
     return markup, css

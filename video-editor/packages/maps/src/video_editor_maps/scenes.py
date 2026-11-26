@@ -133,6 +133,18 @@ TITLE_MAX_LINES = 2
 #: How far past the subject's own bounds the window reaches, as a fraction.
 MAP_PADDING = 0.22
 
+#: A declared ``bbox`` is shown with only this fraction of margin on each side
+#: (no one-degree floor), so it fills the map area.
+BBOX_MARGIN = 0.04
+
+#: Landscape: side margin of the widened bbox panel, and its gap above the title.
+BBOX_PANEL_MARGIN = 60.0
+BBOX_TITLE_GAP = 24.0
+#: Portrait: the bottom of the widened panel with no callout cards, and the
+#: gap above the cards when there are some.
+PORTRAIT_BBOX_BOTTOM = 1780.0
+PORTRAIT_CARDS_GAP = 64.0
+
 #: The watermark is texture, but the craft check still holds it to the reading
 #: floor (2.6% of the short side, 28 px at both authored plates).
 MARK_SIZE = 28.0
@@ -351,6 +363,35 @@ def _title_max_bottom(geom: _Geom) -> float:
         + TITLE_SUBTITLE_MARGIN
         + geom.subtitle * TITLE_LINE_HEIGHT * TITLE_MAX_LINES
     )
+
+
+def _has_bbox(props: Mapping[str, Any]) -> bool:
+    """True when the scene frames itself on a ``bbox`` (its own or a zoom's)."""
+    if props.get("bbox") is not None:
+        return True
+    zooms = props.get("zooms")
+    if isinstance(zooms, Sequence) and not isinstance(zooms, str):
+        return any(isinstance(zoom, Mapping) and zoom.get("bbox") is not None for zoom in zooms)
+    return False
+
+
+def _bbox_frame(geom: _Geom, *, has_cards: bool) -> Rect4:
+    """The map area a ``bbox`` scene fills: the plate minus the title block.
+
+    Landscape: the plate width (up to the callout cards when there are any)
+    from below the badge to above the title block. Portrait: from below the
+    clamped title block to above the cards (or near the foot of the plate).
+    The default panel is a sub-rectangle of this one, so an authored window
+    never gets a smaller map than before.
+    """
+    left, top, width, height = geom.map_frame
+    if geom.height > geom.width:
+        bottom = geom.cards[1] - PORTRAIT_CARDS_GAP if has_cards else PORTRAIT_BBOX_BOTTOM
+        return (left, top, width, max(height, bottom - top))
+    right = geom.cards[0] - 48.0 if has_cards else geom.width - BBOX_PANEL_MARGIN
+    bottom = geom.title[1] - BBOX_TITLE_GAP
+    x = min(left, BBOX_PANEL_MARGIN)
+    return (x, top, max(width, right - x), max(height, bottom - top))
 
 
 @dataclass(frozen=True)
@@ -1965,6 +2006,31 @@ def _view(subject: Country, props: Mapping[str, Any], scale: float, frame: Rect4
     try:
         declared = parse_bounds(props.get("bbox"))
         projection = _text(props, "projection") or "mercator"
+        if declared is not None:
+            # An authored window is shown as written plus a thin margin; the
+            # one-degree padding floor of ``view_for`` would shrink a tight
+            # bbox to a fraction of the panel.
+            west, south, east, north = declared
+            # Places the author named just outside the window stay in shot.
+            for marker in _markers(props):
+                west, east = min(west, marker.lon), max(east, marker.lon)
+                south, north = min(south, marker.lat), max(north, marker.lat)
+            focus = parse_position(props.get("focus"))
+            if focus is not None:
+                west, east = min(west, focus[0]), max(east, focus[0])
+                south, north = min(south, focus[1]), max(north, focus[1])
+            pad_x = (east - west) * BBOX_MARGIN
+            pad_y = (north - south) * BBOX_MARGIN
+            return View(
+                frame=scaled,
+                bounds=(
+                    west - pad_x,
+                    max(-85.0, south - pad_y),
+                    east + pad_x,
+                    min(85.0, north + pad_y),
+                ),
+                projection=projection,
+            )
         return view_for(
             subject,
             scaled,
@@ -2572,7 +2638,10 @@ def _prepare(
     # One uniform scale keeps the plate's proportions on any canvas; the
     # remainder is paper, not a stretched layout. Portrait frames take the
     # portrait plate, which reflows the zones instead of shrinking 16:9.
-    geom = _geom_for(canvas_w, canvas_h, full=_text(props, "frame").lower() == "full")
+    full_frame = _text(props, "frame").lower() == "full"
+    geom = _geom_for(canvas_w, canvas_h, full=full_frame)
+    if not full_frame and _has_bbox(props):
+        geom = replace(geom, map_frame=_bbox_frame(geom, has_cards=bool(_callouts(props))))
     scale = min(canvas_w / geom.width, canvas_h / geom.height)
     plate_w = geom.width * scale
     plate_h = geom.height * scale
@@ -3204,8 +3273,27 @@ def render_map(
                 )
             )
     overlay_html = ""
+    bubble_offsets = _resolve_bubbles(
+        prepared.bubbles,
+        camera_moves,
+        _label_obstacles(
+            label_specs,
+            label_placements,
+            view,
+            camera_moves,
+            label_frame,
+            font_size=label_font,
+            margin=label_gap,
+            seconds=seconds,
+        ),
+        scale=scale,
+        seconds=seconds,
+        bounds=(0.0, 0.0, plate_w, plate_h),
+    )
     for position, (bubble, x, y, delay) in enumerate(prepared.bubbles):
-        overlay_html += bubble_markup(position, bubble.text, x, y)
+        overlay_html += bubble_markup(
+            position, bubble.text, x, y, offset=bubble_offsets[position], scale=scale
+        )
         tracks.append(
             _Track(
                 name=f"bubble_{position}",
@@ -4201,6 +4289,155 @@ def _centre_fits(
     return visible
 
 
+#: How many growing rings the collision pass tries before it gives up.
+NUDGE_RINGS = 10
+
+#: Speech-bubble box metrics, in design units (they mirror ``overlay_css``).
+BUBBLE_FONT = 30.0
+BUBBLE_PAD_X = 16.0
+BUBBLE_PAD_Y = 8.0
+BUBBLE_LIFT = 14.0
+
+
+def _nudge_steps(step: float, rings: int = NUDGE_RINGS) -> list[tuple[float, float]]:
+    """Growing offsets for the collision pass: none, then down, right, up, left."""
+    steps = [(0.0, 0.0)]
+    for ring in range(1, rings + 1):
+        distance = ring * step
+        steps.extend([(0.0, distance), (distance, 0.0), (0.0, -distance), (-distance, 0.0)])
+    return steps
+
+
+def _nudged_placement(
+    spec: _LabelSpec,
+    points: Sequence[tuple[float, float] | None],
+    view_ends: Sequence[float],
+    frame: Rect4,
+    *,
+    placed_boxes: Sequence[Sequence[Rect4 | None]],
+    placed_leaders: Sequence[Sequence[tuple[tuple[float, float], tuple[float, float]] | None]],
+    occupied_shapes: Sequence[Sequence[Sequence[tuple[float, float]]]],
+    font_size: float,
+    margin: float,
+) -> _LabelPlacement | None:
+    """A leader-line placement found by nudging down, right, up, left in growing steps."""
+    _width, height = _label_size(spec.text, font_size)
+    for dx, dy in _nudge_steps(max(height * 0.8, 1.0))[1:]:
+        candidate = _LabelPlacement("right", 0.0, "callout", (dx, dy))
+        violations, _coverage = _placement_violations(
+            spec,
+            candidate,
+            points,
+            view_ends,
+            frame,
+            placed_boxes=placed_boxes,
+            placed_leaders=placed_leaders,
+            occupied_shapes=occupied_shapes,
+            font_size=font_size,
+            margin=margin,
+        )
+        if violations == 0:
+            return candidate
+    return None
+
+
+def _bubble_box(
+    text: str, anchor: tuple[float, float], scale: float, offset: tuple[float, float] = (0.0, 0.0)
+) -> Rect4:
+    """A speech bubble's drawn box: centred above its anchor, plus ``offset``."""
+    width = (LABEL_ADVANCE + LABEL_TRACKING) * BUBBLE_FONT * scale * len(text)
+    width += 2.0 * BUBBLE_PAD_X * scale
+    height = BUBBLE_FONT * 1.25 * scale + 2.0 * BUBBLE_PAD_Y * scale
+    x = anchor[0] + offset[0] - width / 2.0
+    y = anchor[1] + offset[1] - BUBBLE_LIFT * scale - height
+    return (x, y, width, height)
+
+
+def _label_obstacles(
+    specs: Sequence[_LabelSpec],
+    placements: Sequence[_LabelPlacement],
+    view: View,
+    moves: Sequence[tuple[float, float, float, float]],
+    frame: Rect4,
+    *,
+    font_size: float,
+    margin: float,
+    seconds: float,
+) -> list[list[Rect4]]:
+    """Every placed label's box in each camera view, for the bubbles to avoid."""
+    view_ends = _view_ends(moves, seconds)
+    boxes: list[list[Rect4]] = [[] for _ in range(len(view_ends))]
+    for spec, placement in zip(specs, placements, strict=True):
+        points = _label_points(spec, moves, frame)
+        found, _leaders = _placement_geometry(
+            spec, placement, points, view_ends, frame, font_size=font_size, margin=margin
+        )
+        for index, box in enumerate(found):
+            if box is not None and index < len(boxes):
+                boxes[index].append(box)
+    return boxes
+
+
+def _resolve_bubbles(
+    bubbles: Sequence[tuple[Any, float, float, float]],
+    moves: Sequence[tuple[float, float, float, float]],
+    obstacles: Sequence[Sequence[Rect4]],
+    *,
+    scale: float,
+    seconds: float,
+    bounds: Rect4,
+) -> list[tuple[float, float]]:
+    """Screen-pixel offsets that keep every bubble clear of labels and each other.
+
+    The same collision rule as the label pass: when a bubble's box overlaps a
+    placed label or an earlier bubble in any camera view, it is nudged down,
+    right, up, then left in growing steps until it is clear. A nudged bubble is
+    drawn with a leader line back to its anchor.
+    """
+    view_ends = _view_ends(moves, seconds)
+    placed: list[list[Rect4]] = [list(per_view) for per_view in obstacles]
+    while len(placed) < len(view_ends):
+        placed.append([])
+    step = (BUBBLE_FONT * 1.25 + 2.0 * BUBBLE_PAD_Y) * scale * 0.75
+    offsets: list[tuple[float, float]] = []
+    for bubble, x, y, delay in bubbles:
+        anchors = _track_positions(x, y, moves)
+        views = [
+            index
+            for index in range(len(anchors))
+            if index >= len(view_ends) or delay < view_ends[index]
+        ]
+
+        def boxes_at(offset: tuple[float, float], *, anchors=anchors, bubble=bubble, views=views):
+            return {
+                index: _bubble_box(bubble.text, anchors[index], scale, offset) for index in views
+            }
+
+        def hits(boxes: Mapping[int, Rect4]) -> int:
+            return sum(
+                1 for index, box in boxes.items() for other in placed[index] if _overlap(box, other)
+            )
+
+        def outside(boxes: Mapping[int, Rect4]) -> bool:
+            return any(_outside(box, bounds) for box in boxes.values())
+
+        chosen: tuple[float, float] | None = None
+        best: tuple[int, tuple[float, float]] = (1 << 30, (0.0, 0.0))
+        for offset in _nudge_steps(step):
+            boxes = boxes_at(offset)
+            count = hits(boxes) + (1000 if outside(boxes) else 0)
+            if count == 0:
+                chosen = offset
+                break
+            if count < best[0]:
+                best = (count, offset)
+        chosen = chosen if chosen is not None else best[1]
+        offsets.append(chosen)
+        for index, box in boxes_at(chosen).items():
+            placed[index].append(box)
+    return offsets
+
+
 def _layout_labels(
     specs: Sequence[_LabelSpec],
     view: View,
@@ -4321,6 +4558,18 @@ def _layout_labels(
                 if violations < fallback_violations:
                     fallback = candidate
                     fallback_violations = violations
+            if chosen is None and fallback_violations > 0:
+                chosen = _nudged_placement(
+                    spec,
+                    points,
+                    view_ends,
+                    frame,
+                    placed_boxes=placed_boxes,
+                    placed_leaders=placed_leaders,
+                    occupied_shapes=occupied,
+                    font_size=font_size,
+                    margin=margin,
+                )
             chosen = chosen or fallback or _LabelPlacement(primary, 0.0)
         placements.append(chosen)
         boxes, leaders = _placement_geometry(

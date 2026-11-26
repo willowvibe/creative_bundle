@@ -32,7 +32,11 @@ from video_editor_core.calc_card import ledger_total_error, parse_calc
 from video_editor_core.hook_card import parse_hook
 from video_editor_core.progress_strip import parse_progress_labels
 from video_editor_core.tally_chip import money, parse_tally
-from video_editor_core.typographic_scenes import donut_center_error, waterfall_end_error
+from video_editor_core.typographic_scenes import (
+    big_stat_align_error,
+    donut_center_error,
+    waterfall_end_error,
+)
 
 VALID_VISUALS = frozenset({"typographic", "still", "map", "composite", "footage"})
 VALID_LAYOUTS = frozenset(
@@ -554,6 +558,10 @@ def _scene_from(
                 raise ValueError(error)
         if visual == "typographic" and layout == "waterfall":
             error = waterfall_end_error(data)
+            if error:
+                raise ValueError(error)
+        if visual == "typographic" and layout == "big_stat":
+            error = big_stat_align_error(data)
             if error:
                 raise ValueError(error)
         if visual == "typographic" and layout == "donut":

@@ -135,4 +135,6 @@ def test_the_count_can_wait_for_the_calculation_to_be_spoken() -> None:
     step_styles = re.findall(r'class="tally-step[^"]*" style="([^"]*)"', markup)
     assert step_styles and all("9.50s" in style for style in step_styles)
     change = re.search(r'class="tally-change[^"]*" style="([^"]*)"', markup)
-    assert change is not None and "9.50s" in change.group(1)
+    # The change pill lands when the count ends (9.5 + COUNT_SECONDS 0.9), never beside
+    # an intermediate value.
+    assert change is not None and "10.40s" in change.group(1)

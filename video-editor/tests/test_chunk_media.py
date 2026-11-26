@@ -90,7 +90,7 @@ def test_mix_places_the_bundled_coin_cue_at_its_time_and_gain(tmp_path: Path) ->
     out = mix_audio_cues([cue], 6.0, tmp_path / "coin.wav")
     assert _max_volume(out, 0.0, 3.0) < -60  # silent before the count
     # coin_in peaks at -3 dBFS, placed -8 dB down: about -11 dBFS
-    assert _max_volume(out, cue.start, 0.5) == pytest.approx(-11.0, abs=1.5)
+    assert _max_volume(out, cue.start, 0.5) == pytest.approx(-7.0, abs=1.5)  # -3 dBFS peak, -4 dB gain
 
 
 def test_mux_keeps_video_frames_and_adds_audio(tmp_path: Path) -> None:

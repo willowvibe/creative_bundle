@@ -61,3 +61,28 @@ asks where it makes more sense (numbers in research.md, "City comparison").
 - Flow alternative for the 13 AI shots: prompts are in `flow/prompts.md`. Generate through Claude in Chrome
   and swap the shots to `{file: flow/sN_M.png, ai: true}` if wanted.
 - Older cuts are kept in the outputs folder: `final_graphics_v1`, `final_v3_badcaptions`, `final_v4_labelboxes`.
+
+## 2026-11-26: in-order galla, engagement pass, trims, outside review (v5 → v10)
+
+The general lessons are in `video-editor/docs/EXPLAINER_PLAYBOOK.md`; this is what happened here.
+
+- **Galla order.** The tally moved on the same frame its calc result appeared in every calc scene.
+  Now: expression → result → tally (+1.0 s) → ± pill when the count ends. Scene 9's second ₹150 row
+  now lands where it is said.
+- **Engagement.** Scene 1 hook overlay ("రోజుకి ₹12,000 వస్తుంది…" / "మిగిలేది ఎంత?"), a cost checklist
+  under the tally in scenes 4–9, coin on each tally change, swoosh into charts, a hit on big numbers,
+  stronger photo motion.
+- **Trims** (~1 min, 9:20 → 8:16): methodology note, cycle-cart price, batter-making, the repeated
+  gas → menu point, the yearly raise, helper salaries by city, Chennai's breakdown. 483 ElevenLabs
+  characters.
+- **Outside review** (verdict pasted by the owner). Fixed: donut centre counting ahead of slices,
+  ± pill beside a mid-count balance, waterfall and break-even elements shown before they were said,
+  x-axis to 330, hourly rates on different bases (master now ₹29,000 ÷ 360 = ₹81, "దాదాపు నాలుగు
+  రెట్లు"), map framing and label collisions, 7 off-setting stock shots and a slow 2-shot hook
+  (11 Flow stills, 0 credits, see `flow/prompts.md`), "పెద్ద మీట" → "అసలు కీలకం", end card clear for
+  end screens. Not changed (claim was wrong on frames): "₹16" typo, "superscript 6", bar
+  proportions, the ₹1.07 → ₹1.13 count-up, the tally lingering into the city scenes. 160 ElevenLabs
+  characters.
+- **Current cut:** `tiffin-centre-teardown.mp4`, 8:21, QA all pass, −14 LUFS; share copy
+  `tiffin-centre-teardown_share_720p.mp4` (47 MB). Older cuts kept as `_v1_`, `_v2_galla-early_`,
+  `_v3_pre-verdict_`. Not yet watched end to end with sound by the owner.

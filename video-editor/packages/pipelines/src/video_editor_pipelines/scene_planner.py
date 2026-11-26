@@ -41,7 +41,8 @@ may also use these types and put the authored plate props in `props`:
 - "typographic": a flat type plate. props.layout is one of these, with the
   props that layout requires (the renderer rejects a plate that is missing
   them, and the draft fails before it is priced):
-  - big_stat: headline; optional unit, sub, cue.
+  - big_stat: headline; optional unit, sub, cue, align (center|top; top keeps
+    the text in the upper ~40% so the lower 60% is clear for end-screen cards).
   - bar_compare: bars, a list of 2-4 {label, value} maps; optional cue on a
     bar that should reveal on different words.
   - definition: term, gloss.

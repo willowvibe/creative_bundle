@@ -50,6 +50,11 @@ the output root.
 
 ## Explainer features to reach for
 
+- **Follow `docs/EXPLAINER_PLAYBOOK.md` stage by stage** for any numbers-led explainer: number model before
+  the script, voice bought only after the script and screen plan are final, every chart element on a spoken
+  cue, approved shots pinned as `file:`, hook as an overlay (never a new scene), end card `align: top`,
+  and every outside-review claim checked on frames before fixing.
+
 - **Business breakdowns** (`docs/STOCK_EXPLAINERS.md`):
   - `visual: footage` gives a vision-checked stock clip with an AI-still fallback. `shots:` cuts a scene into
     several stock clips, photos or own files (`query:`, `photo:`, `file:`; `ai: true` labels a file). No stock

@@ -22,3 +22,24 @@ South India, no readable text, no logos or brand names, no close-up hands.
 | `s16_0.png` | 16·0 | A shopkeeper rolling up the grey metal shutter of a small eatery on a quiet Hyderabad street at dawn, seen from behind, documentary photo, 16:9, no readable text, no logos |
 | `s20_2.png` | 20·2 | Customers standing at tall steel tables eating idli vada and masala dosa in a busy Bengaluru darshini restaurant, wide shot, documentary photo, 16:9, no readable text, no logos |
 | `s20_3.png` | 20·3 | A busy Bengaluru road in daytime with buses, autorickshaws and two-wheelers, trees along the road, wide shot, documentary photo, 16:9, no readable text, no logos |
+
+## Reviewer-verdict replacements (2026-11-26)
+
+Same route (Flow, Image, Nano Banana 2.1, 0 credits, two variants each; the better one kept), saved in
+`footage/` as WebP. They replace stock shots a reviewer flagged as off-setting (vada with fork and knife,
+a Gujarati puja shop, a North Indian arch, western meal-prep boxes, bakery bags, a resort ceiling, a
+sugarcane cart, a checkered-tablecloth bistro) and recut scene 1 to about 3.5 s a shot.
+
+| File | Shot | Prompt |
+|---|---|---|
+| `s1_dosa.webp` | 1·1 | A tiffin master spreading dosa batter in a thin circle on a large black iron tawa with a steel ladle at a Hyderabad tiffin centre at dawn, steam rising, close-up from the side, documentary photo, 16:9, no readable text, no logos |
+| `s1_rush.webp` | 1·2 | Morning rush at the steel counter of a small Hyderabad tiffin centre, a server handing steel plates of idli and dosa to waiting office workers, motion and steam, mid shot, documentary photo, 16:9, no readable text, no logos |
+| `s1_idli.webp` | 1·3 | Three soft idlis, a crisp medu vada and white coconut chutney with a small bowl of sambar on a stainless steel plate lined with a banana leaf, on a steel counter of a Hyderabad tiffin centre, steam rising, close-up, documentary food photo, 16:9, no cutlery, no readable text, no logos |
+| `s1_cash.webp` | 1·4 | An old dented steel cash box half open with rupee notes and coins on the worn wooden counter of a small South Indian tiffin centre, a steel tumbler beside it, warm morning light, close-up, documentary photo, 16:9, no readable text, no logos |
+| `s7_shop.webp` | 7·0 | The front of a very small tiffin centre shop, about 250 square feet, with a half-raised grey metal shutter and a steel counter, on a narrow Hyderabad side street in the morning, wide shot, documentary photo, 16:9, no readable text, no logos |
+| `s7_street.webp` | 7·1 | A busy main road in old Hyderabad with small shops and autorickshaws, the Charminar visible in the far background, daytime, wide shot, documentary photo, 16:9, no readable text, no logos |
+| `s9_parcel.webp` | 9·0 | A worker at a small Hyderabad tiffin centre packing idli and dosa parcels in butter paper and newspaper with small tied plastic packets of chutney and sambar on a steel counter, close-up of the packing, documentary photo, 16:9, no readable text, no logos |
+| `s9_power.webp` | 9·1 | A stainless steel table-top wet grinder running beside blue 20 litre drinking water cans under a ceiling fan and a tube light in a small South Indian tiffin centre kitchen, documentary photo, 16:9, no people, no readable text, no logos |
+| `s9_licence.webp` | 9·2 | The inside wall of a small South Indian tiffin centre with a framed food licence certificate hanging next to a handwritten menu price board, the writing too small and blurred to read, steel counter below, documentary photo, 16:9, no logos |
+| `s13_rain.webp` | 13·0 | A rainy afternoon on a Hyderabad street, an almost empty small tiffin centre with steel tables under a tin awning, rain falling, puddles, a lone autorickshaw passing, wide shot, documentary photo, 16:9, no readable text, no logos |
+| `s13_empty.webp` | 13·1 | Empty stainless steel tables and plastic stools inside a small South Indian tiffin centre on a quiet slow day, a stack of unused steel plates on the counter, a bored server in the background, documentary photo, 16:9, no readable text, no logos |

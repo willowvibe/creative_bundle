@@ -19,6 +19,7 @@ from __future__ import annotations
 import base64
 import html
 import io
+import math
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
@@ -180,11 +181,34 @@ def parse_overlays(
     return bubbles, stickers
 
 
-def bubble_markup(position: int, text: str, x: float, y: float) -> str:
+def bubble_markup(
+    position: int,
+    text: str,
+    x: float,
+    y: float,
+    *,
+    offset: tuple[float, float] = (0.0, 0.0),
+    scale: float = 1.0,
+) -> str:
+    """A speech bubble at its anchor; a nudged one gets a leader line back to it."""
+    dx, dy = offset
+    body_style = ""
+    leader = ""
+    if dx or dy:
+        lift = 14.0 * scale
+        # The bubble body's bottom-centre sits at (dx, dy - lift) from the anchor.
+        end_x, end_y = dx, dy - lift
+        length = math.hypot(end_x, end_y)
+        angle = math.atan2(end_y, end_x)
+        body_style = f' style="left:{dx:.1f}px;bottom:{lift - dy:.1f}px"'
+        leader = (
+            f'<span class="map-bubble-leader" style="width:{length:.1f}px;'
+            f'transform:rotate({angle:.4f}rad)"></span>'
+        )
     return (
         f'<div class="map-bubble" data-camera-track="bubble_{position}" '
-        f'style="left:{x:.1f}px;top:{y:.1f}px">'
-        f'<span class="map-bubble-body">{html.escape(text)}</span></div>'
+        f'style="left:{x:.1f}px;top:{y:.1f}px">{leader}'
+        f'<span class="map-bubble-body"{body_style}>{html.escape(text)}</span></div>'
     )
 
 
@@ -220,6 +244,10 @@ def overlay_css(index: int, scale: float, *, ink: str = "#14211F") -> str:
         f"        bottom:{-9 * scale:.1f}px; transform:translateX(-50%);\n"
         f"        border:{10 * scale:.1f}px solid transparent; border-bottom:0;\n"
         "        border-top-color:#FFFFFF; }\n"
+        f"      .map-{index} .map-bubble-leader {{ position:absolute; left:0; top:0;\n"
+        f"        height:{2.5 * scale:.1f}px; margin-top:{-1.25 * scale:.1f}px; background:#FFFFFF;\n"
+        f"        transform-origin:0 50%; border-radius:{2 * scale:.1f}px;\n"
+        f"        box-shadow:0 {2 * scale:.1f}px {6 * scale:.1f}px rgba(0,0,0,0.35); }}\n"
         f"      .map-{index} .map-sticker-art {{ position:absolute; left:0; top:0;\n"
         "        transform:translate(-50%, -50%);\n"
         f"        filter: drop-shadow(0 {3 * scale:.1f}px {6 * scale:.1f}px rgba(0,0,0,0.4)); }}\n"

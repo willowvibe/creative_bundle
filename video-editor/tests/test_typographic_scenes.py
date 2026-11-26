@@ -596,7 +596,9 @@ def test_sequence_first_step_opens_at_0_4s_and_a_later_cue_is_unchanged():
     )
     delays = [
         float(delay)
-        for delay in re.findall(r'class="typo-step" style="animation-delay:([\d.]+)s', result.markup)
+        for delay in re.findall(
+            r'class="typo-step" style="animation-delay:([\d.]+)s', result.markup
+        )
     ]
     assert delays[0] == pytest.approx(0.4)
     assert delays[1] == pytest.approx(3.0)
@@ -976,7 +978,7 @@ def test_donut_centre_value_counts_up_like_a_big_stat():
     )
     assert result.markup.count('class="typo-count-step"') >= 2
     assert "monthly" not in result.markup and "total" in result.markup
-    assert "tp_count_1_0" in result.css
+    assert "tp_dnhold_1" in result.css and "tp_dnlast_1" in result.css
 
 
 def test_donut_segments_start_on_their_cues_in_order():
@@ -1043,3 +1045,80 @@ def test_donut_centre_check_uses_the_shown_decimals():
     assert donut_center_error({**props, "center": {"value": 0.3}}) is None
     assert donut_center_error({**props, "center": {"value": 0.4}})
     assert donut_center_error(props) is None
+
+
+def _centre_steps(markup: str):
+    """``[(text, delay)]`` of the donut centre's hidden steps, in order."""
+    return [
+        (text, float(delay))
+        for delay, text in re.findall(
+            r'class="typo-count-step" style="animation: \w+ [\d.]+s linear ([\d.]+)s forwards;[^"]*">([^<]*)<',
+            markup,
+        )
+    ]
+
+
+def test_donut_centre_steps_through_cumulative_sums_at_part_reveal_times():
+    words = [
+        {"word": "first", "start": 1.0, "end": 1.2},
+        {"word": "second", "start": 3.0, "end": 3.2},
+        {"word": "third", "start": 5.0, "end": 5.2},
+        {"word": "fourth", "start": 7.0, "end": 7.2},
+    ]
+    props = {
+        "layout": "donut",
+        "unit": "\u20b9",
+        "parts": [
+            {"label": "A", "value": 3.00, "cue": "first"},
+            {"label": "B", "value": 2.40, "cue": "second"},
+            {"label": "C", "value": 1.62, "cue": "third"},
+            {"label": "D", "value": 6.00, "cue": "fourth"},
+        ],
+        "center": {"value": 13.02, "label": "total"},
+    }
+    markup = render(props, words=words, duration=12.0).markup
+    steps = _centre_steps(markup)
+    texts = [t for t, _ in steps]
+    times = [d for _, d in steps]
+    assert times == sorted(times)
+    # starts at zero, ends on the declared centre value, same two decimals
+    assert texts[0] == "0.00" and texts[-1] == "13.02"
+    assert all(re.fullmatch(r"\d+\.\d\d", t) for t in texts)
+    assert markup.count("\u20b9") >= 5  # legend amounts plus the shared prefix
+    # each part's climb lands on its running sum within 0.4 s of its reveal
+    for reveal, total in [(0.4, "3.00"), (3.0, "5.40"), (5.0, "7.02"), (7.0, "13.02")]:
+        landing = [d for t, d in steps if t == total and reveal <= d <= reveal + 0.41]
+        assert landing, (reveal, total, steps)
+    # nothing climbs before the first slice: the first non-zero step is after the 0.4 s opening
+    assert min(d for t, d in steps if t != "0.00") > 0.4
+    # centre never shows a value belonging to a later part early
+    seven = [d for t, d in steps if t == "7.02"][0]
+    assert seven >= 5.0
+    assert "13.02" not in [t for t, d in steps if d < 7.0]
+
+
+# --- big_stat align -------------------------------------------------------------
+
+
+def test_big_stat_align_top_keeps_the_text_block_above_45_percent_height():
+    result = render(
+        {"layout": "big_stat", "headline": "$32B", "sub": "largest ever", "align": "top"}
+    )
+    stage = re.search(r"\.typo-1 \.typo-stage \{ bottom: ([\d.]+)%;[^}]*flex-start", result.css)
+    assert stage, result.css
+    # the stage box (and so the block) ends at 100 - bottom percent of the frame
+    assert 100.0 - float(stage.group(1)) <= 45.0
+    assert "justify-content: flex-start" in result.css
+    assert ".typo-1 .typo-line { text-align: left; }" in result.css
+
+
+def test_big_stat_align_defaults_to_center_and_is_unchanged():
+    plain = render({"layout": "big_stat", "headline": "$32B"})
+    centred = render({"layout": "big_stat", "headline": "$32B", "align": "center"})
+    assert plain.css == centred.css and plain.markup == centred.markup
+    assert "flex-start" not in plain.css.split(".typo-1 .typo-stage")[-1].split("}")[0]
+
+
+def test_big_stat_rejects_an_unknown_align():
+    with pytest.raises(SceneRenderError, match="align.*center, top.*'bottom'"):
+        render({"layout": "big_stat", "headline": "$32B", "align": "bottom"})

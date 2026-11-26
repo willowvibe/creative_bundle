@@ -5,6 +5,9 @@ videos that show every rupee on screen, as the reference format does (a
 Telugu YouTube business breakdown). First production use:
 `../video-projects/videos/2026-11-12/chai-stall-breakdown/`.
 
+For the order to build one in, and the rules learned so far, start with
+[`EXPLAINER_PLAYBOOK.md`](EXPLAINER_PLAYBOOK.md). This file is the syntax reference.
+
 ## Stock footage scenes
 
 ```yaml

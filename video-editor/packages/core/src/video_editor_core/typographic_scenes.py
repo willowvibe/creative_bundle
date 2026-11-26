@@ -82,6 +82,11 @@ class _Item:
     cue: str = ""
     class_name: str = "typo-line"
     opening: bool = False
+    #: Donut centre only: the running sums (0, after part 1, ...) the centre
+    #: steps through, formatted with ``count_unit`` / ``count_places``.
+    count_sums: tuple[float, ...] = ()
+    count_unit: str = ""
+    count_places: int = 0
 
 
 #: A word run for the readability floor, matching the craft check's tokeniser
@@ -238,6 +243,41 @@ def _icon_markup(props_or_bar: Mapping[str, Any], *, where: str) -> str:
         raise SceneRenderError(f"{where}: {exc}") from exc
 
 
+BIG_STAT_ALIGNS = ("center", "top")
+
+#: Share of the frame height the ``align: top`` text block may occupy; the
+#: lower part stays clear for YouTube end-screen cards.
+BIG_STAT_TOP_BLOCK = 0.42
+
+
+def big_stat_align_error(props: Mapping[str, Any]) -> str | None:
+    """Why a ``big_stat`` ``align`` value is unusable, else ``None``."""
+    align = props.get("align")
+    if align is None:
+        return None
+    if isinstance(align, str) and align.strip().lower() in BIG_STAT_ALIGNS:
+        return None
+    return f"big_stat `align` must be one of {', '.join(BIG_STAT_ALIGNS)}, got {align!r}"
+
+
+def _big_stat_top_css(index: int, width: int) -> str:
+    """Stage override: headline + sub left-aligned in the top of the frame."""
+    u = _unit(width)
+    bottom = 100.0 * (1.0 - BIG_STAT_TOP_BLOCK)
+    return (
+        f"      .typo-{index} .typo-stage {{ bottom: {bottom:.1f}%;\n"
+        f"        align-items: flex-start; justify-content: flex-start;\n"
+        f"        padding-top: {int(70 * u)}px; gap: {int(18 * u)}px; }}\n"
+        f"      .typo-{index} .typo-line {{ text-align: left; }}\n"
+        # Fixed sizes: `cqh` would resolve against an ancestor, not this stage,
+        # and shrank the end card to a footnote. One 100 px line plus a 56 px sub
+        # stay inside the top 42% (150 px wrapped to two lines and ran to 75%).
+        f"      .typo-{index} .typo-headline {{ font-size: {int(100 * u)}px; white-space: nowrap; }}\n"
+        f"      .typo-{index} .typo-sub {{ max-width: none; font-size: {int(56 * u)}px; }}\n"
+        f"      .typo-{index} .typo-rule {{ margin-left: 0; margin-right: auto; }}\n"
+    )
+
+
 def _big_stat(
     props: Mapping[str, Any],
     scene: Mapping[str, Any],
@@ -247,6 +287,10 @@ def _big_stat(
     entry: float,
 ) -> tuple[list[_Item], str]:
     headline = _require(props, "headline")
+    align_error = big_stat_align_error(props)
+    if align_error:
+        raise SceneRenderError(align_error)
+    top = str(props.get("align") or "center").strip().lower() == "top"
     counted = None if props.get("count") is False else _count_markup(headline)
     if counted is None:
         head = f'<span class="typo-headline">{html.escape(headline)}</span>'
@@ -264,7 +308,7 @@ def _big_stat(
     items = [_Item(head, cue=cue, opening=True)]
     if sub:
         items.append(_Item(html.escape(sub), class_name="typo-line typo-sub"))
-    return items, ""
+    return items, _big_stat_top_css(index, width) if top else ""
 
 
 def _bar_compare(
@@ -967,6 +1011,125 @@ def donut_center_error(props: Mapping[str, Any]) -> str | None:
     return None
 
 
+#: Seconds the donut centre takes to climb to each new running sum.
+DONUT_COUNT_SECONDS = 0.4
+#: Sub-steps per climb (the previous sum eases to the new one in this many).
+DONUT_COUNT_SUBSTEPS = 5
+
+
+def _donut_sum_steps(sums: Sequence[float], unit: str, places: int, texts: Sequence[str]) -> str:
+    """Hidden-step spans for ``texts`` with the shared affixes pulled out."""
+    final = format_amount(sums[-1], unit, decimals=places)
+    match = _NUMBER.search(final)
+    prefix = final[: match.start()] if match else ""
+    suffix = final[match.end() :] if match else ""
+    steps: list[str] = []
+    for text in texts:
+        core = text
+        if prefix and core.startswith(prefix):
+            core = core[len(prefix) :]
+        if suffix and core.endswith(suffix):
+            core = core[: len(core) - len(suffix)]
+        steps.append(f'<span class="typo-count-step">{html.escape(core)}</span>')
+    out = ""
+    if prefix:
+        out += f'<span class="typo-count-prefix">{html.escape(prefix)}</span>'
+    out += f'<span class="typo-count typo-dn-sum">{"".join(steps)}</span>'
+    if suffix:
+        out += f'<span class="typo-count-suffix">{html.escape(suffix)}</span>'
+    return out
+
+
+def _donut_sum_markup(sums: Sequence[float], unit: str, places: int) -> str:
+    """The centre value, one hidden step per running sum (before motion)."""
+    texts = [format_amount(value, unit, decimals=places) for value in sums]
+    return _donut_sum_steps(sums, unit, places, texts)
+
+
+def _donut_count_events(
+    sums: Sequence[float], part_times: Sequence[float]
+) -> list[tuple[float, float]]:
+    """``(time, value)`` events: each part's reveal eases to its running sum."""
+    events: list[tuple[float, float]] = [(0.0, sums[0])]
+    count = min(len(part_times), len(sums) - 1)
+    for position in range(count):
+        begin = part_times[position]
+        limit = part_times[position + 1] if position + 1 < count else math.inf
+        previous, target = sums[position], sums[position + 1]
+        for sub in range(1, DONUT_COUNT_SUBSTEPS + 1):
+            moment = begin + DONUT_COUNT_SECONDS * sub / DONUT_COUNT_SUBSTEPS
+            if moment >= limit:
+                break
+            progress = sub / DONUT_COUNT_SUBSTEPS
+            eased = 1.0 - (1.0 - progress) ** 3
+            events.append(
+                (
+                    moment,
+                    target
+                    if sub == DONUT_COUNT_SUBSTEPS
+                    else previous + (target - previous) * eased,
+                )
+            )
+    # The final value always lands, even if a later reveal cut the climb short.
+    if count and events[-1][1] != sums[count]:
+        events.append((max(events[-1][0] + 0.01, part_times[count - 1]), sums[count]))
+    ordered: list[tuple[float, float]] = []
+    for moment, value in events:
+        if ordered and moment <= ordered[-1][0] + 1e-6:
+            ordered[-1] = (ordered[-1][0], value)
+        else:
+            ordered.append((moment, value))
+    return ordered
+
+
+def _donut_count_motion(
+    item: _Item, item_html: str, *, index: int, part_times: Sequence[float]
+) -> tuple[str, str]:
+    """Rebuild the centre's steps so it follows the slice reveal times.
+
+    Each step span is shown from its event time to the next one (the last stays
+    on); the spans sit in one grid cell, so nothing shifts. Opacity runs on the
+    step spans only and each carries its own absolute delay.
+    """
+    events = _donut_count_events(item.count_sums, part_times)
+    texts = [
+        format_amount(value, item.count_unit, decimals=item.count_places) for _, value in events
+    ]
+    rebuilt = _donut_sum_steps(item.count_sums, item.count_unit, item.count_places, texts)
+    match = re.search(
+        r'(<span class="typo-count-prefix">.*?</span>)?<span class="typo-count typo-dn-sum">.*?</span></span>(<span class="typo-count-suffix">.*?</span>)?',
+        item_html,
+        re.DOTALL,
+    )
+    if match is None:
+        return item_html, ""
+    item_html = item_html[: match.start()] + rebuilt + item_html[match.end() :]
+    position = -1
+    last = len(events) - 1
+
+    def style(_: re.Match[str]) -> str:
+        nonlocal position
+        position += 1
+        moment = events[position][0]
+        if position == last:
+            animation = f"tp_dnlast_{index} 0.100s linear {moment:.3f}s forwards"
+        else:
+            gap = max(events[position + 1][0] - moment, 0.001)
+            animation = f"tp_dnhold_{index} {gap:.3f}s linear {moment:.3f}s forwards"
+        shown = " opacity: 1;" if position == 0 else ""
+        return f'<span class="typo-count-step" style="animation: {animation};{shown}">'
+
+    item_html = re.sub(r'<span class="typo-count-step">', style, item_html)
+    css = (
+        f"      .typo-{index} .typo-count {{ display: inline-grid; justify-items: end;\n"
+        "        font-variant-numeric: tabular-nums; }\n"
+        f"      .typo-{index} .typo-count-step {{ grid-area: 1 / 1; opacity: 0; }}\n"
+        f"      @keyframes tp_dnhold_{index} {{ 0%, 99% {{ opacity: 1; }} 100% {{ opacity: 0; }} }}\n"
+        f"      @keyframes tp_dnlast_{index} {{ from, to {{ opacity: 1; }} }}\n"
+    )
+    return item_html, css
+
+
 def _donut(
     props: Mapping[str, Any],
     scene: Mapping[str, Any],
@@ -985,6 +1148,7 @@ def _donut(
     center = props.get("center")
     center_cue = ""
     center_markup = ""
+    center_sums: tuple[float, ...] = ()
     if center is not None:
         if not isinstance(center, Mapping):
             raise SceneRenderError("donut `center` must be an object {value, label}")
@@ -999,9 +1163,16 @@ def _donut(
         shown = total if value is None and not c_label else value
         center_cue = declared_cue(center.get("cue"), "")
         if shown is not None:
-            counted = _count_markup(format_amount(shown, unit, decimals=places))
-            text = counted or html.escape(format_amount(shown, unit, decimals=places))
-            size = min(0.1, 0.7 / max(len(format_amount(shown, unit, decimals=places)), 1))
+            final_text = format_amount(shown, unit, decimals=places)
+            running = 0.0
+            sums = [0.0]
+            for _, part_value, _ in parts:
+                running += part_value
+                sums.append(running)
+            sums[-1] = shown  # ends on the declared (or total) centre value
+            center_sums = tuple(sums)
+            text = _donut_sum_markup(center_sums, unit, places)
+            size = min(0.1, 0.7 / max(len(final_text), 1))
             center_markup += (
                 f'<span class="typo-dn-value" style="font-size:calc(var(--cw) * {size:.4f})">'
                 f"{text}</span>"
@@ -1015,7 +1186,17 @@ def _donut(
         f'<circle class="typo-dn-track" cx="50" cy="50" r="{_DN_RADIUS}"/></svg>'
     )
     frame = track + (f'<div class="typo-dn-center">{center_markup}</div>' if center_markup else "")
-    items = [_Item(frame, cue=center_cue, class_name=_chart_class("dn"), opening=True)]
+    items = [
+        _Item(
+            frame,
+            cue=center_cue,
+            class_name=_chart_class("dn"),
+            opening=True,
+            count_sums=center_sums,
+            count_unit=unit,
+            count_places=places,
+        )
+    ]
     rows = len(parts)
     row_h = min(6.2, 36.0 / rows)
     legend_top = 63.0
@@ -1514,7 +1695,12 @@ def render_typographic(
     rendered: list[str] = []
     for item, delay in zip(items, delays, strict=True):
         item_html = item.html
-        if 'class="typo-count"' in item_html:
+        if item.count_sums and "typo-dn-sum" in item_html:
+            item_html, count_css = _donut_count_motion(
+                item, item_html, index=index, part_times=delays[1 : len(item.count_sums)]
+            )
+            motion_css.append(count_css)
+        elif 'class="typo-count"' in item_html:
             item_html, count_css = _count_motion(item_html, index=index, start=delay)
             motion_css.append(count_css)
         if "typo-gloss" in item.class_name:

@@ -676,7 +676,7 @@ def _moving_map_plan(*, zooms: list[dict[str, Any]]) -> dict[str, Any]:
                     "bbox": "95,0.5,119,8",
                     "markers": [
                         {
-                            "text": "A very long place label that will not fit the frame",
+                            "text": "A very long place label that will not fit the frame " * 3,
                             "lon": 108.0,
                             "lat": 4.0,
                             "cue": False,

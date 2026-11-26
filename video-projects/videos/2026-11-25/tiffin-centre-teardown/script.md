@@ -35,6 +35,7 @@ pronunciations:
   "₹2,240": రెండు వేల రెండు వందల నలభై రూపాయలు
   "₹314": మూడు వందల పద్నాలుగు రూపాయలు
   "₹97": తొంభై ఏడు రూపాయలు
+  "₹81": ఎనభై ఒక్క రూపాయలు
   "₹84,000": ఎనభై నాలుగు వేల రూపాయలు
   "₹3,350": మూడు వేల మూడు వందల యాభై రూపాయలు
   "₹55": యాభై ఐదు రూపాయలు
@@ -95,7 +96,10 @@ as "సుమారు" (about) and rounded; none is presented as exact.
 visual: footage
 shots:
   - {file: footage/s1_0.png, ai: true}
-  - {file: footage/s1_1.jpg}
+  - {file: footage/s1_dosa.webp, ai: true}
+  - {file: footage/s1_rush.webp, ai: true}
+  - {file: footage/s1_idli.webp, ai: true}
+  - {file: footage/s1_cash.webp, ai: true}
 image: the front of a busy roadside tiffin centre in Hyderabad at 8am, people waiting outside, wide street view, documentary photo, no food close-ups, no hands, no text, no logos
 tally: {label: గల్లా పెట్టె, value: 0}
 hook: {headline: "రోజుకి ₹12,000 వస్తుంది…", sub: "మిగిలేది ఎంత?", seconds: 3.5}
@@ -186,8 +190,8 @@ narration: |
 ## Scene 7 — అద్దె
 visual: footage
 shots:
-  - {file: footage/s7_0.mp4}
-  - {file: footage/s7_1.jpg}
+  - {file: footage/s7_shop.webp, ai: true}
+  - {file: footage/s7_street.webp, ai: true}
 image: a row of small ground-floor shops on a busy street in Hyderabad, shutters half open, morning light, documentary photo, no food close-ups, no hands, no text, no logos
 tally: {label: గల్లా పెట్టె, value: 5967}
 progress: "అద్దె · Rent"
@@ -220,9 +224,9 @@ narration: |
 ## Scene 9 — చిన్న ఖర్చులు
 visual: footage
 shots:
-  - {file: footage/s9_0.mp4}
-  - {file: footage/s9_1.jpg}
-  - {file: footage/s9_2.jpg}
+  - {file: footage/s9_parcel.webp, ai: true}
+  - {file: footage/s9_power.webp, ai: true}
+  - {file: footage/s9_licence.webp, ai: true}
 image: a stack of folded paper parcel covers and steel containers on a small eatery counter in India, documentary photo, no food close-ups, no hands, no text, no logos
 tally: {label: గల్లా పెట్టె, value: 3764}
 progress: "చిన్న ఖర్చులు · Small costs"
@@ -264,8 +268,8 @@ steps:
   - {label: జీతాలు, value: -1900}
   - {label: గ్యాస్, value: -1232}
   - {label: అద్దె, value: -583}
-  - {label: మిగతావి, value: -303, cue: false}
-end: {label: మిగులు, value: 3764}
+  - {label: మిగతావి, value: -303, cue: కాదు}
+end: {label: మిగులు, value: 3764, cue: మిగులు}
 tally: {label: గల్లా పెట్టె, value: 3764}
 narration: |
   డబ్బు ఎక్కడికి పోతుంది? సగానికి పైగా పదార్థాలకే. తర్వాత జీతాలు, తర్వాత గ్యాస్.
@@ -275,14 +279,14 @@ narration: |
 ## Scene 12 — బ్రేక్-ఈవెన్
 visual: typographic
 layout: line
-points: [[0, -3868], [150, -52], [330, 4527]]   # y = 25.44·x − 3,868 (tally.py), whole rupees
-y_range: [-4000, 7000]
+points: [[0, -3868], [152, -1], [300, 3764]]   # y = 25.44·x − 3,868 (tally.py), whole rupees
+y_range: [-4000, 5000]
 unit: ₹
 x_label: రోజుకి ప్లేట్లు
 y_label: రోజు మిగులు
-mark: {x: 152, label: Break-even · 152, cue: "152"}
+mark: {x: 152, label: Break-even, cue: "152"}   # the 152 shows under the label
 dots:
-  - {x: 300, label: మన సెంటర్, cue: false}
+  - {x: 300, label: మన సెంటర్, cue: నష్టం}
 tally: {label: గల్లా పెట్టె, value: 3764}
 narration: |
   ఒక ప్లేట్ అమ్మితే, పదార్థాలు, పార్సెల్ పోగా ₹25.44 మిగులుతుంది.
@@ -292,8 +296,8 @@ narration: |
 ## Scene 13 — నెమ్మదిగా ఉన్న రోజు
 visual: footage
 shots:
-  - {file: footage/s13_0.mp4}
-  - {file: footage/s13_1.mp4}
+  - {file: footage/s13_rain.webp, ai: true}
+  - {file: footage/s13_empty.webp, ai: true}
   - {file: footage/s13_2.jpg}
 image: a rainy morning street in an Indian city, empty roadside shops, wet road reflections, documentary photo, no food close-ups, no hands, no text, no logos
 tally: {label: గల్లా పెట్టె, value: 3764}
@@ -317,7 +321,7 @@ narration: |
   గ్యాస్ ధర పెరిగిందని వార్త వస్తే, టిఫిన్ సెంటర్ మునిగిపోతుందా? లెక్క చూద్దాం.
   సిలిండర్ ధర ₹100 పెరిగితే, నెలకి 12 సిలిండర్లు, అంటే రోజుకి ₹40 మాత్రమే అదనపు ఖర్చు.
   కానీ ప్లేట్ ధర ₹1 పెంచితే, 300 ప్లేట్లకి రోజుకి ₹300 అదనంగా వస్తుంది.
-  అంటే ఈ వ్యాపారంలో గ్యాస్ కంటే ధరే పెద్ద మీట. అందుకే గ్యాస్ పెరిగిన ప్రతిసారీ మెనూ బోర్డు మారుతుంది.
+  అంటే ఈ వ్యాపారంలో గ్యాస్ కంటే ధరే అసలు కీలకం. అందుకే గ్యాస్ పెరిగిన ప్రతిసారీ మెనూ బోర్డు మారుతుంది.
 
 ## Scene 15 — యజమాని 12 గంటలు
 visual: footage
@@ -329,11 +333,11 @@ image: an Indian city street before dawn, a single small eatery lit up, shutters
 tally: {label: గల్లా పెట్టె, value: 3764}
 calc:
   - {label: యజమాని గంటకి, expr: "₹3,764 ÷ 12", amount: 314, in_tally: false}
-  - {label: టిఫిన్ మాస్టర్ గంటకి, expr: "₹29,000 ÷ 300", amount: 97, in_tally: false}
+  - {label: టిఫిన్ మాస్టర్ గంటకి, expr: "₹29,000 ÷ 360", amount: 81, in_tally: false}
 narration: |
   ఇంకో విషయం. యజమాని తెల్లవారుజాము నాలుగింటికే లేచి పిండి చూస్తాడు.
   రోజుకి 12 గంటలు. లెక్క ప్రకారం గంటకి సుమారు ₹314.
-  టిఫిన్ మాస్టర్‌కి గంటకి ₹97. అంటే యజమానికి మూడు రెట్లు.
+  టిఫిన్ మాస్టర్ కూడా నెలంతా రోజుకి 12 గంటలు చేస్తే, గంటకి సుమారు ₹81. అంటే యజమానికి దాదాపు నాలుగు రెట్లు.
   కానీ ఆ తేడా అతని కష్టానికి కాదు. పెట్టిన పెట్టుబడికి, తీసుకున్న రిస్క్‌కి.
 
 ## Scene 16 — లెక్కలో లేనివి
@@ -437,6 +441,7 @@ narration: |
 ## Scene 22 — మూలాలు
 visual: typographic
 layout: big_stat
+align: top   # keep the lower 60% clear for YouTube end-screen cards
 headline: ఇడ్లీ ప్లేట్ ఎంత?
 sub: మీ ఊరిలో? కామెంట్‌లో చెప్పండి
 narration: |

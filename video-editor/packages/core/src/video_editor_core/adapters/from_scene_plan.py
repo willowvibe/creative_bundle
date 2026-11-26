@@ -37,7 +37,7 @@ from video_editor_core.hook_card import parse_hook, render_hook
 from video_editor_core.progress_strip import parse_progress, render_progress
 from video_editor_core.render_graph import Rect
 from video_editor_core.scene_renderers import scene_renderer
-from video_editor_core.sfx_synth import coin_path
+from video_editor_core.sfx_synth import coin_path, hit_path, swoosh_path
 from video_editor_core.tally_chip import (
     COUNT_DELAY_SECONDS,
     COUNT_SECONDS,
@@ -50,11 +50,23 @@ from video_editor_core.typographic_scenes import SceneRenderError, render_typogr
 DEFAULT_FPS = 30
 
 #: The coin clink sits this far under the narration.
-COIN_GAIN = 10 ** (-8 / 20)
+COIN_GAIN = 10 ** (-4 / 20)
 #: Own mixer track range for tally coins (narration 150, music 200, tts 100+n).
 COIN_TRACK_BASE = 400
 #: Longest the coin cue plays; the bundled WAVs run about 0.45 s.
 COIN_MAX_SECONDS = 0.5
+
+#: Chart swooshes and number hits are UI sounds, quieter than the coins.
+SWOOSH_GAIN = 10 ** (-10 / 20)
+HIT_GAIN = 10 ** (-8 / 20)
+#: Own mixer track range for UI cues, clear of the tally coins.
+UI_TRACK_BASE = 500
+SWOOSH_MAX_SECONDS = 0.4
+HIT_MAX_SECONDS = 0.4
+#: A swish lands just after the cut, not on top of it.
+SWOOSH_LEAD_SECONDS = 0.05
+#: The fallback for a big stat whose own reveal time cannot be read.
+BIG_STAT_FALLBACK_SECONDS = 0.4
 
 
 def from_scene_plan(plan: dict[str, Any], *, fps: int = DEFAULT_FPS) -> Composition:
@@ -67,6 +79,7 @@ def from_scene_plan(plan: dict[str, Any], *, fps: int = DEFAULT_FPS) -> Composit
     audio: list[AudioCue] = []
     cursor = 0.0
     previous_tally: int | None = None
+    previous_typographic = False
     tally_sound = plan.get("tally_sound", True) is not False
     for index, scene in enumerate(raw_scenes):
         duration = float(scene.get("duration_seconds", 0.0))
@@ -96,7 +109,8 @@ def from_scene_plan(plan: dict[str, Any], *, fps: int = DEFAULT_FPS) -> Composit
         scenes.append(
             CompositionScene(id=_scene_id(scene, index), start=start, end=end, layers=layers)
         )
-        declared = parse_tally((scene.get("props") or {}).get("tally"))
+        props = scene.get("props") or {}
+        declared = parse_tally(props.get("tally"))
         if declared is not None:
             if tally_sound and previous_tally is not None and declared.value != previous_tally:
                 cue = _coin_cue(
@@ -108,6 +122,33 @@ def from_scene_plan(plan: dict[str, Any], *, fps: int = DEFAULT_FPS) -> Composit
                 if cue is not None:
                     audio.append(cue)
             previous_tally = declared.value
+        typographic = _is_typographic(scene)
+        if tally_sound and typographic:
+            if not previous_typographic:
+                cue = _ui_cue(
+                    index,
+                    "swoosh",
+                    start + SWOOSH_LEAD_SECONDS,
+                    end,
+                    source=swoosh_path(),
+                    gain=SWOOSH_GAIN,
+                    max_seconds=SWOOSH_MAX_SECONDS,
+                )
+                if cue is not None:
+                    audio.append(cue)
+            if props.get("layout") == "big_stat":
+                cue = _ui_cue(
+                    index,
+                    "hit",
+                    start + _big_stat_reveal(layers),
+                    end,
+                    source=hit_path(),
+                    gain=HIT_GAIN,
+                    max_seconds=HIT_MAX_SECONDS,
+                )
+                if cue is not None:
+                    audio.append(cue)
+        previous_typographic = typographic
         tts = _asset_by_type(scene, "tts")
         if tts is not None:
             audio.append(
@@ -186,6 +227,47 @@ def _coin_cue(index: int, at: float, scene_end: float, *, rising: bool) -> Audio
         track=COIN_TRACK_BASE + index,
         volume=COIN_GAIN,
     )
+
+
+def _ui_cue(
+    index: int,
+    name: str,
+    at: float,
+    scene_end: float,
+    *,
+    source: Path,
+    gain: float,
+    max_seconds: float,
+) -> AudioCue | None:
+    """A short UI sound cue (chart swoosh or number hit) inside its scene."""
+    if at >= scene_end:
+        return None
+    return AudioCue(
+        id=f"scene_{index}_{name}",
+        source=str(source),
+        start=at,
+        duration=min(max_seconds, scene_end - at),
+        track=UI_TRACK_BASE + index,
+        volume=gain,
+    )
+
+
+def _is_typographic(scene: Mapping[str, Any]) -> bool:
+    """Plans normally use ``type``; accept a script-style ``visual`` too."""
+    return scene.get("type") == "typographic" or scene.get("visual") == "typographic"
+
+
+def _big_stat_reveal(layers: list[CompositionLayer]) -> float:
+    """The big stat's headline reveal time read from the renderer's own markup."""
+    for layer in layers:
+        if layer.preset != "typographic":
+            continue
+        markup = layer.content.text or ""
+        for pattern in (_COUNT_DELAY, _HEADLINE_DELAY):
+            match = pattern.search(markup)
+            if match is not None:
+                return float(match.group(1))
+    return BIG_STAT_FALLBACK_SECONDS
 
 
 def _hook_layers(
@@ -302,6 +384,9 @@ def _tally_layers(
 
 
 _NUMBER = re.compile(r"\d[\d,]*(?:\.\d+)?")
+#: The headline reveal time the typographic renderer writes into its markup.
+_COUNT_DELAY = re.compile(r'class="typo-count-step"[^>]*animation-delay:\s*([\d.]+)s')
+_HEADLINE_DELAY = re.compile(r'class="typo-line[^"]*"[^>]*animation-delay:\s*([\d.]+)s')
 #: How far back from a result the words that set up its calculation may sit.
 _EXPR_WINDOW_SECONDS = 6.0
 #: The expression appears this long before its result when nothing is heard.
@@ -469,9 +554,10 @@ def _asset_by_type(scene: dict[str, Any], *types: str) -> dict[str, Any] | None:
     return None
 
 
-#: A photo shot's Ken Burns: zoom 1.0 to 1.08 with a slight pan, alternating
+#: A photo shot's Ken Burns: zoom 1.00 to 1.10 with a slow pan, alternating
 #: direction shot by shot so neighbouring photos do not drift the same way.
-_PHOTO_PANS = (("0%, 0%", "1.5%, -1%"), ("1.5%, 1%", "-1%, 0%"))
+_PHOTO_SCALE_END = 1.10
+_PHOTO_PANS = (("0%, 0%", "2%, -1.5%"), ("2%, 1.5%", "-1.5%, 0%"))
 
 
 def _shot_layers(
@@ -487,7 +573,8 @@ def _shot_layers(
 
     The scene's window is split evenly in shot order and the cuts are hard. Each
     shot covers the frame and is muted; a clip shorter than its slot loops and a
-    longer one is cut off by the layer's duration. A photo gets a gentle drift.
+    longer one is cut off by the layer's duration. A photo gets a clear Ken Burns
+    zoom (1.00 to 1.10) with a slow pan that alternates photo to photo.
     """
     shots = (scene.get("props") or {}).get("shots") if scene.get("type") == "footage" else None
     if not shots:
@@ -498,6 +585,7 @@ def _shot_layers(
         )
     count = len(shots)
     layers: list[CompositionLayer] = []
+    photo_position = 0
     for position, shot in enumerate(shots):
         slot_start = (
             start if position == 0 else quantise(start + (end - start) * position / count, fps)
@@ -527,7 +615,8 @@ def _shot_layers(
                 )
             )
         else:
-            pan_from, pan_to = _PHOTO_PANS[position % len(_PHOTO_PANS)]
+            pan_from, pan_to = _PHOTO_PANS[photo_position % len(_PHOTO_PANS)]
+            photo_position += 1
             layers.append(
                 CompositionLayer(
                     media_kind="image",
@@ -537,7 +626,7 @@ def _shot_layers(
                             name="drift",
                             params={
                                 "from": f"scale(1) translate({pan_from})",
-                                "to": f"scale(1.08) translate({pan_to})",
+                                "to": f"scale({_PHOTO_SCALE_END:.2f}) translate({pan_to})",
                             },
                             ease="ease-in-out",
                         )
