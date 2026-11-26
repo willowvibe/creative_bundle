@@ -59,6 +59,33 @@ PROFILES: Mapping[str, SafeInsets] = MappingProxyType(
 )
 
 
+#: Top of the burned-caption band as a share of the height. Landscape sits low,
+#: portrait stays above the Shorts/Reels interface. The explainer pipeline
+#: places its captions with these, so map layouts can keep clear of them.
+LANDSCAPE_CAPTION_TOP = 0.84
+PORTRAIT_CAPTION_TOP = 0.72
+#: Top of the Shorts/Reels interface on a portrait frame: with no burned
+#: captions, content may extend down to here (landscape keeps caption_top).
+SHORTS_UI_SAFE_BOTTOM = 0.80
+
+
+def caption_top(width: int, height: int) -> int:
+    """The top edge (px) of the zone the explainer burns its captions into."""
+    return int(height * (LANDSCAPE_CAPTION_TOP if width > height else PORTRAIT_CAPTION_TOP))
+
+
+def content_bottom(width: int, height: int, *, captions_burned: bool = True) -> int:
+    """The lowest edge (px) free content may reach.
+
+    Burned captions (the default) own the band from :func:`caption_top`. Without
+    them a portrait frame is only limited by the Shorts UI
+    (:data:`SHORTS_UI_SAFE_BOTTOM`); landscape is unchanged.
+    """
+    if captions_burned or width > height:
+        return caption_top(width, height)
+    return int(height * SHORTS_UI_SAFE_BOTTOM)
+
+
 def safe_insets(width: int, height: int, *, profile: str = "auto") -> SafeInsets:
     """Return the safe-area insets for a ``width`` x ``height`` canvas.
 

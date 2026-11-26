@@ -10,7 +10,9 @@ Split out of `video-editor` on 2026-11-11 with its history.
 | `shorts/` | Short and long-form packs (`short.yaml`, `longform.yaml`). |
 | `brand/<channel>/` | Reusable channel assets and generators, e.g. `brand/python-decoder/make_bumpers.py` (intro/outro) and upload defaults. |
 
-Channels: Mantra Shakti (devotional, Telugu/Tamil), DeveeKitchen (Telugu food explainers), Python Decoder
+Channels: Mantra Shakti (devotional, Telugu/Tamil), DeveeKitchen (Telugu food explainers; slate and
+trend evidence in `docs/superpowers/specs/2026-11-14-deveekitchen-first-3-videos-design.md` Rev 3 and
+`docs/research/2026-11-26-deveekitchen-trend-scan.md`), Python Decoder
 (@pythondecoder101, English coding tutorials with the talking avatar; plan in
 `docs/superpowers/specs/2026-11-24-pythondecoder-channel-first-3-videos.md`, EP1 in
 `videos/2026-11-24/python-315-features/`, recipe `../video-editor/docs/TECH_TUTORIALS.md`).

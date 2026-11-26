@@ -94,6 +94,8 @@ narration line.
 - Each bubble gets a spoken `cue` so cities appear as they are named (a 38 s map with everything at
   once is a still frame). Colliding labels and bubbles are nudged with leader lines automatically;
   still check the frame.
+- A whole video made of map scenes (a 9:16 "famous X of every district" Short) has its own recipe:
+  `MAP_SHORTS.md` (photo cards, zooms on cues, sidecar captions, photo paths and crops, same-job re-renders).
 
 **Check:** QA `map_markers` and `map_motion` pass; frame shows the region filling the plate.
 

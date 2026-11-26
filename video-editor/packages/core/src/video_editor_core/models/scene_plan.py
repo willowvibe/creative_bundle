@@ -86,6 +86,8 @@ class ScenePlan(BaseModel):
     narration_duration: float = 0.0
     #: False silences the coin clink under a counting tally chip.
     tally_sound: bool = True
+    #: False silences the photo-card pops only.
+    card_sound: bool = True
 
     @model_validator(mode="after")
     def _validate_scenes(self) -> ScenePlan:

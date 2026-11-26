@@ -1,0 +1,5 @@
+- [Repos share bundle](repos-share-bundle.md) — five creative repos + Claude skills/memory/docs in the private creative_bundle repo at /mnt/data2/git_repos/creative_bundle
+- [Cheapag fallback](cheapag-fallback-claude-subagent.md) — on cheapag FAIL ask once (hook-enforced), owner picks Sonnet subagent; env-only FAIL → land + test in main tree
+- [Explainer playbook order](explainer-playbook-order.md) — build explainers stage by stage per video-editor/docs/EXPLAINER_PLAYBOOK.md; Flow stills, ElevenLabs voice
+- [DeveeKitchen slate (trend scan)](deveekitchen-slate-trend-scan.md) — slate from 2026-11-26 outlier scan; Andhra map Short done, Telangana next, account not set up
+- [DeveeKitchen Shorts style](deveekitchen-shorts-style.md) — photo cards, zoom per district, no burned captions, map below the card

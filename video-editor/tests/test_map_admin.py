@@ -95,13 +95,33 @@ def test_a_zoom_can_frame_a_district_or_state_by_name() -> None:
         ("Prayagraj", "Allahabad"),
         ("Gurugram", "Gurgaon"),
         ("Thoothukudi", "Thoothukkudi"),
-        ("Nellore", "Sri Potti Sriramulu Nellore"),
-        ("Kadapa", "Kadapa(YSR)"),
-        ("Eluru", "West Godavari"),
+        ("Nellore", "Sri Potti Sri Ramulu Nellore"),
+        ("Kadapa", "YSR Kadapa"),
+        ("Kadapa(YSR)", "YSR Kadapa"),
+        ("YSR Kadapa", "YSR Kadapa"),
+        ("Konaseema", "Dr. B.R. Ambedkar Konaseema"),
+        ("Anantapur", "Anantapuramu"),
+        ("Eluru", "Eluru"),
     ],
 )
 def test_current_and_common_names_find_the_sources_district(asked: str, found: str) -> None:
     assert find_admin(asked, "district").name == found
+
+
+def test_andhra_pradesh_has_the_current_28_districts() -> None:
+    from video_editor_maps.geo import admin_units
+
+    ap = {unit.region.name for unit in admin_units("district") if unit.state == "Andhra Pradesh"}
+    assert len(ap) == 28
+    assert {"Polavaram", "Markapuram", "Eluru", "Kakinada", "NTR"} <= ap
+
+
+def test_the_replaced_state_does_not_change_the_other_states() -> None:
+    from video_editor_maps.geo import admin_units
+
+    units = admin_units("district")
+    assert len(units) == 735 - 13 + 28
+    assert len([unit for unit in units if unit.state == "Telangana"]) == 33
 
 
 def test_every_alias_points_at_a_real_district() -> None:

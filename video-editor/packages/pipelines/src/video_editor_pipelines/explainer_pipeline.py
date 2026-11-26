@@ -53,10 +53,12 @@ from video_editor_config import Settings
 from video_editor_core.designs import DesignError, designs_dir, load_design
 from video_editor_core.hyperframes_cli import hyperframes_available
 from video_editor_core.render_graph import Rect
+from video_editor_core.safe_area import LANDSCAPE_CAPTION_TOP, PORTRAIT_CAPTION_TOP
 from video_editor_core.scene_plan_composition import (
     canvas_for_aspect,
     render_scene_plan,
 )
+from video_editor_core.srt import srt_from_words
 from video_editor_core.timeline import EDL, Segment
 from video_editor_ffmpeg.broll import mix_sfx_into_video
 from video_editor_ffmpeg.probe import probe_media
@@ -201,6 +203,8 @@ class ExplainerResult:
     qa_path: Path
     passed: bool
     checks: list[QaCheck]
+    #: Sidecar captions when ``captions: {mode: sidecar}``; otherwise ``None``.
+    srt_path: Path | None = None
     #: Rendered QA table; the CLI prints it (the pipelines layer has no UI).
     qa_text: str = ""
 
@@ -744,8 +748,6 @@ def _cut_fields(check: Any) -> tuple[str, bool, str]:
 #: Top of the caption band as a share of the height. Landscape (long-form) sits
 #: low, centred near 90%, clear of the picture; portrait stays higher, above the
 #: Shorts/Reels interface that covers the bottom of the frame.
-LANDSCAPE_CAPTION_TOP = 0.84
-PORTRAIT_CAPTION_TOP = 0.72
 CAPTION_BAND_HEIGHT = 0.094
 
 
@@ -1208,6 +1210,17 @@ def footage_check(report: Sequence[dict[str, Any]]) -> QaCheck:
     return QaCheck("footage", not unjudged, detail)
 
 
+def _srt_word_count(srt_text: str) -> int:
+    """Words in the cue text of a SubRip document (index/timing lines skipped)."""
+    count = 0
+    for line in srt_text.splitlines():
+        line = line.strip()
+        if not line or line.isdigit() or "-->" in line:
+            continue
+        count += len(line.split())
+    return count
+
+
 def run_explainer_job(
     ctx: JobContext,
     script: ExplainerScript,
@@ -1386,21 +1399,35 @@ def run_explainer_job(
                 ctx.work_dir / "with_sfx.mp4",
                 sfx_gain_db=-6.0,
             )
+    sidecar = script.captions_mode == "sidecar"
     caption_report: list[dict[str, Any]] = []
-    captioned = burn_captions(
-        mixed,
-        [{"word": word["word"], "start": word["start"], "end": word["end"]} for word in words],
-        ctx.work_dir / "captioned.mp4",
-        width=width,
-        height=height,
-        preset=caption_preset or script.caption_preset,
-        report=caption_report,
-        cache_dir=ctx.work_dir / "overlay_cache",
-    )
-    (ctx.work_dir / "caption_lines.json").write_text(
-        json.dumps(caption_report, indent=2), encoding="utf-8"
-    )
+    if sidecar:
+        # No burn: the mixed narration video is the deliverable, and the
+        # measured words become a SubRip sidecar (the same writer `ve short`
+        # uses for `captions.mode: sidecar`).
+        captioned = mixed
+    else:
+        captioned = burn_captions(
+            mixed,
+            [{"word": word["word"], "start": word["start"], "end": word["end"]} for word in words],
+            ctx.work_dir / "captioned.mp4",
+            width=width,
+            height=height,
+            preset=caption_preset or script.caption_preset,
+            report=caption_report,
+            cache_dir=ctx.work_dir / "overlay_cache",
+        )
+        (ctx.work_dir / "caption_lines.json").write_text(
+            json.dumps(caption_report, indent=2), encoding="utf-8"
+        )
     final_video = normalize_loudness(captioned, ctx.output_dir / "final.mp4")
+    srt_path: Path | None = None
+    srt_words = 0
+    if sidecar:
+        srt_path = ctx.output_dir / "final.srt"
+        srt_text = srt_from_words(words)
+        srt_path.write_text(srt_text, encoding="utf-8")
+        srt_words = _srt_word_count(srt_text)
 
     # QA gate, measured on the file that ships. Every field below comes from a
     # measurement of the finished build; anything that could not be measured
@@ -1442,7 +1469,10 @@ def run_explainer_job(
         first_word_starts=[
             float(timing.words[0]["start"]) if timing.words else math.inf for timing in timings
         ],
-        caption_coverage=len(words) / display_words if display_words else 0.0,
+        # Sidecar: measured against the SRT that ships beside the video.
+        caption_coverage=(srt_words if sidecar else len(words)) / display_words
+        if display_words
+        else 0.0,
         still_scenes=still_scenes,
         # A footage scene's fallback still is not part of the reuse plan.
         still_renders=sum(
@@ -1476,8 +1506,17 @@ def run_explainer_job(
         extra_checks = [QaCheck("composition_gates", False, "no composition project to gate")]
     extra_checks.extend(
         [
-            caption_tokens_check([row["text"] for row in caption_report], script.narration),
-            caption_contrast_check(caption_report),
+            *(
+                [
+                    QaCheck("caption_tokens", True, "sidecar: no burned captions"),
+                    QaCheck("caption_contrast", True, "sidecar: no burned captions"),
+                ]
+                if sidecar
+                else [
+                    caption_tokens_check([row["text"] for row in caption_report], script.narration),
+                    caption_contrast_check(caption_report),
+                ]
+            ),
             QaCheck(*_cut_fields(sentence_cuts_check(timings))),
         ]
     )
@@ -1497,5 +1536,6 @@ def run_explainer_job(
         qa_path=qa_path,
         passed=passed,
         checks=checks,
+        srt_path=srt_path,
         qa_text=qa_text,
     )

@@ -1203,3 +1203,60 @@ def test_each_sfx_cue_lands_on_its_scene_cut(tmp_path):
 
     # scene_2 has no clip but still advances the cursor: 4.0 + 3.5.
     assert timeline == [(clip, 0.0), (clip, 7.5)]
+
+
+# ---------------------------------------------------------------------------
+# captions: {mode: sidecar} skips the burn and ships final.srt
+# ---------------------------------------------------------------------------
+
+
+def _run_captions_job(tmp_path: Path, monkeypatch, body: str):
+    import video_editor_pipelines.explainer_pipeline as pipeline
+
+    script = load_explainer_script(_write_script(tmp_path, body))
+    ctx = JobContext(job_id="job", work_root=tmp_path / "work", output_root=tmp_path / "out")
+    plan, _reuse = prepare_explainer(ctx, script)
+    burned: list[Path] = []
+    recorded = _patch_fake_pipeline(
+        monkeypatch,
+        ctx,
+        raw_words=_raw_transcript_words([scene.narration for scene in script.scenes]),
+    )
+    real_fake = pipeline.burn_captions
+
+    def spy(video, words, output, **kwargs):
+        burned.append(Path(output))
+        return real_fake(video, words, output, **kwargs)
+
+    monkeypatch.setattr(pipeline, "burn_captions", spy)
+    result = pipeline.run_explainer_job(
+        ctx, script, plan, music_provider="", music_path=None, caption_preset="karaoke"
+    )
+    return ctx, result, burned, recorded
+
+
+def test_sidecar_captions_skip_the_burn_and_write_an_srt(tmp_path: Path, monkeypatch):
+    body = TWO_SCENE_SCRIPT.replace(
+        "voice: narrator\n", "voice: narrator\ncaptions: {mode: sidecar}\n"
+    )
+    ctx, result, burned, _ = _run_captions_job(tmp_path, monkeypatch, body)
+
+    assert burned == []
+    assert result.srt_path == ctx.output_dir / "final.srt"
+    srt = result.srt_path.read_text(encoding="utf-8")
+    assert "-->" in srt and "rack" in srt
+    by_name = {check.name: check for check in result.checks}
+    assert by_name["caption_tokens"].ok
+    assert by_name["caption_tokens"].detail == "sidecar: no burned captions"
+    assert by_name["caption_contrast"].ok
+    assert by_name["caption_contrast"].detail == "sidecar: no burned captions"
+    coverage = next(c for c in result.checks if "words captioned" in c.detail)
+    assert coverage.ok and coverage.detail.startswith("100.0%")
+
+
+def test_default_captions_are_still_burned(tmp_path: Path, monkeypatch):
+    ctx, result, burned, _ = _run_captions_job(tmp_path, monkeypatch, TWO_SCENE_SCRIPT)
+
+    assert len(burned) == 1
+    assert result.srt_path is None
+    assert not (ctx.output_dir / "final.srt").exists()

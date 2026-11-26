@@ -70,6 +70,13 @@ the output root.
   - `state:`/`district:` regions, filled or photo-masked, with
     `image_prompt`/`image_query` photos fetched by the pipeline.
   - `bubbles` and `stickers`.
+  - `cards` (large photo + title + `badge` popping in on each cue, with a pop sound) and per-item `zooms`; card
+    scenes fit the map below the card. Full recipe for 9:16 district-listicle Shorts: `docs/MAP_SHORTS.md`.
+  - Local `image:` paths resolve from the `video-editor` cwd (`videos/<date>/<slug>/photos/x.jpg`), and
+    region photos must be cropped tight to the subject.
+- **Shorts without burned captions:** front matter `captions: {mode: sidecar}` skips the burn and writes
+  `final.srt` (`ve explain` and `ve short`).
+- **Re-render on the same `-j` job id** after edits: narration and music are reused; a new id buys them again.
 - **Telugu and other non-Latin narration:**
   - Use `narration_mode: per_scene`; Whisper skips synthetic Telugu.
   - Spell numbers for the voice with `pronunciations`.

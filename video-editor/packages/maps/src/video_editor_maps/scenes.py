@@ -44,6 +44,20 @@ from video_editor_core.motion.registry import MotionError, build_motion
 from video_editor_core.paper import colors_for, paper_css, paper_layers, safe_css_color
 from video_editor_core.script_text import NON_LATIN_CSS, tag_non_latin_text
 
+from video_editor_maps.cards import (
+    Card,
+    CardError,
+    CardWindow,
+    card_cues,
+    card_fit_band,
+    cards_band_bottom,
+    cards_fit_frame,
+    cards_markup,
+    has_cards,
+    parse_cards,
+    schedule_cards,
+    silence_unspoken_cards,
+)
 from video_editor_maps.geo import (
     Country,
     GeoError,
@@ -136,6 +150,8 @@ MAP_PADDING = 0.22
 #: A declared ``bbox`` is shown with only this fraction of margin on each side
 #: (no one-degree floor), so it fills the map area.
 BBOX_MARGIN = 0.04
+#: A card band thinner than this share of the height is ignored (old fit).
+MIN_CARD_BAND = 0.12
 
 #: Landscape: side margin of the widened bbox panel, and its gap above the title.
 BBOX_PANEL_MARGIN = 60.0
@@ -1661,6 +1677,68 @@ def _zoom_view(
         raise MapSceneError(f"map zoom {zoom.bounds!r}: {exc}") from exc
 
 
+def _geometry_frame(
+    fit_frame: Rect4,
+    map_frame: Rect4,
+    camera_moves: Sequence[tuple[float, float, float, float]],
+) -> Rect4:
+    """The plate rect the land/sea geometry must cover for every camera state.
+
+    Card scenes fit the geographic window into the band under the photo card,
+    but the map itself still has to fill the whole map frame. Start from that
+    frame and add the preimage of the frame under each zoom: a zoom-out scales
+    the drawn plate down, so its clip has to reach further out.
+    """
+    if tuple(fit_frame) == tuple(map_frame):
+        return map_frame
+    left, top, width, height = map_frame
+    right, bottom = left + width, top + height
+    for _start, factor, dx, dy in camera_moves:
+        if not math.isfinite(factor) or factor <= 0.0:
+            continue
+        xs = ((left - dx) / factor, (right - dx) / factor)
+        ys = ((top - dy) / factor, (bottom - dy) / factor)
+        left = min(left, *xs)
+        right = max(right, *xs)
+        top = min(top, *ys)
+        bottom = max(bottom, *ys)
+    return (left, top, right - left, bottom - top)
+
+
+def _coverage_bounds(view: View, frame: Rect4) -> tuple[float, float, float, float]:
+    """The geographic window covering ``frame`` under ``view``'s transform.
+
+    This is only a culling window: drawing still projects through ``view``, so
+    land, sea, coastlines, neighbours and the regions share one scale and
+    offset. The frame is inverted through that same transform rather than
+    fitted again.
+    """
+    if tuple(frame) == tuple(view.frame):
+        return view.bounds
+    x, y, width, height = view.frame
+    west, south, east, north = view.bounds
+    left = math.radians(west)
+    right = math.radians(east)
+    top = -_projected_y(north, view.projection)
+    bottom = -_projected_y(south, view.projection)
+    span_x = right - left
+    span_y = bottom - top
+    scale = min(width / span_x, height / span_y)
+    offset_x = x + (width - span_x * scale) / 2.0
+    offset_y = y + (height - span_y * scale) / 2.0
+    cx, cy, cw, ch = frame
+    left_c = left + (cx - offset_x) / scale
+    top_c = top + (cy - offset_y) / scale
+    right_c = left_c + cw / scale
+    bottom_c = top_c + ch / scale
+    return (
+        math.degrees(left_c),
+        max(-85.0, _latitude_from_projected(-bottom_c, view.projection)),
+        math.degrees(right_c),
+        min(85.0, _latitude_from_projected(-top_c, view.projection)),
+    )
+
+
 def _projection(name: str) -> str:
     """The projection string, defaulting to the map's own."""
     return name.strip() or "mercator"
@@ -2043,10 +2121,14 @@ def _view(subject: Country, props: Mapping[str, Any], scale: float, frame: Rect4
 
 
 def _neighbours(
-    view: View, subject: Country, *, detail: str = "110m", worldview: str = ""
+    bounds: tuple[float, float, float, float],
+    subject: Country,
+    *,
+    detail: str = "110m",
+    worldview: str = "",
 ) -> list[Country]:
-    """Countries that can draw something inside the window."""
-    west, south, east, north = view.bounds
+    """Countries that can draw something inside the culling window."""
+    west, south, east, north = bounds
     near: list[Country] = []
     for country in countries(detail, worldview):
         if country.name == subject.name or country.region == "Antarctica":
@@ -2141,6 +2223,8 @@ def _map_svg(
     detail: str = "110m",
     route_dot: bool = False,
     worldview: str = "",
+    clip_frame: Rect4 | None = None,
+    cull_bounds: tuple[float, float, float, float] | None = None,
     extra_svg: str = "",
 ) -> str:
     """The projected world, clipped to the map panel.
@@ -2148,9 +2232,15 @@ def _map_svg(
     Every stroked path except the route opts out of the camera's scale so its
     screen width is constant; the route compensates with animated width. A
     closely zoomed scene passes ``detail="50m"`` for its outlines.
+
+    ``clip_frame`` and ``cull_bounds`` enlarge only the clip rectangle and the
+    polygon culling window (a card scene covers the whole map frame); every
+    layer is still projected through ``view``, so their scale and offset stay
+    identical to the regions, pins, labels and camera.
     """
-    meridians, parallels = graticule_lines(view)
-    x, y, w, h = view.frame
+    cull = cull_bounds or view.bounds
+    meridians, parallels = graticule_lines(view, bounds=cull)
+    x, y, w, h = clip_frame or view.frame
     clip = f"map-clip-{index}"
     pattern_styles = sorted({region.style for region in regions if region.style in _PATTERN_STYLES})
     pattern_defs = "".join(_region_pattern(style, index, colors, scale) for style in pattern_styles)
@@ -2171,8 +2261,8 @@ def _map_svg(
         f'<path d="{path}" fill="{colors["ghost_fill"]}" opacity="0.92" '
         f'stroke="{colors["ghost_stroke"]}" stroke-width="1.2" '
         'vector-effect="non-scaling-stroke"/>'
-        for country in _neighbours(view, subject, detail=detail, worldview=worldview)
-        for path in country_paths(country, view)
+        for country in _neighbours(cull, subject, detail=detail, worldview=worldview)
+        for path in country_paths(country, view, bounds=cull)
     )
     if ghosts:
         parts.append(f'<g class="map-ghost" clip-path="url(#{clip})">{ghosts}</g>')
@@ -2185,7 +2275,7 @@ def _map_svg(
         f'<path d="{path}" fill="{colors["highlight"]}" '
         f'stroke="{colors["highlight_stroke"]}" stroke-width="1.4" '
         'vector-effect="non-scaling-stroke" stroke-linejoin="round"/>'
-        for path in country_paths(drawing, view)
+        for path in country_paths(drawing, view, bounds=cull)
     )
     parts.append(f'<g class="map-subject" clip-path="url(#{clip})">{subject_paths}</g>')
     if regions:
@@ -2447,6 +2537,10 @@ def map_scene_cues(scene: Mapping[str, Any]) -> dict[str, str]:
     cues.update(
         {f"zoom_{position}": zoom.cue for position, zoom in enumerate(_zooms(props)) if zoom.cue}
     )
+    try:
+        cues.update(card_cues(props))
+    except CardError as exc:
+        raise MapSceneError(str(exc)) from exc
     return cues
 
 
@@ -2511,6 +2605,13 @@ def silence_unspoken_map_cues(
                     entry["cue"] = False
             silenced_zooms.append(entry)
         out["zooms"] = silenced_zooms
+
+    cards = props.get("cards")
+    if isinstance(cards, Sequence) and not isinstance(cards, str):
+        try:
+            out["cards"] = silence_unspoken_cards(props, words)
+        except CardError as exc:
+            raise MapSceneError(str(exc)) from exc
 
     return out
 
@@ -2619,6 +2720,51 @@ class _Prepared:
     #: Speech bubbles and stickers: (text or sticker, plate x, plate y, delay).
     bubbles: tuple[tuple[Any, float, float, float], ...] = ()
     stickers: tuple[tuple[Any, float, float, float], ...] = ()
+    #: Large photo cards and their cue-derived enter/exit windows.
+    photo_cards: tuple[Card, ...] = ()
+    card_windows: tuple[CardWindow, ...] = ()
+
+
+def _card_fit_frame(
+    props: Mapping[str, Any],
+    geom: _Geom,
+    design: DesignTokens,
+    canvas_w: float,
+    canvas_h: float,
+    scale: float,
+) -> Rect4:
+    """The frame the view is fitted to: the free band under the photo cards.
+
+    Without cards (or with ``cards_fit: frame``) this is the map frame, so the
+    scene is laid out exactly as before. Otherwise the width stays and the
+    height shrinks to the band between the card box (plus a small gap) and the
+    caption zone, so the card never covers the framed area. Only the fit
+    target moves; the map itself still renders around it.
+    """
+    frame = geom.map_frame
+    try:
+        wanted = has_cards(props) and cards_fit_frame(props)
+        bottom_fraction = cards_band_bottom(props) if wanted else None
+    except CardError as exc:
+        raise MapSceneError(str(exc)) from exc
+    if not wanted:
+        return frame
+    band = card_fit_band(
+        canvas_w,
+        canvas_h,
+        design.layers.safe_area or "auto",
+        # Private prop set at plan time; absent means captions are burned.
+        captions_burned=props.get("_captions_burned", True) is not False,
+        bottom_fraction=bottom_fraction,
+    )
+    if band is None:
+        return frame
+    plate_y = (canvas_h - geom.height * scale) / 2.0
+    top = max(frame[1], (band[0] - plate_y) / scale)
+    bottom = min(frame[1] + frame[3], (band[1] - plate_y) / scale)
+    if (bottom - top) * scale < canvas_h * MIN_CARD_BAND:
+        return frame
+    return (frame[0], top, frame[2], bottom - top)
 
 
 def _prepare(
@@ -2651,7 +2797,8 @@ def _prepare(
     colors = _colors(design, props)
 
     subject = _subject(props)
-    view = _view(subject, props, scale, geom.map_frame)
+    fit_frame = _card_fit_frame(props, geom, design, canvas_w, canvas_h, scale)
+    view = _view(subject, props, scale, fit_frame)
 
     try:
         declared_focus = parse_position(props.get("focus"))
@@ -2682,6 +2829,10 @@ def _prepare(
     map_rivers = _rivers(props)
     map_regions = _regions(props)
     zooms = _zooms(props)
+    try:
+        photo_cards = parse_cards(props)
+    except CardError as exc:
+        raise MapSceneError(str(exc)) from exc
     # A map that names places does not need the fallback focus pin. Markers,
     # rivers and regions all name places, so any of them drops it unless the
     # scene asks for the pin with ``focus_pin``.
@@ -2712,6 +2863,7 @@ def _prepare(
         raise MapSceneError(str(exc)) from exc
     cues.update({f"bubble_{i}": b.cue for i, b in enumerate(overlay_bubbles) if b.cue})
     cues.update({f"sticker_{i}": k.cue for i, k in enumerate(overlay_stickers) if k.cue})
+    cues.update({f"card_{i}": card.cue for i, card in enumerate(photo_cards) if card.cue})
 
     # Reveals: the word that earns each item, else a bounded stagger.
     times: Mapping[str, float] = (
@@ -2751,7 +2903,7 @@ def _prepare(
         zoom_delays,
         zooms,
         scale=scale,
-        frame=geom.map_frame,
+        frame=fit_frame,
         projection=projection,
         seconds=seconds,
         move_seconds=move_seconds,
@@ -2770,6 +2922,10 @@ def _prepare(
     sticker_delays = _reveal_delays(
         times, "sticker", len(overlay_stickers), entry * 1.8, overlay_stagger, latest
     )
+    card_delays = _reveal_delays(
+        times, "card", len(photo_cards), entry * 1.6, overlay_stagger, latest
+    )
+    card_windows = schedule_cards(photo_cards, card_delays, seconds)
     placed_bubbles = tuple(
         (bubble, *view.project(bubble.lon, bubble.lat), delay)
         for bubble, delay in zip(overlay_bubbles, bubble_delays, strict=True)
@@ -2818,6 +2974,8 @@ def _prepare(
         journey_km=bool(journey and journey.show_km),
         bubbles=placed_bubbles,
         stickers=placed_stickers,
+        photo_cards=tuple(photo_cards),
+        card_windows=tuple(card_windows),
     )
 
 
@@ -3123,6 +3281,13 @@ def render_map(
         if prepared.journey_km:
             km_html, km_css = km_markup(legs, index=index, seconds=seconds)
             journey_css += km_css + _km_label_css(index, colors, scale)
+    map_frame_px = (
+        geom.map_frame[0] * scale,
+        geom.map_frame[1] * scale,
+        geom.map_frame[2] * scale,
+        geom.map_frame[3] * scale,
+    )
+    clip_frame = _geometry_frame(view.frame, map_frame_px, camera_moves)
     map_svg = _map_svg(
         subject,
         view,
@@ -3137,6 +3302,8 @@ def render_map(
         detail=detail,
         route_dot=route_dot,
         worldview=_worldview(props),
+        clip_frame=clip_frame,
+        cull_bounds=_coverage_bounds(view, clip_frame),
         extra_svg=journey_svg,
     )
     label_frame = (
@@ -3332,6 +3499,17 @@ def render_map(
         ink=colors["ink"],
         reveal_seconds=entry * 1.2,
     )
+    photo_cards_markup, photo_cards_css = cards_markup(
+        prepared.photo_cards,
+        prepared.card_windows,
+        index=index,
+        canvas_w=canvas_w,
+        canvas_h=canvas_h,
+        scale=scale,
+        body=body,
+        colors=colors,
+        safe_profile=design.layers.safe_area or "auto",
+    )
 
     markup = (
         f'<div class="map-{index}">'
@@ -3345,6 +3523,7 @@ def render_map(
         f'<div class="map-overlay">{_marker_pins(projected)}{_focus_pin(pin)}'
         f"{labels_markup}{km_html}{overlay_html}</div>"
         "</div>"
+        f"{photo_cards_markup}"
         f"{_badge(props)}{cards}"
         f"{_title(props)}{watermark_markup}"
         "</div>"
@@ -3374,7 +3553,7 @@ def render_map(
         journey_css=journey_css,
         journey_animations=journey_animations,
     )
-    css += label_css + NON_LATIN_CSS
+    css += photo_cards_css + label_css + NON_LATIN_CSS
     return MapSceneRender(
         markup=tag_non_latin_text(markup),
         css=css,

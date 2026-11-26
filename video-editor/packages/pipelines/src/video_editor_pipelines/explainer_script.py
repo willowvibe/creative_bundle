@@ -175,6 +175,10 @@ class ExplainerScript:
     progress: tuple[str, ...] = ()
     #: False silences the coin clink under a counting tally chip.
     tally_sound: bool = True
+    #: False silences only the photo-card pops.
+    card_sound: bool = True
+    #: Front matter ``captions: {mode: burned|sidecar}``; ``sidecar`` means no burn.
+    captions_mode: str = "burned"
 
     @property
     def narration(self) -> str:
@@ -257,6 +261,16 @@ def parse_explainer_script(
     tally_sound = meta.get("tally_sound", True)
     if not isinstance(tally_sound, bool):
         raise ScriptError(f"{source}: `tally_sound` must be true or false, got {tally_sound!r}")
+    card_sound = meta.get("card_sound", True)
+    if not isinstance(card_sound, bool):
+        raise ScriptError(f"{source}: `card_sound` must be true or false, got {card_sound!r}")
+
+    raw_captions = meta.get("captions") or {}
+    captions_mode = (
+        str(raw_captions.get("mode") or "burned").strip() if isinstance(raw_captions, dict) else ""
+    )
+    if captions_mode not in {"burned", "sidecar"}:
+        raise ScriptError(f"{source}: `captions` must be `{{mode: burned|sidecar}}`")
 
     return ExplainerScript(
         title=title,
@@ -276,6 +290,8 @@ def parse_explainer_script(
         ai_label=str(meta["ai_label"]).strip() if "ai_label" in meta else "AI image",
         progress=progress,
         tally_sound=tally_sound,
+        card_sound=card_sound,
+        captions_mode=captions_mode,
     )
 
 
@@ -415,14 +431,14 @@ def _resolve_shot_file(raw: str, label: str, position: int, base_dir: Path | Non
         raise ScriptError(f"{where} is not a regular file: {candidate}")
     suffix = candidate.suffix.lower()
     if suffix not in FILE_SHOT_IMAGE_EXTENSIONS | FILE_SHOT_VIDEO_EXTENSIONS:
-        known = sorted(e.lstrip(".") for e in FILE_SHOT_IMAGE_EXTENSIONS | FILE_SHOT_VIDEO_EXTENSIONS)
+        known = sorted(
+            e.lstrip(".") for e in FILE_SHOT_IMAGE_EXTENSIONS | FILE_SHOT_VIDEO_EXTENSIONS
+        )
         raise ScriptError(f"{where} has unsupported extension {suffix or '(none)'!r}; use {known}")
     return str(candidate.resolve())
 
 
-def _parse_shots(
-    raw: object, label: str, base_dir: Path | None = None
-) -> list[dict[str, Any]]:
+def _parse_shots(raw: object, label: str, base_dir: Path | None = None) -> list[dict[str, Any]]:
     """Validate a footage scene's ``shots`` list and return it normalized.
 
     A shot is one of: a ``query`` (stock clip), a ``photo`` (stock still) or a
@@ -441,9 +457,7 @@ def _parse_shots(
         photo = str(item.get("photo") or "").strip()
         file = str(item.get("file") or "").strip()
         if sum(bool(value) for value in (query, photo, file)) != 1:
-            raise ScriptError(
-                f"{label}: shot {position} must have {one_of}, got {dict(item)!r}"
-            )
+            raise ScriptError(f"{label}: shot {position} must have {one_of}, got {dict(item)!r}")
         unknown = sorted(set(item) - {"query", "photo", "image", "file", "ai"})
         if unknown:
             raise ScriptError(

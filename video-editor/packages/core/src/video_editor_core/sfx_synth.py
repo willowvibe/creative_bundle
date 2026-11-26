@@ -4,7 +4,8 @@
 fast exponential decay, struck twice about 70 ms apart. ``coin_out.wav``
 (money out) is the same shape a fourth lower and a little softer.
 ``swoosh.wav`` is a short filtered-noise sweep, and ``hit.wav`` is a soft low
-thump with a brief click. All are 48 kHz mono 16-bit.
+thump with a brief click, and ``pop.wav`` is a soft 120 ms sine blip with a
+small upward pitch glide (a photo card entering). All are 48 kHz mono 16-bit.
 
 The files are generated once into ``assets/sfx/`` and committed; run
 ``python -m video_editor_core.sfx_synth`` to regenerate them.
@@ -40,6 +41,8 @@ SWOOSH_SECONDS = 0.35
 SWOOSH_PEAK_DBFS = -6.0
 HIT_SECONDS = 0.4
 HIT_PEAK_DBFS = -4.0
+POP_SECONDS = 0.12
+POP_PEAK_DBFS = -6.0
 
 SFX_DIR = Path(__file__).parent / "assets" / "sfx"
 _SOUND_FILES = {
@@ -47,11 +50,12 @@ _SOUND_FILES = {
     "out": "coin_out.wav",
     "swoosh": "swoosh.wav",
     "hit": "hit.wav",
+    "pop": "pop.wav",
 }
 
 
 def sound_path(kind: str) -> Path:
-    """The bundled WAV for ``kind`` (``in``, ``out``, ``swoosh`` or ``hit``)."""
+    """The bundled WAV for ``kind`` (``in``, ``out``, ``swoosh``, ``hit`` or ``pop``)."""
     try:
         filename = _SOUND_FILES[kind]
     except KeyError:
@@ -76,6 +80,11 @@ def swoosh_path() -> Path:
 def hit_path() -> Path:
     """The bundled low emphasis hit."""
     return sound_path("hit")
+
+
+def pop_path() -> Path:
+    """The bundled photo-card pop."""
+    return sound_path("pop")
 
 
 def _normalise(values: list[float], peak_dbfs: float) -> list[int]:
@@ -181,6 +190,27 @@ def write_hit(path: Path) -> Path:
     return _write_wav(Path(path), _hit_samples())
 
 
+def _pop_samples(peak_dbfs: float = POP_PEAK_DBFS) -> list[int]:
+    """A soft UI pop: a short sine whose pitch blips up, with a fast decay."""
+    count = round(POP_SECONDS * SAMPLE_RATE)
+    values = [0.0] * count
+    phase = 0.0
+    for n in range(count):
+        t = n / SAMPLE_RATE
+        # 520 Hz glides up to 780 Hz over the first 50 ms, then holds.
+        hz = 520.0 + 260.0 * min(1.0, t / 0.05)
+        phase += 2.0 * math.pi * hz / SAMPLE_RATE
+        attack = min(1.0, t / 0.008)
+        values[n] = (math.sin(phase) + 0.25 * math.sin(2.0 * phase)) * attack * math.exp(-t / 0.032)
+    _fade_tail(values)
+    return _normalise(values, peak_dbfs)
+
+
+def write_pop(path: Path) -> Path:
+    """Write the photo-card ``pop.wav`` to ``path``."""
+    return _write_wav(Path(path), _pop_samples())
+
+
 def generate_all(directory: Path = SFX_DIR) -> list[Path]:
     """Write every bundled sound into ``directory``."""
     directory = Path(directory)
@@ -189,6 +219,7 @@ def generate_all(directory: Path = SFX_DIR) -> list[Path]:
         write_coin(directory / "coin_out.wav", "out"),
         write_swoosh(directory / "swoosh.wav"),
         write_hit(directory / "hit.wav"),
+        write_pop(directory / "pop.wav"),
     ]
 
 

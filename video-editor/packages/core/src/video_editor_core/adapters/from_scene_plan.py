@@ -37,7 +37,7 @@ from video_editor_core.hook_card import parse_hook, render_hook
 from video_editor_core.progress_strip import parse_progress, render_progress
 from video_editor_core.render_graph import Rect
 from video_editor_core.scene_renderers import scene_renderer
-from video_editor_core.sfx_synth import coin_path, hit_path, swoosh_path
+from video_editor_core.sfx_synth import coin_path, hit_path, pop_path, swoosh_path
 from video_editor_core.tally_chip import (
     COUNT_DELAY_SECONDS,
     COUNT_SECONDS,
@@ -63,6 +63,12 @@ HIT_GAIN = 10 ** (-8 / 20)
 UI_TRACK_BASE = 500
 SWOOSH_MAX_SECONDS = 0.4
 HIT_MAX_SECONDS = 0.4
+#: Photo-card pops sit a little above the swoosh (about -4 dB under the narration).
+POP_GAIN = 10 ** (-4 / 20)
+POP_MAX_SECONDS = 0.12
+#: One mixer track per pop so close-together cards never share a slot.
+POP_TRACK_BASE = 600
+POP_TRACKS_PER_SCENE = 20
 #: A swish lands just after the cut, not on top of it.
 SWOOSH_LEAD_SECONDS = 0.05
 #: The fallback for a big stat whose own reveal time cannot be read.
@@ -81,6 +87,7 @@ def from_scene_plan(plan: dict[str, Any], *, fps: int = DEFAULT_FPS) -> Composit
     previous_tally: int | None = None
     previous_typographic = False
     tally_sound = plan.get("tally_sound", True) is not False
+    card_sound = tally_sound and plan.get("card_sound", True) is not False
     for index, scene in enumerate(raw_scenes):
         duration = float(scene.get("duration_seconds", 0.0))
         if duration <= 0:
@@ -149,6 +156,20 @@ def from_scene_plan(plan: dict[str, Any], *, fps: int = DEFAULT_FPS) -> Composit
                 if cue is not None:
                     audio.append(cue)
         previous_typographic = typographic
+        if card_sound:
+            for position, offset in enumerate(_card_starts(layers)):
+                cue = _ui_cue(
+                    index,
+                    f"card_pop_{position}",
+                    start + offset,
+                    end,
+                    source=pop_path(),
+                    gain=POP_GAIN,
+                    max_seconds=POP_MAX_SECONDS,
+                    track=POP_TRACK_BASE + index * POP_TRACKS_PER_SCENE + position,
+                )
+                if cue is not None:
+                    audio.append(cue)
         tts = _asset_by_type(scene, "tts")
         if tts is not None:
             audio.append(
@@ -238,8 +259,9 @@ def _ui_cue(
     source: Path,
     gain: float,
     max_seconds: float,
+    track: int | None = None,
 ) -> AudioCue | None:
-    """A short UI sound cue (chart swoosh or number hit) inside its scene."""
+    """A short UI sound cue (chart swoosh, number hit or card pop) inside its scene."""
     if at >= scene_end:
         return None
     return AudioCue(
@@ -247,7 +269,7 @@ def _ui_cue(
         source=str(source),
         start=at,
         duration=min(max_seconds, scene_end - at),
-        track=UI_TRACK_BASE + index,
+        track=UI_TRACK_BASE + index if track is None else track,
         volume=gain,
     )
 
@@ -255,6 +277,18 @@ def _ui_cue(
 def _is_typographic(scene: Mapping[str, Any]) -> bool:
     """Plans normally use ``type``; accept a script-style ``visual`` too."""
     return scene.get("type") == "typographic" or scene.get("visual") == "typographic"
+
+
+_CARD_START = re.compile(r'data-card-start="([\d.]+)"')
+
+
+def _card_starts(layers: list[CompositionLayer]) -> list[float]:
+    """Scene-relative entry seconds of each photo card, read from the map's own markup."""
+    starts: list[float] = []
+    for layer in layers:
+        if layer.preset == "map":
+            starts += [float(m) for m in _CARD_START.findall(layer.content.text or "")]
+    return starts
 
 
 def _big_stat_reveal(layers: list[CompositionLayer]) -> float:

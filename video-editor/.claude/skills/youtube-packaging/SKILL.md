@@ -73,3 +73,11 @@ General principles come from these installed skills. Load the one you need befor
 - [ ] Package matches what the first 30 s actually show (no bait)
 - [ ] Publish slot chosen from the current heatmap
 - [ ] Test & Compare variants ready (ask the user before starting the test)
+
+## Other channels
+
+- **DeveeKitchen** (Telugu food explainers and map Shorts) has no channel-specific packaging data yet. Its
+  first Short's `publish.yaml` is the template: `../video-projects/videos/2026-11-26/district-food-map/publish.yaml`
+  (Telugu + English title ≤ 100 chars ending `#shorts`, numbered item list, GI explanation, CC BY-SA photo
+  credits marked as changed, ODbL map line, `captions: {te: …srt}`, private). The `deveekitchen` account is not
+  yet set up in social-engine (`social auth` + `social login` by the owner).

@@ -24,6 +24,7 @@ directory carries a `.gitignore` containing `*`, keeping the notes untracked.
 |---|---|---|
 | `tool-lab/` | `tool-lab/.remember/` | Copy into a future `tool-lab/.remember/` if that repo is added |
 | `root/` | `/mnt/data2/git_repos/.remember/` | Parent-workspace notes; copy to the matching project root |
+| `auto-creative-repos/` | `~/.claude/projects/-mnt-data2-git-repos-creative-repos/memory/` | File-based Claude memory for `creative_repos` (index `MEMORY.md`); copy back to that path on a new machine |
 
 ## Using them as persistent Claude memory
 

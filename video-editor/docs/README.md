@@ -17,7 +17,8 @@ records — kept for provenance, not maintained.
 | [`RENDERING.md`](RENDERING.md) | Render passes and timings, the automatic NVIDIA profile (NVENC, Chrome on the RTX), transparent caption overlay (no Telugu drawtext), image chain, detached capped runs, where final cuts go |
 | [`EXPLAINER_PLAYBOOK.md`](EXPLAINER_PLAYBOOK.md) | The order to build a numbers-led explainer (research → script → calcs → geography → screen plan → timing → stills → voice → music/SFX → captions → hook/end → review) and the rules learned on the tiffin teardown |
 | [`STOCK_EXPLAINERS.md`](STOCK_EXPLAINERS.md) | Stock footage scenes (vision-checked), running tally, checked calculations, ledger, per-scene narration, AI image labels |
-| [`MAP_STORIES.md`](MAP_STORIES.md) | Map-story reels: journeys with km counter and icon, night_map, state/district fills and photos, bubbles, stickers |
+| [`MAP_STORIES.md`](MAP_STORIES.md) | Map-story reels: journeys with km counter and icon, night_map, state/district fills and photos, bubbles, stickers, photo cards |
+| [`MAP_SHORTS.md`](MAP_SHORTS.md) | Recipe for 9:16 "famous X of every district" map Shorts: teaser, numbered photo cards, zooms, pops, sidecar captions, photo sourcing, gotchas |
 | [`DEVOTIONAL_CHANTS.md`](DEVOTIONAL_CHANTS.md) | Japa ×108 chant videos: chant-grid sync, 75% Tamil+English captions, counter, petal/glitter loops, rotating deity images, memory-safe pieces render |
 | [`TECH_TUTORIALS.md`](TECH_TUTORIALS.md) | Coding tutorials: verified demos, real page captures, editor/terminal screen track, talking avatar (hybrid lip sync), section titles, SFX, music bed, channel bumpers, Flow thumbnails, upload gotchas |
 

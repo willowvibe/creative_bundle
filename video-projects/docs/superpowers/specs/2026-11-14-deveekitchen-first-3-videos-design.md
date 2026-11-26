@@ -5,6 +5,22 @@
 **Evidence base:** `research-engine/output/2026-11-14/devee-kitchen-revival.md` (Rev 1) and `devee-ai-production-modes.md` (Rev 2)
 **Status:** approved design; implementation plan to follow
 
+> **Rev 3 · 26 Nov 2026 — slate after the tiffin video.** A trend scan
+> (`docs/research/2026-11-26-deveekitchen-trend-scan.md`: 729 recent videos ranked by views ÷ subscribers,
+> plus Google Trends for TG/AP) replaces videos 2 and 3 below:
+>
+> | Next | Video | Why |
+> |---|---|---|
+> | **2 (started)** | ఏ జిల్లాకు ఏ ఫేమస్ ఫుడ్? — famous food of every Andhra/Telangana district (map Shorts + long) | District food maps are breaking out (Maharashtra 4.5M, 285×); no AP/TG version exists; map engine has district fills |
+> | 3 | "How is it made?" series — ep 1 Tirupati laddu or Atreyapuram pootharekulu | Telugu factory Shorts 7–11M (70–100×) |
+> | 4 | 2D animated nostalgia story — 1990s Godavari village tiffin hotel | 8–55M view pools; **needs owner's call** on stylised AI animation vs the no-AI-food rule |
+>
+> - **Oil (video 3) is shelved:** "cooking oil" scores ~0.5/100 on TG YouTube; reframe as *does an air
+>   fryer really use less oil?* (air fryer 68/100) if revived.
+> - **Chilli (video 2) is deferred:** biryani (56) and the district map beat it on demand; Guntur mirchi
+>   becomes one district in the map instead.
+> - Shorts lead: every video ships a 9:16 Short first; Telugu long-form economics is thin (most < 25K).
+
 ---
 
 ## 0. Decisions locked

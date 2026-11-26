@@ -215,7 +215,82 @@ def _feature(name: str, kind: str, polygons: list[Any], **props: Any) -> dict[st
     }
 
 
-def build(states_shp: Path, districts_geojson: Path) -> tuple[dict[str, Any], dict[str, Any]]:
+def _polygons(geometry: dict[str, Any]) -> list[Polygon]:
+    """A GeoJSON Polygon or MultiPolygon as the build's polygon lists."""
+    raw = geometry["coordinates"]
+    polygons = [raw] if geometry["type"] == "Polygon" else raw
+    return [[[(x, y) for x, y in ring] for ring in polygon] for polygon in polygons]
+
+
+def clean_district_name(name: str) -> str:
+    """An OSM district name without a trailing "District" or extra spaces."""
+    cleaned = " ".join(str(name).split())
+    if cleaned.casefold().endswith(" district"):
+        cleaned = cleaned[: -len(" district")].rstrip()
+    return cleaned
+
+
+def override_features(state: str, source: Path) -> list[dict[str, Any]]:
+    """One override file's features in the same shape as the bundled districts."""
+    document = json.loads(source.read_text(encoding="utf-8"))
+    features: list[dict[str, Any]] = []
+    for feature in document["features"]:
+        properties = feature.get("properties") or {}
+        name = clean_district_name(properties.get("name") or properties.get("query") or "")
+        if not name:
+            continue
+        extra: dict[str, Any] = {}
+        name_te = str(properties.get("name_te") or "").strip()
+        if name_te:
+            extra["name_te"] = name_te
+        features.append(
+            _feature(
+                name,
+                "district",
+                _round(_polygons(feature["geometry"]), DISTRICT_TOLERANCE),
+                state=state,
+                disputed=state in DISPUTED_STATES,
+                **extra,
+            )
+        )
+    return features
+
+
+def apply_overrides(
+    district_features: Sequence[dict[str, Any]],
+    overrides: Sequence[tuple[str, Path]],
+) -> list[dict[str, Any]]:
+    """Drop each override state's districts and add the override's own."""
+    features = list(district_features)
+    for state, source in overrides:
+        features = [
+            feature
+            for feature in features
+            if (feature.get("properties") or {}).get("state") != state
+        ]
+        features.extend(override_features(state, source))
+    features.sort(key=lambda f: (f["properties"]["state"], f["properties"]["name"]))
+    return features
+
+
+def patch_existing(
+    path: Path, overrides: Sequence[tuple[str, Path]]
+) -> dict[str, Any]:
+    """Apply overrides to an already built ``india_districts.json`` in place."""
+    document = json.loads(path.read_text(encoding="utf-8"))
+    features = document.get("features") if isinstance(document, dict) else None
+    if not isinstance(features, list):
+        raise ValueError(f"{path} is not a FeatureCollection")
+    patched = {**document, "features": apply_overrides(features, overrides)}
+    path.write_text(json.dumps(patched, ensure_ascii=False, separators=(",", ":")), "utf-8")
+    return patched
+
+
+def build(
+    states_shp: Path,
+    districts_geojson: Path,
+    overrides: Sequence[tuple[str, Path]] = (),
+) -> tuple[dict[str, Any], dict[str, Any]]:
     """The two FeatureCollections: India's states and its districts."""
     rows = read_dbf(states_shp.with_suffix(".dbf"), ["adm0_a3", "name"])
     shapes = read_shp_polygons(states_shp)
@@ -231,12 +306,7 @@ def build(states_shp: Path, districts_geojson: Path) -> tuple[dict[str, Any], di
     document = json.loads(districts_geojson.read_text(encoding="utf-8"))
     district_features = []
     for feature in document["features"]:
-        geometry = feature["geometry"]
-        raw = geometry["coordinates"]
-        polygons = [raw] if geometry["type"] == "Polygon" else raw
-        district: list[Polygon] = [
-            [[(x, y) for x, y in ring] for ring in polygon] for polygon in polygons
-        ]
+        district = _polygons(feature["geometry"])
         largest = max((polygon[0] for polygon in district), key=lambda r: abs(_signed_area(r)))
         centre = _centroid(largest)
         state = assign_state(centre, states) or _nearest_state(centre, states)
@@ -250,20 +320,50 @@ def build(states_shp: Path, districts_geojson: Path) -> tuple[dict[str, Any], di
                 disputed=state in DISPUTED_STATES,
             )
         )
-    district_features.sort(key=lambda f: (f["properties"]["state"], f["properties"]["name"]))
+    district_features = apply_overrides(district_features, overrides)
     return (
         {"type": "FeatureCollection", "features": state_features},
         {"type": "FeatureCollection", "features": district_features},
     )
 
 
+def _parse_override(value: str) -> tuple[str, Path]:
+    state, separator, source = value.partition("=")
+    state, source = state.strip(), source.strip()
+    if not separator or not state or not source:
+        raise argparse.ArgumentTypeError('an override is "State=<geojson>"')
+    return state, Path(source)
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--states", type=Path, required=True)
-    parser.add_argument("--districts", type=Path, required=True)
+    parser.add_argument("--states", type=Path)
+    parser.add_argument("--districts", type=Path)
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument(
+        "--override",
+        action="append",
+        type=_parse_override,
+        default=[],
+        metavar="STATE=GEOJSON",
+        help="replace one state's districts with a GeoJSON file (repeatable)",
+    )
+    parser.add_argument(
+        "--patch-existing",
+        action="store_true",
+        help="apply the overrides to the already built india_districts.json in --out",
+    )
     args = parser.parse_args(argv)
-    states, districts = build(args.states, args.districts)
+    if args.patch_existing:
+        if not args.override:
+            parser.error("--patch-existing needs at least one --override")
+        path = args.out / "india_districts.json"
+        document = patch_existing(path, args.override)
+        print(f"{path}: {len(document['features'])} features, {path.stat().st_size / 1e6:.2f} MB")
+        return 0
+    if args.states is None or args.districts is None:
+        parser.error("--states and --districts are required unless --patch-existing is used")
+    states, districts = build(args.states, args.districts, args.override)
     for name, document in (("india_states.json", states), ("india_districts.json", districts)):
         path = args.out / name
         path.write_text(json.dumps(document, ensure_ascii=False, separators=(",", ":")), "utf-8")

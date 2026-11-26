@@ -2,12 +2,17 @@
 
 from __future__ import annotations
 
+import json
 import struct
 from pathlib import Path
 
 from video_editor_maps.geo.build_india_admin import (
     DISPUTED_STATES,
+    apply_overrides,
     assign_state,
+    clean_district_name,
+    override_features,
+    patch_existing,
     read_dbf,
     read_shp_polygons,
     rings_to_polygons,
@@ -45,6 +50,98 @@ def test_a_district_goes_to_the_state_that_contains_it() -> None:
 
 def test_the_disputed_north_is_marked() -> None:
     assert {"Jammu and Kashmir", "Ladakh"} <= DISPUTED_STATES
+
+
+def _override_file(folder: Path, name: str = "YSR  Kadapa District") -> Path:
+    path = folder / "override.geojson"
+    path.write_text(
+        json.dumps(
+            {
+                "type": "FeatureCollection",
+                "features": [
+                    {
+                        "type": "Feature",
+                        "properties": {"name": name, "name_te": "వైయస్ఆర్ కడప"},
+                        "geometry": {
+                            "type": "Polygon",
+                            "coordinates": [
+                                [[0.0, 0.0], [0.0, 1.0], [1.0, 1.0], [1.0, 0.0], [0.0, 0.0]]
+                            ],
+                        },
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    return path
+
+
+def test_osm_names_lose_the_district_suffix_and_extra_spaces() -> None:
+    assert clean_district_name("YSR  Kadapa District") == "YSR Kadapa"
+    assert clean_district_name("Sri Potti Sri Ramulu Nellore District") == (
+        "Sri Potti Sri Ramulu Nellore"
+    )
+    assert clean_district_name("Dr. B.R. Ambedkar Konaseema District") == (
+        "Dr. B.R. Ambedkar Konaseema"
+    )
+    assert clean_district_name("  Annamayya  ") == "Annamayya"
+
+
+def test_an_override_uses_the_same_feature_shape_as_the_bundled_districts(
+    tmp_path: Path,
+) -> None:
+    features = override_features("Andhra Pradesh", _override_file(tmp_path))
+    assert len(features) == 1
+    properties = features[0]["properties"]
+    assert properties["name"] == "YSR Kadapa"
+    assert properties["kind"] == "district"
+    assert properties["state"] == "Andhra Pradesh"
+    assert properties["disputed"] is False
+    assert properties["name_te"] == "వైయస్ఆర్ కడప"
+    assert features[0]["geometry"]["type"] == "MultiPolygon"
+
+
+def test_an_override_drops_only_that_states_districts(tmp_path: Path) -> None:
+    features = [
+        {"properties": {"name": "Old", "kind": "district", "state": "Andhra Pradesh"}},
+        {"properties": {"name": "Hyderabad", "kind": "district", "state": "Telangana"}},
+    ]
+    replaced = apply_overrides(features, [("Andhra Pradesh", _override_file(tmp_path))])
+    names = [feature["properties"]["name"] for feature in replaced]
+    assert names == ["YSR Kadapa", "Hyderabad"]
+
+
+def test_patching_an_existing_file_keeps_other_states_untouched(tmp_path: Path) -> None:
+    hyderabad = {
+        "type": "Feature",
+        "properties": {
+            "name": "Hyderabad",
+            "kind": "district",
+            "state": "Telangana",
+            "disputed": False,
+        },
+        "geometry": {"type": "MultiPolygon", "coordinates": [[[[78.0, 17.0]]]]},
+    }
+    old = {
+        "type": "Feature",
+        "properties": {
+            "name": "Old",
+            "kind": "district",
+            "state": "Andhra Pradesh",
+            "disputed": False,
+        },
+        "geometry": {"type": "MultiPolygon", "coordinates": [[[[79.0, 15.0]]]]},
+    }
+    path = tmp_path / "india_districts.json"
+    path.write_text(
+        json.dumps({"type": "FeatureCollection", "features": [old, hyderabad]}),
+        encoding="utf-8",
+    )
+    patched = patch_existing(path, [("Andhra Pradesh", _override_file(tmp_path))])
+    assert hyderabad in patched["features"]
+    assert old not in patched["features"]
+    assert any(f["properties"]["name"] == "YSR Kadapa" for f in patched["features"])
 
 
 def _write_tiny_shapefile(folder: Path) -> tuple[Path, Path]:

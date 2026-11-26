@@ -138,9 +138,12 @@ Components render as one static `html` layer: `four_pillars`, `element_bars`,
 component never computes the chart itself. Preflight rejects an unknown
 component or malformed data before any paid stage.
 
-Captions default to burned. `captions: {mode: sidecar}` skips the burn and
-writes `outputs/<job>/final.srt` from the measured word timings (YouTube
-upload), while the QA coverage gate stays green (#316).
+Captions default to burned. `captions: {mode: sidecar}` works for `ve explain`
+as well as `ve short`: it skips the burn (`final.mp4` is the uncaptioned mixed
+video) and writes `outputs/<job>/final.srt` from the measured word timings
+(YouTube upload). The coverage gate is measured against the SRT, and the
+`caption_tokens` / `caption_contrast` gates pass with "sidecar: no burned
+captions" (#316).
 
 A scene can change visual on a narration line (#314):
 

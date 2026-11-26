@@ -467,15 +467,30 @@ class View:
         return west - margin <= lon <= east + margin and south - margin <= lat <= north + margin
 
 
-def _polygon_paths(polygons: Sequence[Polygon], view: View, *, precision: int = 2) -> list[str]:
-    """One SVG path per polygon, projected into ``view``."""
+def _polygon_paths(
+    polygons: Sequence[Polygon],
+    view: View,
+    *,
+    precision: int = 2,
+    bounds: Bounds | None = None,
+) -> list[str]:
+    """One SVG path per polygon, projected into ``view``.
+
+    ``bounds`` is an optional, larger culling window in the same geographic
+    coordinates as ``view``; projection always uses ``view`` so every layer
+    shares one scale and offset.
+    """
+    west, south, east, north = bounds or view.bounds
     paths: list[str] = []
     for polygon in polygons:
         rings: list[str] = []
         for ring in polygon:
             # Drop a ring that shares no point with the window: it cannot draw
             # anything inside the clipped frame and only bloats the markup.
-            if not any(view.contains(lon, lat, margin=1.0) for lon, lat in ring):
+            if not any(
+                west - 1.0 <= lon <= east + 1.0 and south - 1.0 <= lat <= north + 1.0
+                for lon, lat in ring
+            ):
                 continue
             start = view.project(*ring[0])
             parts = [f"M{start[0]:.{precision}f} {start[1]:.{precision}f}"]
@@ -491,28 +506,38 @@ def _polygon_paths(polygons: Sequence[Polygon], view: View, *, precision: int = 
     return paths
 
 
-def country_paths(unit: Country, view: View, *, precision: int = 2) -> list[str]:
+def country_paths(
+    unit: Country, view: View, *, precision: int = 2, bounds: Bounds | None = None
+) -> list[str]:
     """One SVG path per polygon of ``unit``, projected into ``view``."""
-    return _polygon_paths(unit.polygons, view, precision=precision)
+    return _polygon_paths(unit.polygons, view, precision=precision, bounds=bounds)
 
 
-def region_paths(region: Region, view: View, *, precision: int = 2) -> list[str]:
+def region_paths(
+    region: Region, view: View, *, precision: int = 2, bounds: Bounds | None = None
+) -> list[str]:
     """One SVG path per polygon of ``region``, projected into ``view``."""
-    return _polygon_paths(region.polygons, view, precision=precision)
+    return _polygon_paths(region.polygons, view, precision=precision, bounds=bounds)
 
 
 def graticule_lines(
-    view: View, *, step: float = 10.0, precision: int = 2
+    view: View,
+    *,
+    step: float = 10.0,
+    precision: int = 2,
+    bounds: Bounds | None = None,
 ) -> tuple[list[str], list[str]]:
     """Meridians and parallels inside the window, as SVG path strings.
 
     The steps are snapped to the window's own edges so a line never floats a
     few degrees outside the frame, and the count is capped so a world-wide
-    window at a small step cannot emit thousands of segments.
+    window at a small step cannot emit thousands of segments. ``bounds`` can
+    extend the window without changing the projection, so a full-frame clip
+    still gets graticule lines beyond the fitted view.
     """
     if step <= 0 or not math.isfinite(step):
         raise GeoError(f"graticule step must be positive, got {step!r}")
-    west, south, east, north = view.bounds
+    west, south, east, north = bounds or view.bounds
     meridians: list[str] = []
     parallels: list[str] = []
     longitude = math.ceil(west / step) * step
@@ -766,8 +791,8 @@ class AdminUnit:
 
 
 #: Current or common names -> the district data's own name. The source predates
-#: several renamings (Mysuru, Prayagraj), misspells Hyderabad, and has no
-#: districts created after 2021 (Eluru was carved from West Godavari in 2022).
+#: several renamings (Mysuru, Prayagraj) and misspells Hyderabad; Andhra Pradesh
+#: now carries its 28 districts from OpenStreetMap, including the 2022 carve-outs.
 DISTRICT_ALIASES: dict[str, str] = {
     "hyderabad": "Hydrabad",
     "bengaluru": "Bangalore",
@@ -788,17 +813,18 @@ DISTRICT_ALIASES: dict[str, str] = {
     "kanyakumari": "Kanniyakumari",
     "trichy": "Tiruchirappalli",
     "tiruchy": "Tiruchirappalli",
-    "kadapa": "Kadapa(YSR)",
-    "ysrkadapa": "Kadapa(YSR)",
-    "ananthapur": "Anantapur",
-    "ananthapuramu": "Anantapur",
-    "nellore": "Sri Potti Sriramulu Nellore",
-    "spsrnellore": "Sri Potti Sriramulu Nellore",
+    "kadapa": "YSR Kadapa",
+    "kadapaysr": "YSR Kadapa",
+    "ysrkadapa": "YSR Kadapa",
+    "anantapur": "Anantapuramu",
+    "ananthapur": "Anantapuramu",
+    "ananthapuramu": "Anantapuramu",
+    "nellore": "Sri Potti Sri Ramulu Nellore",
+    "spsrnellore": "Sri Potti Sri Ramulu Nellore",
+    "konaseema": "Dr. B.R. Ambedkar Konaseema",
     "trivandrum": "Thiruvananthapuram",
     "thoothukudi": "Thoothukkudi",
     "tuticorin": "Thoothukkudi",
-    # A 2022 district; the 2021 source still has it inside West Godavari.
-    "eluru": "West Godavari",
 }
 
 

@@ -185,7 +185,13 @@ calc:
 - **UI sounds.** A soft swoosh marks each cut from footage to a chart and a
   low hit lands on each `big_stat` number (`swoosh.wav`, `hit.wav`, synthesized
   by `python -m video_editor_core.sfx_synth`). `tally_sound: false` turns off
-  the coin, swoosh and hit together.
+  the coin, swoosh, hit and card pop together.
+- **Card pop.** Each map photo card (`cards:`) gets a soft ~120 ms pop
+  (`pop.wav`, a sine blip with a small upward pitch glide, about -4 dB under
+  the narration) at scene start plus that card's entry time, read from the
+  card's own `data-card-start` markup so it never drifts from the animation.
+  `card_sound: false` in the front matter silences only the pops;
+  `tally_sound: false` silences them with the other UI sounds.
 - **Arithmetic checks.** All of these are checked before anything is paid
   for:
   - every `expr` is evaluated from its own numbers and must equal `amount`, to

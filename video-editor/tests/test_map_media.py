@@ -115,3 +115,13 @@ def test_map_photos_are_not_counted_as_scene_stills() -> None:
     assert counts_as_scene_still("scene_2_region_1") is False
     assert counts_as_scene_still("scene_2_sticker_0") is False
     assert counts_as_scene_still("scene_4_fallback_image") is False
+
+
+def test_sidecar_captions_front_matter_marks_map_scenes_not_burned() -> None:
+    sidecar = SCRIPT.replace(
+        'aspect_ratio: "9:16"', 'aspect_ratio: "9:16"\ncaptions: {mode: sidecar}'
+    )
+    plan, _ = build_explainer_plan(parse_explainer_script(sidecar), "job")
+    assert plan["scenes"][0]["props"]["_captions_burned"] is False
+    burned, _ = build_explainer_plan(parse_explainer_script(SCRIPT), "job")
+    assert "_captions_burned" not in burned["scenes"][0]["props"]

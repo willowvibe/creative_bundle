@@ -79,11 +79,7 @@ def _plan_shots(scene_id: str, scene_fallback: str, shots: Sequence[Any]) -> lis
     for position, shot in enumerate(shots):
         entry = dict(shot) if isinstance(shot, Mapping) else {}
         file = str(entry.get("file") or "").strip()
-        fallback = (
-            ""
-            if file
-            else str(entry.pop("image", "") or "").strip() or scene_fallback
-        )
+        fallback = "" if file else str(entry.pop("image", "") or "").strip() or scene_fallback
         planned.append(
             {
                 "asset_id": footage_shot_asset_id(scene_id, position),
@@ -120,6 +116,10 @@ def build_explainer_plan(
         elif scene.visual == "map":
             # The map is drawn from bundled geometry, so there is no IMAGE
             # request and no visual description for the asset stage to chase.
+            if script.captions_mode == "sidecar":
+                # Private: lets photo-card scenes use the room burned captions
+                # would otherwise own (absent = burned).
+                props["_captions_burned"] = False
             scenes.append(
                 {
                     "id": scene.id,
@@ -198,6 +198,7 @@ def build_explainer_plan(
         "narration_path": "",
         "narration_duration": 0.0,
         "tally_sound": script.tally_sound,
+        "card_sound": script.card_sound,
     }
     apply_reuse(plan, reuse_plan)
     return plan, reuse_plan
@@ -282,14 +283,14 @@ def explainer_requests(
     ]
 
 
-_MAP_MEDIA_ID = re.compile(r"_(?:region|sticker)_\d+$")
+_MAP_MEDIA_ID = re.compile(r"_(?:region|sticker|card)_\d+$")
 
 
 def counts_as_scene_still(asset_id: str) -> bool:
     """Whether an IMAGE result is a scene still the reuse plan accounted for.
 
     Footage fallback stills, stock photos used as footage shots, and map photos
-    (regions, stickers) are not.
+    (regions, stickers, cards) are not.
     """
     return not (
         asset_id.endswith(FALLBACK_IMAGE_SUFFIX)
@@ -299,13 +300,13 @@ def counts_as_scene_still(asset_id: str) -> bool:
 
 
 #: Map props whose entries may ask the pipeline for a photo.
-_MAP_MEDIA_KEYS = (("regions", "region"), ("stickers", "sticker"))
+_MAP_MEDIA_KEYS = (("regions", "region"), ("stickers", "sticker"), ("cards", "card"))
 
 
 def map_media_requests(
     plan: dict[str, Any], job_id: str, *, image_provider: str = "auto"
 ) -> list[AssetRequest]:
-    """IMAGE requests for map regions/stickers that name ``image_query`` or ``image_prompt``.
+    """IMAGE requests for map regions/stickers/cards that name ``image_query`` or ``image_prompt``.
 
     ``image_query`` searches the free stock libraries (``provider: stock``);
     ``image_prompt`` goes to the image chain. An entry with a local ``image``
@@ -543,7 +544,9 @@ def attach_footage_shots(plan: dict[str, Any], results: Sequence[Any]) -> None:
             if shot.get("file"):
                 found = by_id.get(asset_id)
                 if found is None:
-                    raise RuntimeError(f"footage shot {asset_id}: file {shot['file']} was not served")
+                    raise RuntimeError(
+                        f"footage shot {asset_id}: file {shot['file']} was not served"
+                    )
                 media_type = getattr(found.asset_type, "value", found.asset_type)
                 shot.update(
                     path=str(found.local_path),
